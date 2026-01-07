@@ -2,12 +2,19 @@
   "name": "gob-ui",
   "private": true,
   "packageManager": "pnpm@9.12.3",
+  "version": "0.0.1",
   "scripts": {
     "dev:next": "pnpm -C apps/web-next dev",
     "dev": "pnpm dev:next",
     "build:next": "pnpm -C apps/web-next build",
     "start:next": "pnpm -C apps/web-next start",
-    "lint:next": "pnpm -C apps/web-next lint"
+    "lint:next": "pnpm -C apps/web-next lint",
+
+    "build:ui-wc": "pnpm -C packages/ui-wc build",
+    "publish:ui-wc": "pnpm -C packages/ui-wc publish --registry=https://npm.pkg.github.com",
+
+    "build:all": "pnpm -r build",
+    "lint:all": "pnpm -r lint"
   },
   "devDependencies": {
     "@types/node": "^20.19.27",
@@ -15,6 +22,5 @@
     "@types/react-dom": "^18.3.7",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
-  },
-  "version": "0.0.1"
+  }
 }
