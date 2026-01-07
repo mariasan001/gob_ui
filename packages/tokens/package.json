@@ -1,0 +1,11 @@
+{
+  "name": "@gob/tokens",
+  "version": "0.0.1",
+  "private": true,
+  "sideEffects": [
+    "**/*.json"
+  ],
+  "exports": {
+    "./tokens.json": "./src/tokens.json"
+  }
+}

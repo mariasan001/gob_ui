@@ -1,0 +1,20 @@
+html, body { height: 100%; }
+body{
+  font-family: var(--gob-font-sans);
+  color: var(--gob-text);
+  background: #fff;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: var(--gob-font-sans);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-weight: 800; }
+h2 { font-weight: 700; }
+h3 { font-weight: 600; }
+
+p { font-weight: 400; }

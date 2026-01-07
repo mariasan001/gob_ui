@@ -1,0 +1,36 @@
+/* packages/styles/src/theme.css */
+:root {
+  /* Tipografía (la dejamos base; luego la refinamos) */
+  --gob-font-sans: Raleway, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  --gob-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  /* ✅ Identidad */
+  --gob-primary: #9F2141;
+  --gob-primary-hover: #861B36; /* un tono más oscuro para hover */
+  --gob-primary-contrast: #FFFFFF;
+  --gob-accent-contrast: #0A0A0A;
+  --gob-dark-contrast: #FFFFFF;
+
+
+  --gob-accent: #BC945A;
+  --gob-soft: #DDC7A2;
+
+  /* Superficies */
+  --gob-bg: #FFFFFF;     /* fondo general */
+  --gob-panel: #FFFFFF;  /* cards */
+  --gob-text: #0A0A0A;
+  --gob-muted: rgba(10, 10, 10, 0.68);
+  --gob-border: rgba(10, 10, 10, 0.14);
+
+  /* UI */
+  --gob-radius-sm: 10px;
+  --gob-radius-md: 14px;
+  --gob-radius-lg: 18px;
+
+  --gob-shadow-sm: 0 8px 20px rgba(10,10,10,.08);
+
+  --gob-focus: 0 0 0 4px rgba(159, 33, 65, .22);
+}
+
+/* Si quieres “toque institucional” sin ensuciar el fondo:
+   puedes usar --gob-soft para secciones, banners o highlights. */

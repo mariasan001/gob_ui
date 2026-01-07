@@ -1,0 +1,4 @@
+.gob-stack { display: flex; flex-direction: column; gap: var(--gob-space-3); }
+.gob-row { display: flex; gap: var(--gob-space-3); flex-wrap: wrap; align-items: center; }
+.gob-container { max-width: 900px; margin: 0 auto; padding: 24px; }
+.gob-muted { opacity: .8; }

@@ -1,0 +1,19 @@
+{
+  "name": "gob-ui",
+  "private": true,
+  "packageManager": "pnpm@9.12.3",
+  "scripts": {
+    "dev:next": "pnpm -C apps/web-next dev",
+    "dev": "pnpm dev:next",
+    "build:next": "pnpm -C apps/web-next build",
+    "start:next": "pnpm -C apps/web-next start",
+    "lint:next": "pnpm -C apps/web-next lint"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.27",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
