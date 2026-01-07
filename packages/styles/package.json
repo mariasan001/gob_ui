@@ -1,13 +1,15 @@
 {
-  "name": "@gob/styles",
-  "version": "0.0.1",
-  "private": true,
-  "type": "module",
-  "sideEffects": ["**/*.css", "**/*.ttf"],
+  "name": "@mariasan001/styles",
+  "version": "0.1.0",
+  "private": false,
+  "files": ["src"],
   "exports": {
-    "./fonts.css": "./src/fonts.css",
     "./base.css": "./src/base.css",
     "./theme.css": "./src/theme.css",
-    "./utilities.css": "./src/utilities.css"
+    "./utilities.css": "./src/utilities.css",
+    "./fonts.css": "./src/fonts.css"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

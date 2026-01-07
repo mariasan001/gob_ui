@@ -2,10 +2,12 @@
 
 import { useEffect } from 'react';
 
+// ✅ trae typings sin ejecutar runtime
+import type {} from '@gob/ui-wc';
+
 export default function WcRegister() {
   useEffect(() => {
-    // registra Web Components SOLO en el navegador
-    void import('@gob/ui-wc');
+    void import('@gob/ui-wc'); // ✅ runtime solo en browser
   }, []);
 
   return null;

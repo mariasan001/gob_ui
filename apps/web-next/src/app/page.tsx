@@ -175,8 +175,7 @@ export default function Page() {
 
               <div className={s.previewActions}>
                 <gob-button
-                  tone={'primary' as any}
-                  appearance={'solid' as any}
+                 
                   loading={loading ? true : undefined}
                   onClick={() => {
                     setLoading(true);

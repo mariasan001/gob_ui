@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
-import '@gob/styles/fonts.css';
-import '@gob/styles/base.css';
-import '@gob/styles/theme.css';
-import '@gob/styles/utilities.css';
+import '@mariasan001/styles/fonts.css';
+import '@mariasan001/styles/base.css';
+import '@mariasan001/styles/theme.css';
+import '@mariasan001/styles/utilities.css';
 
 
 export const metadata: Metadata = {

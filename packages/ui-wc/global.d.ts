@@ -1,23 +1,24 @@
-// packages/ui-wc/global.d.ts
 import type * as React from 'react';
+
+type Tone = 'primary' | 'accent' | 'dark' | 'neutral' | 'soft';
+type Appearance = 'solid' | 'outline' | 'ghost';
+type Size = 'sm' | 'md' | 'lg';
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'gob-button': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement>,
-        HTMLElement
-      > & {
-        tone?: 'primary' | 'accent' | 'dark' | 'soft' | 'neutral';
-        appearance?: 'solid' | 'outline' | 'ghost';
-        size?: 'sm' | 'md' | 'lg';
+      'gob-button': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        tone?: Tone;
+        appearance?: Appearance;
+        size?: Size;
 
-        // boolean attributes: en JSX pueden venir como boolean o ''.
         loading?: boolean | '';
         disabled?: boolean | '';
-        'icon-only'?: boolean | '';
 
         type?: 'button' | 'submit' | 'reset';
+
+        'icon-only'?: boolean | '';
+        'icon-position'?: 'left' | 'right';
       };
     }
   }
