@@ -2,23 +2,36 @@
 node_modules/
 .pnpm-store/
 
-# builds
+# builds (monorepo)
 dist/
+**/dist/
 .next/
+**/.next/
 out/
+**/out/
 coverage/
+**/coverage/
 *.tsbuildinfo
+
+# tooling caches
+.turbo/
+**/.turbo/
+.eslintcache
+**/.eslintcache
 
 # env
 .env
 .env.*
 !.env.example
 
-# logs
+# npm / pnpm
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# registry / secrets
+.npmrc
 
 # OS / editor
 .DS_Store
