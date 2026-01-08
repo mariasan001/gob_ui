@@ -11,7 +11,7 @@
     "lint:next": "pnpm -C apps/web-next lint",
 
     "build:ui-wc": "pnpm -C packages/ui-wc build",
-    "publish:ui-wc": "pnpm -C packages/ui-wc publish --registry=https://npm.pkg.github.com",
+   "publish:ui-wc": "cd packages/ui-wc && npm publish --registry=https://npm.pkg.github.com",
 
     "build:all": "pnpm -r build",
     "lint:all": "pnpm -r lint"
