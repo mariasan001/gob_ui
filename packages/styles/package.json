@@ -1,11 +1,13 @@
 {
   "name": "@mariasan001/styles",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
-  "files": ["src"],
+  "type": "module",
+  "files": ["src", "src/fonts"],
   "exports": {
     "./base.css": "./src/base.css",
     "./theme.css": "./src/theme.css",
+    "./button.css": "./src/button.css",
     "./utilities.css": "./src/utilities.css",
     "./fonts.css": "./src/fonts.css"
   },
