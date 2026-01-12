@@ -1,1 +1,4 @@
 @mariasan001:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${XT37YuHy89ilhgCNar8HrNrMvbtI242No157
+}
+always-auth=true
