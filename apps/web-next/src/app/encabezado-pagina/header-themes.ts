@@ -4,7 +4,8 @@ import type { Tone } from '@mariasan001/ui-wc';
 
 export const HEADER_THEME_VARS: Record<Tone, CSSProperties> = {
   primary: {
-    ['--gob-ph-bg' as string]: 'transparent',
+    ['--gob-ph-bg' as string]: '#ffffff',
+    ['--gob-ph-bg-2' as string]: '#fbfbfb',
     ['--gob-ph-text' as string]: '#6b665f',
     ['--gob-ph-muted' as string]: '#8a8278',
     ['--gob-ph-title' as string]: '#181511',
@@ -16,7 +17,8 @@ export const HEADER_THEME_VARS: Record<Tone, CSSProperties> = {
     ['--gob-ph-surface-border' as string]: '#e5e5e5',
   },
   accent: {
-    ['--gob-ph-bg' as string]: 'transparent',
+    ['--gob-ph-bg' as string]: '#f7f1e8',
+    ['--gob-ph-bg-2' as string]: '#f3ebe0',
     ['--gob-ph-text' as string]: '#5c5348',
     ['--gob-ph-muted' as string]: '#8a8278',
     ['--gob-ph-title' as string]: '#3f372e',
@@ -24,11 +26,12 @@ export const HEADER_THEME_VARS: Record<Tone, CSSProperties> = {
     ['--gob-ph-accent' as string]: '#bc945a',
     ['--gob-ph-accent-soft' as string]: 'rgba(188, 148, 90, 0.22)',
     ['--gob-ph-accent-text' as string]: '#7a5a2e',
-    ['--gob-ph-surface' as string]: '#f7f1e8',
+    ['--gob-ph-surface' as string]: 'rgba(255, 255, 255, 0.65)',
     ['--gob-ph-surface-border' as string]: 'rgba(24, 21, 17, 0.1)',
   },
   dark: {
     ['--gob-ph-bg' as string]: '#181511',
+    ['--gob-ph-bg-2' as string]: '#221e19',
     ['--gob-ph-text' as string]: 'rgba(255, 255, 255, 0.72)',
     ['--gob-ph-muted' as string]: 'rgba(255, 255, 255, 0.55)',
     ['--gob-ph-title' as string]: '#ffffff',
@@ -41,6 +44,7 @@ export const HEADER_THEME_VARS: Record<Tone, CSSProperties> = {
   },
   neutral: {
     ['--gob-ph-bg' as string]: '#ebebeb',
+    ['--gob-ph-bg-2' as string]: '#e4e4e4',
     ['--gob-ph-text' as string]: '#5f5952',
     ['--gob-ph-muted' as string]: '#8a8278',
     ['--gob-ph-title' as string]: '#181511',
@@ -53,6 +57,7 @@ export const HEADER_THEME_VARS: Record<Tone, CSSProperties> = {
   },
   soft: {
     ['--gob-ph-bg' as string]: '#e7d7bd',
+    ['--gob-ph-bg-2' as string]: '#dfc9a8',
     ['--gob-ph-text' as string]: '#5a4f42',
     ['--gob-ph-muted' as string]: '#7a6f60',
     ['--gob-ph-title' as string]: '#2f2922',
