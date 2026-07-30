@@ -83,14 +83,6 @@ export default function EstructuraAppPage() {
           </div>
 
           <section className={s.section} aria-label="Ejemplos">
-            <div className={s.sectionHead}>
-              <h2 className={s.sectionTitle}>Ejemplos</h2>
-              <p className={s.sectionDesc}>
-                Cinco variantes. Pulsa Copiar para obtener el codigo completo en{' '}
-                {lang.toUpperCase()}.
-              </p>
-            </div>
-
             <div className={local.exampleList}>
               {SHELL_EXAMPLES.map((example, index) => (
                 <article key={example.id} className={local.exampleCard}>
