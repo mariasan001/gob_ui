@@ -670,24 +670,6 @@
   color: #6b665f;
 }
 
-.code {
-  margin: 0;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #ebebeb;
-  background: #f6f6f6;
-  overflow-x: auto;
-  max-height: 360px;
-}
-
-.code code {
-  font-family: var(--gob-font-mono, ui-monospace, Menlo, monospace);
-  font-size: 12px;
-  line-height: 1.55;
-  color: #181511;
-  white-space: pre;
-}
-
 .tableWrap {
   overflow-x: auto;
   border-radius: 16px;
