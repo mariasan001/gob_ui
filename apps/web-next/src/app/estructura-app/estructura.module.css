@@ -1,0 +1,121 @@
+.stage {
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid #ebebeb;
+  background: #f3f3f3;
+  min-height: 320px;
+}
+
+.shell {
+  --gob-shell-sidebar-width: 200px;
+  --gob-shell-sidebar-collapsed-width: 64px;
+  --gob-shell-content-padding: 18px;
+  min-height: 320px;
+  display: block;
+}
+
+.sidebar {
+  display: grid;
+  gap: 16px;
+  padding: 18px 14px;
+  min-height: 320px;
+}
+
+.brand {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #9f2141;
+}
+
+.nav {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  color: #6b665f;
+}
+
+.nav span {
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.navActive {
+  background: rgba(159, 33, 65, 0.08);
+  color: #9f2141;
+  font-weight: 600;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 0 18px;
+  font-size: 13px;
+  color: #6b665f;
+}
+
+.topbar strong {
+  color: #181511;
+  font-weight: 600;
+}
+
+.content {
+  display: grid;
+  gap: 8px;
+}
+
+.content h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #181511;
+}
+
+.content p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b665f;
+}
+
+.codeWrap {
+  position: relative;
+}
+
+.copyBtn {
+  appearance: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #333;
+  border-radius: 999px;
+  min-height: 22px;
+  padding: 0 10px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.code {
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid #ebebeb;
+  background: #f6f6f6;
+  overflow-x: auto;
+}
+
+.code code {
+  font-family: var(--gob-font-mono, ui-monospace, Menlo, monospace);
+  font-size: 12px;
+  line-height: 1.6;
+  color: #181511;
+  white-space: pre;
+}

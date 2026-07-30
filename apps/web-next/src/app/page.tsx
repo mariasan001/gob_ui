@@ -86,6 +86,17 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'shell') {
+    return (
+      <div className={s.fakeShell} aria-hidden="true">
+        <span className={s.fakeShellSide} />
+        <span className={s.fakeShellMain}>
+          <span className={s.fakeShellTop} />
+          <span className={s.fakeShellBody} />
+        </span>
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
