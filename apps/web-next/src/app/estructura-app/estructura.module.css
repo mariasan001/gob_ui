@@ -677,7 +677,7 @@
   border: 1px solid #ebebeb;
   background: #f6f6f6;
   overflow-x: auto;
-  max-height: 220px;
+  max-height: 360px;
 }
 
 .code code {

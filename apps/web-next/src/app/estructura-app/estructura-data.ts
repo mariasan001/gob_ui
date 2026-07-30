@@ -156,7 +156,7 @@ export const SHELL_RULES = [
   },
 ] as const;
 
-function htmlAttrs(example: ShellExample): string {
+function shellAttrs(example: ShellExample): string {
   const parts: string[] = [];
   if (example.collapsed) parts.push('collapsed');
   if (example.dense) parts.push('dense');
@@ -165,71 +165,472 @@ function htmlAttrs(example: ShellExample): string {
   return parts.length ? ` ${parts.join(' ')}` : '';
 }
 
-function reactAttrs(example: ShellExample): string {
-  const parts: string[] = [];
-  if (example.collapsed) parts.push('collapsed');
-  if (example.dense) parts.push('dense');
-  if (example.hideTopbar) parts.push('hide-topbar');
-  if (example.stickyTopbar === false) parts.push('sticky-topbar="false"');
-  return parts.length ? ` ${parts.join(' ')}` : '';
+function pad(indent: string, lines: string[]): string {
+  return lines.map((line) => (line ? `${indent}${line}` : '')).join('\n');
 }
 
-function bodyMarkup(example: ShellExample, indent = '  '): string {
+function iconKebab(name: string): string {
+  return name
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
+    .toLowerCase();
+}
+
+function icon(lang: CodeLang, name: string, size = 18): string {
+  const kebab = iconKebab(name);
+  if (lang === 'react') {
+    return `<${name} weight="thin" size={${size}} aria-hidden="true" />`;
+  }
+  if (lang === 'vue') {
+    return `<Ph${name} weight="thin" :size="${size}" aria-hidden="true" />`;
+  }
+  if (lang === 'angular') {
+    return `<ph-${kebab} weight="thin" size="${size}" aria-hidden="true"></ph-${kebab}>`;
+  }
+  return `<i class="ph-thin ph-${kebab}" aria-hidden="true"></i>`;
+}
+
+function cls(lang: CodeLang, name: string): string {
+  return lang === 'react' ? `className="${name}"` : `class="${name}"`;
+}
+
+function sidebarMarkup(lang: CodeLang, example: ShellExample, indent: string): string {
+  const active = example.id === 'colapsado' ? 'Expedientes' : 'Inicio';
+  const nav = [
+    ['House', 'Inicio'],
+    ['FolderOpen', 'Expedientes'],
+    ['ChartBar', 'Reportes'],
+    ['Buildings', 'Dependencias'],
+    ['GearSix', 'Ajustes'],
+  ] as const;
+
+  const navItems = nav.flatMap(([name, label]) => {
+    const activeClass = label === active ? ' nav-item--active' : '';
+    if (example.collapsed) {
+      return [
+        `<a href="#" ${cls(lang, `nav-item${activeClass}`)} title="${label}">`,
+        `  ${icon(lang, name)}`,
+        `</a>`,
+      ];
+    }
+    return [
+      `<a href="#" ${cls(lang, `nav-item${activeClass}`)}>`,
+      `  ${icon(lang, name)}`,
+      `  <span>${label}</span>`,
+      `</a>`,
+    ];
+  });
+
+  const brand = example.collapsed
+    ? [
+        `<div ${cls(lang, 'brand')}>`,
+        `  <span ${cls(lang, 'brand-mark')} aria-hidden="true">G</span>`,
+        `  <!-- titulo oculto en collapsed -->`,
+        `  <div ${cls(lang, 'brand-text')}></div>`,
+        `</div>`,
+      ]
+    : [
+        `<div ${cls(lang, 'brand')}>`,
+        `  <span ${cls(lang, 'brand-mark')} aria-hidden="true">G</span>`,
+        `  <div ${cls(lang, 'brand-text')}>`,
+        `    <strong>Gob UI</strong>`,
+        `    <small>Sistema institucional</small>`,
+        `  </div>`,
+        `</div>`,
+      ];
+
+  const foot = example.collapsed
+    ? [
+        `<div ${cls(lang, 'sidebar-foot')}>`,
+        `  <button type="button" aria-label="Salir">`,
+        `    ${icon(lang, 'SignOut')}`,
+        `  </button>`,
+        `  <!-- usuario vacio en collapsed -->`,
+        `  <div ${cls(lang, 'sidebar-user')}></div>`,
+        `</div>`,
+      ]
+    : [
+        `<div ${cls(lang, 'sidebar-foot')}>`,
+        `  <div ${cls(lang, 'sidebar-user')}>`,
+        `    ${icon(lang, 'UserCircle')}`,
+        `    <div>`,
+        `      <strong>MG Sandoval</strong>`,
+        `      <small>Operaciones</small>`,
+        `    </div>`,
+        `  </div>`,
+        `</div>`,
+      ];
+
+  return pad(indent, [
+    `<aside slot="sidebar" ${cls(lang, example.collapsed ? 'sidebar sidebar--collapsed' : 'sidebar')}>`,
+    ...brand.map((l) => `  ${l}`),
+    `  <nav ${cls(lang, 'nav')} aria-label="Principal">`,
+    ...navItems.map((l) => `    ${l}`),
+    `  </nav>`,
+    ...foot.map((l) => `  ${l}`),
+    `</aside>`,
+  ]);
+}
+
+function topbarMarkup(
+  lang: CodeLang,
+  example: ShellExample,
+  indent: string,
+): string {
   if (example.hideTopbar) {
-    return `${indent}<aside slot="sidebar">
-${indent}  <!-- marca + navegacion -->
-${indent}</aside>
-${indent}<section>
-${indent}  <h1>Contenido principal</h1>
-${indent}</section>`;
+    return pad(indent, [
+      `<header slot="topbar" ${cls(lang, 'topbar')}>`,
+      `  <!-- sin contenido: hide-topbar -->`,
+      `  <div ${cls(lang, 'topbar-left')}></div>`,
+      `  <div ${cls(lang, 'topbar-right')}></div>`,
+      `</header>`,
+    ]);
   }
 
-  if (example.variant === 'board') {
-    return `${indent}<aside slot="sidebar">
-${indent}  <!-- marca + navegacion -->
-${indent}</aside>
-${indent}<header slot="topbar">
-${indent}  Tablero institucional · Usuario
-${indent}</header>
-${indent}<section>
-${indent}  <h1>Resumen operativo</h1>
-${indent}  <!-- metricas + listado -->
-${indent}</section>`;
+  const title =
+    example.id === 'tablero'
+      ? 'Tablero institucional'
+      : example.id === 'colapsado'
+        ? 'Expedientes'
+        : example.id === 'compacto'
+          ? 'Cola operativa'
+          : 'Inicio';
+  const meta =
+    example.id === 'tablero'
+      ? 'Hoy · 30 jul 2026'
+      : example.id === 'compacto'
+        ? 'Turno matutino'
+        : 'Direccion de Operaciones';
+
+  return pad(indent, [
+    `<header slot="topbar" ${cls(lang, 'topbar')}>`,
+    `  <div ${cls(lang, 'topbar-left')}>`,
+    `    <strong>${title}</strong>`,
+    `    <small>${meta}</small>`,
+    `  </div>`,
+    `  <div ${cls(lang, 'topbar-right')}>`,
+    `    <label ${cls(lang, 'search')}>`,
+    `      ${icon(lang, 'MagnifyingGlass', 16)}`,
+    `      <span>Buscar expediente</span>`,
+    `    </label>`,
+    `    <button type="button" ${cls(lang, 'icon-btn')} aria-label="Notificaciones">`,
+    `      ${icon(lang, 'Bell')}`,
+    `    </button>`,
+    `    <span ${cls(lang, 'user-chip')}>MG</span>`,
+    `  </div>`,
+    `</header>`,
+  ]);
+}
+
+function contentMarkup(lang: CodeLang, example: ShellExample, indent: string): string {
+  if (example.id === 'sin-topbar') {
+    return pad(indent, [
+      `<section ${cls(lang, 'content')}>`,
+      `  <div ${cls(lang, 'content-head')}>`,
+      `    <div ${cls(lang, 'steps')}>`,
+      `      <span ${cls(lang, 'step step--active')}>1. Datos</span>`,
+      `      <span ${cls(lang, 'step')}>2. Documentos</span>`,
+      `      <span ${cls(lang, 'step')}>3. Revision</span>`,
+      `    </div>`,
+      `  </div>`,
+      `  <div ${cls(lang, 'form')}>`,
+      `    <label>`,
+      `      <span>Nombre completo</span>`,
+      `      <div>Maria Guadalupe Sandoval</div>`,
+      `    </label>`,
+      `    <label>`,
+      `      <span>CURP</span>`,
+      `      <div>SAGM900101MDFNRR09</div>`,
+      `    </label>`,
+      `    <label ${cls(lang, 'form-wide')}>`,
+      `      <span>Motivo de la solicitud</span>`,
+      `      <div>Actualizacion de domicilio fiscal para el ejercicio vigente.</div>`,
+      `    </label>`,
+      `  </div>`,
+      `  <div ${cls(lang, 'content-actions')}>`,
+      `    <button type="button">Cancelar</button>`,
+      `    <button type="button">Continuar</button>`,
+      `  </div>`,
+      `</section>`,
+    ]);
   }
 
-  return `${indent}<aside slot="sidebar">
-${indent}  <!-- marca + navegacion -->
-${indent}</aside>
-${indent}<header slot="topbar">
-${indent}  Barra superior
-${indent}</header>
-${indent}<section>
-${indent}  Contenido principal
-${indent}</section>`;
+  if (example.id === 'colapsado') {
+    return pad(indent, [
+      `<section ${cls(lang, 'content')}>`,
+      `  <div ${cls(lang, 'content-head')}>`,
+      `    <div>`,
+      `      <h1>Expedientes</h1>`,
+      `      <p>Vista ancha con menu colapsado.</p>`,
+      `    </div>`,
+      `    <span ${cls(lang, 'meta-chip')}>248 registros</span>`,
+      `  </div>`,
+      `  <div ${cls(lang, 'table')}>`,
+      `    <div ${cls(lang, 'table-head')}>`,
+      `      <span>Folio</span>`,
+      `      <span>Solicitante</span>`,
+      `      <span>Dependencia</span>`,
+      `      <span>Estado</span>`,
+      `    </div>`,
+      `    <div ${cls(lang, 'table-body')}>`,
+      `      <div ${cls(lang, 'table-row')}>`,
+      `        <strong>EXP-2041</strong>`,
+      `        <span>Ana Ruiz</span>`,
+      `        <span>Salud</span>`,
+      `        <em ${cls(lang, 'status')}>En revision</em>`,
+      `      </div>`,
+      `      <div ${cls(lang, 'table-row')}>`,
+      `        <strong>EXP-2040</strong>`,
+      `        <span>Luis Mora</span>`,
+      `        <span>Educacion</span>`,
+      `        <em ${cls(lang, 'status')}>Abierto</em>`,
+      `      </div>`,
+      `      <div ${cls(lang, 'table-row')}>`,
+      `        <strong>EXP-2039</strong>`,
+      `        <span>Diana Paz</span>`,
+      `        <span>Finanzas</span>`,
+      `        <em ${cls(lang, 'status')}>Abierto</em>`,
+      `      </div>`,
+      `      <div ${cls(lang, 'table-row')}>`,
+      `        <strong>EXP-2038</strong>`,
+      `        <span>Hector Sol</span>`,
+      `        <span>Obras</span>`,
+      `        <em ${cls(lang, 'status')}>Cerrado</em>`,
+      `      </div>`,
+      `    </div>`,
+      `  </div>`,
+      `</section>`,
+    ]);
+  }
+
+  if (example.id === 'compacto') {
+    return pad(indent, [
+      `<section ${cls(lang, 'content content--dense')}>`,
+      `  <div ${cls(lang, 'content-head')}>`,
+      `    <div>`,
+      `      <h1>Cola operativa</h1>`,
+      `      <p>Densidad compacta para revision rapida.</p>`,
+      `    </div>`,
+      `    <!-- acciones opcionales vacias -->`,
+      `    <div ${cls(lang, 'content-head-actions')}></div>`,
+      `  </div>`,
+      `  <div ${cls(lang, 'dense-list')}>`,
+      `    <div ${cls(lang, 'dense-row')}>`,
+      `      <time>08:14</time>`,
+      `      <strong>EXP-2041</strong>`,
+      `      <span>Validar documentos</span>`,
+      `      <em>Alta</em>`,
+      `    </div>`,
+      `    <div ${cls(lang, 'dense-row')}>`,
+      `      <time>08:22</time>`,
+      `      <strong>EXP-2040</strong>`,
+      `      <span>Asignar revisor</span>`,
+      `      <em>Media</em>`,
+      `    </div>`,
+      `    <div ${cls(lang, 'dense-row')}>`,
+      `      <time>08:31</time>`,
+      `      <strong>EXP-2039</strong>`,
+      `      <span>Notificar ciudadano</span>`,
+      `      <em>Alta</em>`,
+      `    </div>`,
+      `    <div ${cls(lang, 'dense-row')}>`,
+      `      <time>08:45</time>`,
+      `      <strong>EXP-2037</strong>`,
+      `      <span>Cerrar expediente</span>`,
+      `      <em>Baja</em>`,
+      `    </div>`,
+      `    <div ${cls(lang, 'dense-row')}>`,
+      `      <time>09:02</time>`,
+      `      <strong>EXP-2035</strong>`,
+      `      <span>Generar oficio</span>`,
+      `      <em>Media</em>`,
+      `    </div>`,
+      `  </div>`,
+      `</section>`,
+    ]);
+  }
+
+  if (example.id === 'tablero') {
+    return pad(indent, [
+      `<section ${cls(lang, 'content')}>`,
+      `  <div ${cls(lang, 'content-head')}>`,
+      `    <div>`,
+      `      <h1>Resumen operativo</h1>`,
+      `      <p>Indicadores del periodo actual.</p>`,
+      `    </div>`,
+      `    <span ${cls(lang, 'meta-chip')}>Ultimos 30 dias</span>`,
+      `  </div>`,
+      `  <div ${cls(lang, 'kpi-row')}>`,
+      `    <article ${cls(lang, 'kpi')}>`,
+      `      <span>Abiertos</span>`,
+      `      <strong>128</strong>`,
+      `      <small>+12 esta semana</small>`,
+      `    </article>`,
+      `    <article ${cls(lang, 'kpi')}>`,
+      `      <span>En revision</span>`,
+      `      <strong>46</strong>`,
+      `      <small>8 urgentes</small>`,
+      `    </article>`,
+      `    <article ${cls(lang, 'kpi')}>`,
+      `      <span>Cerrados</span>`,
+      `      <strong>312</strong>`,
+      `      <small>94% a tiempo</small>`,
+      `    </article>`,
+      `  </div>`,
+      `  <div ${cls(lang, 'list')}>`,
+      `    <div ${cls(lang, 'list-row')}>`,
+      `      <div>`,
+      `        <strong>EXP-2041</strong>`,
+      `        <span>Constancia · Salud</span>`,
+      `      </div>`,
+      `      <em ${cls(lang, 'status')}>En revision</em>`,
+      `    </div>`,
+      `    <div ${cls(lang, 'list-row')}>`,
+      `      <div>`,
+      `        <strong>EXP-2040</strong>`,
+      `        <span>Actualizacion · Educacion</span>`,
+      `      </div>`,
+      `      <em ${cls(lang, 'status')}>Abierto</em>`,
+      `    </div>`,
+      `    <div ${cls(lang, 'list-row')}>`,
+      `      <div>`,
+      `        <strong>EXP-2038</strong>`,
+      `        <span>Baja · Obras</span>`,
+      `      </div>`,
+      `      <em ${cls(lang, 'status')}>Cerrado</em>`,
+      `    </div>`,
+      `  </div>`,
+      `</section>`,
+    ]);
+  }
+
+  // basico — misma estructura completa del preview
+  return pad(indent, [
+    `<section ${cls(lang, 'content')}>`,
+    `  <div ${cls(lang, 'content-head')}>`,
+    `    <div>`,
+    `      <h1>Bienvenida operativa</h1>`,
+    `      <p>Resumen del dia y accesos frecuentes.</p>`,
+    `    </div>`,
+    `    <button type="button">Nuevo expediente</button>`,
+    `  </div>`,
+    `  <div ${cls(lang, 'content-grid')}>`,
+    `    <div ${cls(lang, 'list')}>`,
+    `      <div ${cls(lang, 'list-row')}>`,
+    `        <div>`,
+    `          <strong>EXP-2041</strong>`,
+    `          <span>Solicitud de constancia</span>`,
+    `        </div>`,
+    `        <em ${cls(lang, 'status')}>En revision</em>`,
+    `      </div>`,
+    `      <div ${cls(lang, 'list-row')}>`,
+    `        <div>`,
+    `          <strong>EXP-2040</strong>`,
+    `          <span>Actualizacion de datos</span>`,
+    `        </div>`,
+    `        <em ${cls(lang, 'status')}>Abierto</em>`,
+    `      </div>`,
+    `      <div ${cls(lang, 'list-row')}>`,
+    `        <div>`,
+    `          <strong>EXP-2038</strong>`,
+    `          <span>Baja de servicio</span>`,
+    `        </div>`,
+    `        <em ${cls(lang, 'status')}>Cerrado</em>`,
+    `      </div>`,
+    `    </div>`,
+    `    <aside ${cls(lang, 'stat')}>`,
+    `      <span>Pendientes</span>`,
+    `      <strong>12</strong>`,
+    `      <p>Requieren respuesta hoy.</p>`,
+    `    </aside>`,
+    `  </div>`,
+    `</section>`,
+  ]);
+}
+
+function bodyMarkup(lang: CodeLang, example: ShellExample, indent = '  '): string {
+  return [
+    sidebarMarkup(lang, example, indent),
+    topbarMarkup(lang, example, indent),
+    contentMarkup(lang, example, indent),
+  ].join('\n');
+}
+
+function iconImports(lang: CodeLang): string {
+  if (lang === 'html') {
+    return `<!-- Phosphor thin para iconos del menu y topbar -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css"
+/>
+
+`;
+  }
+  if (lang === 'react') {
+    return `import {
+  Bell,
+  Buildings,
+  ChartBar,
+  FolderOpen,
+  GearSix,
+  House,
+  MagnifyingGlass,
+  SignOut,
+  UserCircle,
+} from '@phosphor-icons/react';
+import '@mariasan001/ui-wc';
+
+`;
+  }
+  if (lang === 'vue') {
+    return `import {
+  PhBell,
+  PhBuildings,
+  PhChartBar,
+  PhFolderOpen,
+  PhGearSix,
+  PhHouse,
+  PhMagnifyingGlass,
+  PhSignOut,
+  PhUserCircle,
+} from '@phosphor-icons/vue';
+import '@mariasan001/ui-wc';
+
+`;
+  }
+  return `import '@phosphor-icons/webcomponents/PhBell';
+import '@phosphor-icons/webcomponents/PhBuildings';
+import '@phosphor-icons/webcomponents/PhChartBar';
+import '@phosphor-icons/webcomponents/PhFolderOpen';
+import '@phosphor-icons/webcomponents/PhGearSix';
+import '@phosphor-icons/webcomponents/PhHouse';
+import '@phosphor-icons/webcomponents/PhMagnifyingGlass';
+import '@phosphor-icons/webcomponents/PhSignOut';
+import '@phosphor-icons/webcomponents/PhUserCircle';
+import '@mariasan001/ui-wc';
+
+`;
 }
 
 export function buildSnippet(lang: CodeLang, example: ShellExample): string {
-  const tagAttrs = lang === 'react' ? reactAttrs(example) : htmlAttrs(example);
-  const shell = `<gob-app-shell${tagAttrs}>
-${bodyMarkup(example)}
-</gob-app-shell>`;
+  const attrs = shellAttrs(example);
 
   if (lang === 'html') {
     return `<!-- npm i @mariasan001/ui-wc -->
 <script type="module">
   import '@mariasan001/ui-wc';
 </script>
-
-${shell}`;
+${iconImports(lang)}<gob-app-shell${attrs}>
+${bodyMarkup(lang, example)}
+</gob-app-shell>`;
   }
 
   if (lang === 'react') {
-    return `import '@mariasan001/ui-wc';
-
-export function ShellDemo() {
+    return `${iconImports(lang)}export function ShellDemo() {
   return (
-    <gob-app-shell${tagAttrs}>
-${bodyMarkup(example, '      ')}
+    <gob-app-shell${attrs}>
+${bodyMarkup(lang, example, '      ')}
     </gob-app-shell>
   );
 }`;
@@ -237,21 +638,19 @@ ${bodyMarkup(example, '      ')}
 
   if (lang === 'vue') {
     return `<script setup>
-import '@mariasan001/ui-wc';
+${iconImports(lang).trimEnd()}
 </script>
 
 <template>
-  <gob-app-shell${tagAttrs}>
-${bodyMarkup(example, '    ')}
+  <gob-app-shell${attrs}>
+${bodyMarkup(lang, example, '    ')}
   </gob-app-shell>
 </template>`;
   }
 
   return `// app.component.ts
-import '@mariasan001/ui-wc';
-
-// app.component.html
-<gob-app-shell${tagAttrs}>
-${bodyMarkup(example)}
+${iconImports(lang)}// app.component.html
+<gob-app-shell${attrs}>
+${bodyMarkup(lang, example)}
 </gob-app-shell>`;
 }
