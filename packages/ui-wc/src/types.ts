@@ -104,6 +104,21 @@ export type GobSidebarProps = React.HTMLAttributes<HTMLElement> & {
   collapsed?: boolean;
 };
 
+export type TopbarVariant =
+  | 'basic'
+  | 'search'
+  | 'actions'
+  | 'notifications'
+  | 'breadcrumb'
+  | 'dense'
+  | 'complete';
+
+export type GobTopbarProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TopbarVariant;
+  tone?: Tone;
+  sticky?: boolean | 'true' | 'false';
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -115,6 +130,7 @@ declare global {
       'gob-pagination': React.DetailedHTMLProps<GobPaginationProps, HTMLElement>;
       'gob-app-shell': React.DetailedHTMLProps<GobAppShellProps, HTMLElement>;
       'gob-sidebar': React.DetailedHTMLProps<GobSidebarProps, HTMLElement>;
+      'gob-topbar': React.DetailedHTMLProps<GobTopbarProps, HTMLElement>;
     }
   }
 }

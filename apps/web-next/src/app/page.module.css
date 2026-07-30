@@ -478,6 +478,50 @@
   width: 64%;
 }
 
+.fakeTopbar {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  width: 150px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeTopbarTitle {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #181511;
+}
+
+.fakeTopbarSearch {
+  width: 100%;
+  height: 18px;
+  border-radius: 8px;
+  background: #f3f3f3;
+  border: 1px solid #ebebeb;
+}
+
+.fakeTopbarActions {
+  display: flex;
+  gap: 4px;
+}
+
+.fakeTopbarActions i {
+  width: 14px;
+  height: 14px;
+  border-radius: 5px;
+  background: rgba(159, 33, 65, 0.14);
+}
+
+.fakeTopbarActions i:last-child {
+  background: #9f2141;
+}
+
 @keyframes rise {
   from {
     opacity: 0;

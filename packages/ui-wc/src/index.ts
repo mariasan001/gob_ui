@@ -6,6 +6,7 @@ import './components/chip/gob-chip';
 import './components/pagination/gob-pagination';
 import './components/app-shell/gob-app-shell';
 import './components/sidebar/gob-sidebar';
+import './components/topbar/gob-topbar';
 
 export type {
   Appearance,
@@ -18,9 +19,11 @@ export type {
   GobRadioProps,
   GobSidebarProps,
   GobSwitchProps,
+  GobTopbarProps,
   PaginationLang,
   PaginationVariant,
   SidebarVariant,
   Size,
   Tone,
+  TopbarVariant,
 } from './types';
