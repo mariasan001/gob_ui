@@ -51,8 +51,8 @@ export default function EstructuraAppPage() {
           </Link>
           <h1 className={s.title}>Estructura de app</h1>
           <p className={s.hint}>
-            Marco para tableros: menu, barra y contenido. Cinco ejemplos con codigo en{' '}
-            <strong>{lang.toUpperCase()}</strong>.
+            Marco para tableros: menu, barra y contenido. Pasa el mouse y pulsa{' '}
+            <strong>Copiar</strong> para el codigo en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
@@ -82,40 +82,26 @@ export default function EstructuraAppPage() {
             </div>
           </div>
 
-          <section className={s.section} aria-label="Ejemplos">
-            <div className={local.exampleList}>
-              {SHELL_EXAMPLES.map((example, index) => (
-                <article key={example.id} className={local.exampleCard}>
-                  <div className={local.exampleHead}>
-                    <div>
-                      <p className={local.exampleIndex}>
-                        Ejemplo {String(index + 1).padStart(2, '0')}
-                      </p>
-                      <h3 className={local.exampleTitle}>{example.title}</h3>
-                      <p className={local.exampleDesc}>{example.description}</p>
-                      <div className={local.tagRow}>
-                        {example.tags.map((tag) => (
-                          <span key={tag} className={local.tag}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      className={local.copyBtn}
-                      onClick={() => void copyExample(example)}
-                    >
-                      {copiedKey === example.id ? 'Copiado' : 'Copiar'}
-                    </button>
-                  </div>
-                  <div className={local.stage}>
-                    <ShellDemo example={example} />
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+          <div className={local.exampleList} aria-label="Ejemplos">
+            {SHELL_EXAMPLES.map((example) => (
+              <article key={example.id} className={local.exampleCard}>
+                <button
+                  type="button"
+                  className={local.copyBtn}
+                  onClick={() => void copyExample(example)}
+                >
+                  {copiedKey === example.id ? 'Copiado' : 'Copiar'}
+                </button>
+                <div className={local.exampleMeta}>
+                  <h3 className={local.exampleTitle}>{example.title}</h3>
+                  <p className={local.exampleDesc}>{example.description}</p>
+                </div>
+                <div className={local.stage}>
+                  <ShellDemo example={example} />
+                </div>
+              </article>
+            ))}
+          </div>
 
           <section className={s.section} aria-label="Atributos">
             <div className={s.sectionHead}>
