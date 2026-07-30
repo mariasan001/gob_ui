@@ -120,6 +120,21 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'page-header') {
+    return (
+      <div className={s.fakePageHeader} aria-hidden="true">
+        <span className={s.fakePageHeaderCrumbs} />
+        <span className={s.fakePageHeaderRow}>
+          <span className={s.fakePageHeaderTitle} />
+          <span className={s.fakePageHeaderActions}>
+            <i />
+            <i />
+          </span>
+        </span>
+        <span className={s.fakePageHeaderDesc} />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

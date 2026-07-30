@@ -119,6 +119,20 @@ export type GobTopbarProps = React.HTMLAttributes<HTMLElement> & {
   sticky?: boolean | 'true' | 'false';
 };
 
+export type PageHeaderVariant =
+  | 'basic'
+  | 'description'
+  | 'breadcrumb'
+  | 'actions'
+  | 'status'
+  | 'dense'
+  | 'complete';
+
+export type GobPageHeaderProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: PageHeaderVariant;
+  tone?: Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -131,6 +145,7 @@ declare global {
       'gob-app-shell': React.DetailedHTMLProps<GobAppShellProps, HTMLElement>;
       'gob-sidebar': React.DetailedHTMLProps<GobSidebarProps, HTMLElement>;
       'gob-topbar': React.DetailedHTMLProps<GobTopbarProps, HTMLElement>;
+      'gob-page-header': React.DetailedHTMLProps<GobPageHeaderProps, HTMLElement>;
     }
   }
 }

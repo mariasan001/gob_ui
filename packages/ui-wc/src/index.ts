@@ -7,6 +7,7 @@ import './components/pagination/gob-pagination';
 import './components/app-shell/gob-app-shell';
 import './components/sidebar/gob-sidebar';
 import './components/topbar/gob-topbar';
+import './components/page-header/gob-page-header';
 
 export type {
   Appearance,
@@ -15,11 +16,13 @@ export type {
   GobButtonProps,
   GobCheckboxProps,
   GobChipProps,
+  GobPageHeaderProps,
   GobPaginationProps,
   GobRadioProps,
   GobSidebarProps,
   GobSwitchProps,
   GobTopbarProps,
+  PageHeaderVariant,
   PaginationLang,
   PaginationVariant,
   SidebarVariant,
