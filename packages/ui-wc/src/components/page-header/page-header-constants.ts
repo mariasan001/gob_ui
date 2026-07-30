@@ -10,17 +10,11 @@ export const PAGE_HEADER_VARIANTS = [
 
 export type PageHeaderVariant = (typeof PAGE_HEADER_VARIANTS)[number];
 
-export const PAGE_HEADER_TONES = [
-  'primary',
-  'accent',
-  'dark',
-  'neutral',
-  'soft',
-] as const;
+export const PAGE_HEADER_SURFACES = ['plain', 'panel'] as const;
 
-export type PageHeaderTone = (typeof PAGE_HEADER_TONES)[number];
+export type PageHeaderSurface = (typeof PAGE_HEADER_SURFACES)[number];
 
-export const PAGE_HEADER_OBSERVED_ATTRIBUTES = ['variant', 'tone'] as const;
+export const PAGE_HEADER_OBSERVED_ATTRIBUTES = ['variant', 'surface'] as const;
 
 export function resolvePageHeaderVariant(value: string | null): PageHeaderVariant {
   if (
@@ -36,15 +30,7 @@ export function resolvePageHeaderVariant(value: string | null): PageHeaderVarian
   return 'basic';
 }
 
-export function resolvePageHeaderTone(value: string | null): PageHeaderTone {
-  if (
-    value === 'accent' ||
-    value === 'dark' ||
-    value === 'neutral' ||
-    value === 'soft' ||
-    value === 'primary'
-  ) {
-    return value;
-  }
-  return 'primary';
+export function resolvePageHeaderSurface(value: string | null): PageHeaderSurface {
+  if (value === 'panel') return 'panel';
+  return 'plain';
 }

@@ -1,4 +1,4 @@
-import type { PageHeaderVariant } from '@mariasan001/ui-wc';
+import type { PageHeaderSurface, PageHeaderVariant } from '@mariasan001/ui-wc';
 
 export type CodeLang = 'html' | 'react' | 'vue' | 'angular';
 
@@ -7,6 +7,11 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'react', label: 'React' },
   { id: 'vue', label: 'Vue' },
   { id: 'angular', label: 'Angular' },
+];
+
+export const SURFACE_OPTIONS: { id: PageHeaderSurface; label: string }[] = [
+  { id: 'plain', label: 'Sin fondo' },
+  { id: 'panel', label: 'Con fondo' },
 ];
 
 export type HeaderExample = {
@@ -67,6 +72,12 @@ export const HEADER_ATTRS = [
     type: 'string',
     defaultValue: 'basic',
     body: 'basic | description | breadcrumb | actions | status | dense | complete',
+  },
+  {
+    name: 'surface',
+    type: 'string',
+    defaultValue: 'plain',
+    body: 'plain (sin fondo) | panel (con fondo y degradado)',
   },
 ] as const;
 
@@ -138,8 +149,12 @@ function iconImports(lang: CodeLang): string {
 `;
 }
 
-export function buildSnippet(lang: CodeLang, example: HeaderExample): string {
-  const attrs = ` variant="${example.variant}"`;
+export function buildSnippet(
+  lang: CodeLang,
+  example: HeaderExample,
+  surface: PageHeaderSurface,
+): string {
+  const attrs = ` variant="${example.variant}" surface="${surface}"`;
   const body = bodyFor(example);
 
   if (lang === 'html') {

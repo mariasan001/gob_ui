@@ -2,18 +2,20 @@
 
 /**
  * Docs de Encabezado de pagina — cascaron canonico = Botones (/botones).
- * Sin seleccion de color: el encabezado hereda el contexto de la pagina.
+ * Filtro de superficie: con fondo / sin fondo (sin seleccion de color).
  */
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import type { PageHeaderSurface } from '@mariasan001/ui-wc';
 import '@mariasan001/ui-wc';
 
 import {
   CODE_LANGUAGES,
   HEADER_ATTRS,
   HEADER_EXAMPLES,
+  SURFACE_OPTIONS,
   buildSnippet,
   type CodeLang,
   type HeaderExample,
@@ -24,6 +26,7 @@ import s from './page.module.css';
 
 export default function EncabezadoPaginaPage() {
   const [lang, setLang] = useState<CodeLang>('html');
+  const [surface, setSurface] = useState<PageHeaderSurface>('plain');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -32,7 +35,7 @@ export default function EncabezadoPaginaPage() {
 
   async function copyExample(example: HeaderExample) {
     try {
-      await navigator.clipboard.writeText(buildSnippet(lang, example));
+      await navigator.clipboard.writeText(buildSnippet(lang, example, surface));
       setCopiedKey(example.id);
       window.setTimeout(() => setCopiedKey(null), 1200);
     } catch {
@@ -78,6 +81,26 @@ export default function EncabezadoPaginaPage() {
                 })}
               </div>
             </div>
+
+            <div className={s.filterBlock}>
+              <p className={s.filterLabel}>Fondo</p>
+              <div className={s.langRow}>
+                {SURFACE_OPTIONS.map((option) => {
+                  const active = option.id === surface;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      className={`${s.langChip} ${active ? s.langChipActive : ''}`}
+                      aria-pressed={active}
+                      onClick={() => setSurface(option.id)}
+                    >
+                      {option.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className={local.exampleList} aria-label="Ejemplos">
@@ -95,7 +118,7 @@ export default function EncabezadoPaginaPage() {
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
                 <div className={local.stage}>
-                  <HeaderDemo example={example} />
+                  <HeaderDemo example={example} surface={surface} />
                 </div>
               </article>
             ))}

@@ -2,7 +2,7 @@ import { defineCustomElement } from '../../lib/define-custom-element';
 import { SafeHTMLElement } from '../../lib/safe-html-element';
 import {
   PAGE_HEADER_OBSERVED_ATTRIBUTES,
-  resolvePageHeaderTone,
+  resolvePageHeaderSurface,
   resolvePageHeaderVariant,
 } from './page-header-constants';
 import { pageHeaderStyles } from './page-header-styles';
@@ -89,10 +89,10 @@ class GobPageHeaderElement extends SafeHTMLElement {
 
   private syncState() {
     const variant = resolvePageHeaderVariant(this.getAttribute('variant'));
-    const tone = resolvePageHeaderTone(this.getAttribute('tone'));
+    const surface = resolvePageHeaderSurface(this.getAttribute('surface'));
 
     this.rootEl.dataset.variant = variant;
-    this.rootEl.dataset.tone = tone;
+    this.rootEl.dataset.surface = surface;
   }
 }
 
