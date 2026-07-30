@@ -58,9 +58,13 @@ class GobAppShellElement extends SafeHTMLElement {
 
   private syncState() {
     const collapsed = this.hasAttribute('collapsed');
+    const dense = this.hasAttribute('dense');
+    const hideTopbar = this.hasAttribute('hide-topbar');
     const sticky = this.getAttribute('sticky-topbar') !== 'false';
 
     this.rootEl.dataset.collapsed = collapsed ? 'true' : 'false';
+    this.rootEl.dataset.dense = dense ? 'true' : 'false';
+    this.rootEl.dataset.hideTopbar = hideTopbar ? 'true' : 'false';
     this.topbarEl.dataset.sticky = sticky ? 'true' : 'false';
   }
 }

@@ -84,6 +84,8 @@ export type GobPaginationProps =
 
 export type GobAppShellProps = React.HTMLAttributes<HTMLElement> & {
   collapsed?: boolean;
+  dense?: boolean;
+  'hide-topbar'?: boolean;
   'sticky-topbar'?: boolean | 'true' | 'false';
 };
 
