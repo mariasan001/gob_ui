@@ -5,7 +5,8 @@ export const pageHeaderStyles = `
   box-sizing: border-box;
   font-family: var(--gob-font-sans, Gotham, Raleway, sans-serif);
   color: var(--gob-ph-text, #6b665f);
-  --gob-ph-bg: transparent;
+  --gob-ph-bg: #ffffff;
+  --gob-ph-bg-2: #fbfbfb;
   --gob-ph-text: #6b665f;
   --gob-ph-muted: #8a8278;
   --gob-ph-title: #181511;
@@ -28,8 +29,10 @@ export const pageHeaderStyles = `
 .root {
   display: grid;
   gap: var(--gob-ph-gap);
-  padding: 4px 2px 2px;
-  background: var(--gob-ph-bg);
+  padding: 18px 18px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--gob-ph-border);
+  background: linear-gradient(180deg, var(--gob-ph-bg) 0%, var(--gob-ph-bg-2) 100%);
   color: var(--gob-ph-text);
 }
 
@@ -131,7 +134,8 @@ export const pageHeaderStyles = `
 :host([tone='primary']),
 :host(:not([tone])),
 .root[data-tone='primary'] {
-  --gob-ph-bg: transparent;
+  --gob-ph-bg: #ffffff;
+  --gob-ph-bg-2: #fbfbfb;
   --gob-ph-text: #6b665f;
   --gob-ph-muted: #8a8278;
   --gob-ph-title: #181511;
@@ -145,7 +149,8 @@ export const pageHeaderStyles = `
 
 :host([tone='accent']),
 .root[data-tone='accent'] {
-  --gob-ph-bg: transparent;
+  --gob-ph-bg: #f7f1e8;
+  --gob-ph-bg-2: #f3ebe0;
   --gob-ph-text: #5c5348;
   --gob-ph-muted: #8a8278;
   --gob-ph-title: #3f372e;
@@ -153,13 +158,14 @@ export const pageHeaderStyles = `
   --gob-ph-accent: #bc945a;
   --gob-ph-accent-soft: rgba(188, 148, 90, 0.22);
   --gob-ph-accent-text: #7a5a2e;
-  --gob-ph-surface: #f7f1e8;
+  --gob-ph-surface: rgba(255, 255, 255, 0.65);
   --gob-ph-surface-border: rgba(24, 21, 17, 0.1);
 }
 
 :host([tone='dark']),
 .root[data-tone='dark'] {
   --gob-ph-bg: #181511;
+  --gob-ph-bg-2: #221e19;
   --gob-ph-text: rgba(255, 255, 255, 0.72);
   --gob-ph-muted: rgba(255, 255, 255, 0.55);
   --gob-ph-title: #ffffff;
@@ -174,6 +180,7 @@ export const pageHeaderStyles = `
 :host([tone='neutral']),
 .root[data-tone='neutral'] {
   --gob-ph-bg: #ebebeb;
+  --gob-ph-bg-2: #e4e4e4;
   --gob-ph-text: #5f5952;
   --gob-ph-muted: #8a8278;
   --gob-ph-title: #181511;
@@ -188,6 +195,7 @@ export const pageHeaderStyles = `
 :host([tone='soft']),
 .root[data-tone='soft'] {
   --gob-ph-bg: #e7d7bd;
+  --gob-ph-bg-2: #dfc9a8;
   --gob-ph-text: #5a4f42;
   --gob-ph-muted: #7a6f60;
   --gob-ph-title: #2f2922;
@@ -197,17 +205,6 @@ export const pageHeaderStyles = `
   --gob-ph-accent-text: #9f2141;
   --gob-ph-surface: rgba(255, 255, 255, 0.42);
   --gob-ph-surface-border: rgba(24, 21, 17, 0.12);
-}
-
-:host([tone='dark']) .root,
-:host([tone='neutral']) .root,
-:host([tone='soft']) .root,
-.root[data-tone='dark'],
-.root[data-tone='neutral'],
-.root[data-tone='soft'] {
-  padding: 18px 18px 16px;
-  border-radius: 16px;
-  border: 1px solid var(--gob-ph-border);
 }
 
 @media (max-width: 720px) {
