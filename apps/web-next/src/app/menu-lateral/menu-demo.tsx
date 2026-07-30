@@ -41,8 +41,11 @@ function Brand({
   onToggle: () => void;
 }) {
   return (
-    <div slot="brand" className={`${local.brand} ${large ? local.brandLg : ''}`}>
-      <span className={local.mark} aria-hidden="true">
+    <div
+      slot="brand"
+      className={`${local.brand} ${large ? local.brandLg : ''} ${collapsed ? local.brandRail : ''}`}
+    >
+      <span className={`${local.mark} ${large ? local.markLg : ''}`} aria-hidden="true">
         G
       </span>
       {!collapsed ? (
@@ -70,15 +73,11 @@ function Brand({
 
 function Footer({
   collapsed,
-  showUser,
+  emphasis,
 }: {
   collapsed: boolean;
-  showUser: boolean;
+  emphasis?: boolean;
 }) {
-  if (!showUser && !collapsed) {
-    return <div slot="footer" className={local.footEmpty} />;
-  }
-
   if (collapsed) {
     return (
       <div slot="footer" className={local.footRail}>
@@ -86,19 +85,24 @@ function Footer({
           MG
         </span>
         <button type="button" className={local.railBtn} title="Salir" aria-label="Salir">
-          <SignOut weight="thin" size={17} aria-hidden="true" />
+          <SignOut weight="thin" size={16} aria-hidden="true" />
         </button>
       </div>
     );
   }
 
   return (
-    <div slot="footer" className={local.foot}>
-      <UserCircle weight="thin" size={18} aria-hidden="true" />
-      <div>
+    <div slot="footer" className={`${local.foot} ${emphasis ? local.footEmphasis : ''}`}>
+      <span className={local.footAvatar} aria-hidden="true">
+        <UserCircle weight="thin" size={20} />
+      </span>
+      <div className={local.footText}>
         <strong>MG Sandoval</strong>
         <small>Operaciones</small>
       </div>
+      <button type="button" className={local.footAction} title="Salir" aria-label="Salir">
+        <SignOut weight="thin" size={15} />
+      </button>
     </div>
   );
 }
@@ -114,20 +118,21 @@ function NavItems({
 }) {
   const showBadges = variant === 'badges';
   const grouped = variant === 'grouped';
+  const dense = variant === 'dense';
 
   const renderItem = (label: string, Icon: typeof House, badge?: number) => (
     <a
       key={label}
       href="#"
-      className={`${local.navItem} ${collapsed ? local.navItemRail : ''} ${
-        label === active ? local.navActive : ''
-      }`}
+      className={`${local.navItem} ${dense ? local.navItemDense : ''} ${
+        collapsed ? local.navItemRail : ''
+      } ${label === active ? local.navActive : ''}`}
       data-active={label === active ? 'true' : undefined}
       title={label}
       onClick={(e) => e.preventDefault()}
     >
       <span className={local.navIcon}>
-        <Icon weight="thin" size={18} aria-hidden="true" />
+        <Icon weight="thin" size={dense ? 17 : 18} aria-hidden="true" />
         {showBadges && badge && collapsed ? <i className={local.badgeDot} /> : null}
       </span>
       {!collapsed ? <span className={local.navLabel}>{label}</span> : null}
@@ -158,33 +163,29 @@ export function MenuDemo({
 }) {
   const [collapsed, setCollapsed] = useState(example.variant === 'collapsed');
   const variant = example.variant === 'collapsed' ? 'basic' : example.variant;
-  const showUser =
-    example.variant === 'user' ||
-    example.variant === 'basic' ||
-    example.variant === 'brand' ||
-    example.variant === 'dense' ||
-    example.variant === 'badges' ||
-    example.variant === 'grouped' ||
-    collapsed;
 
   return (
-    <gob-sidebar
-      variant={variant}
-      tone={tone}
-      collapsed={collapsed || undefined}
-      className={`${local.sidebar} ${collapsed ? local.sidebarRail : ''}`}
-    >
-      <Brand
-        collapsed={collapsed}
-        large={example.variant === 'brand' && !collapsed}
-        onToggle={() => setCollapsed((value) => !value)}
-      />
-      <NavItems
-        variant={example.variant}
-        collapsed={collapsed}
-        active={collapsed ? 'Expedientes' : 'Inicio'}
-      />
-      <Footer collapsed={collapsed} showUser={showUser} />
-    </gob-sidebar>
+    <div className={local.stageInner}>
+      <gob-sidebar
+        variant={variant}
+        tone={tone}
+        collapsed={collapsed || undefined}
+        className={`${local.sidebar} ${collapsed ? local.sidebarRail : ''} ${
+          example.variant === 'dense' ? local.sidebarDense : ''
+        } ${example.variant === 'brand' ? local.sidebarBrand : ''}`}
+      >
+        <Brand
+          collapsed={collapsed}
+          large={example.variant === 'brand' && !collapsed}
+          onToggle={() => setCollapsed((value) => !value)}
+        />
+        <NavItems
+          variant={example.variant}
+          collapsed={collapsed}
+          active={collapsed ? 'Expedientes' : 'Inicio'}
+        />
+        <Footer collapsed={collapsed} emphasis={example.variant === 'user'} />
+      </gob-sidebar>
+    </div>
   );
 }
