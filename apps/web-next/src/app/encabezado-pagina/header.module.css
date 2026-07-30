@@ -91,16 +91,15 @@
 
 .header {
   width: 100%;
-  background: transparent !important;
-  box-shadow: none !important;
+  background: transparent;
+  box-shadow: none;
 }
 
-:global(gob-page-header[surface='plain']),
-:global(gob-page-header:not([surface])) {
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+.headerPlain {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .crumbs {
