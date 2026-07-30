@@ -26,42 +26,6 @@ export type ShellExample = {
   tags: string[];
 };
 
-export const ANATOMY = [
-  {
-    id: 'sidebar',
-    title: 'Menu lateral',
-    caption: 'slot="sidebar"',
-    body: 'Navegacion primaria fija. Ancho completo o colapsado.',
-    metrics: [
-      { label: 'Ancho', value: '248px' },
-      { label: 'Colapsado', value: '72px' },
-      { label: 'Fondo', value: 'Surface' },
-    ],
-  },
-  {
-    id: 'topbar',
-    title: 'Barra superior',
-    caption: 'slot="topbar"',
-    body: 'Titulo, busqueda, acciones o usuario. Sticky por defecto.',
-    metrics: [
-      { label: 'Sticky', value: 'Si' },
-      { label: 'Ocultable', value: 'hide-topbar' },
-      { label: 'Fondo', value: 'Surface' },
-    ],
-  },
-  {
-    id: 'content',
-    title: 'Contenido',
-    caption: 'slot por defecto',
-    body: 'Area principal del tablero, formulario o listado.',
-    metrics: [
-      { label: 'Padding', value: '24px' },
-      { label: 'Compacto', value: '16px' },
-      { label: 'Fondo', value: 'Canvas' },
-    ],
-  },
-] as const;
-
 export const SHELL_ATTRS = [
   {
     name: 'collapsed',
