@@ -411,6 +411,35 @@
   color: #181511;
 }
 
+.fakeShell {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  width: 140px;
+  height: 78px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+  background: #fff;
+}
+
+.fakeShellSide {
+  background: #9f2141;
+}
+
+.fakeShellMain {
+  display: grid;
+  grid-template-rows: 18px 1fr;
+}
+
+.fakeShellTop {
+  background: #efefef;
+  border-bottom: 1px solid rgba(24, 21, 17, 0.08);
+}
+
+.fakeShellBody {
+  background: #fafafa;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
