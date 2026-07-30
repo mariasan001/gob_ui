@@ -81,8 +81,26 @@
   width: min(920px, 100%);
 }
 
+.stageInnerPlain {
+  /* Sin fondo: solo el texto sobre el stage, sin caja */
+}
+
+.stageInnerPanel {
+  /* Con fondo: el panel lo pinta gob-page-header */
+}
+
 .header {
   width: 100%;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+:global(gob-page-header[surface='plain']),
+:global(gob-page-header:not([surface])) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .crumbs {

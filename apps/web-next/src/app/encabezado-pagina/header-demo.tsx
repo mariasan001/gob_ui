@@ -70,7 +70,9 @@ export function HeaderDemo({
   surface: PageHeaderSurface;
 }) {
   return (
-    <div className={local.stageInner}>
+    <div
+      className={`${local.stageInner} ${surface === 'panel' ? local.stageInnerPanel : local.stageInnerPlain}`}
+    >
       <gob-page-header
         key={`${example.id}-${surface}`}
         variant={example.variant}
