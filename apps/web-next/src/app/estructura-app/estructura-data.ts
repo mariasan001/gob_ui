@@ -1,3 +1,5 @@
+import type { Tone } from '@mariasan001/ui-wc';
+
 export type CodeLang = 'html' | 'react' | 'vue' | 'angular';
 
 export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
@@ -6,6 +8,93 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'vue', label: 'Vue' },
   { id: 'angular', label: 'Angular' },
 ];
+
+/** Mismos swatches que Botones / Paginacion. Afectan el menu lateral. */
+export const COLOR_OPTIONS: { id: Tone; label: string; swatch: string }[] = [
+  { id: 'primary', label: 'Primary', swatch: '#9F2141' },
+  { id: 'accent', label: 'Accent', swatch: '#BC945A' },
+  { id: 'dark', label: 'Dark', swatch: '#181511' },
+  { id: 'neutral', label: 'Neutral', swatch: '#FFFFFF' },
+  { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
+];
+
+/** Fondo del menu + estado seleccionado por tono. */
+export const SIDEBAR_THEMES: Record<
+  Tone,
+  {
+    bg: string;
+    text: string;
+    muted: string;
+    activeBg: string;
+    activeText: string;
+    markBg: string;
+    markText: string;
+    footBg: string;
+    footBorder: string;
+    border: string;
+  }
+> = {
+  primary: {
+    bg: '#9F2141',
+    text: 'rgba(255, 255, 255, 0.82)',
+    muted: 'rgba(255, 255, 255, 0.55)',
+    activeBg: 'rgba(255, 255, 255, 0.18)',
+    activeText: '#FFFFFF',
+    markBg: 'rgba(255, 255, 255, 0.18)',
+    markText: '#FFFFFF',
+    footBg: 'rgba(255, 255, 255, 0.1)',
+    footBorder: 'rgba(255, 255, 255, 0.14)',
+    border: 'rgba(255, 255, 255, 0.12)',
+  },
+  accent: {
+    bg: '#F4EBE0',
+    text: '#5C5348',
+    muted: '#8A8278',
+    activeBg: 'rgba(188, 148, 90, 0.28)',
+    activeText: '#7A5A2E',
+    markBg: '#BC945A',
+    markText: '#FFFFFF',
+    footBg: 'rgba(24, 21, 17, 0.05)',
+    footBorder: 'rgba(24, 21, 17, 0.08)',
+    border: 'rgba(24, 21, 17, 0.08)',
+  },
+  dark: {
+    bg: '#181511',
+    text: 'rgba(255, 255, 255, 0.78)',
+    muted: 'rgba(255, 255, 255, 0.48)',
+    activeBg: 'rgba(255, 255, 255, 0.12)',
+    activeText: '#FFFFFF',
+    markBg: '#9F2141',
+    markText: '#FFFFFF',
+    footBg: 'rgba(255, 255, 255, 0.06)',
+    footBorder: 'rgba(255, 255, 255, 0.1)',
+    border: 'rgba(255, 255, 255, 0.1)',
+  },
+  neutral: {
+    bg: '#FFFFFF',
+    text: '#6B665F',
+    muted: '#9A9590',
+    activeBg: '#F0F0F0',
+    activeText: '#181511',
+    markBg: '#181511',
+    markText: '#FFFFFF',
+    footBg: '#F7F7F7',
+    footBorder: '#EFEFEF',
+    border: 'rgba(24, 21, 17, 0.1)',
+  },
+  soft: {
+    bg: '#E7D7BD',
+    text: '#4A4033',
+    muted: '#7A6F60',
+    activeBg: 'rgba(24, 21, 17, 0.1)',
+    activeText: '#181511',
+    markBg: '#9F2141',
+    markText: '#FFFFFF',
+    footBg: 'rgba(24, 21, 17, 0.06)',
+    footBorder: 'rgba(24, 21, 17, 0.08)',
+    border: 'rgba(24, 21, 17, 0.1)',
+  },
+};
 
 export type ShellExampleId =
   | 'basico'
@@ -54,6 +143,11 @@ export const SHELL_ATTRS = [
 ] as const;
 
 export const SHELL_TOKENS = [
+  {
+    name: '--gob-shell-sidebar-bg',
+    value: 'Surface',
+    body: 'Fondo del menu lateral. Cambia con el color del sistema.',
+  },
   {
     name: '--gob-shell-sidebar-width',
     value: '248px',
@@ -613,15 +707,30 @@ import '@mariasan001/ui-wc';
 `;
 }
 
-export function buildSnippet(lang: CodeLang, example: ShellExample): string {
+function shellStyle(lang: CodeLang, tone: Tone): string {
+  const theme = SIDEBAR_THEMES[tone];
+  const css = `--gob-shell-sidebar-bg: ${theme.bg}; --gob-shell-sidebar-border: ${theme.border}; --shell-side-active-bg: ${theme.activeBg}; --shell-side-active-text: ${theme.activeText}`;
+  if (lang === 'react') {
+    return ` style={{ ['--gob-shell-sidebar-bg' as string]: '${theme.bg}', ['--gob-shell-sidebar-border' as string]: '${theme.border}', ['--shell-side-active-bg' as string]: '${theme.activeBg}', ['--shell-side-active-text' as string]: '${theme.activeText}' }}`;
+  }
+  return ` style="${css}"`;
+}
+
+export function buildSnippet(
+  lang: CodeLang,
+  example: ShellExample,
+  tone: Tone = 'primary',
+): string {
   const attrs = shellAttrs(example);
+  const style = shellStyle(lang, tone);
 
   if (lang === 'html') {
     return `<!-- npm i @mariasan001/ui-wc -->
+<!-- Color del menu: ${tone} -->
 <script type="module">
   import '@mariasan001/ui-wc';
 </script>
-${iconImports(lang)}<gob-app-shell${attrs}>
+${iconImports(lang)}<gob-app-shell${attrs}${style}>
 ${bodyMarkup(lang, example)}
 </gob-app-shell>`;
   }
@@ -629,7 +738,7 @@ ${bodyMarkup(lang, example)}
   if (lang === 'react') {
     return `${iconImports(lang)}export function ShellDemo() {
   return (
-    <gob-app-shell${attrs}>
+    <gob-app-shell${attrs}${style}>
 ${bodyMarkup(lang, example, '      ')}
     </gob-app-shell>
   );
@@ -642,15 +751,15 @@ ${iconImports(lang).trimEnd()}
 </script>
 
 <template>
-  <gob-app-shell${attrs}>
+  <gob-app-shell${attrs}${style}>
 ${bodyMarkup(lang, example, '    ')}
   </gob-app-shell>
 </template>`;
   }
 
   return `// app.component.ts
-${iconImports(lang)}// app.component.html
-<gob-app-shell${attrs}>
+${iconImports(lang)}// app.component.html — color menu: ${tone}
+<gob-app-shell${attrs}${style}>
 ${bodyMarkup(lang, example)}
 </gob-app-shell>`;
 }
