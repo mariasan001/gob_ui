@@ -8,10 +8,12 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import type { Tone } from '@mariasan001/ui-wc';
 import '@mariasan001/ui-wc';
 
 import {
   CODE_LANGUAGES,
+  COLOR_OPTIONS,
   SHELL_ATTRS,
   SHELL_EXAMPLES,
   SHELL_RULES,
@@ -26,6 +28,7 @@ import { ShellDemo } from './shell-demo';
 
 export default function EstructuraAppPage() {
   const [lang, setLang] = useState<CodeLang>('html');
+  const [tone, setTone] = useState<Tone>('primary');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export default function EstructuraAppPage() {
 
   async function copyExample(example: ShellExample) {
     try {
-      await navigator.clipboard.writeText(buildSnippet(lang, example));
+      await navigator.clipboard.writeText(buildSnippet(lang, example, tone));
       setCopiedKey(example.id);
       window.setTimeout(() => setCopiedKey(null), 1200);
     } catch {
@@ -80,6 +83,28 @@ export default function EstructuraAppPage() {
                 })}
               </div>
             </div>
+
+            <div className={s.filterBlock}>
+              <p className={s.filterLabel}>Color</p>
+              <div className={s.colorRow}>
+                {COLOR_OPTIONS.map((option) => {
+                  const active = option.id === tone;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      className={`${s.colorSwatch} ${active ? s.colorSwatchActive : ''}`}
+                      style={{ background: option.swatch }}
+                      data-tone={option.id}
+                      aria-label={option.label}
+                      aria-pressed={active}
+                      title={option.label}
+                      onClick={() => setTone(option.id)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className={local.exampleList} aria-label="Ejemplos">
@@ -97,7 +122,7 @@ export default function EstructuraAppPage() {
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
                 <div className={local.stage}>
-                  <ShellDemo example={example} />
+                  <ShellDemo example={example} tone={tone} />
                 </div>
               </article>
             ))}

@@ -11,8 +11,11 @@ import {
   SignOut,
   UserCircle,
 } from '@phosphor-icons/react';
+import type { CSSProperties } from 'react';
 
-import type { ShellExample } from './estructura-data';
+import type { Tone } from '@mariasan001/ui-wc';
+
+import { SIDEBAR_THEMES, type ShellExample } from './estructura-data';
 import local from './estructura.module.css';
 
 const NAV = [
@@ -26,14 +29,30 @@ const NAV = [
 function ShellSidebar({
   collapsed,
   active = 'Inicio',
+  tone,
 }: {
   collapsed?: boolean;
   active?: string;
+  tone: Tone;
 }) {
+  const theme = SIDEBAR_THEMES[tone];
+
   return (
     <aside
       slot="sidebar"
       className={`${local.sidebar} ${collapsed ? local.sidebarCollapsed : ''}`}
+      style={
+        {
+          '--shell-side-text': theme.text,
+          '--shell-side-muted': theme.muted,
+          '--shell-side-active-bg': theme.activeBg,
+          '--shell-side-active-text': theme.activeText,
+          '--shell-side-mark-bg': theme.markBg,
+          '--shell-side-mark-text': theme.markText,
+          '--shell-side-foot-bg': theme.footBg,
+          '--shell-side-foot-border': theme.footBorder,
+        } as CSSProperties
+      }
     >
       <div className={local.brandBlock}>
         <span className={local.brandMark} aria-hidden="true">
@@ -316,7 +335,14 @@ function BoardContent() {
   );
 }
 
-export function ShellDemo({ example }: { example: ShellExample }) {
+export function ShellDemo({
+  example,
+  tone = 'primary',
+}: {
+  example: ShellExample;
+  tone?: Tone;
+}) {
+  const theme = SIDEBAR_THEMES[tone];
   const shellProps = {
     collapsed: example.collapsed || undefined,
     dense: example.dense || undefined,
@@ -335,10 +361,21 @@ export function ShellDemo({ example }: { example: ShellExample }) {
   if (example.id === 'tablero') body = <BoardContent />;
 
   return (
-    <gob-app-shell {...shellProps} className={shellClass}>
+    <gob-app-shell
+      {...shellProps}
+      className={shellClass}
+      style={
+        {
+          '--gob-shell-sidebar-bg': theme.bg,
+          '--gob-shell-sidebar-border': theme.border,
+          '--gob-shell-sidebar-text': theme.text,
+        } as CSSProperties
+      }
+    >
       <ShellSidebar
         collapsed={example.collapsed}
         active={example.id === 'colapsado' ? 'Expedientes' : 'Inicio'}
+        tone={tone}
       />
       {!example.hideTopbar ? (
         <ShellTopbar
