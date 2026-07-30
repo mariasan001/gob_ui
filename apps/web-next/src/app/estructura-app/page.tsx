@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react';
 import '@mariasan001/ui-wc';
 
 import {
-  ANATOMY,
   CODE_LANGUAGES,
   SHELL_ATTRS,
   SHELL_EXAMPLES,
@@ -81,33 +80,6 @@ export default function EstructuraAppPage() {
                 })}
               </div>
             </div>
-          </div>
-
-          <div className={s.spec}>
-            <h2 className={s.specTitle}>Anatomia</h2>
-            <p className={s.specDesc}>
-              Tres zonas con slots. El marco controla sticky, colapso, densidad y ocultar topbar.
-            </p>
-          </div>
-
-          <div className={local.anatomyGrid}>
-            {ANATOMY.map((item) => (
-              <article key={item.id} className={local.anatomyCard}>
-                <div>
-                  <h3>{item.title}</h3>
-                  <code>{item.caption}</code>
-                  <p>{item.body}</p>
-                </div>
-                <ul className={local.anatomyMetrics}>
-                  {item.metrics.map((metric) => (
-                    <li key={metric.label}>
-                      <span>{metric.label}</span>
-                      <strong>{metric.value}</strong>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
           </div>
 
           <section className={s.section} aria-label="Ejemplos">
