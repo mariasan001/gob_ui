@@ -104,14 +104,14 @@
   font-size: 14px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: #181511;
+  color: var(--gob-topbar-title, #181511);
   white-space: nowrap;
 }
 
 .titleBlock small {
   font-size: 11px;
   font-weight: 500;
-  color: #8a8278;
+  color: var(--gob-topbar-muted, #8a8278);
   white-space: nowrap;
 }
 
@@ -121,11 +121,11 @@
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  color: #8a8278;
+  color: var(--gob-topbar-muted, #8a8278);
 }
 
 .crumbs a {
-  color: #6b665f;
+  color: var(--gob-topbar-text, #6b665f);
   text-decoration: none;
   font-weight: 500;
 }
@@ -135,7 +135,7 @@
 }
 
 .crumbs strong {
-  color: #181511;
+  color: var(--gob-topbar-title, #181511);
   font-weight: 700;
 }
 
@@ -147,9 +147,9 @@
   min-height: 38px;
   padding: 0 12px;
   border-radius: 12px;
-  border: 1px solid #ebebeb;
-  background: #fafafa;
-  color: #9a9590;
+  border: 1px solid var(--gob-topbar-surface-border, #ebebeb);
+  background: var(--gob-topbar-surface, #fafafa);
+  color: var(--gob-topbar-muted, #9a9590);
   font-size: 13px;
 }
 
@@ -166,15 +166,19 @@
 }
 
 .btnGhost {
-  border: 1px solid #e5e5e5;
-  background: #fff;
-  color: #4a453e;
+  border: 1px solid var(--gob-topbar-surface-border, #e5e5e5);
+  background: var(--gob-topbar-surface, #fff);
+  color: var(--gob-topbar-title, #4a453e);
 }
 
 .btnPrimary {
   border: 0;
   background: var(--gob-topbar-accent, #9f2141);
   color: #fff;
+}
+
+:global(gob-topbar[tone='dark']) .btnPrimary {
+  color: #181511;
 }
 
 .iconBtn {
@@ -184,10 +188,10 @@
   place-items: center;
   width: 36px;
   height: 36px;
-  border: 1px solid #ebebeb;
+  border: 1px solid var(--gob-topbar-surface-border, #ebebeb);
   border-radius: 11px;
-  background: #fff;
-  color: #6b665f;
+  background: var(--gob-topbar-surface, #fff);
+  color: var(--gob-topbar-text, #6b665f);
   cursor: default;
 }
 
@@ -199,7 +203,7 @@
   height: 7px;
   border-radius: 50%;
   background: var(--gob-topbar-accent, #9f2141);
-  box-shadow: 0 0 0 2px #fff;
+  box-shadow: 0 0 0 2px var(--gob-topbar-bg, #fff);
 }
 
 .avatar {
@@ -212,6 +216,10 @@
   color: var(--gob-topbar-accent-text, #9f2141);
   font-size: 12px;
   font-weight: 700;
+}
+
+:global(gob-topbar[tone='dark']) .avatar {
+  color: #fff;
 }
 
 .tableWrap {
