@@ -86,8 +86,8 @@ export default function EstructuraAppPage() {
             <div className={s.sectionHead}>
               <h2 className={s.sectionTitle}>Ejemplos</h2>
               <p className={s.sectionDesc}>
-                Cinco variantes. Copiar lleva la estructura completa del preview: menu, topbar y
-                contenido.
+                Cinco variantes. Pulsa Copiar para obtener el codigo completo en{' '}
+                {lang.toUpperCase()}.
               </p>
             </div>
 
@@ -120,9 +120,6 @@ export default function EstructuraAppPage() {
                   <div className={local.stage}>
                     <ShellDemo example={example} />
                   </div>
-                  <pre className={local.code}>
-                    <code>{buildSnippet(lang, example)}</code>
-                  </pre>
                 </article>
               ))}
             </div>
