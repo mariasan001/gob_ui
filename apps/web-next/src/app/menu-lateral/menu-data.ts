@@ -109,30 +109,15 @@ function bodyFor(lang: CodeLang, example: MenuExample): string {
   const brand = collapsed
     ? `${i}<div slot="brand" class="brand">
 ${i}  <span class="mark">G</span>
-${i}  <button type="button" aria-label="Expandir menu">
-${i}    ${icon(lang, 'CaretDoubleRight')}
-${i}  </button>
+${i}  <button type="button" aria-label="Expandir menu">${icon(lang, 'CaretDoubleRight')}</button>
 ${i}</div>`
-    : example.variant === 'brand'
-      ? `${i}<div slot="brand" class="brand brand--lg">
+    : `${i}<div slot="brand" class="brand">
 ${i}  <span class="mark">G</span>
 ${i}  <div>
 ${i}    <strong>Gob UI</strong>
 ${i}    <small>Sistema institucional</small>
 ${i}  </div>
-${i}  <button type="button" aria-label="Colapsar menu">
-${i}    ${icon(lang, 'CaretDoubleLeft')}
-${i}  </button>
-${i}</div>`
-      : `${i}<div slot="brand" class="brand">
-${i}  <span class="mark">G</span>
-${i}  <div>
-${i}    <strong>Gob UI</strong>
-${i}    <small>Sistema institucional</small>
-${i}  </div>
-${i}  <button type="button" aria-label="Colapsar menu">
-${i}    ${icon(lang, 'CaretDoubleLeft')}
-${i}  </button>
+${i}  <button type="button" aria-label="Colapsar menu">${icon(lang, 'CaretDoubleLeft')}</button>
 ${i}</div>`;
 
   const navBasic = `${i}<a href="#" class="nav-item is-active" data-active="true">

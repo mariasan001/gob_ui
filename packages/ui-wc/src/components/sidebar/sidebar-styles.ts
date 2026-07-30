@@ -19,11 +19,11 @@ export const sidebarStyles = `
 .root {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
   height: 100%;
   min-height: inherit;
-  padding: 14px 12px 12px;
+  padding: 12px 10px 10px;
   border-right: 1px solid var(--gob-sidebar-border, rgba(24, 21, 17, 0.1));
   background: var(--gob-sidebar-bg, #fff);
   color: var(--gob-sidebar-text, #6b665f);
@@ -61,10 +61,18 @@ export const sidebarStyles = `
 
 .nav {
   display: grid;
-  gap: 6px;
+  gap: 4px;
   align-content: start;
   min-height: 0;
   overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .footer {
