@@ -22,6 +22,7 @@ export type {
   GobSidebarProps,
   GobSwitchProps,
   GobTopbarProps,
+  PageHeaderSurface,
   PageHeaderVariant,
   PaginationLang,
   PaginationVariant,

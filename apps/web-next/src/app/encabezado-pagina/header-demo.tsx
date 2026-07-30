@@ -1,6 +1,6 @@
 'use client';
 
-import type { PageHeaderVariant } from '@mariasan001/ui-wc';
+import type { PageHeaderSurface, PageHeaderVariant } from '@mariasan001/ui-wc';
 
 import type { HeaderExample } from './header-data';
 import local from './header.module.css';
@@ -62,10 +62,21 @@ function contentFor(variant: PageHeaderVariant) {
   );
 }
 
-export function HeaderDemo({ example }: { example: HeaderExample }) {
+export function HeaderDemo({
+  example,
+  surface,
+}: {
+  example: HeaderExample;
+  surface: PageHeaderSurface;
+}) {
   return (
     <div className={local.stageInner}>
-      <gob-page-header variant={example.variant} className={local.header}>
+      <gob-page-header
+        key={`${example.id}-${surface}`}
+        variant={example.variant}
+        surface={surface}
+        className={local.header}
+      >
         {contentFor(example.variant)}
       </gob-page-header>
     </div>

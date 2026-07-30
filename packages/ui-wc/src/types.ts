@@ -128,9 +128,11 @@ export type PageHeaderVariant =
   | 'dense'
   | 'complete';
 
+export type PageHeaderSurface = 'plain' | 'panel';
+
 export type GobPageHeaderProps = React.HTMLAttributes<HTMLElement> & {
   variant?: PageHeaderVariant;
-  tone?: Tone;
+  surface?: PageHeaderSurface;
 };
 
 declare global {
