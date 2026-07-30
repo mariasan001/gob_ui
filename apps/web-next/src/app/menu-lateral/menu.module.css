@@ -65,7 +65,7 @@
 
 .stage {
   display: block;
-  min-height: 360px;
+  min-height: 460px;
   padding: 0;
   border-radius: 14px;
   background: #f4f4f4;
@@ -76,8 +76,8 @@
 .stageFrame {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  min-height: 360px;
-  height: 360px;
+  min-height: 460px;
+  height: 460px;
 }
 
 .stageContent {
@@ -456,7 +456,7 @@
   }
 
   .sidebar {
-    height: 340px;
+    height: 420px;
   }
 
   .stageContent {
