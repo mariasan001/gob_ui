@@ -108,6 +108,18 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'topbar') {
+    return (
+      <div className={s.fakeTopbar} aria-hidden="true">
+        <span className={s.fakeTopbarTitle} />
+        <span className={s.fakeTopbarSearch} />
+        <span className={s.fakeTopbarActions}>
+          <i />
+          <i />
+        </span>
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

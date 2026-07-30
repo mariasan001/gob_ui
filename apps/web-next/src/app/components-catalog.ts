@@ -6,6 +6,7 @@ export type PreviewKind =
   | 'icon'
   | 'shell'
   | 'sidebar'
+  | 'topbar'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -119,12 +120,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'topbar',
+    href: '/barra-superior',
     name: 'Barra superior',
     description: 'Barra con busqueda, usuario y acciones.',
-    preview: 'soon',
+    preview: 'topbar',
     category: 'layout',
     tags: ['header', 'navbar', 'dashboard', 'topbar'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'page-header',
