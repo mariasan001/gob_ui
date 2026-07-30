@@ -89,6 +89,21 @@ export type GobAppShellProps = React.HTMLAttributes<HTMLElement> & {
   'sticky-topbar'?: boolean | 'true' | 'false';
 };
 
+export type SidebarVariant =
+  | 'basic'
+  | 'collapsed'
+  | 'brand'
+  | 'grouped'
+  | 'user'
+  | 'dense'
+  | 'badges';
+
+export type GobSidebarProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SidebarVariant;
+  tone?: Tone;
+  collapsed?: boolean;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -99,6 +114,7 @@ declare global {
       'gob-chip': React.DetailedHTMLProps<GobChipProps, HTMLElement>;
       'gob-pagination': React.DetailedHTMLProps<GobPaginationProps, HTMLElement>;
       'gob-app-shell': React.DetailedHTMLProps<GobAppShellProps, HTMLElement>;
+      'gob-sidebar': React.DetailedHTMLProps<GobSidebarProps, HTMLElement>;
     }
   }
 }

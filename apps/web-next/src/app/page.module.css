@@ -440,6 +440,44 @@
   background: #fafafa;
 }
 
+.fakeSidebar {
+  display: grid;
+  gap: 6px;
+  width: 120px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  background: #9f2141;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+}
+
+.fakeSidebarBrand {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 4px;
+}
+
+.fakeSidebarItem,
+.fakeSidebarItemActive {
+  height: 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.fakeSidebarItemActive {
+  background: rgba(255, 255, 255, 0.45);
+  width: 100%;
+}
+
+.fakeSidebarItem:nth-child(4) {
+  width: 78%;
+}
+
+.fakeSidebarItem:nth-child(5) {
+  width: 64%;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
