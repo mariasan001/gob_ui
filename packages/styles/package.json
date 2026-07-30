@@ -3,13 +3,23 @@
   "version": "0.1.1",
   "private": false,
   "type": "module",
-  "files": ["src", "src/fonts"],
+  "files": [
+    "base.css",
+    "theme.css",
+    "utilities.css",
+    "fonts.css",
+    "src",
+    "src/fonts"
+  ],
+  "sideEffects": [
+    "*.css",
+    "src/**/*.css"
+  ],
   "exports": {
-    "./base.css": "./src/base.css",
-    "./theme.css": "./src/theme.css",
-    "./button.css": "./src/button.css",
-    "./utilities.css": "./src/utilities.css",
-    "./fonts.css": "./src/fonts.css"
+    "./base.css": "./base.css",
+    "./theme.css": "./theme.css",
+    "./utilities.css": "./utilities.css",
+    "./fonts.css": "./fonts.css"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

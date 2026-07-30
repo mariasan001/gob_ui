@@ -1,130 +1,231 @@
 'use client';
 
 import Link from 'next/link';
+import {
+  ArrowRight,
+  Bell,
+  CirclesFour,
+  House,
+  MagnifyingGlass,
+  Plus,
+  Square,
+  TextT,
+  User,
+} from '@phosphor-icons/react';
+import { useDeferredValue, useMemo, useState } from 'react';
+
+import {
+  CATEGORIES,
+  COMPONENTS,
+  type ComponentCategory,
+  type PreviewKind,
+} from './components-catalog';
+import { SiteNav } from './site-nav';
 import s from './page.module.css';
-import WcRegister from './playground/button/wc-register';
+
+function normalize(value: string) {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+function Preview({ kind }: { kind: PreviewKind }) {
+  if (kind === 'btn') {
+    return (
+      <>
+        <span className={s.fakeBtnSolid}>
+          <Plus weight="thin" size={14} />
+          Aceptar
+        </span>
+        <span className={s.fakeBtnOutline}>Aceptar</span>
+        <span className={s.fakeBtnGhost}>Aceptar</span>
+      </>
+    );
+  }
+  if (kind === 'pag') {
+    return (
+      <>
+        <span className={s.fakePage}>1</span>
+        <span className={`${s.fakePage} ${s.fakePageActive}`}>2</span>
+        <span className={s.fakePage}>3</span>
+        <span className={s.fakePage}>4</span>
+      </>
+    );
+  }
+  if (kind === 'type') {
+    return (
+      <div className={s.fakeType}>
+        <span className={s.fakeTypeH}>Aa</span>
+        <span className={s.fakeTypeLines}>
+          <span />
+          <span />
+          <span />
+        </span>
+      </div>
+    );
+  }
+  if (kind === 'color') {
+    return (
+      <div className={s.fakeColors}>
+        <span style={{ background: '#9F2141' }} />
+        <span style={{ background: '#BC945A' }} />
+        <span style={{ background: '#1F8A55' }} />
+        <span style={{ background: '#D0921A' }} />
+      </div>
+    );
+  }
+  if (kind === 'icon') {
+    return (
+      <div className={s.fakeIcons}>
+        <House weight="thin" size={22} />
+        <User weight="thin" size={22} />
+        <Bell weight="thin" size={22} />
+        <MagnifyingGlass weight="thin" size={22} />
+      </div>
+    );
+  }
+  return (
+    <div className={s.fakeSoon}>
+      <CirclesFour weight="thin" size={28} />
+      <Square weight="thin" size={28} />
+      <TextT weight="thin" size={28} />
+    </div>
+  );
+}
 
 export default function HomePage() {
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState<ComponentCategory | 'all'>('all');
+  const deferredQuery = useDeferredValue(query);
+
+  const filtered = useMemo(() => {
+    const q = normalize(deferredQuery);
+    return COMPONENTS.filter((item) => {
+      if (category !== 'all' && item.category !== category) return false;
+      if (!q) return true;
+      const haystack = normalize(
+        [item.name, item.description, item.category, ...item.tags].join(' '),
+      );
+      return haystack.includes(q);
+    });
+  }, [deferredQuery, category]);
+
+  const readyCount = filtered.filter((item) => item.status === 'ready').length;
+
   return (
     <div className={s.page}>
-      <WcRegister />
-
-      <header className={s.header}>
-        <div className={s.headerInner}>
-          <div className={s.brand}>
-            <span className={s.logo} aria-hidden="true" />
-            <div className={s.brandText}>
-              <div className={s.brandName}>Gob UI</div>
-              <div className={s.brandHint}>Design System + Web Components</div>
-            </div>
-          </div>
-
-          <nav className={s.nav}>
-            <Link className={s.navLink} href="/components">Componentes</Link>
-            <Link className={s.navLink} href="/docs">Docs</Link>
-            <Link className={s.navLink} href="/tokens">Tokens</Link>
-            <Link className={s.navCta} href="/playground/button">Playground</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteNav active="componentes" />
 
       <main className={s.shell}>
-        <section className={s.hero}>
-          {/* LEFT */}
-          <div className={s.left}>
-            <div className={s.pills}>
-              <span className={s.pill}>Tokens</span>
-              <span className={s.pill}>Web Components</span>
-              <span className={s.pillGhost}>slot</span>
-              <span className={s.pillGhost}>attrs</span>
+        <header className={s.hero}>
+          <p className={s.eyebrow}>Sistema de diseno</p>
+          <h1 className={s.title}>Gob UI</h1>
+          <p className={s.lead}>
+            Catalogo para dashboards y paginas web. Filtra, elige uno y lo
+            desarrollamos poco a poco.
+          </p>
+        </header>
+
+        <section id="componentes" className={s.section} aria-label="Componentes">
+          <div className={s.toolbar}>
+            <div className={s.toolbarHead}>
+              <div className={s.sectionHead}>
+                <h2 className={s.sectionTitle}>Componentes</h2>
+                <p className={s.sectionDesc}>
+                  {filtered.length} de {COMPONENTS.length}
+                  {query || category !== 'all' ? '' : ` · ${readyCount} listos`}
+                </p>
+              </div>
+
+              <label className={s.search}>
+                <MagnifyingGlass weight="thin" size={18} aria-hidden />
+                <input
+                  className={s.searchInput}
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Buscar componente..."
+                  aria-label="Buscar componente"
+                />
+              </label>
             </div>
 
-            <h1 className={s.title}>
-              UI institucional,
-              <br />
-              sin “inventar estilos”.
-            </h1>
+            <div className={s.catRow} role="tablist" aria-label="Categorias">
+              {CATEGORIES.map((item) => {
+                const active = item.id === category;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    className={`${s.catChip} ${active ? s.catChipActive : ''}`}
+                    onClick={() => setCategory(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-            <p className={s.subtitle}>
-              Un sistema de componentes portable (Next/Vite/Vue/Angular/HTML) basado en tokens.
-              Consistencia visual, accesibilidad y cero drama.
+          {filtered.length === 0 ? (
+            <p className={s.empty}>
+              No hay coincidencias. Prueba con dashboard, form o modal.
             </p>
+          ) : (
+            <div className={s.grid}>
+              {filtered.map((item, index) => {
+                const body = (
+                  <>
+                    <div className={s.cardPreview} aria-hidden="true">
+                      <Preview kind={item.preview} />
+                      {item.status === 'soon' ? <span className={s.soonBadge}>Pronto</span> : null}
+                    </div>
+                    <div className={s.cardBody}>
+                      <p className={s.cardCat}>{item.category}</p>
+                      <h3 className={s.cardTitle}>{item.name}</h3>
+                      <p className={s.cardDesc}>{item.description}</p>
+                      {item.status === 'ready' ? (
+                        <span className={s.cardCta}>
+                          Abrir
+                          <ArrowRight weight="thin" size={14} />
+                        </span>
+                      ) : (
+                        <span className={s.cardSoon}>En roadmap</span>
+                      )}
+                    </div>
+                  </>
+                );
 
-            <div className={s.actions}>
-              <Link className={s.primary} href="/components">Explorar componentes</Link>
-              <Link className={s.secondary} href="/docs">Ver documentación</Link>
+                if (item.status === 'ready' && item.href) {
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      className={s.card}
+                      style={{ animationDelay: `${30 + Math.min(index, 12) * 25}ms` }}
+                    >
+                      {body}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <article
+                    key={item.id}
+                    className={`${s.card} ${s.cardSoonItem}`}
+                    style={{ animationDelay: `${30 + Math.min(index, 12) * 25}ms` }}
+                  >
+                    {body}
+                  </article>
+                );
+              })}
             </div>
-
-            <div className={s.metrics}>
-              <div className={s.metric}>
-                <div className={s.metricVal}>1</div>
-                <div className={s.metricLbl}>Paquete WC</div>
-              </div>
-              <div className={s.metric}>
-                <div className={s.metricVal}>Tokens</div>
-                <div className={s.metricLbl}>CSS Variables</div>
-              </div>
-              <div className={s.metric}>
-                <div className={s.metricVal}>Multi</div>
-                <div className={s.metricLbl}>Stack listo</div>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT */}
-          <div className={s.right}>
-            <div className={s.showcase}>
-              <div className={s.showcaseTop}>
-                <div className={s.showcaseTitle}>Vitrina</div>
-                <div className={s.showcaseHint}>Botón real (WC)</div>
-              </div>
-
-              <div className={s.previewRow}>
-                <gob-button tone="primary" appearance="solid">
-                  Guardar
-                </gob-button>
-
-                <gob-button tone="neutral" appearance="outline">
-                  Cancelar
-                </gob-button>
-
-                <gob-button tone="dark" appearance="solid">
-                  Acción
-                  <span slot="icon" aria-hidden="true">★</span>
-                </gob-button>
-              </div>
-
-              <div className={s.codeBox}>
-                <div className={s.codeHead}>
-                  <span className={s.codeDot} />
-                  <span className={s.codeDot2} />
-                  <span className={s.codeDot3} />
-                  <span className={s.codeTitle}>Uso rápido</span>
-                </div>
-
-                <pre className={s.code}>
-                  <code>{`<gob-button tone="primary" appearance="solid">
-  Guardar
-</gob-button>`}</code>
-                </pre>
-              </div>
-
-              <div className={s.quickLinks}>
-                <Link className={s.quick} href="/playground/button">
-                  Abrir playground →
-                </Link>
-                <Link className={s.quick} href="/tokens">
-                  Ver tokens →
-                </Link>
-              </div>
-            </div>
-          </div>
+          )}
         </section>
-
-        <footer className={s.footer}>
-          <span className={s.footerLeft}>Gob UI</span>
-          <span className={s.footerRight}>Portable • Tokens • Web Components</span>
-        </footer>
       </main>
     </div>
   );

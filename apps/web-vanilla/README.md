@@ -1,6 +1,7 @@
 # web-vanilla
 
-Abre `index.html` con un servidor estático (VSCode Live Server).
-Este demo usa:
-- @gob/styles (base + theme + utilities)
-- @gob/ui-wc (dist/gob-ui.js)
+Abre `index.html` con un servidor estatico.
+
+Esta referencia usa:
+- `@mariasan001/styles` para base, tema y utilidades
+- `@mariasan001/ui-wc` para `gob-button`

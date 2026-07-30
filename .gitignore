@@ -18,6 +18,9 @@ coverage/
 **/.turbo/
 .eslintcache
 **/.eslintcache
+tools/consumer-smoke/tarballs/
+tools/consumer-smoke/*.log
+tools/consumer-smoke/**/pnpm-lock.yaml
 
 # env
 .env

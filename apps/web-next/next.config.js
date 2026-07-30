@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@gob/ui-wc'],
+  transpilePackages: ['@mariasan001/ui-wc'],
 };
 
 module.exports = nextConfig;
