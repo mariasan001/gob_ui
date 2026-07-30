@@ -7,7 +7,7 @@ export const sidebarStyles = `
   box-sizing: border-box;
   font-family: var(--gob-font-sans, Gotham, Raleway, sans-serif);
   color: var(--gob-sidebar-text, #6b665f);
-  transition: width 220ms ease;
+  transition: width 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 *,
@@ -17,17 +17,24 @@ export const sidebarStyles = `
 }
 
 .root {
+  position: relative;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: 12px;
+  gap: 14px;
   width: 100%;
   height: 100%;
   min-height: inherit;
-  padding: 12px 10px 10px;
+  padding: 16px 12px 12px;
   border-right: 1px solid var(--gob-sidebar-border, rgba(24, 21, 17, 0.1));
-  background: var(--gob-sidebar-bg, #fff);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, #fff 7%, transparent) 0%,
+      transparent 42%
+    ),
+    var(--gob-sidebar-bg, #fff);
   color: var(--gob-sidebar-text, #6b665f);
-  transition: padding 220ms ease, gap 220ms ease;
+  transition: padding 240ms ease, gap 240ms ease;
 }
 
 :host([collapsed]) {
@@ -41,17 +48,17 @@ export const sidebarStyles = `
 }
 
 .root[data-variant="dense"] {
-  gap: 10px;
-  padding: 12px 10px 10px;
-  --gob-sidebar-width: 220px;
+  gap: 8px;
+  padding: 12px 8px 10px;
+  --gob-sidebar-width: 212px;
 }
 
 :host([variant="dense"]:not([collapsed])) {
-  width: var(--gob-sidebar-width, 220px);
+  width: var(--gob-sidebar-width, 212px);
 }
 
 .root[data-variant="brand"] {
-  gap: 18px;
+  gap: 16px;
   padding-top: 18px;
 }
 
@@ -61,10 +68,11 @@ export const sidebarStyles = `
 
 .nav {
   display: grid;
-  gap: 4px;
+  gap: 3px;
   align-content: start;
   min-height: 0;
   overflow: auto;
+  padding-right: 2px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -88,59 +96,64 @@ export const sidebarStyles = `
 
 .root[data-collapsed="true"] .nav {
   justify-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
-/* Tones — vars en :host para que el contenido slotted las herede */
+/* Tones */
 :host([tone='primary']),
 :host(:not([tone])) {
   --gob-sidebar-bg: #9f2141;
-  --gob-sidebar-text: rgba(255, 255, 255, 0.82);
-  --gob-sidebar-muted: rgba(255, 255, 255, 0.55);
-  --gob-sidebar-active-bg: rgba(255, 255, 255, 0.18);
+  --gob-sidebar-text: rgba(255, 255, 255, 0.86);
+  --gob-sidebar-muted: rgba(255, 255, 255, 0.58);
+  --gob-sidebar-active-bg: rgba(255, 255, 255, 0.16);
   --gob-sidebar-active-text: #fff;
-  --gob-sidebar-border: rgba(255, 255, 255, 0.12);
+  --gob-sidebar-border: rgba(255, 255, 255, 0.14);
   --gob-sidebar-accent: #9f2141;
+  --gob-sidebar-hover: rgba(255, 255, 255, 0.08);
 }
 
 :host([tone='accent']) {
-  --gob-sidebar-bg: #f4ebe0;
-  --gob-sidebar-text: #5c5348;
+  --gob-sidebar-bg: #f3ebe0;
+  --gob-sidebar-text: #53493e;
   --gob-sidebar-muted: #8a8278;
-  --gob-sidebar-active-bg: rgba(188, 148, 90, 0.28);
-  --gob-sidebar-active-text: #7a5a2e;
+  --gob-sidebar-active-bg: rgba(188, 148, 90, 0.26);
+  --gob-sidebar-active-text: #6f5128;
   --gob-sidebar-border: rgba(24, 21, 17, 0.08);
   --gob-sidebar-accent: #bc945a;
+  --gob-sidebar-hover: rgba(24, 21, 17, 0.05);
 }
 
 :host([tone='dark']) {
   --gob-sidebar-bg: #181511;
-  --gob-sidebar-text: rgba(255, 255, 255, 0.78);
+  --gob-sidebar-text: rgba(255, 255, 255, 0.82);
   --gob-sidebar-muted: rgba(255, 255, 255, 0.48);
   --gob-sidebar-active-bg: rgba(255, 255, 255, 0.12);
   --gob-sidebar-active-text: #fff;
   --gob-sidebar-border: rgba(255, 255, 255, 0.1);
   --gob-sidebar-accent: #181511;
+  --gob-sidebar-hover: rgba(255, 255, 255, 0.06);
 }
 
 :host([tone='neutral']) {
   --gob-sidebar-bg: #fff;
-  --gob-sidebar-text: #6b665f;
+  --gob-sidebar-text: #5f5952;
   --gob-sidebar-muted: #9a9590;
   --gob-sidebar-active-bg: rgba(159, 33, 65, 0.1);
   --gob-sidebar-active-text: #9f2141;
-  --gob-sidebar-border: rgba(24, 21, 17, 0.1);
+  --gob-sidebar-border: rgba(24, 21, 17, 0.08);
   --gob-sidebar-accent: #9f2141;
+  --gob-sidebar-hover: rgba(24, 21, 17, 0.04);
 }
 
 :host([tone='soft']) {
   --gob-sidebar-bg: #e7d7bd;
-  --gob-sidebar-text: #4a4033;
+  --gob-sidebar-text: #463d31;
   --gob-sidebar-muted: #7a6f60;
   --gob-sidebar-active-bg: rgba(159, 33, 65, 0.12);
   --gob-sidebar-active-text: #9f2141;
-  --gob-sidebar-border: rgba(24, 21, 17, 0.1);
+  --gob-sidebar-border: rgba(24, 21, 17, 0.08);
   --gob-sidebar-accent: #9f2141;
+  --gob-sidebar-hover: rgba(24, 21, 17, 0.05);
 }
 
 ::slotted([data-active="true"]),

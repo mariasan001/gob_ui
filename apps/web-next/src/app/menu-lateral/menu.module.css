@@ -1,13 +1,13 @@
 .exampleList {
   display: grid;
-  gap: 16px;
+  gap: 18px;
   padding-top: 6px;
 }
 
 .exampleCard {
   position: relative;
   display: grid;
-  gap: 10px;
+  gap: 12px;
   padding: 18px;
   border-radius: 20px;
   border: 1px solid #ebebeb;
@@ -65,39 +65,66 @@
 
 .stage {
   display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
-  min-height: 460px;
-  padding: 18px;
-  border-radius: 14px;
-  background: #f4f4f4;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  padding: 28px 24px;
+  border-radius: 16px;
   border: 1px solid #ececec;
   overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 20% 10%, rgba(159, 33, 65, 0.06), transparent 55%),
+    linear-gradient(165deg, #f7f7f7 0%, #efefef 100%);
+}
+
+.stageInner {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .sidebar {
-  --gob-sidebar-width: 240px;
-  --gob-sidebar-collapsed-width: 76px;
-  height: 424px;
-  border-radius: 16px;
+  --gob-sidebar-width: 252px;
+  --gob-sidebar-collapsed-width: 80px;
+  height: 440px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 28px rgba(24, 21, 17, 0.1);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 18px 40px rgba(24, 21, 17, 0.14);
 }
 
 .sidebarRail {
-  --gob-sidebar-collapsed-width: 76px;
+  --gob-sidebar-collapsed-width: 80px;
+}
+
+.sidebarDense {
+  --gob-sidebar-width: 220px;
+  height: 400px;
+}
+
+.sidebarBrand {
+  height: 456px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
   min-width: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
 }
 
 .brandLg {
-  padding: 2px 0 4px;
+  padding-bottom: 12px;
+}
+
+.brandRail {
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 8px;
 }
 
 .brandText {
@@ -108,17 +135,19 @@
 
 .brandText strong {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 1.2;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
   color: var(--gob-sidebar-active-text, inherit);
   white-space: nowrap;
 }
 
 .brandText small {
   display: block;
-  margin-top: 2px;
-  font-size: 10px;
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 500;
   color: var(--gob-sidebar-muted, #9a9590);
   white-space: nowrap;
 }
@@ -126,73 +155,95 @@
 .mark {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
   background: var(--gob-sidebar-accent, #9f2141);
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   flex: 0 0 auto;
+  box-shadow: 0 6px 14px rgba(24, 21, 17, 0.12);
+}
+
+.markLg {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  font-size: 16px;
 }
 
 :global(gob-sidebar[tone='primary']) .mark,
 :global(gob-sidebar[tone='dark']) .mark {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: none;
 }
 
 .toggle {
   appearance: none;
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   margin-left: auto;
   border: 0;
-  border-radius: 9px;
-  background: color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, currentColor 9%, transparent);
   color: inherit;
   cursor: pointer;
   flex: 0 0 auto;
-  transition: background 140ms ease;
+  transition: background 140ms ease, transform 140ms ease;
 }
 
 .toggle:hover {
-  background: color-mix(in srgb, currentColor 16%, transparent);
+  background: color-mix(in srgb, currentColor 15%, transparent);
+  transform: translateY(-1px);
 }
 
-:global(gob-sidebar[collapsed]) .brand {
-  flex-direction: column;
-  gap: 8px;
-}
-
-:global(gob-sidebar[collapsed]) .toggle {
+.brandRail .toggle {
   margin-left: 0;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
 }
 
 .navItem {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 36px;
-  padding: 0 10px;
-  border-radius: 11px;
+  gap: 11px;
+  min-height: 40px;
+  padding: 0 11px;
+  border-radius: 12px;
   color: inherit;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
-  transition: background 140ms ease, color 140ms ease;
+  letter-spacing: -0.01em;
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.navItem:hover {
+  background: var(--gob-sidebar-hover, rgba(24, 21, 17, 0.04));
+}
+
+.navItemDense {
+  min-height: 34px;
+  padding: 0 9px;
+  border-radius: 10px;
+  font-size: 12px;
+  gap: 9px;
 }
 
 .navItemRail {
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  min-height: 42px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
   padding: 0;
-  border-radius: 13px;
+  border-radius: 14px;
 }
 
 .navIcon {
@@ -202,6 +253,7 @@
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
+  opacity: 0.95;
 }
 
 .navLabel {
@@ -216,69 +268,119 @@
   background: var(--gob-sidebar-active-bg, rgba(159, 33, 65, 0.1));
   color: var(--gob-sidebar-active-text, #9f2141);
   font-weight: 700;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.navActive:hover {
+  background: var(--gob-sidebar-active-bg, rgba(159, 33, 65, 0.1));
 }
 
 .group {
-  margin: 8px 0 2px;
-  padding: 0 10px;
+  margin: 12px 0 4px;
+  padding: 0 11px;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gob-sidebar-muted, #9a9590);
 }
 
 .group:first-child {
-  margin-top: 0;
+  margin-top: 2px;
 }
 
 .badge {
   flex: 0 0 auto;
-  min-width: 20px;
-  padding: 2px 6px;
+  min-width: 22px;
+  padding: 3px 7px;
   border-radius: 999px;
-  background: var(--gob-sidebar-active-bg, rgba(159, 33, 65, 0.12));
+  background: color-mix(in srgb, currentColor 14%, transparent);
   color: var(--gob-sidebar-active-text, #9f2141);
   font-style: normal;
   font-size: 11px;
   font-weight: 700;
   text-align: center;
+  line-height: 1;
 }
 
 .badgeDot {
   position: absolute;
-  top: -2px;
-  right: -4px;
-  width: 7px;
-  height: 7px;
+  top: -3px;
+  right: -5px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: var(--gob-sidebar-active-text, #fff);
+  background: #fff;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gob-sidebar-bg, #9f2141) 85%, #000);
 }
 
-.footEmpty {
-  display: none;
+:global(gob-sidebar[tone='neutral']) .badgeDot,
+:global(gob-sidebar[tone='soft']) .badgeDot,
+:global(gob-sidebar[tone='accent']) .badgeDot {
+  background: var(--gob-sidebar-accent, #9f2141);
+  box-shadow: 0 0 0 2px var(--gob-sidebar-bg, #fff);
 }
 
 .foot {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 4px 2px;
-  border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  gap: 10px;
+  margin-top: 2px;
+  padding: 10px;
+  border-radius: 14px;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
 }
 
-.foot strong {
+.footEmphasis {
+  background: color-mix(in srgb, currentColor 11%, transparent);
+  border-color: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.footAvatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 11px;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  color: var(--gob-sidebar-active-text, inherit);
+  flex: 0 0 auto;
+}
+
+.footText {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.footText strong {
   display: block;
   font-size: 12px;
   font-weight: 700;
   color: var(--gob-sidebar-active-text, inherit);
+  white-space: nowrap;
 }
 
-.foot small {
+.footText small {
   display: block;
   margin-top: 2px;
   font-size: 11px;
   color: var(--gob-sidebar-muted, #9a9590);
+  white-space: nowrap;
+}
+
+.footAction {
+  appearance: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--gob-sidebar-muted, inherit);
+  cursor: default;
+  flex: 0 0 auto;
 }
 
 .footRail {
@@ -286,7 +388,7 @@
   gap: 8px;
   justify-items: center;
   width: 100%;
-  padding-top: 6px;
+  padding-top: 8px;
   border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
 }
 
@@ -294,11 +396,11 @@
   appearance: none;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border: 0;
-  border-radius: 10px;
-  background: transparent;
+  border-radius: 12px;
+  background: color-mix(in srgb, currentColor 8%, transparent);
   color: inherit;
   cursor: default;
 }
@@ -306,12 +408,12 @@
 .avatar {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: var(--gob-sidebar-active-bg, rgba(255, 255, 255, 0.18));
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--gob-sidebar-active-bg, rgba(255, 255, 255, 0.16));
   color: var(--gob-sidebar-active-text, #fff);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
 }
 
@@ -361,9 +463,16 @@
 }
 
 @media (max-width: 640px) {
-  .sidebar {
-    width: 100%;
-    --gob-sidebar-width: 100%;
+  .stage {
+    min-height: 420px;
+    padding: 18px 14px;
+  }
+
+  .sidebar,
+  .sidebarBrand,
+  .sidebarDense {
+    width: min(100%, 280px);
+    --gob-sidebar-width: min(100%, 280px);
     height: 420px;
   }
 }
