@@ -102,12 +102,26 @@ function ShellSidebar({
 function ShellTopbar({
   title,
   meta,
+  tone,
 }: {
   title: string;
   meta?: string;
+  tone: Tone;
 }) {
+  const theme = SIDEBAR_THEMES[tone];
+
   return (
-    <header slot="topbar" className={local.topbar}>
+    <header
+      slot="topbar"
+      className={local.topbar}
+      style={
+        {
+          '--shell-accent': theme.accent,
+          '--shell-accent-soft': theme.accentSoft,
+          '--shell-accent-text': theme.accentText,
+        } as CSSProperties
+      }
+    >
       <div className={local.topbarLeft}>
         <strong>{title}</strong>
         {meta ? <p className={local.topMeta}>{meta}</p> : null}
@@ -379,6 +393,7 @@ export function ShellDemo({
       />
       {!example.hideTopbar ? (
         <ShellTopbar
+          tone={tone}
           title={
             example.id === 'tablero'
               ? 'Tablero institucional'
