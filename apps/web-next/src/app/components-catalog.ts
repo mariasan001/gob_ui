@@ -1,4 +1,12 @@
-export type PreviewKind = 'btn' | 'pag' | 'type' | 'color' | 'icon' | 'shell' | 'soon';
+export type PreviewKind =
+  | 'btn'
+  | 'pag'
+  | 'type'
+  | 'color'
+  | 'icon'
+  | 'shell'
+  | 'sidebar'
+  | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
 
@@ -101,12 +109,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'sidebar',
+    href: '/menu-lateral',
     name: 'Menu lateral',
     description: 'Navegacion lateral colapsable para consolas.',
-    preview: 'soon',
+    preview: 'sidebar',
     category: 'layout',
     tags: ['menu', 'nav', 'dashboard', 'aside', 'sidebar'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'topbar',

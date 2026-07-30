@@ -97,6 +97,17 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'sidebar') {
+    return (
+      <div className={s.fakeSidebar} aria-hidden="true">
+        <span className={s.fakeSidebarBrand} />
+        <span className={s.fakeSidebarItemActive} />
+        <span className={s.fakeSidebarItem} />
+        <span className={s.fakeSidebarItem} />
+        <span className={s.fakeSidebarItem} />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
