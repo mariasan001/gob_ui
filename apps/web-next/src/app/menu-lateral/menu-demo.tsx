@@ -27,6 +27,7 @@ const NAV: {
   { label: 'Expedientes', Icon: FolderOpen, badge: 12 },
   { label: 'Reportes', Icon: ChartBar, badge: 3 },
   { label: 'Dependencias', Icon: Buildings },
+  { label: 'Usuarios', Icon: UserCircle, badge: 5 },
   { label: 'Ajustes', Icon: GearSix },
 ];
 
@@ -179,7 +180,15 @@ function StagePanel({ collapsed }: { collapsed: boolean }) {
           <span>Abierto</span>
         </div>
         <div>
+          <strong>EXP-2039</strong>
+          <span>Abierto</span>
+        </div>
+        <div>
           <strong>EXP-2038</strong>
+          <span>Cerrado</span>
+        </div>
+        <div>
+          <strong>EXP-2035</strong>
           <span>Cerrado</span>
         </div>
       </div>
