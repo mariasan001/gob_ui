@@ -82,6 +82,11 @@ export type GobPaginationProps =
     'aria-label'?: string;
   };
 
+export type GobAppShellProps = React.HTMLAttributes<HTMLElement> & {
+  collapsed?: boolean;
+  'sticky-topbar'?: boolean | 'true' | 'false';
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -91,6 +96,7 @@ declare global {
       'gob-switch': React.DetailedHTMLProps<GobSwitchProps, HTMLElement>;
       'gob-chip': React.DetailedHTMLProps<GobChipProps, HTMLElement>;
       'gob-pagination': React.DetailedHTMLProps<GobPaginationProps, HTMLElement>;
+      'gob-app-shell': React.DetailedHTMLProps<GobAppShellProps, HTMLElement>;
     }
   }
 }
