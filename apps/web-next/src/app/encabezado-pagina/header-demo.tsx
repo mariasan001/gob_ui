@@ -77,7 +77,7 @@ export function HeaderDemo({
         key={`${example.id}-${surface}`}
         variant={example.variant}
         surface={surface}
-        className={local.header}
+        className={`${local.header} ${surface === 'plain' ? local.headerPlain : ''}`}
       >
         {contentFor(example.variant)}
       </gob-page-header>
