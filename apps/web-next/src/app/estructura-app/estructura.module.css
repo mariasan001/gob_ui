@@ -1,24 +1,183 @@
+.anatomyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: -12px;
+}
+
+.anatomyCard {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid #ebebeb;
+  background: #fff;
+  min-width: 0;
+}
+
+.anatomyCard h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #181511;
+}
+
+.anatomyCard code {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+  font-size: 11px;
+  color: #9f2141;
+}
+
+.anatomyCard p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b665f;
+}
+
+.anatomyMetrics {
+  list-style: none;
+  margin: 0;
+  padding: 12px 0 0;
+  border-top: 1px solid #efefef;
+  display: grid;
+  gap: 8px;
+}
+
+.anatomyMetrics li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 12px;
+  color: #6b655c;
+}
+
+.anatomyMetrics strong {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #181511;
+  white-space: nowrap;
+}
+
+.exampleList {
+  display: grid;
+  gap: 28px;
+}
+
+.exampleCard {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid #ebebeb;
+  background: #fff;
+}
+
+.exampleHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.exampleIndex {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9f2141;
+}
+
+.exampleTitle {
+  margin: 0 0 4px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #181511;
+}
+
+.exampleDesc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b665f;
+  max-width: 62ch;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tag {
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: #f4f4f4;
+  border: 1px solid #ebebeb;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b665f;
+}
+
+.copyBtn {
+  appearance: none;
+  flex: 0 0 auto;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #333;
+  border-radius: 999px;
+  min-height: 28px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .stage {
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 14px;
   border: 1px solid #ebebeb;
   background: #f3f3f3;
-  min-height: 320px;
+  min-height: 300px;
 }
 
 .shell {
   --gob-shell-sidebar-width: 200px;
   --gob-shell-sidebar-collapsed-width: 64px;
   --gob-shell-content-padding: 18px;
-  min-height: 320px;
+  --gob-shell-frame-height: 300px;
+  height: 300px;
   display: block;
+}
+
+.shellDense {
+  --gob-shell-sidebar-width: 180px;
+  --gob-shell-content-padding: 12px;
 }
 
 .sidebar {
   display: grid;
-  gap: 16px;
-  padding: 18px 14px;
-  min-height: 320px;
+  gap: 14px;
+  padding: 16px 12px;
+  min-height: 100%;
+}
+
+.sidebarCollapsed {
+  justify-items: center;
+  text-align: center;
+  padding-inline: 8px;
 }
 
 .brand {
@@ -30,7 +189,7 @@
 
 .nav {
   display: grid;
-  gap: 8px;
+  gap: 6px;
   font-size: 13px;
   color: #6b665f;
 }
@@ -51,8 +210,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  min-height: 56px;
-  padding: 0 18px;
+  min-height: 54px;
+  padding: 0 16px;
   font-size: 13px;
   color: #6b665f;
 }
@@ -62,51 +221,144 @@
   font-weight: 600;
 }
 
+.topMeta {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #9a9590;
+}
+
+.userChip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(24, 21, 17, 0.05);
+  color: #181511;
+  font-weight: 600;
+  font-size: 12px;
+}
+
 .content {
   display: grid;
   gap: 8px;
 }
 
-.content h3 {
+.content h3,
+.boardHead h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 500;
   color: #181511;
 }
 
-.content p {
+.content p,
+.boardHead p {
   margin: 0;
   font-size: 13px;
   line-height: 1.5;
   color: #6b665f;
 }
 
-.codeWrap {
-  position: relative;
+.contentLines {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
 }
 
-.copyBtn {
-  appearance: none;
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  border: 1px solid #e5e5e5;
+.contentLines span {
+  display: block;
+  height: 10px;
+  border-radius: 6px;
+  background: rgba(24, 21, 17, 0.06);
+}
+
+.contentLines span:nth-child(1) {
+  width: 92%;
+}
+
+.contentLines span:nth-child(2) {
+  width: 78%;
+}
+
+.contentLines span:nth-child(3) {
+  width: 64%;
+}
+
+.board {
+  display: grid;
+  gap: 14px;
+}
+
+.boardHead {
+  display: grid;
+  gap: 4px;
+}
+
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kpi {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
   background: #fff;
-  color: #333;
-  border-radius: 999px;
-  min-height: 22px;
-  padding: 0 10px;
-  font: inherit;
+  border: 1px solid #ebebeb;
+}
+
+.kpi span {
   font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
+  color: #9a9590;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.kpi strong {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #181511;
+}
+
+.panelBlock {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #ebebeb;
+  background: #fff;
+}
+
+.panelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+}
+
+.panelRow:last-child {
+  border-bottom: 0;
+}
+
+.panelRow span {
+  color: #181511;
+  font-weight: 500;
+}
+
+.panelRow em {
+  font-style: normal;
+  color: #6b665f;
+  font-size: 12px;
 }
 
 .code {
   margin: 0;
-  padding: 18px;
-  border-radius: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
   border: 1px solid #ebebeb;
   background: #f6f6f6;
   overflow-x: auto;
@@ -115,7 +367,129 @@
 .code code {
   font-family: var(--gob-font-mono, ui-monospace, Menlo, monospace);
   font-size: 12px;
-  line-height: 1.6;
+  line-height: 1.55;
   color: #181511;
   white-space: pre;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid #ebebeb;
+  background: #fff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #efefef;
+}
+
+.table th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a8278;
+  background: #fafafa;
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+.table code {
+  font-family: var(--gob-font-mono, ui-monospace, Menlo, monospace);
+  font-size: 12px;
+  color: #9f2141;
+}
+
+.table td:last-child {
+  color: #6b665f;
+  line-height: 1.45;
+}
+
+.rulesPanel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+.ruleRow {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid #efefef;
+}
+
+.ruleRow:nth-child(odd) {
+  border-right: 1px solid #efefef;
+}
+
+.ruleRow:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.ruleIndex {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #9f2141;
+}
+
+.ruleTitle {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #181511;
+}
+
+.ruleBody {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #6b665f;
+}
+
+@media (max-width: 900px) {
+  .anatomyGrid,
+  .kpiRow,
+  .rulesPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .ruleRow:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .ruleRow:nth-last-child(-n + 2) {
+    border-bottom: 1px solid #efefef;
+  }
+
+  .ruleRow:last-child {
+    border-bottom: 0;
+  }
+
+  .shell {
+    --gob-shell-frame-height: auto;
+    height: auto;
+    min-height: 320px;
+  }
+
+  .stage {
+    min-height: 320px;
+  }
 }
