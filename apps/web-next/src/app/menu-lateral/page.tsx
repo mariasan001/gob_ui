@@ -51,8 +51,8 @@ export default function MenuLateralPage() {
           </Link>
           <h1 className={s.title}>Menu lateral</h1>
           <p className={s.hint}>
-            Navegacion lateral para consolas. Pasa el mouse y pulsa <strong>Copiar</strong> para
-            el codigo en <strong>{lang.toUpperCase()}</strong>.
+            Navegacion lateral colapsable. Prueba el boton del menu y pulsa <strong>Copiar</strong>{' '}
+            para el codigo en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>

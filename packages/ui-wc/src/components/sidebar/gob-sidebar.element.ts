@@ -60,8 +60,7 @@ class GobSidebarElement extends SafeHTMLElement {
   private syncState() {
     const variant = resolveSidebarVariant(this.getAttribute('variant'));
     const tone = resolveSidebarTone(this.getAttribute('tone'));
-    const collapsed =
-      this.hasAttribute('collapsed') || variant === 'collapsed';
+    const collapsed = this.hasAttribute('collapsed');
 
     this.rootEl.dataset.variant = variant;
     this.rootEl.dataset.tone = tone;

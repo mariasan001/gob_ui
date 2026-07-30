@@ -64,62 +64,103 @@
 }
 
 .stage {
-  display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
-  min-height: 320px;
-  padding: 16px;
+  display: block;
+  min-height: 340px;
+  padding: 0;
   border-radius: 14px;
   background: #f4f4f4;
   border: 1px solid #ececec;
   overflow: hidden;
 }
 
+.stageFrame {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 340px;
+  height: 340px;
+}
+
+.stageContent {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 28px 24px;
+  background:
+    linear-gradient(180deg, #fafafa 0%, #f3f3f3 100%);
+}
+
+.stageLine {
+  display: block;
+  height: 12px;
+  border-radius: 8px;
+  background: rgba(24, 21, 17, 0.06);
+  width: 88%;
+}
+
+.stageLineShort {
+  width: 54%;
+}
+
 .sidebar {
-  --gob-sidebar-width: 220px;
-  --gob-sidebar-collapsed-width: 68px;
-  height: 288px;
-  border-radius: 14px;
+  --gob-sidebar-width: 228px;
+  --gob-sidebar-collapsed-width: 80px;
+  height: 100%;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(24, 21, 17, 0.08);
+}
+
+.sidebarRail {
+  --gob-sidebar-collapsed-width: 80px;
 }
 
 .brand {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.brandTop {
   display: flex;
   align-items: center;
   gap: 10px;
   min-width: 0;
 }
 
-.brandLg {
-  padding: 4px 2px 8px;
+.brandLg .brandTop {
+  padding: 2px 0 4px;
 }
 
-.brand strong {
+.brandText {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.brandText strong {
   display: block;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--gob-sidebar-active-text, inherit);
+  white-space: nowrap;
 }
 
-.brand small {
+.brandText small {
   display: block;
   margin-top: 2px;
   font-size: 11px;
   color: var(--gob-sidebar-muted, #9a9590);
+  white-space: nowrap;
 }
 
 .mark {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: color-mix(in srgb, #fff 18%, transparent);
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
   background: var(--gob-sidebar-accent, #9f2141);
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   flex: 0 0 auto;
 }
@@ -129,22 +170,76 @@
   background: rgba(255, 255, 255, 0.18);
 }
 
+.toggle {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  color: inherit;
+  cursor: pointer;
+  transition: background 140ms ease, transform 140ms ease;
+}
+
+.toggle:hover {
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+:global(gob-sidebar[collapsed]) .brandTop {
+  justify-content: center;
+}
+
+:global(gob-sidebar[collapsed]) .toggle {
+  width: 44px;
+  min-height: 44px;
+  margin-inline: auto;
+  border-radius: 14px;
+}
+
 .navItem {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 36px;
+  min-height: 40px;
   padding: 0 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   color: inherit;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
+  transition: background 140ms ease, color 140ms ease;
 }
 
-.navItem span {
+.navItemRail {
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 14px;
+}
+
+.navIcon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+}
+
+.navLabel {
   flex: 1 1 auto;
   min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .navActive {
@@ -153,16 +248,8 @@
   font-weight: 700;
 }
 
-:global(gob-sidebar[variant='collapsed']) .navItem,
-:global(gob-sidebar[collapsed]) .navItem {
-  justify-content: center;
-  width: 40px;
-  padding: 0;
-}
-
-:global(gob-sidebar[variant='collapsed']) .brand,
-:global(gob-sidebar[collapsed]) .brand {
-  justify-content: center;
+.navItemRail.navActive {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 10%, transparent);
 }
 
 .group {
@@ -192,12 +279,23 @@
   text-align: center;
 }
 
+.badgeDot {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gob-sidebar-active-text, #fff);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gob-sidebar-bg, #9f2141) 80%, transparent);
+}
+
 .foot {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 10px;
-  border-radius: 12px;
+  border-radius: 14px;
   background: color-mix(in srgb, currentColor 8%, transparent);
   border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
 }
@@ -216,14 +314,36 @@
   color: var(--gob-sidebar-muted, #9a9590);
 }
 
-.footIcon {
+.footRail {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  width: 100%;
+}
+
+.railBtn {
+  appearance: none;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 14px;
   background: color-mix(in srgb, currentColor 8%, transparent);
   color: inherit;
+  cursor: default;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: var(--gob-sidebar-active-bg, rgba(255, 255, 255, 0.18));
+  color: var(--gob-sidebar-active-text, #fff);
+  font-size: 10px;
+  font-weight: 700;
 }
 
 .tableWrap {
@@ -272,7 +392,17 @@
 }
 
 @media (max-width: 640px) {
-  .stage {
-    min-height: 300px;
+  .stageFrame {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 0;
+  }
+
+  .sidebar {
+    height: 320px;
+  }
+
+  .stageContent {
+    display: none;
   }
 }
