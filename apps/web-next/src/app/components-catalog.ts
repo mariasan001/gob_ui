@@ -7,6 +7,7 @@ export type PreviewKind =
   | 'shell'
   | 'sidebar'
   | 'topbar'
+  | 'page-header'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -130,12 +131,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'page-header',
+    href: '/encabezado-pagina',
     name: 'Encabezado de pagina',
     description: 'Titulo, migas de pan y acciones de la vista.',
-    preview: 'soon',
+    preview: 'page-header',
     category: 'layout',
-    tags: ['header', 'titulo', 'dashboard'],
-    status: 'soon',
+    tags: ['header', 'titulo', 'dashboard', 'page-header'],
+    status: 'ready',
   },
   {
     id: 'breadcrumb',
