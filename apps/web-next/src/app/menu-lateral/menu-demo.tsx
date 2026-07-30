@@ -149,53 +149,6 @@ function NavItems({
   return <>{NAV.map(({ label, Icon, badge }) => renderItem(label, Icon, badge))}</>;
 }
 
-function StagePanel({ collapsed }: { collapsed: boolean }) {
-  return (
-    <div className={local.stageContent} aria-hidden="true">
-      <div className={local.stageHead}>
-        <strong>{collapsed ? 'Mas espacio de trabajo' : 'Panel principal'}</strong>
-        <span>Expedientes · Operaciones</span>
-      </div>
-      <div className={local.stageCards}>
-        <article>
-          <em>Abiertos</em>
-          <b>128</b>
-        </article>
-        <article>
-          <em>Revision</em>
-          <b>46</b>
-        </article>
-        <article>
-          <em>Cerrados</em>
-          <b>312</b>
-        </article>
-      </div>
-      <div className={local.stageList}>
-        <div>
-          <strong>EXP-2041</strong>
-          <span>En revision</span>
-        </div>
-        <div>
-          <strong>EXP-2040</strong>
-          <span>Abierto</span>
-        </div>
-        <div>
-          <strong>EXP-2039</strong>
-          <span>Abierto</span>
-        </div>
-        <div>
-          <strong>EXP-2038</strong>
-          <span>Cerrado</span>
-        </div>
-        <div>
-          <strong>EXP-2035</strong>
-          <span>Cerrado</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function MenuDemo({
   example,
   tone,
@@ -215,26 +168,23 @@ export function MenuDemo({
     collapsed;
 
   return (
-    <div className={local.stageFrame}>
-      <gob-sidebar
-        variant={variant}
-        tone={tone}
-        collapsed={collapsed || undefined}
-        className={`${local.sidebar} ${collapsed ? local.sidebarRail : ''}`}
-      >
-        <Brand
-          collapsed={collapsed}
-          large={example.variant === 'brand' && !collapsed}
-          onToggle={() => setCollapsed((value) => !value)}
-        />
-        <NavItems
-          variant={example.variant}
-          collapsed={collapsed}
-          active={collapsed ? 'Expedientes' : 'Inicio'}
-        />
-        <Footer collapsed={collapsed} showUser={showUser} />
-      </gob-sidebar>
-      <StagePanel collapsed={collapsed} />
-    </div>
+    <gob-sidebar
+      variant={variant}
+      tone={tone}
+      collapsed={collapsed || undefined}
+      className={`${local.sidebar} ${collapsed ? local.sidebarRail : ''}`}
+    >
+      <Brand
+        collapsed={collapsed}
+        large={example.variant === 'brand' && !collapsed}
+        onToggle={() => setCollapsed((value) => !value)}
+      />
+      <NavItems
+        variant={example.variant}
+        collapsed={collapsed}
+        active={collapsed ? 'Expedientes' : 'Inicio'}
+      />
+      <Footer collapsed={collapsed} showUser={showUser} />
+    </gob-sidebar>
   );
 }
