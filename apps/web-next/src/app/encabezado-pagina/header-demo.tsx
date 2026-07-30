@@ -1,9 +1,8 @@
 'use client';
 
-import type { PageHeaderVariant, Tone } from '@mariasan001/ui-wc';
+import type { PageHeaderVariant } from '@mariasan001/ui-wc';
 
 import type { HeaderExample } from './header-data';
-import { HEADER_THEME_VARS } from './header-themes';
 import local from './header.module.css';
 
 function Breadcrumb() {
@@ -63,22 +62,10 @@ function contentFor(variant: PageHeaderVariant) {
   );
 }
 
-export function HeaderDemo({
-  example,
-  tone,
-}: {
-  example: HeaderExample;
-  tone: Tone;
-}) {
+export function HeaderDemo({ example }: { example: HeaderExample }) {
   return (
     <div className={local.stageInner}>
-      <gob-page-header
-        key={`${example.id}-${tone}`}
-        variant={example.variant}
-        tone={tone}
-        className={local.header}
-        style={HEADER_THEME_VARS[tone]}
-      >
+      <gob-page-header variant={example.variant} className={local.header}>
         {contentFor(example.variant)}
       </gob-page-header>
     </div>

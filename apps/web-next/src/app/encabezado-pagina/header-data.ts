@@ -1,4 +1,4 @@
-import type { PageHeaderVariant, Tone } from '@mariasan001/ui-wc';
+import type { PageHeaderVariant } from '@mariasan001/ui-wc';
 
 export type CodeLang = 'html' | 'react' | 'vue' | 'angular';
 
@@ -7,14 +7,6 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'react', label: 'React' },
   { id: 'vue', label: 'Vue' },
   { id: 'angular', label: 'Angular' },
-];
-
-export const COLOR_OPTIONS: { id: Tone; label: string; swatch: string }[] = [
-  { id: 'primary', label: 'Primary', swatch: '#9F2141' },
-  { id: 'accent', label: 'Accent', swatch: '#BC945A' },
-  { id: 'dark', label: 'Dark', swatch: '#181511' },
-  { id: 'neutral', label: 'Neutral', swatch: '#EBEBEB' },
-  { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
 ];
 
 export type HeaderExample = {
@@ -75,12 +67,6 @@ export const HEADER_ATTRS = [
     type: 'string',
     defaultValue: 'basic',
     body: 'basic | description | breadcrumb | actions | status | dense | complete',
-  },
-  {
-    name: 'tone',
-    type: 'string',
-    defaultValue: 'primary',
-    body: 'Acento de estado y botones: primary | accent | dark | neutral | soft',
   },
 ] as const;
 
@@ -152,12 +138,8 @@ function iconImports(lang: CodeLang): string {
 `;
 }
 
-export function buildSnippet(
-  lang: CodeLang,
-  example: HeaderExample,
-  tone: Tone,
-): string {
-  const attrs = ` variant="${example.variant}" tone="${tone}"`;
+export function buildSnippet(lang: CodeLang, example: HeaderExample): string {
+  const attrs = ` variant="${example.variant}"`;
   const body = bodyFor(example);
 
   if (lang === 'html') {

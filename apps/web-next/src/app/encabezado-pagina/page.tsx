@@ -2,17 +2,16 @@
 
 /**
  * Docs de Encabezado de pagina — cascaron canonico = Botones (/botones).
+ * Sin seleccion de color: el encabezado hereda el contexto de la pagina.
  */
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import type { Tone } from '@mariasan001/ui-wc';
 import '@mariasan001/ui-wc';
 
 import {
   CODE_LANGUAGES,
-  COLOR_OPTIONS,
   HEADER_ATTRS,
   HEADER_EXAMPLES,
   buildSnippet,
@@ -25,7 +24,6 @@ import s from './page.module.css';
 
 export default function EncabezadoPaginaPage() {
   const [lang, setLang] = useState<CodeLang>('html');
-  const [tone, setTone] = useState<Tone>('primary');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +32,7 @@ export default function EncabezadoPaginaPage() {
 
   async function copyExample(example: HeaderExample) {
     try {
-      await navigator.clipboard.writeText(buildSnippet(lang, example, tone));
+      await navigator.clipboard.writeText(buildSnippet(lang, example));
       setCopiedKey(example.id);
       window.setTimeout(() => setCopiedKey(null), 1200);
     } catch {
@@ -80,28 +78,6 @@ export default function EncabezadoPaginaPage() {
                 })}
               </div>
             </div>
-
-            <div className={s.filterBlock}>
-              <p className={s.filterLabel}>Color</p>
-              <div className={s.colorRow}>
-                {COLOR_OPTIONS.map((option) => {
-                  const active = option.id === tone;
-                  return (
-                    <button
-                      key={option.id}
-                      type="button"
-                      className={`${s.colorSwatch} ${active ? s.colorSwatchActive : ''}`}
-                      style={{ background: option.swatch }}
-                      data-tone={option.id}
-                      aria-label={option.label}
-                      aria-pressed={active}
-                      title={option.label}
-                      onClick={() => setTone(option.id)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
           <div className={local.exampleList} aria-label="Ejemplos">
@@ -119,7 +95,7 @@ export default function EncabezadoPaginaPage() {
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
                 <div className={local.stage}>
-                  <HeaderDemo example={example} tone={tone} />
+                  <HeaderDemo example={example} />
                 </div>
               </article>
             ))}
