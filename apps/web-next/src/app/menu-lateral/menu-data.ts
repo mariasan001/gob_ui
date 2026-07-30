@@ -28,13 +28,13 @@ export const MENU_EXAMPLES: MenuExample[] = [
   {
     id: 'basic',
     title: 'Basico',
-    description: 'Icono + etiqueta. Uso estandar de consolas institucionales.',
+    description: 'Icono + etiqueta. Usa el boton para colapsar o expandir.',
     variant: 'basic',
   },
   {
     id: 'collapsed',
     title: 'Colapsado',
-    description: 'Carril de iconos. Mas espacio para tablas y paneles.',
+    description: 'Carril de iconos con boton para expandir. Ideal junto a tablas.',
     variant: 'collapsed',
   },
   {
@@ -86,7 +86,7 @@ export const MENU_ATTRS = [
     name: 'collapsed',
     type: 'boolean',
     defaultValue: 'false',
-    body: 'Fuerza el modo carril de iconos (igual que variant="collapsed").',
+    body: 'Activa el carril compacto de iconos. Combinalo con un boton para alternar.',
   },
 ] as const;
 
@@ -105,25 +105,34 @@ function icon(lang: CodeLang, name: string): string {
 
 function bodyFor(lang: CodeLang, example: MenuExample): string {
   const i = '  ';
-  const brand =
-    example.variant === 'brand'
+  const collapsed = example.variant === 'collapsed';
+  const brand = collapsed
+    ? `${i}<div slot="brand" class="brand">
+${i}  <span class="mark">G</span>
+${i}  <button type="button" aria-label="Expandir menu">
+${i}    ${icon(lang, 'CaretDoubleRight')}
+${i}  </button>
+${i}</div>`
+    : example.variant === 'brand'
       ? `${i}<div slot="brand" class="brand brand--lg">
 ${i}  <span class="mark">G</span>
 ${i}  <div>
 ${i}    <strong>Gob UI</strong>
 ${i}    <small>Sistema institucional</small>
 ${i}  </div>
+${i}  <button type="button" aria-label="Colapsar menu">
+${i}    ${icon(lang, 'CaretDoubleLeft')}
+${i}  </button>
 ${i}</div>`
-      : example.variant === 'collapsed'
-        ? `${i}<div slot="brand" class="brand">
-${i}  <span class="mark">G</span>
-${i}</div>`
-        : `${i}<div slot="brand" class="brand">
+      : `${i}<div slot="brand" class="brand">
 ${i}  <span class="mark">G</span>
 ${i}  <div>
 ${i}    <strong>Gob UI</strong>
 ${i}    <small>Sistema institucional</small>
 ${i}  </div>
+${i}  <button type="button" aria-label="Colapsar menu">
+${i}    ${icon(lang, 'CaretDoubleLeft')}
+${i}  </button>
 ${i}</div>`;
 
   const navBasic = `${i}<a href="#" class="nav-item is-active" data-active="true">
@@ -237,6 +246,8 @@ function iconImports(lang: CodeLang): string {
   if (lang === 'react') {
     return `import {
   Buildings,
+  CaretDoubleLeft,
+  CaretDoubleRight,
   ChartBar,
   FolderOpen,
   GearSix,
@@ -251,6 +262,8 @@ import '@mariasan001/ui-wc';
   if (lang === 'vue') {
     return `import {
   PhBuildings,
+  PhCaretDoubleLeft,
+  PhCaretDoubleRight,
   PhChartBar,
   PhFolderOpen,
   PhGearSix,
@@ -272,7 +285,9 @@ export function buildSnippet(
   example: MenuExample,
   tone: Tone,
 ): string {
-  const attrs = ` variant="${example.variant}" tone="${tone}"`;
+  const variant = example.variant === 'collapsed' ? 'basic' : example.variant;
+  const collapsedAttr = example.variant === 'collapsed' ? ' collapsed' : '';
+  const attrs = ` variant="${variant}" tone="${tone}"${collapsedAttr}`;
   const body = bodyFor(lang, example);
 
   if (lang === 'html') {
