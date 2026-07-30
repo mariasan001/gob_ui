@@ -13,7 +13,7 @@ export const COLOR_OPTIONS: { id: Tone; label: string; swatch: string }[] = [
   { id: 'primary', label: 'Primary', swatch: '#9F2141' },
   { id: 'accent', label: 'Accent', swatch: '#BC945A' },
   { id: 'dark', label: 'Dark', swatch: '#181511' },
-  { id: 'neutral', label: 'Neutral', swatch: '#FFFFFF' },
+  { id: 'neutral', label: 'Neutral', swatch: '#EBEBEB' },
   { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
 ];
 

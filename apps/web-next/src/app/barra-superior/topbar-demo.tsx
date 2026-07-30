@@ -5,6 +5,7 @@ import { Bell, MagnifyingGlass } from '@phosphor-icons/react';
 import type { Tone, TopbarVariant } from '@mariasan001/ui-wc';
 
 import type { TopbarExample } from './topbar-data';
+import { TOPBAR_THEME_VARS } from './topbar-themes';
 import local from './topbar.module.css';
 
 function Start({ variant }: { variant: TopbarVariant }) {
@@ -91,9 +92,11 @@ export function TopbarDemo({
   return (
     <div className={local.stageInner}>
       <gob-topbar
+        key={`${example.id}-${tone}`}
         variant={example.variant}
         tone={tone}
         className={`${local.topbar} ${example.variant === 'dense' ? local.topbarDense : ''}`}
+        style={TOPBAR_THEME_VARS[tone]}
       >
         <Start variant={example.variant} />
         <Center variant={example.variant} />
