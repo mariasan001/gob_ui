@@ -23,121 +23,7 @@ import {
 } from './estructura-data';
 import local from './estructura.module.css';
 import s from './page.module.css';
-
-function ShellDemo({ example }: { example: ShellExample }) {
-  const shellProps = {
-    collapsed: example.collapsed || undefined,
-    dense: example.dense || undefined,
-    'hide-topbar': example.hideTopbar || undefined,
-    'sticky-topbar': example.stickyTopbar === false ? ('false' as const) : undefined,
-  };
-
-  if (example.variant === 'board') {
-    return (
-      <gob-app-shell {...shellProps} className={local.shell}>
-        <aside slot="sidebar" className={local.sidebar}>
-          <p className={local.brand}>Gob UI</p>
-          <nav className={local.nav} aria-label="Principal">
-            <span className={local.navActive}>Inicio</span>
-            <span>Expedientes</span>
-            <span>Reportes</span>
-            <span>Usuarios</span>
-            <span>Ajustes</span>
-          </nav>
-        </aside>
-        <header slot="topbar" className={local.topbar}>
-          <div>
-            <strong>Tablero institucional</strong>
-            <p className={local.topMeta}>Hoy · 30 jul 2026</p>
-          </div>
-          <span className={local.userChip}>MG Sandoval</span>
-        </header>
-        <section className={local.board}>
-          <div className={local.boardHead}>
-            <h3>Resumen operativo</h3>
-            <p>Indicadores del periodo actual.</p>
-          </div>
-          <div className={local.kpiRow}>
-            <article className={local.kpi}>
-              <span>Abiertos</span>
-              <strong>128</strong>
-            </article>
-            <article className={local.kpi}>
-              <span>En revision</span>
-              <strong>46</strong>
-            </article>
-            <article className={local.kpi}>
-              <span>Cerrados</span>
-              <strong>312</strong>
-            </article>
-          </div>
-          <div className={local.panelBlock}>
-            <div className={local.panelRow}>
-              <span>EXP-2041</span>
-              <em>En revision</em>
-            </div>
-            <div className={local.panelRow}>
-              <span>EXP-2040</span>
-              <em>Abierto</em>
-            </div>
-            <div className={local.panelRow}>
-              <span>EXP-2038</span>
-              <em>Cerrado</em>
-            </div>
-          </div>
-        </section>
-      </gob-app-shell>
-    );
-  }
-
-  return (
-    <gob-app-shell
-      {...shellProps}
-      className={`${local.shell} ${example.dense ? local.shellDense : ''}`}
-    >
-      <aside
-        slot="sidebar"
-        className={`${local.sidebar} ${example.collapsed ? local.sidebarCollapsed : ''}`}
-      >
-        <p className={local.brand}>{example.collapsed ? 'G' : 'Gob UI'}</p>
-        <nav className={local.nav} aria-label="Principal">
-          {example.collapsed ? (
-            <>
-              <span className={local.navActive} title="Inicio">
-                In
-              </span>
-              <span title="Expedientes">Ex</span>
-              <span title="Reportes">Re</span>
-              <span title="Ajustes">Aj</span>
-            </>
-          ) : (
-            <>
-              <span className={local.navActive}>Inicio</span>
-              <span>Expedientes</span>
-              <span>Reportes</span>
-              <span>Ajustes</span>
-            </>
-          )}
-        </nav>
-      </aside>
-      {!example.hideTopbar ? (
-        <header slot="topbar" className={local.topbar}>
-          <strong>{example.title}</strong>
-          <span>Usuario demo</span>
-        </header>
-      ) : null}
-      <section className={local.content}>
-        <h3>Contenido principal</h3>
-        <p>{example.description}</p>
-        <div className={local.contentLines} aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-      </section>
-    </gob-app-shell>
-  );
-}
+import { ShellDemo } from './shell-demo';
 
 export default function EstructuraAppPage() {
   const [lang, setLang] = useState<CodeLang>('html');
@@ -228,8 +114,7 @@ export default function EstructuraAppPage() {
             <div className={s.sectionHead}>
               <h2 className={s.sectionTitle}>Ejemplos</h2>
               <p className={s.sectionDesc}>
-                Cinco variantes frecuentes. Revisa el preview, copia el snippet y cambia el lenguaje
-                arriba.
+                Cinco variantes con preview completo. Copia el snippet en el lenguaje activo.
               </p>
             </div>
 
