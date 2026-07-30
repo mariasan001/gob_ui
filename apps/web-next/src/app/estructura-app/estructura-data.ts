@@ -18,7 +18,7 @@ export const COLOR_OPTIONS: { id: Tone; label: string; swatch: string }[] = [
   { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
 ];
 
-/** Fondo del menu + estado seleccionado por tono. */
+/** Fondo del menu + estado seleccionado + acento de topbar (campana / avatar). */
 export const SIDEBAR_THEMES: Record<
   Tone,
   {
@@ -32,6 +32,10 @@ export const SIDEBAR_THEMES: Record<
     footBg: string;
     footBorder: string;
     border: string;
+    /** Color del punto de notificacion y avatar. */
+    accent: string;
+    accentSoft: string;
+    accentText: string;
   }
 > = {
   primary: {
@@ -45,6 +49,9 @@ export const SIDEBAR_THEMES: Record<
     footBg: 'rgba(255, 255, 255, 0.1)',
     footBorder: 'rgba(255, 255, 255, 0.14)',
     border: 'rgba(255, 255, 255, 0.12)',
+    accent: '#9F2141',
+    accentSoft: 'rgba(159, 33, 65, 0.12)',
+    accentText: '#9F2141',
   },
   accent: {
     bg: '#F4EBE0',
@@ -57,6 +64,9 @@ export const SIDEBAR_THEMES: Record<
     footBg: 'rgba(24, 21, 17, 0.05)',
     footBorder: 'rgba(24, 21, 17, 0.08)',
     border: 'rgba(24, 21, 17, 0.08)',
+    accent: '#BC945A',
+    accentSoft: 'rgba(188, 148, 90, 0.18)',
+    accentText: '#8A6A35',
   },
   dark: {
     bg: '#181511',
@@ -69,30 +79,39 @@ export const SIDEBAR_THEMES: Record<
     footBg: 'rgba(255, 255, 255, 0.06)',
     footBorder: 'rgba(255, 255, 255, 0.1)',
     border: 'rgba(255, 255, 255, 0.1)',
+    accent: '#181511',
+    accentSoft: 'rgba(24, 21, 17, 0.1)',
+    accentText: '#181511',
   },
   neutral: {
     bg: '#FFFFFF',
     text: '#6B665F',
     muted: '#9A9590',
-    activeBg: '#F0F0F0',
-    activeText: '#181511',
-    markBg: '#181511',
+    activeBg: 'rgba(159, 33, 65, 0.1)',
+    activeText: '#9F2141',
+    markBg: '#9F2141',
     markText: '#FFFFFF',
     footBg: '#F7F7F7',
     footBorder: '#EFEFEF',
     border: 'rgba(24, 21, 17, 0.1)',
+    accent: '#9F2141',
+    accentSoft: 'rgba(159, 33, 65, 0.12)',
+    accentText: '#9F2141',
   },
   soft: {
     bg: '#E7D7BD',
     text: '#4A4033',
     muted: '#7A6F60',
-    activeBg: 'rgba(24, 21, 17, 0.1)',
-    activeText: '#181511',
+    activeBg: 'rgba(159, 33, 65, 0.12)',
+    activeText: '#9F2141',
     markBg: '#9F2141',
     markText: '#FFFFFF',
     footBg: 'rgba(24, 21, 17, 0.06)',
     footBorder: 'rgba(24, 21, 17, 0.08)',
     border: 'rgba(24, 21, 17, 0.1)',
+    accent: '#9F2141',
+    accentSoft: 'rgba(159, 33, 65, 0.14)',
+    accentText: '#9F2141',
   },
 };
 

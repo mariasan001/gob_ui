@@ -292,7 +292,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #9f2141;
+  background: var(--shell-accent, #9f2141);
 }
 
 .userChip {
@@ -301,8 +301,8 @@
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: rgba(159, 33, 65, 0.1);
-  color: #9f2141;
+  background: var(--shell-accent-soft, rgba(159, 33, 65, 0.1));
+  color: var(--shell-accent-text, #9f2141);
   font-weight: 700;
   font-size: 12px;
 }
