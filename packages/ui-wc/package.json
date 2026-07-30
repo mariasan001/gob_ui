@@ -29,6 +29,7 @@
   },
   "scripts": {
     "build": "tsup",
+    "prepack": "pnpm build",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {

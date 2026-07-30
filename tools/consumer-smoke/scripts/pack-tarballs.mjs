@@ -35,8 +35,9 @@ for (const entry of await readdir(tarballsDir, { withFileTypes: true })) {
   }
 }
 
+await run('pnpm', ['-C', 'packages/ui-wc', 'build'], repoRoot);
 await run('pnpm', ['-C', 'packages/styles', 'exec', 'npm', 'pack', '--pack-destination', tarballsDir, '--cache', '.npm-cache'], repoRoot);
-await run('pnpm', ['-C', 'packages/ui-wc', 'exec', 'npm', 'pack', '--pack-destination', tarballsDir, '--cache', '.npm-cache'], repoRoot);
+await run('pnpm', ['-C', 'packages/ui-wc', 'exec', 'npm', 'pack', '--pack-destination', tarballsDir, '--ignore-scripts', '--cache', '.npm-cache'], repoRoot);
 
 const tarballs = await readdir(tarballsDir);
 const stylesTarball = tarballs.find((name) => name.startsWith('mariasan001-styles-') && name.endsWith('.tgz'));
