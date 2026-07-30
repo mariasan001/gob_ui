@@ -4,6 +4,7 @@ import {
   PAGE_HEADER_OBSERVED_ATTRIBUTES,
   resolvePageHeaderSurface,
   resolvePageHeaderVariant,
+  type PageHeaderSurface,
 } from './page-header-constants';
 import { pageHeaderStyles } from './page-header-styles';
 
@@ -77,6 +78,20 @@ class GobPageHeaderElement extends SafeHTMLElement {
     top.append(main, actions);
     this.rootEl.append(breadcrumb, top);
     shadow.append(style, this.rootEl);
+  }
+
+  get surface(): PageHeaderSurface {
+    return resolvePageHeaderSurface(this.getAttribute('surface'));
+  }
+
+  set surface(value: PageHeaderSurface | string | null) {
+    const next = resolvePageHeaderSurface(value == null ? null : String(value));
+    if (next === 'plain') {
+      // plain es el default: dejamos el attr explicito para que React/CSS lo lean
+      this.setAttribute('surface', 'plain');
+    } else {
+      this.setAttribute('surface', next);
+    }
   }
 
   connectedCallback() {
