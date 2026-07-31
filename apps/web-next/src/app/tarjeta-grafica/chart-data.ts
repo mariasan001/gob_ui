@@ -40,7 +40,17 @@ export type ChartKind =
   | 'donut'
   | 'heatmap'
   | 'gauge'
-  | 'radar';
+  | 'radar'
+  | 'hbar'
+  | 'stacked-bar'
+  | 'stepline'
+  | 'scatter'
+  | 'bubble'
+  | 'funnel'
+  | 'treemap'
+  | 'rose'
+  | 'pie'
+  | 'waterfall';
 
 export type ChartExample = {
   id: ChartCardVariant;
@@ -49,6 +59,7 @@ export type ChartExample = {
   variant: ChartCardVariant;
   cardTitle: string;
   subtitle?: string;
+  footer?: string;
   showActions?: boolean;
   showLegend?: boolean;
   chart: ChartKind;
@@ -59,7 +70,7 @@ export const CHART_EXAMPLES: ChartExample[] = [
   {
     id: 'basic',
     title: 'Basica · Barras',
-    description: 'Columnas con degradado y esquinas redondeadas (ECharts bar).',
+    description: 'Columnas planas con pista de fondo (ECharts bar).',
     variant: 'basic',
     cardTitle: 'Tramites por mes',
     chart: 'bars',
@@ -67,7 +78,7 @@ export const CHART_EXAMPLES: ChartExample[] = [
   {
     id: 'legend',
     title: 'Leyenda · Area apilada',
-    description: 'Areas suaves apiladas para comparar canales en el tiempo.',
+    description: 'Areas planas apiladas para comparar canales.',
     variant: 'legend',
     cardTitle: 'Canales de atencion',
     chart: 'area',
@@ -81,7 +92,7 @@ export const CHART_EXAMPLES: ChartExample[] = [
   {
     id: 'actions',
     title: 'Acciones · Linea + meta',
-    description: 'Serie real vs meta con area degradada y tooltip.',
+    description: 'Serie real vs meta con tipografia limpia.',
     variant: 'actions',
     cardTitle: 'Ingresos vs meta',
     chart: 'line',
@@ -90,7 +101,7 @@ export const CHART_EXAMPLES: ChartExample[] = [
   {
     id: 'period',
     title: 'Periodo · Mapa de calor',
-    description: 'Heatmap de carga operativa por dia y franja horaria.',
+    description: 'Heatmap de carga operativa por dia y franja.',
     variant: 'period',
     cardTitle: 'Carga operativa',
     subtitle: 'Enero – Junio 2026',
@@ -99,7 +110,7 @@ export const CHART_EXAMPLES: ChartExample[] = [
   {
     id: 'side-legend',
     title: 'Lateral · Donut',
-    description: 'Anillo moderno con padAngle y esquinas redondeadas.',
+    description: 'Anillo con total central y leyenda a la derecha.',
     variant: 'side-legend',
     cardTitle: 'Distribucion por region',
     chart: 'donut',
@@ -138,6 +149,105 @@ export const CHART_EXAMPLES: ChartExample[] = [
       { label: 'Meta', tone: 'b' },
     ],
   },
+  {
+    id: 'footer',
+    title: 'Footer · Barras horizontales',
+    description: 'Ranking horizontal con nota al pie.',
+    variant: 'footer',
+    cardTitle: 'Prioridad ciudadana',
+    chart: 'hbar',
+    footer: 'Fuente: encuesta Q2 · n=1,240',
+  },
+  {
+    id: 'stripe',
+    title: 'Franja · Barras apiladas',
+    description: 'Apilado de estados con acento lateral.',
+    variant: 'stripe',
+    cardTitle: 'Flujo de tickets',
+    subtitle: 'Ultimas 6 semanas',
+    chart: 'stacked-bar',
+  },
+  {
+    id: 'framed',
+    title: 'Enmarcada · Escalonada',
+    description: 'Linea step dentro de un marco suave.',
+    variant: 'framed',
+    cardTitle: 'Citas confirmadas',
+    subtitle: 'Esta semana',
+    chart: 'stepline',
+  },
+  {
+    id: 'toolbar',
+    title: 'Toolbar · Dispersion',
+    description: 'Scatter con acciones de exportar en el encabezado.',
+    variant: 'toolbar',
+    cardTitle: 'Tiempo vs resolucion',
+    subtitle: 'Correlacion operativa',
+    chart: 'scatter',
+    showActions: true,
+  },
+  {
+    id: 'minimal',
+    title: 'Minimal · Burbujas',
+    description: 'Bubble chart compacto, solo titulo.',
+    variant: 'minimal',
+    cardTitle: 'Volumen por zona',
+    chart: 'bubble',
+  },
+  {
+    id: 'compare',
+    title: 'Comparar · Pie',
+    description: 'Pastel completo con leyenda lateral.',
+    variant: 'compare',
+    cardTitle: 'Modo de atencion',
+    chart: 'pie',
+    showLegend: true,
+    legend: [
+      { label: 'Digital', tone: 'a' },
+      { label: 'Presencial', tone: 'b' },
+      { label: 'Mixto', tone: 'c' },
+    ],
+  },
+  {
+    id: 'funnel',
+    title: 'Embudo · Conversion',
+    description: 'Funnel de etapas del tramite digital.',
+    variant: 'funnel',
+    cardTitle: 'Embudo de alta',
+    chart: 'funnel',
+  },
+  {
+    id: 'treemap',
+    title: 'Treemap · Composicion',
+    description: 'Mapa rectangular de participacion por servicio.',
+    variant: 'treemap',
+    cardTitle: 'Mix de servicios',
+    subtitle: 'Participacion relativa',
+    chart: 'treemap',
+  },
+  {
+    id: 'rose',
+    title: 'Rosa · Nightingale',
+    description: 'Pie rosa (area) para categorias de impacto.',
+    variant: 'rose',
+    cardTitle: 'Impacto por eje',
+    chart: 'rose',
+    showLegend: true,
+    legend: [
+      { label: 'A–C', tone: 'a' },
+      { label: 'D–F', tone: 'b' },
+    ],
+  },
+  {
+    id: 'waterfall',
+    title: 'Cascada · Variacion',
+    description: 'Waterfall de altas, bajas y total del periodo.',
+    variant: 'waterfall',
+    cardTitle: 'Variacion de expedientes',
+    subtitle: 'Mes actual',
+    chart: 'waterfall',
+    footer: 'Neto del periodo: +90 expedientes',
+  },
 ];
 
 export const CHART_ATTRS = [
@@ -145,7 +255,7 @@ export const CHART_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | legend | actions | period | side-legend | dense | elevated',
+    body: 'basic | legend | actions | period | side-legend | dense | elevated | footer | stripe | framed | toolbar | minimal | compare | funnel | treemap | rose | waterfall',
   },
   {
     name: 'tone',
@@ -163,13 +273,13 @@ export const CHART_ATTRS = [
     name: 'slot=subtitle',
     type: 'slot',
     defaultValue: '—',
-    body: 'Periodo o contexto (period / elevated).',
+    body: 'Periodo o contexto.',
   },
   {
     name: 'slot=actions',
     type: 'slot',
     defaultValue: '—',
-    body: 'Acciones del encabezado (actions / elevated).',
+    body: 'Acciones del encabezado.',
   },
   {
     name: 'slot=default',
@@ -181,7 +291,13 @@ export const CHART_ATTRS = [
     name: 'slot=legend',
     type: 'slot',
     defaultValue: '—',
-    body: 'Leyenda de series (legend / side-legend / dense / elevated).',
+    body: 'Leyenda de series.',
+  },
+  {
+    name: 'slot=footer',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Nota al pie (footer / waterfall).',
   },
 ] as const;
 
@@ -199,6 +315,26 @@ function chartTypeLabel(kind: ChartKind): string {
       return 'gauge';
     case 'radar':
       return 'radar';
+    case 'hbar':
+      return 'bar (horizontal)';
+    case 'stacked-bar':
+      return 'bar (stacked)';
+    case 'stepline':
+      return 'line (step)';
+    case 'scatter':
+      return 'scatter';
+    case 'bubble':
+      return 'scatter (bubble)';
+    case 'funnel':
+      return 'funnel';
+    case 'treemap':
+      return 'treemap';
+    case 'rose':
+      return 'pie (rose)';
+    case 'pie':
+      return 'pie';
+    case 'waterfall':
+      return 'bar (waterfall)';
     default:
       return 'bar';
   }
@@ -207,19 +343,39 @@ function chartTypeLabel(kind: ChartKind): string {
 function sampleOptionHint(kind: ChartKind): string {
   switch (kind) {
     case 'area':
-      return `{ series: [{ type: 'line', stack: 'total', areaStyle: {}, smooth: 0.45 }] }`;
+      return `{ series: [{ type: 'line', stack: 'total', areaStyle: {} }] }`;
     case 'line':
-      return `{ series: [{ type: 'line', smooth: 0.5, areaStyle: {} }] }`;
+      return `{ series: [{ type: 'line', smooth: 0.35 }] }`;
     case 'donut':
-      return `{ series: [{ type: 'pie', radius: ['58%', '82%'], padAngle: 3 }] }`;
+      return `{ series: [{ type: 'pie', radius: ['56%', '76%'] }] }`;
     case 'heatmap':
       return `{ series: [{ type: 'heatmap', data: [[0,0,5], ...] }] }`;
     case 'gauge':
-      return `{ series: [{ type: 'gauge', progress: { show: true }, data: [{ value: 74 }] }] }`;
+      return `{ series: [{ type: 'gauge', progress: { show: true } }] }`;
     case 'radar':
-      return `{ radar: { indicator: [...] }, series: [{ type: 'radar', data: [...] }] }`;
+      return `{ radar: { indicator: [...] }, series: [{ type: 'radar' }] }`;
+    case 'hbar':
+      return `{ yAxis: { type: 'category' }, series: [{ type: 'bar' }] }`;
+    case 'stacked-bar':
+      return `{ series: [{ type: 'bar', stack: 'total' }] }`;
+    case 'stepline':
+      return `{ series: [{ type: 'line', step: 'middle' }] }`;
+    case 'scatter':
+      return `{ series: [{ type: 'scatter', data: [[12,44], ...] }] }`;
+    case 'bubble':
+      return `{ series: [{ type: 'scatter', symbolSize: (d) => d[2] }] }`;
+    case 'funnel':
+      return `{ series: [{ type: 'funnel', data: [...] }] }`;
+    case 'treemap':
+      return `{ series: [{ type: 'treemap', data: [...] }] }`;
+    case 'rose':
+      return `{ series: [{ type: 'pie', roseType: 'area' }] }`;
+    case 'pie':
+      return `{ series: [{ type: 'pie', radius: '70%' }] }`;
+    case 'waterfall':
+      return `{ series: [{ type: 'bar', stack: 'all' }, ...] }`;
     default:
-      return `{ series: [{ type: 'bar', itemStyle: { borderRadius: [10,10,4,4] } }] }`;
+      return `{ series: [{ type: 'bar' }] }`;
   }
 }
 
@@ -237,6 +393,9 @@ function slotsOnly(example: ChartExample, indent: string): string {
     for (const item of example.legend) {
       lines.push(`${indent}<span slot="legend">${item.label}</span>`);
     }
+  }
+  if (example.footer) {
+    lines.push(`${indent}<span slot="footer">${example.footer}</span>`);
   }
   return lines.join('\n');
 }

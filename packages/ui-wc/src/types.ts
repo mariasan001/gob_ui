@@ -246,7 +246,17 @@ export type ChartCardVariant =
   | 'period'
   | 'side-legend'
   | 'dense'
-  | 'elevated';
+  | 'elevated'
+  | 'footer'
+  | 'stripe'
+  | 'framed'
+  | 'toolbar'
+  | 'minimal'
+  | 'compare'
+  | 'funnel'
+  | 'treemap'
+  | 'rose'
+  | 'waterfall';
 
 export type ChartCardTone = Tone;
 

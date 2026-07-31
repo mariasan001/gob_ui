@@ -536,6 +536,331 @@ export function buildChartOption(
     };
   }
 
+  if (kind === 'hbar') {
+    return {
+      ...anim(),
+      grid: { left: 4, right: 28, top: 8, bottom: 4, containLabel: true },
+      tooltip: { trigger: 'axis', ...tip },
+      xAxis: { ...axisValue(palette), splitLine: { show: false } },
+      yAxis: {
+        ...axisCategory(palette, ['Salud', 'Educacion', 'Movilidad', 'Seguridad', 'Hacienda']),
+        inverse: true,
+      },
+      series: [
+        {
+          type: 'bar',
+          barWidth: 14,
+          itemStyle: { color: a, borderRadius: [0, 8, 8, 0] },
+          label: {
+            show: true,
+            position: 'right',
+            color: palette.muted,
+            fontFamily: font,
+            fontWeight: 700,
+            fontSize: 11,
+          },
+          data: [92, 78, 64, 81, 55],
+        },
+      ],
+    };
+  }
+
+  if (kind === 'stacked-bar') {
+    return {
+      ...anim(),
+      color: [a, b, c],
+      grid: { left: 4, right: 8, top: 24, bottom: 4, containLabel: true },
+      tooltip: { trigger: 'axis', ...tip },
+      xAxis: axisCategory(palette, ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun']),
+      yAxis: axisValue(palette),
+      series: [
+        {
+          name: 'Nuevos',
+          type: 'bar',
+          stack: 'total',
+          barWidth: '48%',
+          itemStyle: { color: a, borderRadius: [0, 0, 0, 0] },
+          data: [40, 52, 48, 60, 55, 70],
+        },
+        {
+          name: 'En curso',
+          type: 'bar',
+          stack: 'total',
+          itemStyle: { color: b },
+          data: [28, 30, 35, 32, 38, 40],
+        },
+        {
+          name: 'Cerrados',
+          type: 'bar',
+          stack: 'total',
+          itemStyle: { color: c, borderRadius: [6, 6, 0, 0] },
+          data: [18, 22, 20, 26, 24, 28],
+        },
+      ],
+    };
+  }
+
+  if (kind === 'stepline') {
+    return {
+      ...anim(),
+      grid: { left: 4, right: 8, top: 24, bottom: 4, containLabel: true },
+      tooltip: { trigger: 'axis', ...tip },
+      xAxis: axisCategory(palette, ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']),
+      yAxis: axisValue(palette),
+      series: [
+        {
+          type: 'line',
+          step: 'middle',
+          symbol: 'circle',
+          symbolSize: 7,
+          lineStyle: { width: 2.5, color: a },
+          itemStyle: { color: a, borderColor: '#fff', borderWidth: 2 },
+          areaStyle: { color: hexToRgba(a, 0.1) },
+          data: [12, 18, 15, 24, 22, 30, 28],
+        },
+      ],
+    };
+  }
+
+  if (kind === 'scatter') {
+    const pts = [
+      [12, 44],
+      [18, 52],
+      [25, 38],
+      [32, 61],
+      [40, 55],
+      [48, 72],
+      [55, 64],
+      [62, 80],
+      [70, 68],
+      [78, 88],
+    ];
+    return {
+      ...anim(),
+      grid: { left: 4, right: 12, top: 24, bottom: 4, containLabel: true },
+      tooltip: { ...tip, trigger: 'item' },
+      xAxis: { ...axisValue(palette), name: '', scale: true },
+      yAxis: { ...axisValue(palette), scale: true },
+      series: [
+        {
+          type: 'scatter',
+          symbolSize: 12,
+          itemStyle: { color: a, opacity: 0.85 },
+          data: pts,
+        },
+      ],
+    };
+  }
+
+  if (kind === 'bubble') {
+    return {
+      ...anim(),
+      grid: { left: 4, right: 12, top: 24, bottom: 4, containLabel: true },
+      tooltip: {
+        ...tip,
+        trigger: 'item',
+        formatter: (params: unknown) => {
+          const p = params as { data?: number[] };
+          const d = p.data;
+          if (!d) return '';
+          return `x ${d[0]} · y ${d[1]} · vol ${d[2]}`;
+        },
+      },
+      xAxis: { ...axisValue(palette), scale: true },
+      yAxis: { ...axisValue(palette), scale: true },
+      series: [
+        {
+          type: 'scatter',
+          symbolSize: (data: number[]) => Math.max(10, data[2] / 4),
+          itemStyle: { color: hexToRgba(a, 0.55), borderColor: a, borderWidth: 1.5 },
+          data: [
+            [10, 40, 40],
+            [22, 55, 70],
+            [35, 30, 50],
+            [48, 68, 95],
+            [60, 42, 60],
+            [72, 78, 110],
+            [85, 58, 80],
+          ],
+        },
+      ],
+    };
+  }
+
+  if (kind === 'funnel') {
+    return {
+      ...anim(),
+      color: [a, b, c, hexToRgba(a, 0.55), hexToRgba(b, 0.55)],
+      tooltip: { trigger: 'item', ...tip },
+      series: [
+        {
+          type: 'funnel',
+          left: '8%',
+          width: '84%',
+          top: 8,
+          bottom: 8,
+          minSize: '18%',
+          maxSize: '100%',
+          sort: 'descending',
+          gap: 6,
+          label: {
+            show: true,
+            position: 'inside',
+            color: '#fff',
+            fontFamily: font,
+            fontWeight: 700,
+            fontSize: 11,
+            formatter: '{b}',
+          },
+          itemStyle: { borderColor: '#fff', borderWidth: 2 },
+          data: [
+            { value: 100, name: 'Visitas' },
+            { value: 72, name: 'Inicio' },
+            { value: 48, name: 'Formulario' },
+            { value: 28, name: 'Revision' },
+            { value: 16, name: 'Alta' },
+          ],
+        },
+      ],
+    };
+  }
+
+  if (kind === 'treemap') {
+    return {
+      ...anim(),
+      tooltip: { ...tip, trigger: 'item' },
+      series: [
+        {
+          type: 'treemap',
+          roam: false,
+          nodeClick: false,
+          breadcrumb: { show: false },
+          label: {
+            show: true,
+            fontFamily: font,
+            fontWeight: 700,
+            fontSize: 12,
+            color: '#fff',
+          },
+          itemStyle: {
+            borderColor: '#fff',
+            borderWidth: 3,
+            gapWidth: 3,
+          },
+          levels: [
+            {
+              itemStyle: { borderWidth: 0, gapWidth: 4 },
+            },
+          ],
+          data: [
+            { name: 'Tramites', value: 42, itemStyle: { color: a } },
+            { name: 'Pagos', value: 28, itemStyle: { color: b } },
+            { name: 'Citas', value: 18, itemStyle: { color: c } },
+            { name: 'Consultas', value: 12, itemStyle: { color: hexToRgba(a, 0.55) } },
+          ],
+        },
+      ],
+    };
+  }
+
+  if (kind === 'rose') {
+    return {
+      ...anim(),
+      color: [a, b, c, hexToRgba(a, 0.55), hexToRgba(b, 0.55), hexToRgba(c, 0.55)],
+      tooltip: { trigger: 'item', ...tip },
+      series: [
+        {
+          type: 'pie',
+          roseType: 'area',
+          radius: ['12%', '72%'],
+          center: ['50%', '52%'],
+          itemStyle: { borderRadius: 6, borderColor: '#fff', borderWidth: 2 },
+          label: {
+            color: palette.muted,
+            fontFamily: font,
+            fontWeight: 700,
+            fontSize: 11,
+          },
+          data: [
+            { value: 40, name: 'A' },
+            { value: 28, name: 'B' },
+            { value: 32, name: 'C' },
+            { value: 18, name: 'D' },
+            { value: 24, name: 'E' },
+            { value: 14, name: 'F' },
+          ],
+        },
+      ],
+    };
+  }
+
+  if (kind === 'pie') {
+    return {
+      ...anim(),
+      color: [a, b, c],
+      tooltip: { trigger: 'item', ...tip },
+      series: [
+        {
+          type: 'pie',
+          radius: '70%',
+          center: ['50%', '52%'],
+          itemStyle: { borderRadius: 6, borderColor: '#fff', borderWidth: 3 },
+          label: {
+            formatter: '{b}\n{d}%',
+            color: palette.muted,
+            fontFamily: font,
+            fontWeight: 700,
+            fontSize: 11,
+          },
+          data: [
+            { value: 48, name: 'Digital' },
+            { value: 32, name: 'Presencial' },
+            { value: 20, name: 'Mixto' },
+          ],
+        },
+      ],
+    };
+  }
+
+  if (kind === 'waterfall') {
+    // placeholder / aumento / total helper bars
+    const placeholder = [0, 40, 70, 55, 0];
+    const increase = [40, 30, '-', '-', 90];
+    const decrease = ['-', '-', 15, 20, '-'];
+    return {
+      ...anim(),
+      tooltip: { trigger: 'axis', ...tip },
+      grid: { left: 4, right: 8, top: 24, bottom: 4, containLabel: true },
+      xAxis: axisCategory(palette, ['Base', 'Altas', 'Bajas', 'Ajustes', 'Total']),
+      yAxis: axisValue(palette),
+      series: [
+        {
+          name: 'Placeholder',
+          type: 'bar',
+          stack: 'all',
+          silent: true,
+          itemStyle: { borderColor: 'transparent', color: 'transparent' },
+          emphasis: { itemStyle: { borderColor: 'transparent', color: 'transparent' } },
+          data: placeholder,
+        },
+        {
+          name: 'Alza',
+          type: 'bar',
+          stack: 'all',
+          itemStyle: { color: a, borderRadius: [6, 6, 0, 0] },
+          data: increase,
+        },
+        {
+          name: 'Baja',
+          type: 'bar',
+          stack: 'all',
+          itemStyle: { color: b, borderRadius: [6, 6, 0, 0] },
+          data: decrease,
+        },
+      ],
+    };
+  }
+
   const barData = [420, 532, 401, 634, 490, 580, 520];
   const max = Math.max(...barData);
 

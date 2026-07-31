@@ -4,16 +4,18 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts/core';
 import {
   BarChart,
+  FunnelChart,
   GaugeChart,
   HeatmapChart,
   LineChart,
   PieChart,
   RadarChart,
+  ScatterChart,
+  TreemapChart,
 } from 'echarts/charts';
 import {
   GraphicComponent,
   GridComponent,
-  MarkPointComponent,
   RadarComponent,
   TooltipComponent,
   VisualMapComponent,
@@ -33,12 +35,14 @@ echarts.use([
   RadarChart,
   HeatmapChart,
   GaugeChart,
+  ScatterChart,
+  FunnelChart,
+  TreemapChart,
   GridComponent,
   TooltipComponent,
   RadarComponent,
   VisualMapComponent,
   GraphicComponent,
-  MarkPointComponent,
   CanvasRenderer,
 ]);
 

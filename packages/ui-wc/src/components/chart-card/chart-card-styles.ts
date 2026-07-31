@@ -24,6 +24,7 @@ export const chartCardStyles = `
 }
 
 .root {
+  position: relative;
   display: grid;
   gap: 14px;
   min-width: 0;
@@ -33,6 +34,7 @@ export const chartCardStyles = `
   background: var(--gob-cc-bg);
   color: var(--gob-cc-muted);
   box-shadow: var(--gob-cc-shadow);
+  overflow: hidden;
 }
 
 .head {
@@ -100,7 +102,8 @@ export const chartCardStyles = `
   color: var(--gob-cc-muted);
 }
 
-.root[data-variant='dense'] {
+.root[data-variant='dense'],
+.root[data-variant='minimal'] {
   --gob-cc-pad: 12px;
   --gob-cc-chart-min: 120px;
   gap: 10px;
@@ -111,17 +114,45 @@ export const chartCardStyles = `
   border-color: transparent;
 }
 
-.root[data-variant='side-legend'] .main {
+.root[data-variant='stripe'] {
+  padding-left: calc(var(--gob-cc-pad) + 6px);
+}
+
+.root[data-variant='stripe']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gob-cc-accent);
+}
+
+.root[data-variant='framed'] .chart {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(24, 21, 17, 0.03);
+  border: 1px solid rgba(24, 21, 17, 0.06);
+}
+
+.root[data-variant='side-legend'] .main,
+.root[data-variant='compare'] .main {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 18px;
 }
 
-.root[data-variant='side-legend'] .legend {
+.root[data-variant='side-legend'] .legend,
+.root[data-variant='compare'] .legend {
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
   min-width: 112px;
+}
+
+.root[data-variant='footer'] .footer,
+.root[data-variant='waterfall'] .footer {
+  display: block;
 }
 
 .root[data-variant='basic'] .subtitle,
@@ -136,7 +167,29 @@ export const chartCardStyles = `
 .root[data-variant='side-legend'] .subtitle,
 .root[data-variant='side-legend'] .actions,
 .root[data-variant='dense'] .subtitle,
-.root[data-variant='dense'] .actions {
+.root[data-variant='dense'] .actions,
+.root[data-variant='footer'] .subtitle,
+.root[data-variant='footer'] .actions,
+.root[data-variant='footer'] .legend,
+.root[data-variant='stripe'] .actions,
+.root[data-variant='stripe'] .legend,
+.root[data-variant='framed'] .actions,
+.root[data-variant='framed'] .legend,
+.root[data-variant='toolbar'] .legend,
+.root[data-variant='minimal'] .subtitle,
+.root[data-variant='minimal'] .actions,
+.root[data-variant='minimal'] .legend,
+.root[data-variant='compare'] .subtitle,
+.root[data-variant='compare'] .actions,
+.root[data-variant='funnel'] .subtitle,
+.root[data-variant='funnel'] .actions,
+.root[data-variant='funnel'] .legend,
+.root[data-variant='treemap'] .actions,
+.root[data-variant='treemap'] .legend,
+.root[data-variant='rose'] .subtitle,
+.root[data-variant='rose'] .actions,
+.root[data-variant='waterfall'] .actions,
+.root[data-variant='waterfall'] .legend {
   display: none;
 }
 
