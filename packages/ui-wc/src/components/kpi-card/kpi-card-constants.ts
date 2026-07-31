@@ -12,6 +12,10 @@ export const KPI_VARIANTS = [
   'compare',
   'progress',
   'elevated',
+  'sparkline',
+  'ring',
+  'split',
+  'live',
 ] as const;
 
 export type KpiVariant = (typeof KPI_VARIANTS)[number];
@@ -41,7 +45,11 @@ export function resolveKpiVariant(value: string | null): KpiVariant {
     value === 'horizontal' ||
     value === 'compare' ||
     value === 'progress' ||
-    value === 'elevated'
+    value === 'elevated' ||
+    value === 'sparkline' ||
+    value === 'ring' ||
+    value === 'split' ||
+    value === 'live'
   ) {
     return value;
   }
