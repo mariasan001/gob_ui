@@ -14,8 +14,41 @@ import {
 
 import type { DataGridTone } from '@mariasan001/ui-wc';
 
-import { DEMO_ROWS, STATUS_TABS, type GridExample } from './grid-data';
+import {
+  DEMO_ROWS,
+  STATUS_TABS,
+  type DemoRow,
+  type GridExample,
+} from './grid-data';
 import local from './grid.module.css';
+
+const RICH_VARIANTS = new Set([
+  'filters',
+  'paginated',
+  'toolbar',
+  'wide',
+  'card-rows',
+  'assignees',
+  'progress',
+  'tags',
+  'live',
+  'financial',
+  'alert',
+]);
+
+const PAGER_VARIANTS = new Set([
+  'paginated',
+  'filters',
+  'toolbar',
+  'wide',
+  'card-rows',
+  'assignees',
+  'progress',
+  'tags',
+  'live',
+  'financial',
+  'alert',
+]);
 
 function FilterChip({ label }: { label: string }) {
   return (
@@ -39,11 +72,7 @@ function SortTh({
 }) {
   return (
     <th className={align === 'right' ? 'num' : undefined}>
-      <button
-        type="button"
-        className="gob-dg-sort"
-        data-dir={dir || undefined}
-      >
+      <button type="button" className="gob-dg-sort" data-dir={dir || undefined}>
         {label}
       </button>
     </th>
@@ -94,6 +123,480 @@ function FolioCell({
   );
 }
 
+function StatusPill({ row }: { row: DemoRow }) {
+  return (
+    <span className="gob-dg-status" data-tone={row.estatus}>
+      <span className="gob-dg-dot" />
+      {row.estatusLabel}
+    </span>
+  );
+}
+
+function Kebab() {
+  return (
+    <div className="gob-dg-actions">
+      <button type="button" className="gob-dg-kebab" aria-label="Mas acciones">
+        ⋮
+      </button>
+    </div>
+  );
+}
+
+function progressTone(value: number): 'ok' | 'warn' | 'err' {
+  if (value >= 70) return 'ok';
+  if (value >= 40) return 'warn';
+  return 'err';
+}
+
+function DefaultHeader({
+  variant,
+  withExpand,
+  showSort,
+  showRowActions,
+  frozenRight,
+}: {
+  variant: GridExample['variant'];
+  withExpand: boolean;
+  showSort: boolean;
+  showRowActions: boolean;
+  frozenRight: boolean;
+}) {
+  const wide = variant === 'wide';
+  const assignees = variant === 'assignees';
+  const progress = variant === 'progress';
+  const tags = variant === 'tags';
+  const live = variant === 'live';
+  const financial = variant === 'financial';
+  const alert = variant === 'alert';
+  const skeleton = variant === 'skeleton';
+
+  if (skeleton) {
+    return (
+      <tr>
+        <th>Expediente</th>
+        <th>Ciudadano</th>
+        <th>Dependencia</th>
+        <th>Estatus</th>
+        <th style={{ width: 48 }} />
+      </tr>
+    );
+  }
+
+  if (assignees) {
+    return (
+      <tr>
+        <SortTh label="Expediente" />
+        <SortTh label="Ciudadano" />
+        <th>Asignados</th>
+        <SortTh label="Estatus" />
+        <th style={{ width: 48 }} />
+      </tr>
+    );
+  }
+
+  if (progress) {
+    return (
+      <tr>
+        <SortTh label="Expediente" />
+        <SortTh label="Ciudadano" />
+        <th>Avance</th>
+        <th>Score</th>
+        <SortTh label="Estatus" />
+        <th style={{ width: 48 }} />
+      </tr>
+    );
+  }
+
+  if (tags) {
+    return (
+      <tr>
+        <SortTh label="Expediente" />
+        <SortTh label="Ciudadano" />
+        <th>Etiquetas</th>
+        <SortTh label="Estatus" />
+        <th style={{ width: 48 }} />
+      </tr>
+    );
+  }
+
+  if (live) {
+    return (
+      <tr>
+        <SortTh label="Expediente" />
+        <SortTh label="Ubicacion" />
+        <th>Señal</th>
+        <SortTh label="Estatus" />
+        <th style={{ width: 48 }} />
+      </tr>
+    );
+  }
+
+  if (financial) {
+    return (
+      <tr>
+        <SortTh label="Expediente" />
+        <SortTh label="Ciudadano" />
+        <SortTh label="Total" align="right" />
+        <SortTh label="Pagado" align="right" />
+        <SortTh label="Saldo" align="right" />
+        <SortTh label="Estatus" />
+        <th style={{ width: 48 }} />
+      </tr>
+    );
+  }
+
+  if (alert) {
+    return (
+      <tr>
+        <SortTh label="Expediente" />
+        <SortTh label="Ciudadano" />
+        <th>Alerta</th>
+        <SortTh label="Estatus" />
+        <th style={{ width: 48 }} />
+      </tr>
+    );
+  }
+
+  return (
+    <tr>
+      {withExpand ? <th style={{ width: 40 }} /> : null}
+      {variant === 'bulk' ? (
+        <th style={{ width: 36 }}>
+          <input
+            className="gob-dg-check"
+            type="checkbox"
+            aria-label="Seleccionar todo"
+            defaultChecked
+          />
+        </th>
+      ) : null}
+      {showSort ? (
+        <>
+          <SortTh label="Expediente" dir="desc" />
+          <SortTh label="Ciudadano" />
+          <SortTh label="Dependencia" />
+          {wide ? (
+            <>
+              <SortTh label="Municipio" />
+              <SortTh label="Programa" />
+              <SortTh label="Actualizado" />
+            </>
+          ) : (
+            <SortTh label="Actualizado" />
+          )}
+          <SortTh label="Monto" align="right" />
+          <SortTh label="Estatus" />
+        </>
+      ) : (
+        <>
+          <th>Expediente</th>
+          <th>Ciudadano</th>
+          <th>Dependencia</th>
+          {wide ? (
+            <>
+              <th>Municipio</th>
+              <th>Programa</th>
+              <th>Actualizado</th>
+            </>
+          ) : (
+            <th>Actualizado</th>
+          )}
+          <th className="num">Monto</th>
+          <th>Estatus</th>
+        </>
+      )}
+      {showRowActions || frozenRight ? <th style={{ width: 48 }} /> : null}
+    </tr>
+  );
+}
+
+function SpecialRows({ variant }: { variant: GridExample['variant'] }) {
+  if (variant === 'skeleton') {
+    return (
+      <>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <tr key={index}>
+            <td>
+              <span className="gob-dg-stack">
+                <span className="gob-dg-skel" style={{ width: '70%' }} />
+                <span className="gob-dg-skel" style={{ width: '45%' }} />
+              </span>
+            </td>
+            <td>
+              <span className="gob-dg-cell">
+                <span className="gob-dg-skel" data-size="lg" />
+                <span className="gob-dg-stack">
+                  <span className="gob-dg-skel" style={{ width: 120 }} />
+                  <span className="gob-dg-skel" style={{ width: 90 }} />
+                </span>
+              </span>
+            </td>
+            <td>
+              <span className="gob-dg-skel" style={{ width: 72 }} />
+            </td>
+            <td>
+              <span className="gob-dg-skel" data-size="pill" />
+            </td>
+            <td>
+              <span className="gob-dg-skel" style={{ width: 18, height: 18 }} />
+            </td>
+          </tr>
+        ))}
+      </>
+    );
+  }
+
+  return (
+    <>
+      {DEMO_ROWS.map((row) => {
+        if (variant === 'assignees') {
+          return (
+            <tr key={row.folio}>
+              <td>
+                <FolioCell folio={row.folio} fecha={row.fecha} isNew={row.isNew} />
+              </td>
+              <td>
+                <PersonCell
+                  name={row.ciudadano}
+                  curp={row.curp}
+                  initials={row.initials}
+                  hue={row.hue}
+                />
+              </td>
+              <td>
+                <span className="gob-dg-avatars">
+                  {row.assignees.map((person) => (
+                    <span
+                      key={`${row.folio}-${person.initials}`}
+                      className="gob-dg-avatar"
+                      data-hue={person.hue}
+                    >
+                      {person.initials}
+                    </span>
+                  ))}
+                  {row.assigneeExtra > 0 ? (
+                    <span className="gob-dg-more">+{row.assigneeExtra}</span>
+                  ) : null}
+                </span>
+              </td>
+              <td>
+                <StatusPill row={row} />
+              </td>
+              <td>
+                <Kebab />
+              </td>
+            </tr>
+          );
+        }
+
+        if (variant === 'progress') {
+          const tone = progressTone(row.progress);
+          const scoreTone = progressTone(row.score * 10);
+          return (
+            <tr key={row.folio}>
+              <td>
+                <FolioCell folio={row.folio} fecha={row.fecha} isNew={row.isNew} />
+              </td>
+              <td>
+                <PersonCell
+                  name={row.ciudadano}
+                  curp={row.curp}
+                  initials={row.initials}
+                  hue={row.hue}
+                />
+              </td>
+              <td>
+                <span className="gob-dg-progress">
+                  <span className="gob-dg-secondary">
+                    {row.progress}% · docs
+                  </span>
+                  <span className="gob-dg-progress-track">
+                    <span
+                      className="gob-dg-progress-fill"
+                      data-tone={tone}
+                      style={{ width: `${row.progress}%` }}
+                    />
+                  </span>
+                </span>
+              </td>
+              <td>
+                <span
+                  className="gob-dg-ring"
+                  data-tone={scoreTone}
+                  style={{ ['--p' as string]: row.score * 10 }}
+                >
+                  <span>
+                    {row.score}/10
+                  </span>
+                </span>
+              </td>
+              <td>
+                <StatusPill row={row} />
+              </td>
+              <td>
+                <Kebab />
+              </td>
+            </tr>
+          );
+        }
+
+        if (variant === 'tags') {
+          return (
+            <tr key={row.folio}>
+              <td>
+                <FolioCell folio={row.folio} fecha={row.fecha} isNew={row.isNew} />
+              </td>
+              <td>
+                <PersonCell
+                  name={row.ciudadano}
+                  curp={row.curp}
+                  initials={row.initials}
+                  hue={row.hue}
+                />
+              </td>
+              <td>
+                <span className="gob-dg-tags">
+                  {row.tags.map((tag) => (
+                    <span key={tag} className="gob-dg-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </span>
+              </td>
+              <td>
+                <StatusPill row={row} />
+              </td>
+              <td>
+                <Kebab />
+              </td>
+            </tr>
+          );
+        }
+
+        if (variant === 'live') {
+          return (
+            <tr key={row.folio}>
+              <td>
+                <FolioCell folio={row.folio} fecha={row.fecha} isNew={row.isNew} />
+              </td>
+              <td>
+                <span className="gob-dg-stack">
+                  <span className="gob-dg-primary">{row.location}</span>
+                  <span className="gob-dg-secondary">{row.locationNote}</span>
+                </span>
+              </td>
+              <td>
+                {row.live ? (
+                  <span className="gob-dg-live">
+                    <span className="gob-dg-dot" />
+                    Live
+                  </span>
+                ) : (
+                  <span className="gob-dg-tag">Offline</span>
+                )}
+              </td>
+              <td>
+                <StatusPill row={row} />
+              </td>
+              <td>
+                <Kebab />
+              </td>
+            </tr>
+          );
+        }
+
+        if (variant === 'financial') {
+          return (
+            <tr key={row.folio}>
+              <td>
+                <FolioCell folio={row.folio} fecha={row.fecha} isNew={row.isNew} />
+              </td>
+              <td>
+                <PersonCell
+                  name={row.ciudadano}
+                  curp={row.curp}
+                  initials={row.initials}
+                  hue={row.hue}
+                />
+              </td>
+              <td className="num">
+                <span className="gob-dg-primary">{row.monto}</span>
+              </td>
+              <td className="num">
+                <span
+                  className={
+                    row.pagado === '$0.00'
+                      ? 'gob-dg-amount-neg'
+                      : 'gob-dg-amount-pos'
+                  }
+                >
+                  {row.pagado}
+                </span>
+              </td>
+              <td className="num">
+                <span
+                  className={
+                    row.saldo === '$0.00'
+                      ? 'gob-dg-amount-pos'
+                      : 'gob-dg-amount-neg'
+                  }
+                >
+                  {row.saldo}
+                </span>
+              </td>
+              <td>
+                <StatusPill row={row} />
+              </td>
+              <td>
+                <Kebab />
+              </td>
+            </tr>
+          );
+        }
+
+        if (variant === 'alert') {
+          return (
+            <tr
+              key={row.folio}
+              className={row.alert ? 'gob-dg-alert' : undefined}
+            >
+              <td>
+                <FolioCell folio={row.folio} fecha={row.fecha} isNew={row.isNew} />
+              </td>
+              <td>
+                <PersonCell
+                  name={row.ciudadano}
+                  curp={row.curp}
+                  initials={row.initials}
+                  hue={row.hue}
+                />
+              </td>
+              <td>
+                {row.alert ? (
+                  <span className="gob-dg-priority">
+                    <span className="gob-dg-dot" />
+                    {row.alertReason}
+                  </span>
+                ) : (
+                  <span className="gob-dg-secondary">Sin alerta</span>
+                )}
+              </td>
+              <td>
+                <StatusPill row={row} />
+              </td>
+              <td>
+                <Kebab />
+              </td>
+            </tr>
+          );
+        }
+
+        return null;
+      })}
+    </>
+  );
+}
+
 export function GridDemo({
   example,
   tone,
@@ -107,18 +610,23 @@ export function GridDemo({
   const withExpand = example.variant === 'expandable';
   const withColFilter = example.variant === 'column-filter';
   const grouped = example.variant === 'grouped';
+  const special = [
+    'assignees',
+    'progress',
+    'tags',
+    'live',
+    'financial',
+    'alert',
+    'skeleton',
+  ].includes(example.variant);
+
   const showRowActions =
     frozenRight ||
-    example.variant === 'toolbar' ||
-    example.variant === 'filters' ||
-    example.variant === 'paginated' ||
-    example.variant === 'wide' ||
-    withExpand;
-  const showSort =
-    example.variant === 'filters' ||
-    example.variant === 'paginated' ||
-    example.variant === 'toolbar' ||
-    example.variant === 'wide';
+    RICH_VARIANTS.has(example.variant) ||
+    withExpand ||
+    example.variant === 'skeleton';
+
+  const showSort = RICH_VARIANTS.has(example.variant);
 
   const colSpan =
     (withExpand ? 1 : 0) +
@@ -141,19 +649,26 @@ export function GridDemo({
 
         {example.showActions ? (
           <span slot="actions" className={local.toolbar}>
-            <button type="button" className={local.toolBtn}>
-              <SortAscending weight="bold" size={13} />
-              Ordenar
-            </button>
-            <button type="button" className={local.toolBtn}>
-              <Funnel weight="bold" size={13} />
-              Filtrar
-            </button>
+            {example.variant !== 'skeleton' ? (
+              <>
+                <button type="button" className={local.toolBtn}>
+                  <SortAscending weight="bold" size={13} />
+                  Ordenar
+                </button>
+                <button type="button" className={local.toolBtn}>
+                  <Funnel weight="bold" size={13} />
+                  Filtrar
+                </button>
+              </>
+            ) : null}
             <button type="button" className={local.toolBtn}>
               <ArrowsClockwise weight="bold" size={13} />
               Refrescar
             </button>
-            <button type="button" className={`${local.toolBtn} ${local.toolBtnPrimary}`}>
+            <button
+              type="button"
+              className={`${local.toolBtn} ${local.toolBtnPrimary}`}
+            >
               <DownloadSimple weight="bold" size={13} />
               Exportar
             </button>
@@ -169,7 +684,9 @@ export function GridDemo({
                 className={`${local.tab} ${'active' in tab && tab.active ? local.tabActive : ''}`}
               >
                 {tab.label}
-                <span className={local.tabCount}>{tab.count.toLocaleString('es-MX')}</span>
+                <span className={local.tabCount}>
+                  {tab.count.toLocaleString('es-MX')}
+                </span>
               </button>
             ))}
           </nav>
@@ -209,55 +726,13 @@ export function GridDemo({
 
         <table>
           <thead>
-            <tr>
-              {withExpand ? <th style={{ width: 40 }} /> : null}
-              {example.variant === 'bulk' ? (
-                <th style={{ width: 36 }}>
-                  <input
-                    className="gob-dg-check"
-                    type="checkbox"
-                    aria-label="Seleccionar todo"
-                    defaultChecked
-                  />
-                </th>
-              ) : null}
-              {showSort ? (
-                <>
-                  <SortTh label="Expediente" dir="desc" />
-                  <SortTh label="Ciudadano" />
-                  <SortTh label="Dependencia" />
-                  {wide ? (
-                    <>
-                      <SortTh label="Municipio" />
-                      <SortTh label="Programa" />
-                      <SortTh label="Actualizado" />
-                    </>
-                  ) : (
-                    <SortTh label="Actualizado" />
-                  )}
-                  <SortTh label="Monto" align="right" />
-                  <SortTh label="Estatus" />
-                </>
-              ) : (
-                <>
-                  <th>Expediente</th>
-                  <th>Ciudadano</th>
-                  <th>Dependencia</th>
-                  {wide ? (
-                    <>
-                      <th>Municipio</th>
-                      <th>Programa</th>
-                      <th>Actualizado</th>
-                    </>
-                  ) : (
-                    <th>Actualizado</th>
-                  )}
-                  <th className="num">Monto</th>
-                  <th>Estatus</th>
-                </>
-              )}
-              {showRowActions || frozenRight ? <th style={{ width: 48 }} /> : null}
-            </tr>
+            <DefaultHeader
+              variant={example.variant}
+              withExpand={withExpand}
+              showSort={showSort}
+              showRowActions={showRowActions}
+              frozenRight={frozenRight}
+            />
             {withColFilter ? (
               <tr>
                 <th>
@@ -282,7 +757,9 @@ export function GridDemo({
             ) : null}
           </thead>
           <tbody>
-            {grouped ? (
+            {special ? (
+              <SpecialRows variant={example.variant} />
+            ) : grouped ? (
               <>
                 <tr className="gob-dg-group">
                   <td colSpan={6}>Salud · 4,102 expedientes</td>
@@ -308,10 +785,7 @@ export function GridDemo({
                     </td>
                     <td className="num">{row.monto}</td>
                     <td>
-                      <span className="gob-dg-status" data-tone={row.estatus}>
-                        <span className="gob-dg-dot" />
-                        {row.estatusLabel}
-                      </span>
+                      <StatusPill row={row} />
                     </td>
                   </tr>
                 ))}
@@ -340,10 +814,7 @@ export function GridDemo({
                       </td>
                       <td className="num">{row.monto}</td>
                       <td>
-                        <span className="gob-dg-status" data-tone={row.estatus}>
-                          <span className="gob-dg-dot" />
-                          {row.estatusLabel}
-                        </span>
+                        <StatusPill row={row} />
                       </td>
                     </tr>
                   ),
@@ -411,7 +882,10 @@ export function GridDemo({
                       </td>
                     )}
                     <td className="num">
-                      <span className="gob-dg-stack" style={{ textAlign: 'right' }}>
+                      <span
+                        className="gob-dg-stack"
+                        style={{ textAlign: 'right' }}
+                      >
                         <span className="gob-dg-primary">{row.monto}</span>
                         <span
                           className={
@@ -426,22 +900,11 @@ export function GridDemo({
                       </span>
                     </td>
                     <td>
-                      <span className="gob-dg-status" data-tone={row.estatus}>
-                        <span className="gob-dg-dot" />
-                        {row.estatusLabel}
-                      </span>
+                      <StatusPill row={row} />
                     </td>
                     {showRowActions || frozenRight ? (
                       <td>
-                        <div className="gob-dg-actions">
-                          <button
-                            type="button"
-                            className="gob-dg-kebab"
-                            aria-label="Mas acciones"
-                          >
-                            ⋮
-                          </button>
-                        </div>
+                        <Kebab />
                       </td>
                     ) : null}
                   </tr>
@@ -492,10 +955,7 @@ export function GridDemo({
           <span slot="footer" className={local.footerSlot}>
             <span className={local.footerMeta}>
               <span>{example.footer}</span>
-              {example.variant === 'paginated' ||
-              example.variant === 'filters' ||
-              example.variant === 'wide' ||
-              example.variant === 'toolbar' ? (
+              {PAGER_VARIANTS.has(example.variant) ? (
                 <label className={local.perPage}>
                   Filas
                   <select defaultValue="25" aria-label="Filas por pagina">
@@ -506,15 +966,19 @@ export function GridDemo({
                 </label>
               ) : null}
             </span>
-            {example.variant === 'paginated' ||
-            example.variant === 'filters' ||
-            example.variant === 'toolbar' ||
-            example.variant === 'wide' ? (
+            {PAGER_VARIANTS.has(example.variant) ? (
               <nav className={local.pager} aria-label="Paginacion">
-                <button type="button" className={local.pageBtn} aria-label="Anterior">
+                <button
+                  type="button"
+                  className={local.pageBtn}
+                  aria-label="Anterior"
+                >
                   <CaretLeft weight="bold" size={14} />
                 </button>
-                <button type="button" className={`${local.pageBtn} ${local.pageBtnActive}`}>
+                <button
+                  type="button"
+                  className={`${local.pageBtn} ${local.pageBtnActive}`}
+                >
                   1
                 </button>
                 <button type="button" className={local.pageBtn}>
@@ -530,7 +994,11 @@ export function GridDemo({
                 <button type="button" className={local.pageBtn}>
                   250
                 </button>
-                <button type="button" className={local.pageBtn} aria-label="Siguiente">
+                <button
+                  type="button"
+                  className={local.pageBtn}
+                  aria-label="Siguiente"
+                >
                   <CaretRight weight="bold" size={14} />
                 </button>
               </nav>

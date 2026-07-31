@@ -129,7 +129,14 @@ export const dataGridStyles = `
 .root[data-variant='toolbar'] .tabs,
 .root[data-variant='paginated'] .tabs,
 .root[data-variant='wide'] .tabs,
-.root[data-variant='expandable'] .tabs {
+.root[data-variant='expandable'] .tabs,
+.root[data-variant='card-rows'] .tabs,
+.root[data-variant='assignees'] .tabs,
+.root[data-variant='progress'] .tabs,
+.root[data-variant='tags'] .tabs,
+.root[data-variant='live'] .tabs,
+.root[data-variant='financial'] .tabs,
+.root[data-variant='alert'] .tabs {
   display: flex;
 }
 
@@ -137,7 +144,14 @@ export const dataGridStyles = `
 .root[data-variant='column-filter'] .filters,
 .root[data-variant='toolbar'] .filters,
 .root[data-variant='wide'] .filters,
-.root[data-variant='paginated'] .filters {
+.root[data-variant='paginated'] .filters,
+.root[data-variant='card-rows'] .filters,
+.root[data-variant='assignees'] .filters,
+.root[data-variant='progress'] .filters,
+.root[data-variant='tags'] .filters,
+.root[data-variant='live'] .filters,
+.root[data-variant='financial'] .filters,
+.root[data-variant='alert'] .filters {
   display: flex;
 }
 
@@ -164,11 +178,22 @@ export const dataGridStyles = `
 }
 
 .root[data-variant='frozen-left'] .actions,
-.root[data-variant='grouped'] .actions {
+.root[data-variant='grouped'] .actions,
+.root[data-variant='skeleton'] .tabs,
+.root[data-variant='skeleton'] .filters,
+.root[data-variant='skeleton'] .bulk {
   display: none;
 }
 
-.root[data-variant='expandable'] .actions {
+.root[data-variant='expandable'] .actions,
+.root[data-variant='card-rows'] .actions,
+.root[data-variant='assignees'] .actions,
+.root[data-variant='progress'] .actions,
+.root[data-variant='tags'] .actions,
+.root[data-variant='live'] .actions,
+.root[data-variant='financial'] .actions,
+.root[data-variant='alert'] .actions,
+.root[data-variant='skeleton'] .actions {
   display: inline-flex;
 }
 

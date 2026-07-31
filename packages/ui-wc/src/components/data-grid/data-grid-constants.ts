@@ -9,6 +9,14 @@ export const DATA_GRID_VARIANTS = [
   'wide',
   'toolbar',
   'grouped',
+  'card-rows',
+  'assignees',
+  'progress',
+  'tags',
+  'live',
+  'financial',
+  'alert',
+  'skeleton',
 ] as const;
 
 export type DataGridVariant = (typeof DATA_GRID_VARIANTS)[number];
@@ -454,5 +462,203 @@ gob-data-grid .gob-dg-badge-new {
   letter-spacing: 0.04em;
   background: color-mix(in srgb, var(--gob-dg-accent) 12%, #fff);
   color: var(--gob-dg-accent);
+}
+
+/* —— Filas tarjeta —— */
+gob-data-grid[variant='card-rows'] .scroll {
+  background: #f4f3f1;
+  padding: 10px 12px 14px;
+  max-height: 460px;
+}
+gob-data-grid[variant='card-rows'] table {
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+gob-data-grid[variant='card-rows'] thead th {
+  background: transparent;
+  border-bottom: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+gob-data-grid[variant='card-rows'] tbody td {
+  border-bottom: 0;
+  border-top: 1px solid rgba(24, 21, 17, 0.06);
+  border-bottom: 1px solid rgba(24, 21, 17, 0.06);
+  box-shadow: 0 1px 2px rgba(24, 21, 17, 0.03);
+}
+gob-data-grid[variant='card-rows'] tbody td:first-child {
+  border-left: 1px solid rgba(24, 21, 17, 0.06);
+  border-radius: 12px 0 0 12px;
+}
+gob-data-grid[variant='card-rows'] tbody td:last-child {
+  border-right: 1px solid rgba(24, 21, 17, 0.06);
+  border-radius: 0 12px 12px 0;
+}
+gob-data-grid[variant='card-rows'] tbody tr:hover td {
+  background: #fff;
+}
+
+/* —— Stack de avatares —— */
+gob-data-grid .gob-dg-avatars {
+  display: inline-flex;
+  align-items: center;
+}
+gob-data-grid .gob-dg-avatars .gob-dg-avatar {
+  width: 28px;
+  height: 28px;
+  font-size: 10px;
+  border: 2px solid #fff;
+  margin-left: -8px;
+}
+gob-data-grid .gob-dg-avatars .gob-dg-avatar:first-child {
+  margin-left: 0;
+}
+gob-data-grid .gob-dg-avatars .gob-dg-more {
+  display: inline-grid;
+  place-items: center;
+  margin-left: -6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  background: rgba(24, 21, 17, 0.06);
+  color: #4a453e;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* —— Progreso / anillo —— */
+gob-data-grid .gob-dg-progress {
+  display: grid;
+  gap: 4px;
+  min-width: 88px;
+}
+gob-data-grid .gob-dg-progress-track {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(24, 21, 17, 0.08);
+  overflow: hidden;
+}
+gob-data-grid .gob-dg-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--gob-dg-accent);
+}
+gob-data-grid .gob-dg-progress-fill[data-tone='ok'] { background: #187a4a; }
+gob-data-grid .gob-dg-progress-fill[data-tone='warn'] { background: #c48a12; }
+gob-data-grid .gob-dg-progress-fill[data-tone='err'] { background: #b03328; }
+gob-data-grid .gob-dg-ring {
+  --p: 50;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background:
+    conic-gradient(var(--gob-dg-accent) calc(var(--p) * 1%), rgba(24, 21, 17, 0.08) 0);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gob-dg-title);
+}
+gob-data-grid .gob-dg-ring::before {
+  content: '';
+  grid-area: 1 / 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #fff;
+}
+gob-data-grid .gob-dg-ring > span {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
+}
+gob-data-grid .gob-dg-ring[data-tone='ok'] {
+  background: conic-gradient(#187a4a calc(var(--p) * 1%), rgba(24, 21, 17, 0.08) 0);
+}
+gob-data-grid .gob-dg-ring[data-tone='warn'] {
+  background: conic-gradient(#c48a12 calc(var(--p) * 1%), rgba(24, 21, 17, 0.08) 0);
+}
+gob-data-grid .gob-dg-ring[data-tone='err'] {
+  background: conic-gradient(#b03328 calc(var(--p) * 1%), rgba(24, 21, 17, 0.08) 0);
+}
+
+/* —— Tags —— */
+gob-data-grid .gob-dg-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* —— Live —— */
+gob-data-grid .gob-dg-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #187a4a;
+}
+gob-data-grid .gob-dg-live .gob-dg-dot {
+  background: #187a4a;
+  box-shadow: 0 0 0 3px rgba(24, 122, 74, 0.18);
+}
+
+/* —— Alerta / prioridad —— */
+gob-data-grid tr.gob-dg-alert td {
+  background: rgba(192, 57, 43, 0.04);
+}
+gob-data-grid tr.gob-dg-alert td:first-child {
+  box-shadow: inset 3px 0 0 #b03328;
+}
+gob-data-grid tr.gob-dg-alert:hover td {
+  background: rgba(192, 57, 43, 0.07);
+}
+gob-data-grid .gob-dg-priority {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #b03328;
+}
+
+/* —— Skeleton —— */
+gob-data-grid[variant='skeleton'] tbody td {
+  pointer-events: none;
+}
+gob-data-grid .gob-dg-skel {
+  display: block;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(24, 21, 17, 0.06) 0%,
+    rgba(24, 21, 17, 0.12) 45%,
+    rgba(24, 21, 17, 0.06) 90%
+  );
+  background-size: 200% 100%;
+  animation: gob-dg-shimmer 1.2s ease-in-out infinite;
+}
+gob-data-grid .gob-dg-skel[data-size='lg'] {
+  height: 28px;
+  width: 28px;
+  border-radius: 999px;
+}
+gob-data-grid .gob-dg-skel[data-size='pill'] {
+  height: 22px;
+  width: 72px;
+  border-radius: 999px;
+}
+@keyframes gob-dg-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* —— Financiero —— */
+gob-data-grid[variant='financial'] .gob-dg-primary {
+  font-variant-numeric: tabular-nums;
 }
 `;

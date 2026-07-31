@@ -294,7 +294,15 @@ export type DataGridVariant =
   | 'column-filter'
   | 'wide'
   | 'toolbar'
-  | 'grouped';
+  | 'grouped'
+  | 'card-rows'
+  | 'assignees'
+  | 'progress'
+  | 'tags'
+  | 'live'
+  | 'financial'
+  | 'alert'
+  | 'skeleton';
 
 export type DataGridTone = Tone;
 

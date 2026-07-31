@@ -143,6 +143,100 @@ export const GRID_EXAMPLES: GridExample[] = [
     subtitle: 'Agrupacion servidor',
     footer: '3 grupos · 12,480 total',
   },
+  {
+    id: 'card-rows',
+    title: 'Filas tarjeta',
+    description: 'Cada fila es una tarjeta con espacio — listado operativo premium.',
+    variant: 'card-rows',
+    cardTitle: 'Mesa de control',
+    subtitle: 'Vista de tarjetas para priorizar casos.',
+    showTabs: true,
+    showFilters: true,
+    showActions: true,
+    footer: '1 – 6 de 12,480',
+  },
+  {
+    id: 'assignees',
+    title: 'Con asignados',
+    description: 'Stack de avatares del analitista / mesa responsable.',
+    variant: 'assignees',
+    cardTitle: 'Carga por analista',
+    subtitle: 'Quien atiende cada expediente.',
+    showTabs: true,
+    showFilters: true,
+    showActions: true,
+    footer: '1 – 6 de 12,480',
+  },
+  {
+    id: 'progress',
+    title: 'Con progreso',
+    description: 'Barras y anillos de avance documental (checklist / score).',
+    variant: 'progress',
+    cardTitle: 'Avance de expedientes',
+    subtitle: 'Documentacion y cumplimiento.',
+    showTabs: true,
+    showFilters: true,
+    showActions: true,
+    footer: 'Promedio de avance: 68%',
+  },
+  {
+    id: 'tags',
+    title: 'Con etiquetas',
+    description: 'Pills de programa, prioridad y canal sin saturar la fila.',
+    variant: 'tags',
+    cardTitle: 'Clasificacion operativa',
+    subtitle: 'Etiquetas institucionales.',
+    showTabs: true,
+    showFilters: true,
+    showActions: true,
+    footer: '1 – 6 de 12,480',
+  },
+  {
+    id: 'live',
+    title: 'Estado en vivo',
+    description: 'Indicador Live + ubicacion / siguiente accion en tiempo real.',
+    variant: 'live',
+    cardTitle: 'Operacion en campo',
+    subtitle: 'Ventanillas y unidades moviles.',
+    showTabs: true,
+    showFilters: true,
+    showActions: true,
+    footer: '4 unidades en vivo',
+  },
+  {
+    id: 'financial',
+    title: 'Financiera',
+    description: 'Total, pagado y saldo con color (estilo factura / cobranza).',
+    variant: 'financial',
+    cardTitle: 'Cobranza de derechos',
+    subtitle: 'Montos institucionales.',
+    showTabs: true,
+    showFilters: true,
+    showActions: true,
+    footer: 'Saldo pendiente: $13,580.00',
+  },
+  {
+    id: 'alert',
+    title: 'Con alertas',
+    description: 'Filas prioritarias resaltadas para vencimientos o riesgos.',
+    variant: 'alert',
+    cardTitle: 'Vencimientos criticos',
+    subtitle: 'Atencion inmediata.',
+    showTabs: true,
+    showFilters: true,
+    showActions: true,
+    footer: '2 alertas activas',
+  },
+  {
+    id: 'skeleton',
+    title: 'Cargando',
+    description: 'Skeleton shimmer mientras llegan datos del servidor.',
+    variant: 'skeleton',
+    cardTitle: 'Cargando expedientes',
+    subtitle: 'Esperando respuesta del API…',
+    showActions: true,
+    footer: 'Cargando…',
+  },
 ];
 
 export const GRID_ATTRS = [
@@ -150,7 +244,7 @@ export const GRID_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'filters',
-    body: 'filters | frozen-left | frozen-right | bulk | paginated | expandable | column-filter | wide | toolbar | grouped',
+    body: 'filters | frozen-left | frozen-right | bulk | paginated | expandable | column-filter | wide | toolbar | grouped | card-rows | assignees | progress | tags | live | financial | alert | skeleton',
   },
   {
     name: 'tone',
@@ -216,6 +310,7 @@ export type DemoRow = {
   fecha: string;
   monto: string;
   pagado: string;
+  saldo: string;
   municipio: string;
   programa: string;
   estatus: 'ok' | 'warn' | 'err' | 'info' | 'muted';
@@ -224,6 +319,16 @@ export type DemoRow = {
   hue: number;
   isNew?: boolean;
   relative: string;
+  assignees: { initials: string; hue: number }[];
+  assigneeExtra: number;
+  progress: number;
+  score: number;
+  tags: string[];
+  location: string;
+  locationNote: string;
+  live: boolean;
+  alert?: boolean;
+  alertReason?: string;
 };
 
 export const DEMO_ROWS: DemoRow[] = [
@@ -235,6 +340,7 @@ export const DEMO_ROWS: DemoRow[] = [
     fecha: '12/03/2026',
     monto: '$4,250.00',
     pagado: '$4,250.00',
+    saldo: '$0.00',
     municipio: 'Centro',
     programa: 'Apoyo familiar',
     estatus: 'ok',
@@ -242,6 +348,17 @@ export const DEMO_ROWS: DemoRow[] = [
     initials: 'AG',
     hue: 0,
     relative: 'hace 2 h',
+    assignees: [
+      { initials: 'MR', hue: 1 },
+      { initials: 'CL', hue: 2 },
+    ],
+    assigneeExtra: 1,
+    progress: 100,
+    score: 9,
+    tags: ['Prioritario', 'Salud'],
+    location: 'Ventanilla 4 · Centro',
+    locationNote: 'Listo para entrega',
+    live: false,
   },
   {
     folio: 'EXP-2026-01483',
@@ -251,6 +368,7 @@ export const DEMO_ROWS: DemoRow[] = [
     fecha: '12/03/2026',
     monto: '$1,180.00',
     pagado: '$0.00',
+    saldo: '$1,180.00',
     municipio: 'Norte',
     programa: 'Beca basica',
     estatus: 'warn',
@@ -259,6 +377,20 @@ export const DEMO_ROWS: DemoRow[] = [
     hue: 1,
     isNew: true,
     relative: 'hace 5 h',
+    assignees: [
+      { initials: 'SP', hue: 0 },
+      { initials: 'JD', hue: 4 },
+      { initials: 'AK', hue: 5 },
+    ],
+    assigneeExtra: 0,
+    progress: 45,
+    score: 4,
+    tags: ['Beca', 'Documentos'],
+    location: 'Mesa 2 · Educacion',
+    locationNote: 'Faltan 2 anexos',
+    live: true,
+    alert: true,
+    alertReason: 'Vence en 24 h',
   },
   {
     folio: 'EXP-2026-01484',
@@ -268,6 +400,7 @@ export const DEMO_ROWS: DemoRow[] = [
     fecha: '11/03/2026',
     monto: '$890.00',
     pagado: '$890.00',
+    saldo: '$0.00',
     municipio: 'Sur',
     programa: 'Tarifa social',
     estatus: 'ok',
@@ -275,6 +408,14 @@ export const DEMO_ROWS: DemoRow[] = [
     initials: 'PM',
     hue: 2,
     relative: 'ayer',
+    assignees: [{ initials: 'TG', hue: 3 }],
+    assigneeExtra: 0,
+    progress: 90,
+    score: 8,
+    tags: ['Movilidad'],
+    location: 'Unidad movil Sur',
+    locationNote: '5 min a siguiente cita',
+    live: true,
   },
   {
     folio: 'EXP-2026-01485',
@@ -284,6 +425,7 @@ export const DEMO_ROWS: DemoRow[] = [
     fecha: '11/03/2026',
     monto: '$12,400.00',
     pagado: '$0.00',
+    saldo: '$12,400.00',
     municipio: 'Oriente',
     programa: 'Devolucion',
     estatus: 'err',
@@ -291,6 +433,19 @@ export const DEMO_ROWS: DemoRow[] = [
     initials: 'DJ',
     hue: 3,
     relative: 'ayer',
+    assignees: [
+      { initials: 'NR', hue: 1 },
+      { initials: 'FB', hue: 2 },
+    ],
+    assigneeExtra: 2,
+    progress: 20,
+    score: 2,
+    tags: ['Hacienda', 'Urgente'],
+    location: 'Archivo Oriente',
+    locationNote: 'Requiere reclasificacion',
+    live: false,
+    alert: true,
+    alertReason: 'Saldo critico',
   },
   {
     folio: 'EXP-2026-01486',
@@ -300,6 +455,7 @@ export const DEMO_ROWS: DemoRow[] = [
     fecha: '10/03/2026',
     monto: '$2,010.00',
     pagado: '$1,000.00',
+    saldo: '$1,010.00',
     municipio: 'Poniente',
     programa: 'Atencion ciudadana',
     estatus: 'info',
@@ -307,6 +463,17 @@ export const DEMO_ROWS: DemoRow[] = [
     initials: 'SV',
     hue: 4,
     relative: 'hace 2 d',
+    assignees: [
+      { initials: 'QL', hue: 5 },
+      { initials: 'HM', hue: 0 },
+    ],
+    assigneeExtra: 0,
+    progress: 65,
+    score: 6,
+    tags: ['Campo', 'Seguridad'],
+    location: 'Ruta Poniente',
+    locationNote: 'En ruta · ETA 18 min',
+    live: true,
   },
   {
     folio: 'EXP-2026-01487',
@@ -316,6 +483,7 @@ export const DEMO_ROWS: DemoRow[] = [
     fecha: '10/03/2026',
     monto: '$760.00',
     pagado: '$760.00',
+    saldo: '$0.00',
     municipio: 'Centro',
     programa: 'Medicamentos',
     estatus: 'ok',
@@ -323,6 +491,14 @@ export const DEMO_ROWS: DemoRow[] = [
     initials: 'MO',
     hue: 5,
     relative: 'hace 2 d',
+    assignees: [{ initials: 'VW', hue: 2 }],
+    assigneeExtra: 0,
+    progress: 80,
+    score: 7,
+    tags: ['Farmacia'],
+    location: 'Farmacia Centro',
+    locationNote: 'Entrega programada',
+    live: false,
   },
 ];
 
