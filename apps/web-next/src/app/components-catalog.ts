@@ -8,6 +8,7 @@ export type PreviewKind =
   | 'sidebar'
   | 'topbar'
   | 'page-header'
+  | 'breadcrumb'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -141,12 +142,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'breadcrumb',
+    href: '/migas-de-pan',
     name: 'Migas de pan',
     description: 'Ruta jerarquica entre secciones del sistema.',
-    preview: 'soon',
+    preview: 'breadcrumb',
     category: 'navegacion',
-    tags: ['ruta', 'navegacion', 'breadcrumb'],
-    status: 'soon',
+    tags: ['ruta', 'navegacion', 'breadcrumb', 'migas'],
+    status: 'ready',
   },
   {
     id: 'container',

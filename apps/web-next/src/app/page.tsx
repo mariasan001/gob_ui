@@ -135,6 +135,17 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'breadcrumb') {
+    return (
+      <div className={s.fakeBreadcrumb} aria-hidden="true">
+        <span className={s.fakeBreadcrumbItem} />
+        <i>/</i>
+        <span className={s.fakeBreadcrumbItem} />
+        <i>/</i>
+        <span className={`${s.fakeBreadcrumbItem} ${s.fakeBreadcrumbCurrent}`} />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

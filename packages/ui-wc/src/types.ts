@@ -135,6 +135,20 @@ export type GobPageHeaderProps = React.HTMLAttributes<HTMLElement> & {
   surface?: PageHeaderSurface;
 };
 
+export type BreadcrumbVariant =
+  | 'basic'
+  | 'chevron'
+  | 'icons'
+  | 'collapsed'
+  | 'underline'
+  | 'dense'
+  | 'complete';
+
+export type GobBreadcrumbProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: BreadcrumbVariant;
+  tone?: Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -148,6 +162,7 @@ declare global {
       'gob-sidebar': React.DetailedHTMLProps<GobSidebarProps, HTMLElement>;
       'gob-topbar': React.DetailedHTMLProps<GobTopbarProps, HTMLElement>;
       'gob-page-header': React.DetailedHTMLProps<GobPageHeaderProps, HTMLElement>;
+      'gob-breadcrumb': React.DetailedHTMLProps<GobBreadcrumbProps, HTMLElement>;
     }
   }
 }
