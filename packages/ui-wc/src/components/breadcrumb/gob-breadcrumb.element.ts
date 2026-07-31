@@ -44,11 +44,6 @@ class GobBreadcrumbElement extends SafeHTMLElement {
 
     this.rootEl.dataset.variant = variant;
     this.rootEl.dataset.tone = tone;
-
-    // Expone el separador a light DOM (spans data-sep)
-    const sep =
-      variant === 'chevron' ? '›' : variant === 'collapsed' ? '/' : '/';
-    this.style.setProperty('--gob-bc-sep', `'${sep}'`);
   }
 }
 
