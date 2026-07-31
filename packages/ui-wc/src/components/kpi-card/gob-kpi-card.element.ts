@@ -2,6 +2,7 @@ import { defineCustomElement } from '../../lib/define-custom-element';
 import { SafeHTMLElement } from '../../lib/safe-html-element';
 import {
   KPI_OBSERVED_ATTRIBUTES,
+  resolveKpiProgress,
   resolveKpiTone,
   resolveKpiVariant,
 } from './kpi-card-constants';
@@ -13,6 +14,7 @@ class GobKpiCardElement extends SafeHTMLElement {
   }
 
   private readonly rootEl: HTMLElement;
+  private readonly meterFillEl: HTMLElement;
 
   constructor() {
     super();
@@ -63,7 +65,14 @@ class GobKpiCardElement extends SafeHTMLElement {
     trendSlot.name = 'trend';
     trend.appendChild(trendSlot);
 
-    valueRow.append(value, trend);
+    const compare = document.createElement('div');
+    compare.className = 'compare';
+    compare.setAttribute('part', 'compare');
+    const compareSlot = document.createElement('slot');
+    compareSlot.name = 'compare';
+    compare.appendChild(compareSlot);
+
+    valueRow.append(value, trend, compare);
 
     const period = document.createElement('div');
     period.className = 'period';
@@ -72,7 +81,15 @@ class GobKpiCardElement extends SafeHTMLElement {
     periodSlot.name = 'period';
     period.appendChild(periodSlot);
 
-    this.rootEl.append(head, valueRow, period);
+    const meter = document.createElement('div');
+    meter.className = 'meter';
+    meter.setAttribute('part', 'meter');
+    this.meterFillEl = document.createElement('span');
+    this.meterFillEl.className = 'meterFill';
+    this.meterFillEl.setAttribute('part', 'meter-fill');
+    meter.appendChild(this.meterFillEl);
+
+    this.rootEl.append(head, valueRow, meter, period);
     shadow.append(style, this.rootEl);
   }
 
@@ -87,9 +104,11 @@ class GobKpiCardElement extends SafeHTMLElement {
   private syncState() {
     const variant = resolveKpiVariant(this.getAttribute('variant'));
     const tone = resolveKpiTone(this.getAttribute('tone'));
+    const progress = resolveKpiProgress(this.getAttribute('progress'));
 
     this.rootEl.dataset.variant = variant;
     this.rootEl.dataset.tone = tone;
+    this.rootEl.style.setProperty('--gob-kpi-progress', `${progress}%`);
 
     const trend = this.rootEl.querySelector('.trend') as HTMLElement | null;
     if (trend) {

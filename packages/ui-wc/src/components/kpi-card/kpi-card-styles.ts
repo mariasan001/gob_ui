@@ -15,6 +15,8 @@ export const kpiCardStyles = `
   --gob-kpi-pad: 18px;
   --gob-kpi-radius: 16px;
   --gob-kpi-value-size: 1.85rem;
+  --gob-kpi-progress: 64%;
+  --gob-kpi-shadow: none;
 }
 
 *,
@@ -24,6 +26,7 @@ export const kpiCardStyles = `
 }
 
 .root {
+  position: relative;
   display: grid;
   gap: 10px;
   min-width: 0;
@@ -32,6 +35,8 @@ export const kpiCardStyles = `
   border: 1px solid var(--gob-kpi-border);
   background: var(--gob-kpi-bg);
   color: var(--gob-kpi-muted);
+  box-shadow: var(--gob-kpi-shadow);
+  overflow: hidden;
 }
 
 .head {
@@ -79,7 +84,8 @@ export const kpiCardStyles = `
   color: var(--gob-kpi-title);
 }
 
-.trend {
+.trend,
+.compare {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -100,11 +106,33 @@ export const kpiCardStyles = `
   color: var(--gob-kpi-down);
 }
 
+.compare {
+  background: var(--gob-kpi-accent-soft);
+  color: var(--gob-kpi-accent);
+}
+
 .period {
   margin: 0;
   font-size: 12px;
   font-weight: 500;
   color: var(--gob-kpi-muted);
+}
+
+.meter {
+  display: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(24, 21, 17, 0.08);
+  overflow: hidden;
+}
+
+.meterFill {
+  display: block;
+  height: 100%;
+  width: var(--gob-kpi-progress);
+  border-radius: inherit;
+  background: var(--gob-kpi-accent);
 }
 
 .root[data-variant='dense'] {
@@ -113,18 +141,93 @@ export const kpiCardStyles = `
   gap: 6px;
 }
 
+.root[data-variant='stripe'] {
+  padding-left: calc(var(--gob-kpi-pad) + 6px);
+}
+
+.root[data-variant='stripe']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--gob-kpi-accent);
+}
+
+.root[data-variant='filled'] {
+  background: var(--gob-kpi-accent-soft);
+  border-color: transparent;
+}
+
+.root[data-variant='filled'] .value {
+  color: var(--gob-kpi-accent);
+}
+
+.root[data-variant='horizontal'] {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.root[data-variant='horizontal'] .head {
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.root[data-variant='horizontal'] .valueRow {
+  flex: 0 0 auto;
+}
+
+.root[data-variant='horizontal'] .value {
+  --gob-kpi-value-size: 1.5rem;
+}
+
+.root[data-variant='elevated'] {
+  --gob-kpi-shadow: 0 14px 28px rgba(24, 21, 17, 0.1);
+  border-color: transparent;
+}
+
+.root[data-variant='progress'] .meter {
+  display: block;
+}
+
 .root[data-variant='basic'] .trend,
 .root[data-variant='basic'] .period,
 .root[data-variant='basic'] .icon,
+.root[data-variant='basic'] .compare,
 .root[data-variant='trend-up'] .period,
 .root[data-variant='trend-up'] .icon,
+.root[data-variant='trend-up'] .compare,
 .root[data-variant='trend-down'] .period,
 .root[data-variant='trend-down'] .icon,
+.root[data-variant='trend-down'] .compare,
 .root[data-variant='period'] .trend,
 .root[data-variant='period'] .icon,
+.root[data-variant='period'] .compare,
 .root[data-variant='icon'] .trend,
 .root[data-variant='icon'] .period,
-.root[data-variant='dense'] .icon {
+.root[data-variant='icon'] .compare,
+.root[data-variant='dense'] .icon,
+.root[data-variant='dense'] .compare,
+.root[data-variant='complete'] .compare,
+.root[data-variant='stripe'] .trend,
+.root[data-variant='stripe'] .icon,
+.root[data-variant='stripe'] .compare,
+.root[data-variant='filled'] .trend,
+.root[data-variant='filled'] .period,
+.root[data-variant='filled'] .compare,
+.root[data-variant='horizontal'] .trend,
+.root[data-variant='horizontal'] .period,
+.root[data-variant='horizontal'] .compare,
+.root[data-variant='compare'] .trend,
+.root[data-variant='compare'] .icon,
+.root[data-variant='progress'] .trend,
+.root[data-variant='progress'] .icon,
+.root[data-variant='progress'] .compare,
+.root[data-variant='elevated'] .compare {
   display: none;
 }
 
@@ -139,5 +242,23 @@ export const kpiCardStyles = `
 .root[data-tone='accent'] {
   --gob-kpi-accent: #bc945a;
   --gob-kpi-accent-soft: rgba(188, 148, 90, 0.18);
+}
+
+:host([tone='dark']),
+.root[data-tone='dark'] {
+  --gob-kpi-accent: #181511;
+  --gob-kpi-accent-soft: rgba(24, 21, 17, 0.08);
+}
+
+:host([tone='neutral']),
+.root[data-tone='neutral'] {
+  --gob-kpi-accent: #6b655c;
+  --gob-kpi-accent-soft: rgba(24, 21, 17, 0.06);
+}
+
+:host([tone='soft']),
+.root[data-tone='soft'] {
+  --gob-kpi-accent: #a67c52;
+  --gob-kpi-accent-soft: rgba(231, 215, 189, 0.65);
 }
 `;
