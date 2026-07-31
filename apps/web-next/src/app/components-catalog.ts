@@ -10,6 +10,7 @@ export type PreviewKind =
   | 'page-header'
   | 'breadcrumb'
   | 'container'
+  | 'grid'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -163,12 +164,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'grid',
+    href: '/cuadricula',
     name: 'Cuadricula',
     description: 'Composicion de filas, columnas y espacios.',
-    preview: 'soon',
+    preview: 'grid',
     category: 'layout',
     tags: ['layout', 'columnas', 'dashboard', 'grid'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'divider',

@@ -10,6 +10,7 @@ import './components/topbar/gob-topbar';
 import './components/page-header/gob-page-header';
 import './components/breadcrumb/gob-breadcrumb';
 import './components/container/gob-container';
+import './components/grid/gob-grid';
 
 export type {
   Appearance,
@@ -22,12 +23,15 @@ export type {
   GobCheckboxProps,
   GobChipProps,
   GobContainerProps,
+  GobGridProps,
   GobPageHeaderProps,
   GobPaginationProps,
   GobRadioProps,
   GobSidebarProps,
   GobSwitchProps,
   GobTopbarProps,
+  GridGap,
+  GridVariant,
   PageHeaderSurface,
   PageHeaderVariant,
   PaginationLang,

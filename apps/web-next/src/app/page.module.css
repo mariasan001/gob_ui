@@ -636,6 +636,28 @@
   border: 1px dashed rgba(159, 33, 65, 0.35);
 }
 
+.fakeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  width: 150px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeGrid span {
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(159, 33, 65, 0.12);
+}
+
+.fakeGrid span:nth-child(2),
+.fakeGrid span:nth-child(3) {
+  background: rgba(159, 33, 65, 0.22);
+}
+
 @keyframes rise {
   from {
     opacity: 0;

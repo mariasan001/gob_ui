@@ -167,6 +167,22 @@ export type GobContainerProps = React.HTMLAttributes<HTMLElement> & {
   shadow?: boolean | 'true' | 'false';
 };
 
+export type GridVariant =
+  | 'basic'
+  | 'three'
+  | 'four'
+  | 'dense'
+  | 'loose'
+  | 'split'
+  | 'auto';
+
+export type GridGap = 'sm' | 'md' | 'lg';
+
+export type GobGridProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: GridVariant;
+  gap?: GridGap;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -182,6 +198,7 @@ declare global {
       'gob-page-header': React.DetailedHTMLProps<GobPageHeaderProps, HTMLElement>;
       'gob-breadcrumb': React.DetailedHTMLProps<GobBreadcrumbProps, HTMLElement>;
       'gob-container': React.DetailedHTMLProps<GobContainerProps, HTMLElement>;
+      'gob-grid': React.DetailedHTMLProps<GobGridProps, HTMLElement>;
     }
   }
 }
