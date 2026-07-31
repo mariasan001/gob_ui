@@ -12,6 +12,8 @@ export type PreviewKind =
   | 'container'
   | 'grid'
   | 'divider'
+  | 'spacer'
+  | 'kpi-card'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -185,21 +187,23 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'spacer',
+    href: '/espaciador',
     name: 'Espaciador',
     description: 'Espaciado utilitario entre bloques.',
-    preview: 'soon',
+    preview: 'spacer',
     category: 'layout',
     tags: ['espacio', 'layout', 'spacer'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'kpi-card',
+    href: '/tarjeta-metrica',
     name: 'Tarjeta de metrica',
     description: 'Indicador clave con tendencia y periodo.',
-    preview: 'soon',
+    preview: 'kpi-card',
     category: 'datos',
     tags: ['dashboard', 'kpi', 'metric', 'stat'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'chart-card',

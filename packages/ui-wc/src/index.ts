@@ -12,6 +12,8 @@ import './components/breadcrumb/gob-breadcrumb';
 import './components/container/gob-container';
 import './components/grid/gob-grid';
 import './components/divider/gob-divider';
+import './components/spacer/gob-spacer';
+import './components/kpi-card/gob-kpi-card';
 
 export type {
   Appearance,
@@ -28,20 +30,25 @@ export type {
   GobContainerProps,
   GobDividerProps,
   GobGridProps,
+  GobKpiCardProps,
   GobPageHeaderProps,
   GobPaginationProps,
   GobRadioProps,
   GobSidebarProps,
+  GobSpacerProps,
   GobSwitchProps,
   GobTopbarProps,
   GridGap,
   GridVariant,
+  KpiTone,
+  KpiVariant,
   PageHeaderSurface,
   PageHeaderVariant,
   PaginationLang,
   PaginationVariant,
   SidebarVariant,
   Size,
+  SpacerVariant,
   Tone,
   TopbarVariant,
 } from './types';
