@@ -1,0 +1,339 @@
+import type { TableTone, TableVariant } from '@mariasan001/ui-wc';
+
+export type CodeLang = 'html' | 'react' | 'vue' | 'angular';
+
+export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
+  { id: 'html', label: 'HTML' },
+  { id: 'react', label: 'React' },
+  { id: 'vue', label: 'Vue' },
+  { id: 'angular', label: 'Angular' },
+];
+
+export const COLOR_OPTIONS: { id: TableTone; label: string; swatch: string }[] =
+  [
+    { id: 'primary', label: 'Primary', swatch: '#9F2141' },
+    { id: 'accent', label: 'Accent', swatch: '#BC945A' },
+    { id: 'dark', label: 'Dark', swatch: '#181511' },
+    { id: 'neutral', label: 'Neutral', swatch: '#FFFFFF' },
+    { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
+  ];
+
+export type TableExample = {
+  id: TableVariant;
+  title: string;
+  description: string;
+  variant: TableVariant;
+  cardTitle: string;
+  subtitle?: string;
+  showActions?: boolean;
+  footer?: string;
+};
+
+/** 10 tipos pensados para listados masivos institucionales. */
+export const TABLE_EXAMPLES: TableExample[] = [
+  {
+    id: 'basic',
+    title: 'Basica',
+    description: 'Listado limpio de expedientes. Punto de partida para consultas.',
+    variant: 'basic',
+    cardTitle: 'Expedientes recientes',
+    footer: 'Mostrando 1–5 de 12,480',
+  },
+  {
+    id: 'striped',
+    title: 'Zebra',
+    description: 'Filas alternadas para escanear miles de registros sin perder la linea.',
+    variant: 'striped',
+    cardTitle: 'Padron de beneficiarios',
+    subtitle: 'Corte 2026-Q2',
+    footer: '5,902 registros en esta pagina',
+  },
+  {
+    id: 'bordered',
+    title: 'Con borde',
+    description: 'Celdas definidas para reportes oficiales e impresion.',
+    variant: 'bordered',
+    cardTitle: 'Reporte de ingresos',
+  },
+  {
+    id: 'dense',
+    title: 'Densa',
+    description: 'Maxima densidad tipografica para tableros con mucho volumen.',
+    variant: 'dense',
+    cardTitle: 'Bitacora de movimientos',
+    footer: 'Densidad compacta · 40 filas/vista',
+  },
+  {
+    id: 'selectable',
+    title: 'Seleccionable',
+    description: 'Checkbox por fila para acciones masivas (exportar, asignar, archivar).',
+    variant: 'selectable',
+    cardTitle: 'Lote de tramites',
+    subtitle: 'Selecciona para operar en bloque',
+    showActions: true,
+    footer: '2 seleccionados de 5',
+  },
+  {
+    id: 'sortable',
+    title: 'Ordenable',
+    description: 'Encabezados con orden para priorizar por folio, fecha o monto.',
+    variant: 'sortable',
+    cardTitle: 'Cola de revision',
+    subtitle: 'Orden por fecha de ingreso',
+    footer: 'Clic en columna para ordenar',
+  },
+  {
+    id: 'sticky',
+    title: 'Encabezado fijo',
+    description: 'Header sticky al hacer scroll en listados largos.',
+    variant: 'sticky',
+    cardTitle: 'Inventario documental',
+    subtitle: 'Scroll vertical interno',
+    footer: 'Header fijo mientras navegas',
+  },
+  {
+    id: 'status',
+    title: 'Con estatus',
+    description: 'Badges de estado para flujos: en revision, aprobado, rechazado.',
+    variant: 'status',
+    cardTitle: 'Seguimiento de solicitudes',
+    showActions: true,
+    footer: 'Actualizado hace 3 min',
+  },
+  {
+    id: 'actions',
+    title: 'Con acciones',
+    description: 'Botones por fila: ver, descargar, reasignar.',
+    variant: 'actions',
+    cardTitle: 'Gestion de casos',
+    subtitle: 'Operacion diaria',
+    footer: 'Acciones por expediente',
+  },
+  {
+    id: 'empty',
+    title: 'Vacia',
+    description: 'Estado sin resultados para busquedas o filtros sin coincidencias.',
+    variant: 'empty',
+    cardTitle: 'Resultados de busqueda',
+    subtitle: 'Folio / CURP / RFC',
+  },
+];
+
+export const TABLE_ATTRS = [
+  {
+    name: 'variant',
+    type: 'string',
+    defaultValue: 'basic',
+    body: 'basic | striped | bordered | dense | selectable | sortable | sticky | status | actions | empty',
+  },
+  {
+    name: 'tone',
+    type: 'string',
+    defaultValue: 'primary',
+    body: 'primary | accent | dark | neutral | soft',
+  },
+  {
+    name: 'slot=title',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Titulo del listado.',
+  },
+  {
+    name: 'slot=subtitle',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Contexto o corte de datos.',
+  },
+  {
+    name: 'slot=actions',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Acciones de lote (exportar, filtrar).',
+  },
+  {
+    name: 'slot=default',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Tabla HTML nativa (<table>) con thead/tbody.',
+  },
+  {
+    name: 'slot=empty',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Contenido del estado vacio (variant=empty).',
+  },
+  {
+    name: 'slot=footer',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Resumen / paginacion / conteo de registros.',
+  },
+] as const;
+
+export type DemoRow = {
+  folio: string;
+  ciudadano: string;
+  dependencia: string;
+  fecha: string;
+  monto: string;
+  estatus: 'ok' | 'warn' | 'err' | 'info';
+  estatusLabel: string;
+};
+
+export const DEMO_ROWS: DemoRow[] = [
+  {
+    folio: 'EXP-2026-01482',
+    ciudadano: 'Garcia Lopez, Ana',
+    dependencia: 'Salud',
+    fecha: '12/03/2026',
+    monto: '$4,250.00',
+    estatus: 'ok',
+    estatusLabel: 'Aprobado',
+  },
+  {
+    folio: 'EXP-2026-01483',
+    ciudadano: 'Hernandez Ruiz, Luis',
+    dependencia: 'Educacion',
+    fecha: '12/03/2026',
+    monto: '$1,180.00',
+    estatus: 'warn',
+    estatusLabel: 'En revision',
+  },
+  {
+    folio: 'EXP-2026-01484',
+    ciudadano: 'Martinez Soto, Paula',
+    dependencia: 'Movilidad',
+    fecha: '11/03/2026',
+    monto: '$890.00',
+    estatus: 'info',
+    estatusLabel: 'Recibido',
+  },
+  {
+    folio: 'EXP-2026-01485',
+    ciudadano: 'Jimenez Cruz, Diego',
+    dependencia: 'Hacienda',
+    fecha: '11/03/2026',
+    monto: '$12,400.00',
+    estatus: 'err',
+    estatusLabel: 'Rechazado',
+  },
+  {
+    folio: 'EXP-2026-01486',
+    ciudadano: 'Vargas Neri, Sofia',
+    dependencia: 'Seguridad',
+    fecha: '10/03/2026',
+    monto: '$2,010.00',
+    estatus: 'ok',
+    estatusLabel: 'Aprobado',
+  },
+];
+
+/** Filas extra para sticky / densas (sensacion de volumen). */
+export const DEMO_ROWS_LONG: DemoRow[] = [
+  ...DEMO_ROWS,
+  {
+    folio: 'EXP-2026-01487',
+    ciudadano: 'Ortega Diaz, Mario',
+    dependencia: 'Salud',
+    fecha: '10/03/2026',
+    monto: '$760.00',
+    estatus: 'warn',
+    estatusLabel: 'En revision',
+  },
+  {
+    folio: 'EXP-2026-01488',
+    ciudadano: 'Pena Salas, Laura',
+    dependencia: 'Educacion',
+    fecha: '09/03/2026',
+    monto: '$3,320.00',
+    estatus: 'info',
+    estatusLabel: 'Recibido',
+  },
+  {
+    folio: 'EXP-2026-01489',
+    ciudadano: 'Ramos Ibarra, Jose',
+    dependencia: 'Movilidad',
+    fecha: '09/03/2026',
+    monto: '$510.00',
+    estatus: 'ok',
+    estatusLabel: 'Aprobado',
+  },
+];
+
+function iconImports(lang: CodeLang): string {
+  if (lang === 'html') return '';
+  return `import '@mariasan001/ui-wc';
+
+`;
+}
+
+export function buildSnippet(
+  lang: CodeLang,
+  example: TableExample,
+  tone: TableTone,
+): string {
+  const attrs = ` variant="${example.variant}" tone="${tone}"`;
+  const title = example.cardTitle;
+
+  if (lang === 'html') {
+    return `<!-- npm i @mariasan001/ui-wc -->
+<script type="module">import '@mariasan001/ui-wc';</script>
+
+<gob-table${attrs}>
+  <span slot="title">${title}</span>
+  <table>
+    <thead>
+      <tr>
+        <th>Folio</th>
+        <th>Ciudadano</th>
+        <th>Dependencia</th>
+        <th class="num">Monto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>EXP-2026-01482</td>
+        <td>Garcia Lopez, Ana</td>
+        <td>Salud</td>
+        <td class="num">$4,250.00</td>
+      </tr>
+      <!-- ... miles de filas / paginacion servidor ... -->
+    </tbody>
+  </table>
+  <span slot="footer">Mostrando 1–50 de 12,480</span>
+</gob-table>`;
+  }
+
+  if (lang === 'react') {
+    return `${iconImports(lang)}export function TablaExpedientes() {
+  return (
+    <gob-table${attrs}>
+      <span slot="title">${title}</span>
+      <table>{/* thead + tbody densos */}</table>
+      <span slot="footer">Mostrando 1–50 de 12,480</span>
+    </gob-table>
+  );
+}`;
+  }
+
+  if (lang === 'vue') {
+    return `<script setup>
+${iconImports(lang).trimEnd()}
+</script>
+
+<template>
+  <gob-table${attrs}>
+    <span slot="title">${title}</span>
+    <table><!-- thead + tbody --></table>
+    <span slot="footer">Mostrando 1–50 de 12,480</span>
+  </gob-table>
+</template>`;
+  }
+
+  return `// app.component.html
+${iconImports(lang)}<gob-table${attrs}>
+  <span slot="title">${title}</span>
+  <table><!-- thead + tbody --></table>
+  <span slot="footer">Mostrando 1–50 de 12,480</span>
+</gob-table>`;
+}

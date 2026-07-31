@@ -15,6 +15,7 @@ import './components/divider/gob-divider';
 import './components/spacer/gob-spacer';
 import './components/kpi-card/gob-kpi-card';
 import './components/chart-card/gob-chart-card';
+import './components/table/gob-table';
 
 export type {
   Appearance,
@@ -41,6 +42,7 @@ export type {
   GobSidebarProps,
   GobSpacerProps,
   GobSwitchProps,
+  GobTableProps,
   GobTopbarProps,
   GridGap,
   GridVariant,
@@ -53,6 +55,8 @@ export type {
   SidebarVariant,
   Size,
   SpacerVariant,
+  TableTone,
+  TableVariant,
   Tone,
   TopbarVariant,
 } from './types';

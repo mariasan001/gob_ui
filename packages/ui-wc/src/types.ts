@@ -265,6 +265,25 @@ export type GobChartCardProps = React.HTMLAttributes<HTMLElement> & {
   tone?: ChartCardTone | Tone;
 };
 
+export type TableVariant =
+  | 'basic'
+  | 'striped'
+  | 'bordered'
+  | 'dense'
+  | 'selectable'
+  | 'sortable'
+  | 'sticky'
+  | 'status'
+  | 'actions'
+  | 'empty';
+
+export type TableTone = Tone;
+
+export type GobTableProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TableVariant;
+  tone?: TableTone | Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -285,6 +304,7 @@ declare global {
       'gob-spacer': React.DetailedHTMLProps<GobSpacerProps, HTMLElement>;
       'gob-kpi-card': React.DetailedHTMLProps<GobKpiCardProps, HTMLElement>;
       'gob-chart-card': React.DetailedHTMLProps<GobChartCardProps, HTMLElement>;
+      'gob-table': React.DetailedHTMLProps<GobTableProps, HTMLElement>;
     }
   }
 }

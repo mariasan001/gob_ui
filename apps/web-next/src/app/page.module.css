@@ -773,6 +773,37 @@
   background: rgba(159, 33, 65, 0.48);
 }
 
+.fakeTable {
+  display: grid;
+  gap: 6px;
+  width: 148px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeTableHead {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.14);
+}
+
+.fakeTableRow {
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(159, 33, 65, 0.12);
+}
+
+.fakeTableRow:nth-child(3) {
+  width: 88%;
+  background: rgba(159, 33, 65, 0.22);
+}
+
+.fakeTableRow:nth-child(4) {
+  width: 72%;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
