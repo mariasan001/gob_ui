@@ -833,6 +833,114 @@
   background: rgba(159, 33, 65, 0.12);
 }
 
+.fakeFilterBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 150px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeFilterSearch {
+  flex: 1;
+  height: 18px;
+  border-radius: 8px;
+  background: #f3f3f3;
+  border: 1px solid #ebebeb;
+}
+
+.fakeFilterBar i {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(159, 33, 65, 0.12);
+}
+
+.fakeFilterBar b {
+  width: 22px;
+  height: 18px;
+  border-radius: 6px;
+  background: #9f2141;
+}
+
+.fakeToolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 150px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeToolbarTitle {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: #181511;
+}
+
+.fakeToolbar i {
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  background: rgba(159, 33, 65, 0.14);
+}
+
+.fakeToolbar b {
+  width: 20px;
+  height: 16px;
+  border-radius: 5px;
+  background: #9f2141;
+}
+
+.fakeList {
+  display: grid;
+  gap: 8px;
+  width: 148px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeListRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fakeListRow i {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(159, 33, 65, 0.18);
+  flex: 0 0 auto;
+}
+
+.fakeListRow b {
+  flex: 1;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.12);
+}
+
+.fakeListRow:nth-child(2) b {
+  width: 80%;
+  flex: 0 1 80%;
+}
+
+.fakeListRow:nth-child(3) b {
+  width: 65%;
+  flex: 0 1 65%;
+}
+
 @keyframes rise {
   from {
     opacity: 0;

@@ -17,6 +17,9 @@ export type PreviewKind =
   | 'chart-card'
   | 'tabla'
   | 'data-grid'
+  | 'filter-bar'
+  | 'toolbar'
+  | 'list'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -240,30 +243,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'filter-bar',
+    href: '/barra-filtros',
     name: 'Barra de filtros',
     description: 'Filtros para tableros y consultas.',
-    preview: 'soon',
+    preview: 'filter-bar',
     category: 'datos',
     tags: ['filtros', 'dashboard', 'toolbar'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'toolbar',
+    href: '/barra-herramientas',
     name: 'Barra de herramientas',
     description: 'Acciones de vista: exportar, refrescar, densificar.',
-    preview: 'soon',
+    preview: 'toolbar',
     category: 'datos',
     tags: ['acciones', 'dashboard', 'barra', 'toolbar'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'list',
+    href: '/lista',
     name: 'Lista',
     description: 'Listas simples con avatar, meta y accion.',
-    preview: 'soon',
+    preview: 'list',
     category: 'datos',
     tags: ['lista', 'feed', 'dashboard'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'timeline',

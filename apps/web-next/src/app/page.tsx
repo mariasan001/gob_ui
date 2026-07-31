@@ -225,6 +225,44 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'filter-bar') {
+    return (
+      <div className={s.fakeFilterBar} aria-hidden="true">
+        <span className={s.fakeFilterSearch} />
+        <i />
+        <i />
+        <b />
+      </div>
+    );
+  }
+  if (kind === 'toolbar') {
+    return (
+      <div className={s.fakeToolbar} aria-hidden="true">
+        <span className={s.fakeToolbarTitle} />
+        <i />
+        <i />
+        <b />
+      </div>
+    );
+  }
+  if (kind === 'list') {
+    return (
+      <div className={s.fakeList} aria-hidden="true">
+        <span className={s.fakeListRow}>
+          <i />
+          <b />
+        </span>
+        <span className={s.fakeListRow}>
+          <i />
+          <b />
+        </span>
+        <span className={s.fakeListRow}>
+          <i />
+          <b />
+        </span>
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
