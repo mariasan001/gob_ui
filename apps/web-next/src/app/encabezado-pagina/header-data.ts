@@ -156,9 +156,16 @@ export function buildSnippet(
 ): string {
   const attrs = ` variant="${example.variant}" surface="${surface}"`;
   const body = bodyFor(example);
+  const showActions =
+    example.variant === 'actions' || example.variant === 'complete';
+  const showStatus =
+    example.variant === 'status' || example.variant === 'complete';
+  const showCrumb =
+    example.variant === 'breadcrumb' || example.variant === 'complete';
 
   if (lang === 'html') {
     return `<!-- npm i @mariasan001/ui-wc -->
+<!-- gob-page-header es el cascaron; acciones/migas las cables tu. -->
 <script type="module">import '@mariasan001/ui-wc';</script>
 
 <gob-page-header${attrs}>
@@ -167,14 +174,30 @@ ${body}
   }
 
   if (lang === 'react') {
-    const indented = body
-      .split('\n')
-      .map((line) => (line ? `      ${line}` : ''))
-      .join('\n');
-    return `${iconImports(lang)}export function EncabezadoPagina() {
+    return `// Interaccion en React; gob-page-header solo aporta layout/slots.
+import { useState } from 'react';
+import '@mariasan001/ui-wc';
+
+export function EncabezadoPagina() {
+  const [status, setStatus] = useState('En revision');
+  const [flash, setFlash] = useState('');
+
   return (
     <gob-page-header${attrs}>
-${indented}
+${showCrumb ? `      <nav slot="breadcrumb" aria-label="Migas">
+        <button type="button" onClick={() => setFlash('Inicio')}>Inicio</button>
+        <span>/</span>
+        <button type="button" onClick={() => setFlash('Expedientes')}>Expedientes</button>
+        <span>/</span>
+        <strong>Detalle</strong>
+      </nav>` : ''}
+      <h1 slot="title">Expedientes</h1>
+${showStatus ? `      <button type="button" slot="meta" onClick={() => setStatus((s) => (s === 'En revision' ? 'Aprobado' : 'En revision'))}>
+        {status}
+      </button>` : ''}
+      <p slot="description">{flash || 'Consulta y da seguimiento a los expedientes abiertos.'}</p>
+${showActions ? `      <button type="button" onClick={() => setFlash('Listado exportado')}>Exportar</button>
+      <button type="button" onClick={() => setFlash('Alta de expediente')}>Nuevo</button>` : ''}
     </gob-page-header>
   );
 }`;
@@ -182,7 +205,9 @@ ${indented}
 
   if (lang === 'vue') {
     return `<script setup>
-${iconImports(lang).trimEnd()}
+import { ref } from 'vue';
+import '@mariasan001/ui-wc';
+const flash = ref('');
 </script>
 
 <template>
@@ -193,7 +218,9 @@ ${body}
   }
 
   return `// app.component.html
-${iconImports(lang)}<gob-page-header${attrs}>
+import '@mariasan001/ui-wc';
+
+<gob-page-header${attrs}>
 ${body}
 </gob-page-header>`;
 }

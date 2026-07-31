@@ -79,6 +79,8 @@
 
 .stageInner {
   width: min(920px, 100%);
+  display: grid;
+  gap: 10px;
 }
 
 .topbar {
@@ -124,19 +126,38 @@
   color: var(--gob-topbar-muted, #8a8278);
 }
 
-.crumbs a {
-  color: var(--gob-topbar-text, #6b665f);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.crumbs a:hover {
-  color: var(--gob-topbar-accent-text, #9f2141);
-}
-
 .crumbs strong {
   color: var(--gob-topbar-title, #181511);
   font-weight: 700;
+}
+
+.flash {
+  margin: 0;
+  min-height: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9f2141;
+}
+
+.crumbItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.crumbBtn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  font-weight: 500;
+  color: var(--gob-topbar-text, #6b665f);
+  cursor: pointer;
+}
+
+.crumbBtn:hover {
+  color: var(--gob-topbar-accent-text, #9f2141);
 }
 
 .search {
@@ -153,6 +174,21 @@
   font-size: 13px;
 }
 
+.search input {
+  border: 0;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gob-topbar-title, #181511);
+}
+
+.search input::placeholder {
+  color: var(--gob-topbar-muted, #9a9590);
+}
+
 .btnGhost,
 .btnPrimary {
   appearance: none;
@@ -162,7 +198,7 @@
   font: inherit;
   font-size: 12px;
   font-weight: 700;
-  cursor: default;
+  cursor: pointer;
 }
 
 .btnGhost {
@@ -192,7 +228,7 @@
   border-radius: 11px;
   background: var(--gob-topbar-surface, #fff);
   color: var(--gob-topbar-text, #6b665f);
-  cursor: default;
+  cursor: pointer;
 }
 
 .dot {
@@ -207,6 +243,8 @@
 }
 
 .avatar {
+  appearance: none;
+  border: 0;
   display: grid;
   place-items: center;
   width: 36px;
@@ -216,6 +254,8 @@
   color: var(--gob-topbar-accent-text, #9f2141);
   font-size: 12px;
   font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 :global(gob-topbar[tone='dark']) .avatar {
