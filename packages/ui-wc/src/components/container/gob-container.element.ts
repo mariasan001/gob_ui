@@ -2,6 +2,7 @@ import { defineCustomElement } from '../../lib/define-custom-element';
 import { SafeHTMLElement } from '../../lib/safe-html-element';
 import {
   CONTAINER_OBSERVED_ATTRIBUTES,
+  resolveContainerFlag,
   resolveContainerVariant,
 } from './container-constants';
 import { containerStyles } from './container-styles';
@@ -38,7 +39,12 @@ class GobContainerElement extends SafeHTMLElement {
 
   private syncState() {
     const variant = resolveContainerVariant(this.getAttribute('variant'));
+    const border = resolveContainerFlag(this.getAttribute('border'));
+    const shadow = resolveContainerFlag(this.getAttribute('shadow'));
+
     this.rootEl.dataset.variant = variant;
+    this.rootEl.dataset.border = border ? 'true' : 'false';
+    this.rootEl.dataset.shadow = shadow ? 'true' : 'false';
   }
 }
 

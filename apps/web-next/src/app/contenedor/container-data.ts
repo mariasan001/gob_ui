@@ -9,6 +9,16 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'angular', label: 'Angular' },
 ];
 
+export const BORDER_OPTIONS: { id: boolean; label: string }[] = [
+  { id: false, label: 'Sin borde' },
+  { id: true, label: 'Con borde' },
+];
+
+export const SHADOW_OPTIONS: { id: boolean; label: string }[] = [
+  { id: false, label: 'Sin sombra' },
+  { id: true, label: 'Con sombra' },
+];
+
 export type ContainerExample = {
   id: ContainerVariant;
   title: string;
@@ -76,6 +86,18 @@ export const CONTAINER_ATTRS = [
     defaultValue: 'basic',
     body: 'basic | narrow | wide | full | flush | padded | prose',
   },
+  {
+    name: 'border',
+    type: 'boolean',
+    defaultValue: 'false',
+    body: 'Muestra borde. Usa border="true" para activarlo.',
+  },
+  {
+    name: 'shadow',
+    type: 'boolean',
+    defaultValue: 'false',
+    body: 'Muestra sombra. Usa shadow="true" para activarla.',
+  },
 ] as const;
 
 function bodyFor(example: ContainerExample): string {
@@ -102,8 +124,13 @@ function iconImports(lang: CodeLang): string {
 `;
 }
 
-export function buildSnippet(lang: CodeLang, example: ContainerExample): string {
-  const attrs = ` variant="${example.variant}"`;
+export function buildSnippet(
+  lang: CodeLang,
+  example: ContainerExample,
+  border: boolean,
+  shadow: boolean,
+): string {
+  const attrs = ` variant="${example.variant}" border="${border}" shadow="${shadow}"`;
   const body = bodyFor(example);
 
   if (lang === 'html') {

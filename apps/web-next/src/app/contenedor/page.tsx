@@ -2,7 +2,7 @@
 
 /**
  * Docs de Contenedor — cascaron canonico = Botones (/botones).
- * Sin seleccion de color: define anchos y margenes de pagina.
+ * Caracteristicas: borde y sombra (sin seleccion de color).
  */
 
 import Link from 'next/link';
@@ -11,9 +11,11 @@ import { useEffect, useState } from 'react';
 import '@mariasan001/ui-wc';
 
 import {
+  BORDER_OPTIONS,
   CODE_LANGUAGES,
   CONTAINER_ATTRS,
   CONTAINER_EXAMPLES,
+  SHADOW_OPTIONS,
   buildSnippet,
   type CodeLang,
   type ContainerExample,
@@ -24,6 +26,8 @@ import s from './page.module.css';
 
 export default function ContenedorPage() {
   const [lang, setLang] = useState<CodeLang>('html');
+  const [border, setBorder] = useState(false);
+  const [shadow, setShadow] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ export default function ContenedorPage() {
 
   async function copyExample(example: ContainerExample) {
     try {
-      await navigator.clipboard.writeText(buildSnippet(lang, example));
+      await navigator.clipboard.writeText(buildSnippet(lang, example, border, shadow));
       setCopiedKey(example.id);
       window.setTimeout(() => setCopiedKey(null), 1200);
     } catch {
@@ -78,6 +82,46 @@ export default function ContenedorPage() {
                 })}
               </div>
             </div>
+
+            <div className={s.filterBlock}>
+              <p className={s.filterLabel}>Borde</p>
+              <div className={s.langRow}>
+                {BORDER_OPTIONS.map((option) => {
+                  const active = option.id === border;
+                  return (
+                    <button
+                      key={String(option.id)}
+                      type="button"
+                      className={`${s.langChip} ${active ? s.langChipActive : ''}`}
+                      aria-pressed={active}
+                      onClick={() => setBorder(option.id)}
+                    >
+                      {option.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className={s.filterBlock}>
+              <p className={s.filterLabel}>Sombra</p>
+              <div className={s.langRow}>
+                {SHADOW_OPTIONS.map((option) => {
+                  const active = option.id === shadow;
+                  return (
+                    <button
+                      key={String(option.id)}
+                      type="button"
+                      className={`${s.langChip} ${active ? s.langChipActive : ''}`}
+                      aria-pressed={active}
+                      onClick={() => setShadow(option.id)}
+                    >
+                      {option.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className={local.exampleList} aria-label="Ejemplos">
@@ -94,7 +138,7 @@ export default function ContenedorPage() {
                   <h3 className={local.exampleTitle}>{example.title}</h3>
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
-                <ContainerDemo example={example} />
+                <ContainerDemo example={example} border={border} shadow={shadow} />
               </article>
             ))}
           </div>
