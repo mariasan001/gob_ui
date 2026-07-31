@@ -51,8 +51,9 @@ export default function MigasDePanPage() {
           </Link>
           <h1 className={s.title}>Migas de pan</h1>
           <p className={s.hint}>
-            Ruta jerarquica entre secciones. Pasa el mouse y pulsa{' '}
-            <strong>Copiar</strong> para el codigo en <strong>{lang.toUpperCase()}</strong>.
+            Funcional: navega, vuelve y expande la ruta. Pulsa{' '}
+            <strong>Copiar</strong> para markup + patron interactivo en{' '}
+            <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
