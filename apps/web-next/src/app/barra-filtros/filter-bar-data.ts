@@ -61,6 +61,36 @@ export const FILTER_BAR_EXAMPLES: FilterBarExample[] = [
     description: 'Busqueda, chips, selects y acciones juntas.',
     variant: 'complete',
   },
+  {
+    id: 'dates',
+    title: 'Rango de fechas',
+    description: 'Desde / hasta para bitacoras y reportes.',
+    variant: 'dates',
+  },
+  {
+    id: 'tags',
+    title: 'Etiquetas activas',
+    description: 'Filtros aplicados removibles uno a uno.',
+    variant: 'tags',
+  },
+  {
+    id: 'count',
+    title: 'Con conteo',
+    description: 'Muestra cuantos resultados coinciden.',
+    variant: 'count',
+  },
+  {
+    id: 'region',
+    title: 'Por region',
+    description: 'Entidad y municipio para consultas territoriales.',
+    variant: 'region',
+  },
+  {
+    id: 'advanced',
+    title: 'Avanzada',
+    description: 'Busqueda, fechas, region y aplicar en un solo bloque.',
+    variant: 'advanced',
+  },
 ];
 
 export const FILTER_BAR_ATTRS = [
@@ -68,7 +98,7 @@ export const FILTER_BAR_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | search | chips | dense | with-actions | complete',
+    body: 'basic | search | chips | dense | with-actions | complete | dates | tags | count | region | advanced',
   },
   {
     name: 'tone',
@@ -96,7 +126,13 @@ function bodyFor(lang: CodeLang, example: FilterBarExample): string {
   const v = example.variant;
   const parts: string[] = [];
 
-  if (v === 'search' || v === 'complete' || v === 'dense') {
+  if (
+    v === 'search' ||
+    v === 'complete' ||
+    v === 'dense' ||
+    v === 'advanced' ||
+    v === 'count'
+  ) {
     parts.push(`${i}<label slot="search" class="gob-fb-search">
 ${i}  ${icon(lang, 'MagnifyingGlass')}
 ${i}  <input placeholder="Folio o CURP" aria-label="Buscar" />
@@ -109,7 +145,37 @@ ${i}<button type="button" class="gob-fb-chip">Semana</button>
 ${i}<button type="button" class="gob-fb-chip">Mes</button>`);
   }
 
-  if (v === 'basic' || v === 'with-actions' || v === 'complete' || v === 'dense') {
+  if (v === 'tags') {
+    parts.push(`${i}<button type="button" class="gob-fb-tag">Salud ${icon(lang, 'X', 12)}</button>
+${i}<button type="button" class="gob-fb-tag">En revision ${icon(lang, 'X', 12)}</button>
+${i}<button type="button" class="gob-fb-tag">Hoy ${icon(lang, 'X', 12)}</button>`);
+  }
+
+  if (v === 'dates' || v === 'advanced') {
+    parts.push(`${i}<label class="gob-fb-field">
+${i}  <span>Desde</span>
+${i}  <select class="gob-fb-select" aria-label="Desde"><option>01/07/2026</option><option>01/06/2026</option></select>
+${i}</label>
+${i}<label class="gob-fb-field">
+${i}  <span>Hasta</span>
+${i}  <select class="gob-fb-select" aria-label="Hasta"><option>31/07/2026</option><option>Hoy</option></select>
+${i}</label>`);
+  }
+
+  if (v === 'region' || v === 'advanced') {
+    parts.push(`${i}<select class="gob-fb-select" aria-label="Entidad">
+${i}  <option>Todas las entidades</option>
+${i}  <option>CDMX</option>
+${i}  <option>Jalisco</option>
+${i}</select>
+${i}<select class="gob-fb-select" aria-label="Municipio">
+${i}  <option>Todos los municipios</option>
+${i}  <option>Guadalajara</option>
+${i}  <option>Zapopan</option>
+${i}</select>`);
+  }
+
+  if (v === 'basic' || v === 'with-actions' || v === 'complete' || v === 'dense' || v === 'count') {
     parts.push(`${i}<select class="gob-fb-select" aria-label="Dependencia">
 ${i}  <option>Todas las dependencias</option>
 ${i}  <option>Salud</option>
@@ -122,9 +188,17 @@ ${i}  <option>Cerrado</option>
 ${i}</select>`);
   }
 
-  if (v === 'with-actions' || v === 'complete') {
+  if (v === 'count') {
+    parts.push(`${i}<span slot="actions" class="gob-fb-count">128 resultados</span>`);
+  }
+
+  if (v === 'with-actions' || v === 'complete' || v === 'advanced' || v === 'dates' || v === 'region') {
     parts.push(`${i}<button slot="actions" type="button" class="gob-fb-btn">Limpiar</button>
 ${i}<button slot="actions" type="button" class="gob-fb-btn gob-fb-btn-primary">Aplicar</button>`);
+  }
+
+  if (v === 'tags') {
+    parts.push(`${i}<button slot="actions" type="button" class="gob-fb-btn">Limpiar todo</button>`);
   }
 
   return parts.join('\n');
@@ -138,13 +212,13 @@ function iconImports(lang: CodeLang): string {
 `;
   }
   if (lang === 'react') {
-    return `import { MagnifyingGlass } from '@phosphor-icons/react';
+    return `import { MagnifyingGlass, X } from '@phosphor-icons/react';
 import '@mariasan001/ui-wc';
 
 `;
   }
   if (lang === 'vue') {
-    return `import { PhMagnifyingGlass } from '@phosphor-icons/vue';
+    return `import { PhMagnifyingGlass, PhX } from '@phosphor-icons/vue';
 import '@mariasan001/ui-wc';
 
 `;
@@ -157,26 +231,24 @@ import '@mariasan001/ui-wc';
 function interactiveHint(lang: CodeLang): string {
   if (lang === 'react') {
     return `
-// Interaccion (React): chips, selects y Aplicar/Limpiar con useState.
+// Interaccion (React): chips, tags, selects y Aplicar/Limpiar con useState.
 const [period, setPeriod] = useState('hoy');
-const [dep, setDep] = useState('');
-const [status, setStatus] = useState('');
-const [query, setQuery] = useState('');
-// onClick de chip -> setPeriod; Aplicar -> filtrar listado; Limpiar -> reset.
+const [tags, setTags] = useState(['Salud', 'En revision']);
+// Quitar tag -> filter; Aplicar -> filtrar listado; Limpiar -> reset.
 `;
   }
   if (lang === 'vue') {
     return `
-<!-- Interaccion (Vue): period, dep, status y query como refs; Aplicar emite filtros. -->
+<!-- Interaccion (Vue): period/tags/dep como refs; Aplicar emite filtros. -->
 `;
   }
   if (lang === 'angular') {
     return `
-// Interaccion (Angular): period/dep/status/query en el componente; Aplicar filtra.
+// Interaccion (Angular): period/tags/dep en el componente; Aplicar filtra.
 `;
   }
   return `
-<!-- Interaccion: escucha change en selects/input y click en chips/botones. -->
+<!-- Interaccion: escucha change en selects/input y click en chips/tags/botones. -->
 `;
 }
 
@@ -186,12 +258,7 @@ export function buildSnippet(
   tone: Tone,
 ): string {
   const body = bodyFor(lang, example);
-  const tag =
-    lang === 'react'
-      ? `<gob-filter-bar variant="${example.variant}" tone="${tone}">
-${body}
-</gob-filter-bar>`
-      : `<gob-filter-bar variant="${example.variant}" tone="${tone}">
+  const tag = `<gob-filter-bar variant="${example.variant}" tone="${tone}">
 ${body}
 </gob-filter-bar>`;
 

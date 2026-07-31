@@ -5,6 +5,11 @@ export const FILTER_BAR_VARIANTS = [
   'dense',
   'with-actions',
   'complete',
+  'dates',
+  'tags',
+  'count',
+  'region',
+  'advanced',
 ] as const;
 
 export type FilterBarVariant = (typeof FILTER_BAR_VARIANTS)[number];
@@ -29,7 +34,12 @@ export function resolveFilterBarVariant(
     value === 'chips' ||
     value === 'dense' ||
     value === 'with-actions' ||
-    value === 'complete'
+    value === 'complete' ||
+    value === 'dates' ||
+    value === 'tags' ||
+    value === 'count' ||
+    value === 'region' ||
+    value === 'advanced'
   ) {
     return value;
   }
@@ -208,5 +218,53 @@ gob-filter-bar[variant='dense'] .gob-fb-btn {
   padding: 0 12px;
   border-radius: 8px;
   font-size: 11px;
+}
+
+gob-filter-bar .gob-fb-tag {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 8px 0 12px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--gob-fb-accent-soft);
+  color: var(--gob-fb-accent-text);
+  font-family: var(--gob-fb-font);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+gob-filter-bar .gob-fb-tag i,
+gob-filter-bar .gob-fb-tag svg {
+  opacity: 0.7;
+}
+gob-filter-bar .gob-fb-count {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--gob-fb-accent-soft);
+  color: var(--gob-fb-accent-text);
+  font-family: var(--gob-fb-font);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+gob-filter-bar .gob-fb-field {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+gob-filter-bar .gob-fb-field span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gob-fb-muted);
 }
 `;

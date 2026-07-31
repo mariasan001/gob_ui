@@ -67,6 +67,36 @@ export const LIST_EXAMPLES: ListExample[] = [
     description: 'Avatar, meta, accion y seleccion juntos.',
     variant: 'complete',
   },
+  {
+    id: 'icon',
+    title: 'Con icono',
+    description: 'Icono de documento o carpeta a la izquierda.',
+    variant: 'icon',
+  },
+  {
+    id: 'nav',
+    title: 'Navegable',
+    description: 'Fila clickable con chevron hacia el detalle.',
+    variant: 'nav',
+  },
+  {
+    id: 'grouped',
+    title: 'Agrupada',
+    description: 'Secciones con encabezado (Hoy, Ayer…).',
+    variant: 'grouped',
+  },
+  {
+    id: 'status',
+    title: 'Solo estatus',
+    description: 'Pill de estatus sin fecha meta.',
+    variant: 'status',
+  },
+  {
+    id: 'empty',
+    title: 'Vacia',
+    description: 'Estado sin resultados para consultas.',
+    variant: 'empty',
+  },
 ];
 
 export const LIST_ATTRS = [
@@ -74,7 +104,7 @@ export const LIST_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | avatar | meta | actions | dense | selectable | complete',
+    body: 'basic | avatar | meta | actions | dense | selectable | complete | icon | nav | grouped | status | empty',
   },
   {
     name: 'tone',
@@ -92,6 +122,7 @@ export const SAMPLE_ROWS = [
     detail: 'EXP-2026-01482 · Salud',
     meta: 'Hoy',
     status: 'En revision',
+    group: 'Hoy',
   },
   {
     id: '2',
@@ -100,6 +131,7 @@ export const SAMPLE_ROWS = [
     detail: 'EXP-2026-01491 · Educacion',
     meta: 'Ayer',
     status: 'Cerrado',
+    group: 'Ayer',
   },
   {
     id: '3',
@@ -108,6 +140,7 @@ export const SAMPLE_ROWS = [
     detail: 'EXP-2026-01502 · Finanzas',
     meta: '2d',
     status: 'Pendiente',
+    group: 'Ayer',
   },
 ] as const;
 
@@ -124,13 +157,20 @@ function icon(lang: CodeLang, name: string, size = 16): string {
   return `<i class="ph-thin ph-${kebab}" aria-hidden="true"></i>`;
 }
 
-function rowMarkup(lang: CodeLang, example: ListExample, row: (typeof SAMPLE_ROWS)[number]): string {
+function rowMarkup(
+  lang: CodeLang,
+  example: ListExample,
+  row: (typeof SAMPLE_ROWS)[number],
+): string {
   const i = '  ';
   const v = example.variant;
   const showAvatar = v === 'avatar' || v === 'complete' || v === 'dense';
+  const showIcon = v === 'icon';
   const showMeta = v === 'meta' || v === 'complete';
+  const showStatus = v === 'status';
   const showAction = v === 'actions' || v === 'complete';
   const showCheck = v === 'selectable' || v === 'complete';
+  const showNav = v === 'nav';
 
   const parts: string[] = [];
   if (showCheck) {
@@ -140,6 +180,11 @@ function rowMarkup(lang: CodeLang, example: ListExample, row: (typeof SAMPLE_ROW
   }
   if (showAvatar) {
     parts.push(`${i}  <span class="gob-list-avatar">${row.initials}</span>`);
+  }
+  if (showIcon) {
+    parts.push(
+      `${i}  <span class="gob-list-icon">${icon(lang, 'FileText', 18)}</span>`,
+    );
   }
   parts.push(`${i}  <div class="gob-list-body">
 ${i}    <p class="gob-list-primary">${row.name}</p>
@@ -151,18 +196,46 @@ ${i}    <span>${row.meta}</span>
 ${i}    <span class="gob-list-pill">${row.status}</span>
 ${i}  </div>`);
   }
+  if (showStatus) {
+    parts.push(`${i}  <span class="gob-list-pill">${row.status}</span>`);
+  }
   if (showAction) {
     parts.push(
       `${i}  <button type="button" class="gob-list-action" aria-label="Mas acciones">${icon(lang, 'DotsThree', 18)}</button>`,
     );
   }
+  if (showNav) {
+    parts.push(
+      `${i}  <span class="gob-list-chevron">${icon(lang, 'CaretRight', 16)}</span>`,
+    );
+  }
 
-  return `${i}<div class="gob-list-item" role="listitem">
+  const interactive = showNav ? ' data-interactive="true"' : '';
+  return `${i}<div class="gob-list-item" role="listitem"${interactive}>
 ${parts.join('\n')}
 ${i}</div>`;
 }
 
 function bodyFor(lang: CodeLang, example: ListExample): string {
+  const i = '  ';
+  if (example.variant === 'empty') {
+    return `${i}<div class="gob-list-empty">
+${i}  <strong>Sin resultados</strong>
+${i}  <p>Ajusta los filtros o crea un nuevo expediente.</p>
+${i}</div>`;
+  }
+
+  if (example.variant === 'grouped') {
+    const groups = ['Hoy', 'Ayer'] as const;
+    return groups
+      .map((group) => {
+        const rows = SAMPLE_ROWS.filter((r) => r.group === group);
+        return `${i}<div class="gob-list-group">${group}</div>
+${rows.map((row) => rowMarkup(lang, example, row)).join('\n')}`;
+      })
+      .join('\n');
+  }
+
   return SAMPLE_ROWS.map((row) => rowMarkup(lang, example, row)).join('\n');
 }
 
@@ -174,13 +247,13 @@ function iconImports(lang: CodeLang): string {
 `;
   }
   if (lang === 'react') {
-    return `import { DotsThree } from '@phosphor-icons/react';
+    return `import { CaretRight, DotsThree, FileText } from '@phosphor-icons/react';
 import '@mariasan001/ui-wc';
 
 `;
   }
   if (lang === 'vue') {
-    return `import { PhDotsThree } from '@phosphor-icons/vue';
+    return `import { PhCaretRight, PhDotsThree, PhFileText } from '@phosphor-icons/vue';
 import '@mariasan001/ui-wc';
 
 `;
@@ -193,23 +266,23 @@ import '@mariasan001/ui-wc';
 function interactiveHint(lang: CodeLang): string {
   if (lang === 'react') {
     return `
-// Interaccion (React): selected Set + onClick de accion con useState.
+// Interaccion (React): selected Set + onClick de fila/accion con useState.
 const [selected, setSelected] = useState<Set<string>>(new Set());
-// Toggle checkbox -> actualizar selected; DotsThree -> menu de fila.
+// Toggle checkbox -> selected; nav row -> navigate; DotsThree -> menu.
 `;
   }
   if (lang === 'vue') {
     return `
-<!-- Interaccion (Vue): selected como Set/ref; handler de accion por fila. -->
+<!-- Interaccion (Vue): selected como Set/ref; handler de accion/nav por fila. -->
 `;
   }
   if (lang === 'angular') {
     return `
-// Interaccion (Angular): selected en el componente; handler de accion por fila.
+// Interaccion (Angular): selected en el componente; handler de accion/nav.
 `;
   }
   return `
-<!-- Interaccion: change en checkboxes y click en acciones por fila. -->
+<!-- Interaccion: change en checkboxes y click en filas/acciones. -->
 `;
 }
 

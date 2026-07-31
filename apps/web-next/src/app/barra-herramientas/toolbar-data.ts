@@ -55,6 +55,36 @@ export const TOOLBAR_EXAMPLES: ToolbarExample[] = [
     description: 'Titulo, exportar, refrescar y densidad juntos.',
     variant: 'complete',
   },
+  {
+    id: 'search',
+    title: 'Con busqueda',
+    description: 'Campo rapido para filtrar la vista actual.',
+    variant: 'search',
+  },
+  {
+    id: 'views',
+    title: 'Cambiar vista',
+    description: 'Tabla o tarjetas segun la consulta.',
+    variant: 'views',
+  },
+  {
+    id: 'print',
+    title: 'Imprimir',
+    description: 'Accion de impresion o PDF del listado.',
+    variant: 'print',
+  },
+  {
+    id: 'bulk',
+    title: 'Acciones masivas',
+    description: 'Barra cuando hay filas seleccionadas.',
+    variant: 'bulk',
+  },
+  {
+    id: 'icons',
+    title: 'Solo iconos',
+    description: 'Acciones compactas con iconos.',
+    variant: 'icons',
+  },
 ];
 
 export const TOOLBAR_ATTRS = [
@@ -62,7 +92,7 @@ export const TOOLBAR_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | actions | density | refresh | complete',
+    body: 'basic | actions | density | refresh | complete | search | views | print | bulk | icons',
   },
   {
     name: 'tone',
@@ -96,29 +126,71 @@ function bodyFor(lang: CodeLang, example: ToolbarExample): string {
   const v = example.variant;
   const parts: string[] = [];
 
-  parts.push(`${i}<div slot="start" class="gob-tbx-title">
+  if (v === 'bulk') {
+    parts.push(`${i}<div slot="start" class="gob-tbx-title">
+${i}  <strong>3 seleccionados</strong>
+${i}  <small>Acciones masivas</small>
+${i}</div>`);
+  } else {
+    parts.push(`${i}<div slot="start" class="gob-tbx-title">
 ${i}  <strong>Expedientes</strong>
 ${i}  <small>Consulta operativa</small>
 ${i}</div>`);
+  }
 
-  if (v === 'actions' || v === 'complete' || v === 'basic') {
-    if (v !== 'basic') {
+  if (v === 'search') {
+    parts.push(`${i}<label class="gob-tbx-search">
+${i}  ${icon(lang, 'MagnifyingGlass')}
+${i}  <input placeholder="Buscar en vista" aria-label="Buscar" />
+${i}</label>`);
+  }
+
+  if (v === 'actions' || v === 'complete' || v === 'basic' || v === 'print') {
+    if (v === 'actions' || v === 'complete') {
       parts.push(
         `${i}<button type="button" class="gob-tbx-btn gob-tbx-btn-ghost">${icon(lang, 'Export')} Exportar</button>`,
       );
     }
-    parts.push(
-      `${i}<button type="button" class="gob-tbx-btn gob-tbx-btn-primary">Nuevo</button>`,
-    );
+    if (v === 'print') {
+      parts.push(
+        `${i}<button type="button" class="gob-tbx-btn gob-tbx-btn-ghost">${icon(lang, 'Printer')} Imprimir</button>`,
+      );
+    }
+    if (v !== 'print') {
+      parts.push(
+        `${i}<button type="button" class="gob-tbx-btn gob-tbx-btn-primary">Nuevo</button>`,
+      );
+    }
   }
 
-  if (v === 'refresh' || v === 'complete') {
+  if (v === 'bulk') {
+    parts.push(`${i}<button type="button" class="gob-tbx-btn gob-tbx-btn-ghost">Asignar</button>
+${i}<button type="button" class="gob-tbx-btn gob-tbx-btn-ghost">Archivar</button>
+${i}<button type="button" class="gob-tbx-btn gob-tbx-btn-primary">Cerrar</button>`);
+  }
+
+  if (v === 'refresh' || v === 'complete' || v === 'icons') {
     parts.push(
       `${i}<button type="button" class="gob-tbx-icon-btn" aria-label="Refrescar">${icon(lang, 'ArrowsClockwise', 18)}</button>`,
     );
   }
 
-  if (v === 'density' || v === 'complete') {
+  if (v === 'icons') {
+    parts.push(
+      `${i}<button type="button" class="gob-tbx-icon-btn" aria-label="Exportar">${icon(lang, 'Export', 18)}</button>`,
+      `${i}<button type="button" class="gob-tbx-icon-btn" aria-label="Imprimir">${icon(lang, 'Printer', 18)}</button>`,
+      `${i}<button type="button" class="gob-tbx-icon-btn" aria-label="Mas">${icon(lang, 'DotsThree', 18)}</button>`,
+    );
+  }
+
+  if (v === 'views' || v === 'complete') {
+    parts.push(`${i}<div slot="end" class="gob-tbx-seg" role="group" aria-label="Vista">
+${i}  <button type="button" aria-pressed="true">${icon(lang, 'Table', 14)} Tabla</button>
+${i}  <button type="button" aria-pressed="false">${icon(lang, 'SquaresFour', 14)} Tarjetas</button>
+${i}</div>`);
+  }
+
+  if (v === 'density') {
     parts.push(`${i}<div slot="end" class="gob-tbx-seg" role="group" aria-label="Densidad">
 ${i}  <button type="button" aria-pressed="true">Comodo</button>
 ${i}  <button type="button" aria-pressed="false">Compacto</button>
@@ -136,13 +208,13 @@ function iconImports(lang: CodeLang): string {
 `;
   }
   if (lang === 'react') {
-    return `import { ArrowsClockwise, Export } from '@phosphor-icons/react';
+    return `import { ArrowsClockwise, DotsThree, Export, MagnifyingGlass, Printer, SquaresFour, Table } from '@phosphor-icons/react';
 import '@mariasan001/ui-wc';
 
 `;
   }
   if (lang === 'vue') {
-    return `import { PhArrowsClockwise, PhExport } from '@phosphor-icons/vue';
+    return `import { PhArrowsClockwise, PhDotsThree, PhExport, PhMagnifyingGlass, PhPrinter, PhSquaresFour, PhTable } from '@phosphor-icons/vue';
 import '@mariasan001/ui-wc';
 
 `;
@@ -155,23 +227,23 @@ import '@mariasan001/ui-wc';
 function interactiveHint(lang: CodeLang): string {
   if (lang === 'react') {
     return `
-// Interaccion (React): density + onClick de Exportar/Refrescar/Nuevo con useState.
+// Interaccion (React): view/density + handlers Exportar/Refrescar/Bulk con useState.
+const [view, setView] = useState<'tabla' | 'tarjetas'>('tabla');
 const [density, setDensity] = useState<'comodo' | 'compacto'>('comodo');
-// Refrescar -> setFlash('Datos actualizados'); Exportar -> descarga CSV.
 `;
   }
   if (lang === 'vue') {
     return `
-<!-- Interaccion (Vue): density ref; handlers para exportar y refrescar. -->
+<!-- Interaccion (Vue): view/density refs; handlers export/refresh/bulk. -->
 `;
   }
   if (lang === 'angular') {
     return `
-// Interaccion (Angular): density en el componente; handlers export/refresh.
+// Interaccion (Angular): view/density en el componente; handlers export/refresh.
 `;
   }
   return `
-<!-- Interaccion: click en exportar/refrescar y conmutador de densidad. -->
+<!-- Interaccion: click en exportar/refrescar/vistas y acciones masivas. -->
 `;
 }
 
