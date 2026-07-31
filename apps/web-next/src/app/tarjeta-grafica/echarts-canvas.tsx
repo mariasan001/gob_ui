@@ -11,7 +11,9 @@ import {
   RadarChart,
 } from 'echarts/charts';
 import {
+  GraphicComponent,
   GridComponent,
+  MarkPointComponent,
   RadarComponent,
   TooltipComponent,
   VisualMapComponent,
@@ -35,6 +37,8 @@ echarts.use([
   TooltipComponent,
   RadarComponent,
   VisualMapComponent,
+  GraphicComponent,
+  MarkPointComponent,
   CanvasRenderer,
 ]);
 
@@ -54,7 +58,10 @@ export function EchartsCanvas({
     const host = hostRef.current;
     if (!host) return;
 
-    const chart = echarts.init(host, undefined, { renderer: 'canvas' });
+    const chart = echarts.init(host, undefined, {
+      renderer: 'canvas',
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+    });
     chartRef.current = chart;
 
     const onResize = () => chart.resize();
@@ -79,6 +86,7 @@ export function EchartsCanvas({
     if (!chart) return;
     const palette = paletteForTone(tone);
     chart.setOption(buildChartOption(kind, palette), true);
+    chart.resize();
   }, [kind, tone]);
 
   return (
