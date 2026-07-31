@@ -83,15 +83,16 @@ export default function BarraFiltrosPage() {
             </div>
             <div className={s.filterBlock}>
               <p className={s.filterLabel}>Color</p>
-              <div className={s.swatchRow}>
+              <div className={s.colorRow}>
                 {COLOR_OPTIONS.map((option) => {
                   const active = option.id === tone;
                   return (
                     <button
                       key={option.id}
                       type="button"
-                      className={`${s.swatch} ${active ? s.swatchActive : ''}`}
+                      className={`${s.colorSwatch} ${active ? s.colorSwatchActive : ''}`}
                       style={{ background: option.swatch }}
+                      data-tone={option.id}
                       aria-label={option.label}
                       aria-pressed={active}
                       title={option.label}

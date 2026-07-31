@@ -80,7 +80,7 @@
 .filters {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 20px 32px;
   align-items: flex-end;
   padding: 4px 2px 22px;
