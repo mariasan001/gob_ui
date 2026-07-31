@@ -163,7 +163,7 @@ export type ContainerVariant =
 
 export type GobContainerProps = React.HTMLAttributes<HTMLElement> & {
   variant?: ContainerVariant;
-  border?: boolean | 'true' | 'false';
+  radius?: boolean | 'true' | 'false';
   shadow?: boolean | 'true' | 'false';
 };
 
