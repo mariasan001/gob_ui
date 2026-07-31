@@ -16,6 +16,7 @@ import './components/spacer/gob-spacer';
 import './components/kpi-card/gob-kpi-card';
 import './components/chart-card/gob-chart-card';
 import './components/table/gob-table';
+import './components/data-grid/gob-data-grid';
 
 export type {
   Appearance,
@@ -24,6 +25,8 @@ export type {
   ChartCardVariant,
   ChipTone,
   ContainerVariant,
+  DataGridTone,
+  DataGridVariant,
   DividerTone,
   DividerVariant,
   GobAppShellProps,
@@ -33,6 +36,7 @@ export type {
   GobCheckboxProps,
   GobChipProps,
   GobContainerProps,
+  GobDataGridProps,
   GobDividerProps,
   GobGridProps,
   GobKpiCardProps,

@@ -804,6 +804,35 @@
   width: 72%;
 }
 
+.fakeDataGrid {
+  display: grid;
+  gap: 6px;
+  width: 148px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeDataGridFilters {
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(159, 33, 65, 0.16);
+  margin-bottom: 2px;
+}
+
+.fakeDataGrid .fakeTableHead {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.14);
+}
+
+.fakeDataGrid .fakeTableRow {
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(159, 33, 65, 0.12);
+}
+
 @keyframes rise {
   from {
     opacity: 0;

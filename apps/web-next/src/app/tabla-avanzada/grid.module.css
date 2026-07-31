@@ -1,0 +1,251 @@
+.exampleList {
+  display: grid;
+  gap: 18px;
+  padding-top: 6px;
+}
+
+.exampleCard {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid #ebebeb;
+  background: #fff;
+  min-width: 0;
+}
+
+.exampleMeta {
+  display: grid;
+  gap: 4px;
+  padding-right: 72px;
+}
+
+.exampleTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #181511;
+}
+
+.exampleDesc {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8a8278;
+  max-width: 64ch;
+}
+
+.copyBtn {
+  appearance: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #333;
+  border-radius: 999px;
+  min-height: 22px;
+  padding: 0 10px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 140ms ease;
+  white-space: nowrap;
+}
+
+.exampleCard:hover .copyBtn,
+.exampleCard:focus-within .copyBtn {
+  opacity: 1;
+}
+
+.stage {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 120px;
+  padding: 22px;
+  border-radius: 16px;
+  border: 1px solid #ececec;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 80% 0%, rgba(159, 33, 65, 0.05), transparent 50%),
+    linear-gradient(165deg, #f7f7f7 0%, #efefef 100%);
+}
+
+.stageInner {
+  width: min(780px, 100%);
+}
+
+.toolbar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.toolBtn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 9px;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+  background: #fff;
+  color: #4a453e;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filtersRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(24, 21, 17, 0.12);
+  background: #fff;
+  color: #8a8278;
+  min-width: min(220px, 100%);
+}
+
+.search input {
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #181511;
+  width: 100%;
+}
+
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(24, 21, 17, 0.05);
+  color: #4a453e;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.bulkRow {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.folio {
+  font-family: var(--gob-font-mono, ui-monospace, Menlo, monospace);
+  font-size: 12px;
+  font-weight: 600;
+  color: #9f2141;
+}
+
+.footerSlot {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pager {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pager strong {
+  color: #181511;
+  font-weight: 800;
+}
+
+.libNote {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(159, 33, 65, 0.14);
+  background: rgba(159, 33, 65, 0.05);
+  color: #4a453e;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.libNote strong {
+  color: #9f2141;
+  font-weight: 700;
+}
+
+.libNote code {
+  font-family: var(--gob-font-mono, ui-monospace, Menlo, monospace);
+  font-size: 12px;
+  color: #9f2141;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid #ebebeb;
+  background: #fff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #efefef;
+}
+
+.table th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a8278;
+  background: #fafafa;
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+.table code {
+  font-family: var(--gob-font-mono, ui-monospace, Menlo, monospace);
+  font-size: 12px;
+  color: #9f2141;
+}
+
+.table td:last-child {
+  color: #6b665f;
+  line-height: 1.45;
+}

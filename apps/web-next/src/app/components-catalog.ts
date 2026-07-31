@@ -16,6 +16,7 @@ export type PreviewKind =
   | 'kpi-card'
   | 'chart-card'
   | 'tabla'
+  | 'data-grid'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -229,12 +230,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'data-grid',
+    href: '/tabla-avanzada',
     name: 'Tabla avanzada',
     description: 'Tabla con filtros, columnas fijas y acciones por fila.',
-    preview: 'soon',
+    preview: 'data-grid',
     category: 'datos',
-    tags: ['tabla', 'dashboard', 'excel', 'datagrid'],
-    status: 'soon',
+    tags: ['tabla', 'dashboard', 'excel', 'datagrid', 'filtros'],
+    status: 'ready',
   },
   {
     id: 'filter-bar',
