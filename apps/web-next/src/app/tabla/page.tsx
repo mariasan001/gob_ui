@@ -52,8 +52,8 @@ export default function TablaPage() {
           </Link>
           <h1 className={s.title}>Tabla</h1>
           <p className={s.hint}>
-            Listados densos para datos masivos institucionales. Pasa el mouse y
-            pulsa <strong>Copiar</strong> para el codigo en{' '}
+            Listados densos para datos masivos institucionales. Pulsa{' '}
+            <strong>Copiar</strong> para markup + filas + patron interactivo en{' '}
             <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
