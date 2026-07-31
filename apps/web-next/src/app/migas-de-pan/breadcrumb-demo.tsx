@@ -2,9 +2,9 @@
 
 import { House } from '@phosphor-icons/react';
 
-import type { BreadcrumbVariant, Tone } from '@mariasan001/ui-wc';
+import type { BreadcrumbVariant } from '@mariasan001/ui-wc';
 
-import type { BreadcrumbExample } from './breadcrumb-data';
+import type { BreadcrumbExample, BreadcrumbTone } from './breadcrumb-data';
 import { BREADCRUMB_THEME_VARS } from './breadcrumb-themes';
 import local from './breadcrumb.module.css';
 
@@ -115,7 +115,7 @@ export function BreadcrumbDemo({
   tone,
 }: {
   example: BreadcrumbExample;
-  tone: Tone;
+  tone: BreadcrumbTone;
 }) {
   // Vars en un wrapper (no en el CE) para evitar mismatch de hidratacion
   // cuando el custom element muta o reordena el atributo style.

@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react';
 
-import type { Tone } from '@mariasan001/ui-wc';
+import type { BreadcrumbTone } from './breadcrumb-data';
 
-export const BREADCRUMB_THEME_VARS: Record<Tone, CSSProperties> = {
+export const BREADCRUMB_THEME_VARS: Record<BreadcrumbTone, CSSProperties> = {
   primary: {
     ['--gob-bc-text' as string]: '#6b665f',
     ['--gob-bc-muted' as string]: '#8a8278',
@@ -24,38 +24,5 @@ export const BREADCRUMB_THEME_VARS: Record<Tone, CSSProperties> = {
     ['--gob-bc-pad-y' as string]: '0px',
     ['--gob-bc-pad-x' as string]: '0px',
     ['--gob-bc-radius' as string]: '0px',
-  },
-  dark: {
-    ['--gob-bc-text' as string]: 'rgba(255, 255, 255, 0.72)',
-    ['--gob-bc-muted' as string]: 'rgba(255, 255, 255, 0.45)',
-    ['--gob-bc-current' as string]: '#ffffff',
-    ['--gob-bc-accent' as string]: '#ffffff',
-    ['--gob-bc-bg' as string]: '#181511',
-    ['--gob-bc-border' as string]: 'rgba(255, 255, 255, 0.1)',
-    ['--gob-bc-pad-y' as string]: '10px',
-    ['--gob-bc-pad-x' as string]: '14px',
-    ['--gob-bc-radius' as string]: '12px',
-  },
-  neutral: {
-    ['--gob-bc-text' as string]: '#5f5952',
-    ['--gob-bc-muted' as string]: '#8a8278',
-    ['--gob-bc-current' as string]: '#181511',
-    ['--gob-bc-accent' as string]: '#9f2141',
-    ['--gob-bc-bg' as string]: '#ebebeb',
-    ['--gob-bc-border' as string]: 'rgba(24, 21, 17, 0.1)',
-    ['--gob-bc-pad-y' as string]: '10px',
-    ['--gob-bc-pad-x' as string]: '14px',
-    ['--gob-bc-radius' as string]: '12px',
-  },
-  soft: {
-    ['--gob-bc-text' as string]: '#5a4f42',
-    ['--gob-bc-muted' as string]: '#7a6f60',
-    ['--gob-bc-current' as string]: '#2f2922',
-    ['--gob-bc-accent' as string]: '#9f2141',
-    ['--gob-bc-bg' as string]: '#e7d7bd',
-    ['--gob-bc-border' as string]: 'rgba(24, 21, 17, 0.1)',
-    ['--gob-bc-pad-y' as string]: '10px',
-    ['--gob-bc-pad-x' as string]: '14px',
-    ['--gob-bc-radius' as string]: '12px',
   },
 };
