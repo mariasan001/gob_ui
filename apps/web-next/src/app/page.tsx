@@ -154,6 +154,16 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'grid') {
+    return (
+      <div className={s.fakeGrid} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
