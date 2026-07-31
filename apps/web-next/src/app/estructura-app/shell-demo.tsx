@@ -11,7 +11,7 @@ import {
   SignOut,
   UserCircle,
 } from '@phosphor-icons/react';
-import type { CSSProperties } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 
 import type { Tone } from '@mariasan001/ui-wc';
 
@@ -28,12 +28,16 @@ const NAV = [
 
 function ShellSidebar({
   collapsed,
-  active = 'Inicio',
+  active,
   tone,
+  onNavigate,
+  onSignOut,
 }: {
   collapsed?: boolean;
-  active?: string;
+  active: string;
   tone: Tone;
+  onNavigate: (label: string) => void;
+  onSignOut: () => void;
 }) {
   const theme = SIDEBAR_THEMES[tone];
 
@@ -70,14 +74,17 @@ function ShellSidebar({
         {NAV.map(({ label, Icon }) => {
           const isActive = label === active;
           return (
-            <span
+            <button
               key={label}
+              type="button"
               className={`${local.navItem} ${isActive ? local.navActive : ''}`}
               title={label}
+              aria-current={isActive ? 'page' : undefined}
+              onClick={() => onNavigate(label)}
             >
               <Icon weight="thin" size={18} aria-hidden="true" />
               {!collapsed ? <em>{label}</em> : null}
-            </span>
+            </button>
           );
         })}
       </nav>
@@ -88,12 +95,20 @@ function ShellSidebar({
             <UserCircle weight="thin" size={18} aria-hidden="true" />
             MG Sandoval
           </span>
-          <span className={local.sidebarFootMeta}>Operaciones</span>
+          <button type="button" className={local.signOut} onClick={onSignOut}>
+            <SignOut weight="thin" size={16} aria-hidden="true" />
+            Salir
+          </button>
         </div>
       ) : (
-        <div className={local.sidebarFootCollapsed} title="Salir">
+        <button
+          type="button"
+          className={local.sidebarFootCollapsed}
+          title="Salir"
+          onClick={onSignOut}
+        >
           <SignOut weight="thin" size={18} aria-hidden="true" />
-        </div>
+        </button>
       )}
     </aside>
   );
@@ -103,10 +118,22 @@ function ShellTopbar({
   title,
   meta,
   tone,
+  query,
+  onQuery,
+  onSearch,
+  onBell,
+  onProfile,
+  unread,
 }: {
   title: string;
   meta?: string;
   tone: Tone;
+  query: string;
+  onQuery: (v: string) => void;
+  onSearch: () => void;
+  onBell: () => void;
+  onProfile: () => void;
+  unread: number;
 }) {
   const theme = SIDEBAR_THEMES[tone];
 
@@ -129,23 +156,46 @@ function ShellTopbar({
       <div className={local.topbarRight}>
         <label className={local.search}>
           <MagnifyingGlass weight="thin" size={16} aria-hidden="true" />
-          <span>Buscar expediente</span>
+          <input
+            value={query}
+            placeholder="Buscar expediente"
+            aria-label="Buscar expediente"
+            onChange={(e) => onQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') onSearch();
+            }}
+          />
         </label>
-        <button type="button" className={local.iconBtn} aria-label="Notificaciones">
+        <button
+          type="button"
+          className={local.iconBtn}
+          aria-label="Notificaciones"
+          onClick={onBell}
+        >
           <Bell weight="thin" size={18} />
-          <i className={local.dot} />
+          {unread > 0 ? <i className={local.dot} /> : null}
         </button>
-        <span className={local.userChip}>MG</span>
+        <button type="button" className={local.userChip} onClick={onProfile}>
+          MG
+        </button>
       </div>
     </header>
   );
 }
 
-function Status({ tone, children }: { tone: 'open' | 'review' | 'done'; children: string }) {
-  return <em className={`${local.status} ${local[`status_${tone}`]}`}>{children}</em>;
+function Status({
+  tone,
+  children,
+}: {
+  tone: 'open' | 'review' | 'done';
+  children: string;
+}) {
+  return (
+    <em className={`${local.status} ${local[`status_${tone}`]}`}>{children}</em>
+  );
 }
 
-function BasicContent() {
+function BasicContent({ onNew }: { onNew: () => void }) {
   return (
     <section className={local.panel}>
       <div className={local.panelHead}>
@@ -153,7 +203,7 @@ function BasicContent() {
           <h3>Bienvenida operativa</h3>
           <p>Resumen del dia y accesos frecuentes.</p>
         </div>
-        <button type="button" className={local.primaryBtn}>
+        <button type="button" className={local.primaryBtn} onClick={onNew}>
           Nuevo expediente
         </button>
       </div>
@@ -219,7 +269,9 @@ function CollapsedContent() {
             <span>{name}</span>
             <span>{dep}</span>
             <Status
-              tone={state === 'Cerrado' ? 'done' : state === 'Abierto' ? 'open' : 'review'}
+              tone={
+                state === 'Cerrado' ? 'done' : state === 'Abierto' ? 'open' : 'review'
+              }
             >
               {state}
             </Status>
@@ -230,7 +282,13 @@ function CollapsedContent() {
   );
 }
 
-function FocusContent() {
+function FocusContent({
+  onCancel,
+  onContinue,
+}: {
+  onCancel: () => void;
+  onContinue: () => void;
+}) {
   return (
     <section className={local.panel}>
       <div className={local.wizard}>
@@ -254,10 +312,14 @@ function FocusContent() {
           </label>
         </div>
         <div className={local.formActions}>
-          <button type="button" className={local.ghostBtn}>
+          <button type="button" className={local.ghostBtn} onClick={onCancel}>
             Cancelar
           </button>
-          <button type="button" className={local.primaryBtn}>
+          <button
+            type="button"
+            className={local.primaryBtn}
+            onClick={onContinue}
+          >
             Continuar
           </button>
         </div>
@@ -357,62 +419,121 @@ export function ShellDemo({
   tone?: Tone;
 }) {
   const theme = SIDEBAR_THEMES[tone];
+  const defaultActive = example.id === 'colapsado' ? 'Expedientes' : 'Inicio';
+  const [active, setActive] = useState(defaultActive);
+  const [query, setQuery] = useState('');
+  const [unread, setUnread] = useState(3);
+  const [flash, setFlash] = useState('');
+
+  useEffect(() => {
+    setActive(defaultActive);
+  }, [defaultActive, example.id]);
+
+  useEffect(() => {
+    if (!flash) return;
+    const t = window.setTimeout(() => setFlash(''), 2200);
+    return () => window.clearTimeout(t);
+  }, [flash]);
+
   const shellProps = {
     collapsed: example.collapsed || undefined,
     dense: example.dense || undefined,
     'hide-topbar': example.hideTopbar || undefined,
-    'sticky-topbar': example.stickyTopbar === false ? ('false' as const) : undefined,
+    'sticky-topbar':
+      example.stickyTopbar === false ? ('false' as const) : undefined,
   };
 
   const shellClass = `${local.shell} ${example.dense ? local.shellDense : ''} ${
     example.hideTopbar ? local.shellFocus : ''
   } ${example.variant === 'board' ? local.shellBoard : ''}`;
 
-  let body = <BasicContent />;
+  const titleFromNav =
+    active === 'Inicio'
+      ? example.id === 'tablero'
+        ? 'Tablero institucional'
+        : example.id === 'compacto'
+          ? 'Cola operativa'
+          : 'Inicio'
+      : active;
+
+  let body = <BasicContent onNew={() => setFlash('Nuevo expediente')} />;
   if (example.id === 'colapsado') body = <CollapsedContent />;
-  if (example.id === 'sin-topbar') body = <FocusContent />;
+  if (example.id === 'sin-topbar') {
+    body = (
+      <FocusContent
+        onCancel={() => setFlash('Formulario cancelado')}
+        onContinue={() => setFlash('Paso 2 · Documentos')}
+      />
+    );
+  }
   if (example.id === 'compacto') body = <DenseContent />;
   if (example.id === 'tablero') body = <BoardContent />;
 
   return (
-    <gob-app-shell
-      {...shellProps}
-      className={shellClass}
-      style={
-        {
-          '--gob-shell-sidebar-bg': theme.bg,
-          '--gob-shell-sidebar-border': theme.border,
-          '--gob-shell-sidebar-text': theme.text,
-        } as CSSProperties
-      }
-    >
-      <ShellSidebar
-        collapsed={example.collapsed}
-        active={example.id === 'colapsado' ? 'Expedientes' : 'Inicio'}
-        tone={tone}
-      />
-      {!example.hideTopbar ? (
-        <ShellTopbar
+    <div className={local.demoWrap}>
+      <gob-app-shell
+        {...shellProps}
+        className={shellClass}
+        style={
+          {
+            '--gob-shell-sidebar-bg': theme.bg,
+            '--gob-shell-sidebar-border': theme.border,
+            '--gob-shell-sidebar-text': theme.text,
+          } as CSSProperties
+        }
+      >
+        <ShellSidebar
+          collapsed={example.collapsed}
+          active={active}
           tone={tone}
-          title={
-            example.id === 'tablero'
-              ? 'Tablero institucional'
-              : example.id === 'colapsado'
-                ? 'Expedientes'
-                : example.id === 'compacto'
-                  ? 'Cola operativa'
-                  : 'Inicio'
-          }
-          meta={
-            example.id === 'tablero'
-              ? 'Hoy · 30 jul 2026'
-              : example.id === 'compacto'
-                ? 'Turno matutino'
-                : 'Direccion de Operaciones'
-          }
+          onNavigate={(label) => {
+            setActive(label);
+            setFlash(`Seccion: ${label}`);
+          }}
+          onSignOut={() => setFlash('Sesion cerrada')}
         />
+        {!example.hideTopbar ? (
+          <ShellTopbar
+            tone={tone}
+            title={flash || titleFromNav}
+            meta={
+              flash
+                ? 'Accion reciente'
+                : example.id === 'tablero'
+                  ? 'Hoy · 30 jul 2026'
+                  : example.id === 'compacto'
+                    ? 'Turno matutino'
+                    : 'Direccion de Operaciones'
+            }
+            query={query}
+            onQuery={setQuery}
+            onSearch={() =>
+              setFlash(
+                query.trim()
+                  ? `Busqueda: “${query.trim()}”`
+                  : 'Escribe un folio o CURP',
+              )
+            }
+            onBell={() => {
+              if (unread > 0) {
+                setUnread(0);
+                setFlash('3 avisos leidos');
+              } else {
+                setUnread(3);
+                setFlash('3 avisos nuevos');
+              }
+            }}
+            onProfile={() => setFlash('Perfil · MG Sandoval')}
+            unread={unread}
+          />
+        ) : null}
+        {body}
+      </gob-app-shell>
+      {example.hideTopbar && flash ? (
+        <p className={local.flash} role="status">
+          {flash}
+        </p>
       ) : null}
-      {body}
-    </gob-app-shell>
+    </div>
   );
 }

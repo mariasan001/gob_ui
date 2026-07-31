@@ -150,6 +150,10 @@
 }
 
 .navItem {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -157,7 +161,14 @@
   padding: 0 10px;
   border-radius: 10px;
   color: var(--shell-side-text, #6b665f);
+  font: inherit;
   font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.navItem:hover {
+  background: rgba(24, 21, 17, 0.04);
 }
 
 .navItem em {
@@ -206,6 +217,8 @@
 }
 
 .sidebarFootCollapsed {
+  appearance: none;
+  border: 0;
   display: grid;
   place-items: center;
   width: 40px;
@@ -213,6 +226,7 @@
   border-radius: 10px;
   color: var(--shell-side-text, #6b665f);
   background: var(--shell-side-foot-bg, #f7f7f7);
+  cursor: pointer;
 }
 
 /* Topbar */
@@ -265,6 +279,21 @@
   font-size: 12px;
 }
 
+.search input {
+  border: 0;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: #181511;
+}
+
+.search input::placeholder {
+  color: #9a9590;
+}
+
 @media (min-width: 720px) {
   .search {
     display: inline-flex;
@@ -282,7 +311,7 @@
   border-radius: 10px;
   background: #fff;
   color: #6b665f;
-  cursor: default;
+  cursor: pointer;
 }
 
 .dot {
@@ -296,6 +325,8 @@
 }
 
 .userChip {
+  appearance: none;
+  border: 0;
   display: grid;
   place-items: center;
   width: 34px;
@@ -305,6 +336,42 @@
   color: var(--shell-accent-text, #9f2141);
   font-weight: 700;
   font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.signOut {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 0;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--shell-side-muted, #9a9590);
+  cursor: pointer;
+}
+
+.signOut:hover {
+  color: var(--shell-side-active-text, #9f2141);
+}
+
+.demoWrap {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+
+.flash {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9f2141;
+  text-align: center;
 }
 
 /* Content panels */
@@ -362,7 +429,7 @@
   font: inherit;
   font-size: 12px;
   font-weight: 700;
-  cursor: default;
+  cursor: pointer;
 }
 
 .primaryBtn {

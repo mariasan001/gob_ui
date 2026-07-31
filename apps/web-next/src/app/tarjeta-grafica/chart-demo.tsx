@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { DownloadSimple, DotsThree } from '@phosphor-icons/react';
 
 import type { ChartCardTone } from '@mariasan001/ui-wc';
@@ -15,6 +16,14 @@ export function ChartDemo({
   example: ChartExample;
   tone: ChartCardTone;
 }) {
+  const [flash, setFlash] = useState('');
+
+  useEffect(() => {
+    if (!flash) return;
+    const t = window.setTimeout(() => setFlash(''), 2200);
+    return () => window.clearTimeout(t);
+  }, [flash]);
+
   return (
     <div className={local.stageInner}>
       <gob-chart-card
@@ -28,10 +37,20 @@ export function ChartDemo({
         ) : null}
         {example.showActions ? (
           <span slot="actions" className={local.actions}>
-            <button type="button" className={local.actionBtn} aria-label="Exportar">
+            <button
+              type="button"
+              className={local.actionBtn}
+              aria-label="Exportar"
+              onClick={() => setFlash('Grafica exportada (PNG)')}
+            >
               <DownloadSimple weight="bold" size={14} />
             </button>
-            <button type="button" className={local.actionBtn} aria-label="Mas">
+            <button
+              type="button"
+              className={local.actionBtn}
+              aria-label="Mas"
+              onClick={() => setFlash('Menu: compartir · imprimir · datos')}
+            >
               <DotsThree weight="bold" size={16} />
             </button>
           </span>
@@ -56,9 +75,7 @@ export function ChartDemo({
               </span>
             ))
           : null}
-        {example.footer ? (
-          <span slot="footer">{example.footer}</span>
-        ) : null}
+        <span slot="footer">{flash || example.footer || ' '}</span>
       </gob-chart-card>
     </div>
   );
