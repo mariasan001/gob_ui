@@ -9,9 +9,9 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'angular', label: 'Angular' },
 ];
 
-export const BORDER_OPTIONS: { id: boolean; label: string }[] = [
-  { id: false, label: 'Sin borde' },
-  { id: true, label: 'Con borde' },
+export const RADIUS_OPTIONS: { id: boolean; label: string }[] = [
+  { id: false, label: 'Sin radio' },
+  { id: true, label: 'Con radio' },
 ];
 
 export const SHADOW_OPTIONS: { id: boolean; label: string }[] = [
@@ -87,10 +87,10 @@ export const CONTAINER_ATTRS = [
     body: 'basic | narrow | wide | full | flush | padded | prose',
   },
   {
-    name: 'border',
+    name: 'radius',
     type: 'boolean',
     defaultValue: 'false',
-    body: 'Muestra borde. Usa border="true" para activarlo.',
+    body: 'Esquinas redondeadas. Usa radius="true" para activarlo.',
   },
   {
     name: 'shadow',
@@ -127,10 +127,10 @@ function iconImports(lang: CodeLang): string {
 export function buildSnippet(
   lang: CodeLang,
   example: ContainerExample,
-  border: boolean,
+  radius: boolean,
   shadow: boolean,
 ): string {
-  const attrs = ` variant="${example.variant}" border="${border}" shadow="${shadow}"`;
+  const attrs = ` variant="${example.variant}" radius="${radius}" shadow="${shadow}"`;
   const body = bodyFor(example);
 
   if (lang === 'html') {

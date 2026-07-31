@@ -5,11 +5,11 @@ import local from './container.module.css';
 
 export function ContainerDemo({
   example,
-  border,
+  radius,
   shadow,
 }: {
   example: ContainerExample;
-  border: boolean;
+  radius: boolean;
   shadow: boolean;
 }) {
   return (
@@ -20,9 +20,9 @@ export function ContainerDemo({
       </div>
       <div className={local.stageInner}>
         <gob-container
-          key={`${example.id}-${border}-${shadow}`}
+          key={`${example.id}-${radius}-${shadow}`}
           variant={example.variant}
-          border={border ? 'true' : 'false'}
+          radius={radius ? 'true' : 'false'}
           shadow={shadow ? 'true' : 'false'}
         >
           {example.variant === 'prose' ? (

@@ -39,11 +39,11 @@ class GobContainerElement extends SafeHTMLElement {
 
   private syncState() {
     const variant = resolveContainerVariant(this.getAttribute('variant'));
-    const border = resolveContainerFlag(this.getAttribute('border'));
+    const radius = resolveContainerFlag(this.getAttribute('radius'));
     const shadow = resolveContainerFlag(this.getAttribute('shadow'));
 
     this.rootEl.dataset.variant = variant;
-    this.rootEl.dataset.border = border ? 'true' : 'false';
+    this.rootEl.dataset.radius = radius ? 'true' : 'false';
     this.rootEl.dataset.shadow = shadow ? 'true' : 'false';
   }
 }

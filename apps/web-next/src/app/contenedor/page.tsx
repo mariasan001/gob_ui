@@ -2,7 +2,7 @@
 
 /**
  * Docs de Contenedor — cascaron canonico = Botones (/botones).
- * Caracteristicas: borde y sombra (sin seleccion de color).
+ * Caracteristicas: radio y sombra (sin seleccion de color).
  */
 
 import Link from 'next/link';
@@ -11,10 +11,10 @@ import { useEffect, useState } from 'react';
 import '@mariasan001/ui-wc';
 
 import {
-  BORDER_OPTIONS,
   CODE_LANGUAGES,
   CONTAINER_ATTRS,
   CONTAINER_EXAMPLES,
+  RADIUS_OPTIONS,
   SHADOW_OPTIONS,
   buildSnippet,
   type CodeLang,
@@ -26,7 +26,7 @@ import s from './page.module.css';
 
 export default function ContenedorPage() {
   const [lang, setLang] = useState<CodeLang>('html');
-  const [border, setBorder] = useState(false);
+  const [radius, setRadius] = useState(false);
   const [shadow, setShadow] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
@@ -36,7 +36,7 @@ export default function ContenedorPage() {
 
   async function copyExample(example: ContainerExample) {
     try {
-      await navigator.clipboard.writeText(buildSnippet(lang, example, border, shadow));
+      await navigator.clipboard.writeText(buildSnippet(lang, example, radius, shadow));
       setCopiedKey(example.id);
       window.setTimeout(() => setCopiedKey(null), 1200);
     } catch {
@@ -84,17 +84,17 @@ export default function ContenedorPage() {
             </div>
 
             <div className={s.filterBlock}>
-              <p className={s.filterLabel}>Borde</p>
+              <p className={s.filterLabel}>Radio</p>
               <div className={s.langRow}>
-                {BORDER_OPTIONS.map((option) => {
-                  const active = option.id === border;
+                {RADIUS_OPTIONS.map((option) => {
+                  const active = option.id === radius;
                   return (
                     <button
                       key={String(option.id)}
                       type="button"
                       className={`${s.langChip} ${active ? s.langChipActive : ''}`}
                       aria-pressed={active}
-                      onClick={() => setBorder(option.id)}
+                      onClick={() => setRadius(option.id)}
                     >
                       {option.label}
                     </button>
@@ -138,7 +138,7 @@ export default function ContenedorPage() {
                   <h3 className={local.exampleTitle}>{example.title}</h3>
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
-                <ContainerDemo example={example} border={border} shadow={shadow} />
+                <ContainerDemo example={example} radius={radius} shadow={shadow} />
               </article>
             ))}
           </div>
