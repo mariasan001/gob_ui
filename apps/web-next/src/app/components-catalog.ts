@@ -9,6 +9,7 @@ export type PreviewKind =
   | 'topbar'
   | 'page-header'
   | 'breadcrumb'
+  | 'container'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -152,12 +153,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'container',
+    href: '/contenedor',
     name: 'Contenedor',
     description: 'Anchos y margenes consistentes de pagina.',
-    preview: 'soon',
+    preview: 'container',
     category: 'layout',
     tags: ['grid', 'layout', 'ancho', 'container'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'grid',

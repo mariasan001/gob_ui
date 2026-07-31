@@ -9,16 +9,19 @@ import './components/sidebar/gob-sidebar';
 import './components/topbar/gob-topbar';
 import './components/page-header/gob-page-header';
 import './components/breadcrumb/gob-breadcrumb';
+import './components/container/gob-container';
 
 export type {
   Appearance,
   BreadcrumbVariant,
   ChipTone,
+  ContainerVariant,
   GobAppShellProps,
   GobBreadcrumbProps,
   GobButtonProps,
   GobCheckboxProps,
   GobChipProps,
+  GobContainerProps,
   GobPageHeaderProps,
   GobPaginationProps,
   GobRadioProps,
