@@ -290,10 +290,53 @@ export const DEMO_ROWS_LONG: DemoRow[] = [
 function iconImports(lang: CodeLang): string {
   if (lang === 'html') return '';
   return `import '@mariasan001/ui-wc';
-
 `;
 }
 
+function sampleRowsJson(count = 3): string {
+  return JSON.stringify(
+    DEMO_ROWS.slice(0, count).map((r) => ({
+      folio: r.folio,
+      ciudadano: r.ciudadano,
+      curp: r.curp,
+      dependencia: r.dependencia,
+      fecha: r.fecha,
+      monto: r.monto,
+      estatus: r.estatus,
+      estatusLabel: r.estatusLabel,
+      initials: r.initials,
+      hue: r.hue,
+    })),
+    null,
+    2,
+  );
+}
+
+function htmlRow(r: DemoRow, indent = '      '): string {
+  return `${indent}<tr>
+${indent}  <td>
+${indent}    <span class="gob-tb-stack">
+${indent}      <span class="gob-tb-primary">${r.folio}</span>
+${indent}      <span class="gob-tb-secondary">Creado: ${r.fecha}</span>
+${indent}    </span>
+${indent}  </td>
+${indent}  <td>
+${indent}    <span class="gob-tb-cell">
+${indent}      <span class="gob-tb-avatar" data-hue="${r.hue}">${r.initials}</span>
+${indent}      <span class="gob-tb-stack">
+${indent}        <span class="gob-tb-primary">${r.ciudadano}</span>
+${indent}        <span class="gob-tb-secondary">${r.curp}</span>
+${indent}      </span>
+${indent}    </span>
+${indent}  </td>
+${indent}  <td>${r.dependencia}</td>
+${indent}  <td><span class="gob-tb-secondary">${r.fecha}</span></td>
+${indent}  <td class="num">${r.monto}</td>
+${indent}  <td><span class="gob-tb-status" data-tone="${r.estatus}"><span class="gob-tb-dot"></span>${r.estatusLabel}</span></td>
+${indent}</tr>`;
+}
+
+/** Snippet completo: filas reales + patron de interaccion en el host. */
 export function buildSnippet(
   lang: CodeLang,
   example: TableExample,
@@ -301,66 +344,235 @@ export function buildSnippet(
 ): string {
   const attrs = ` variant="${example.variant}" tone="${tone}"`;
   const title = example.cardTitle;
+  const rows = DEMO_ROWS.slice(0, 3);
+  const withStatus =
+    example.variant === 'status' || example.variant === 'actions';
+  const withCheck = example.variant === 'selectable';
+  const body = rows
+    .map((r) => {
+      const base = htmlRow(r);
+      if (!withStatus) {
+        return base.replace(
+          /\n\s*<td><span class="gob-tb-status"[\s\S]*?<\/td>/,
+          '',
+        );
+      }
+      return base;
+    })
+    .join('\n');
+
+  if (example.variant === 'empty') {
+    if (lang === 'react') {
+      return `${iconImports(lang)}
+export function TablaVacia() {
+  return (
+    <gob-table${attrs}>
+      <span slot="title">${title}</span>
+      <div slot="empty">
+        <p>Sin resultados</p>
+        <p>No hay expedientes con ese folio, CURP o RFC.</p>
+      </div>
+    </gob-table>
+  );
+}`;
+    }
+    return `<!-- npm i @mariasan001/ui-wc -->
+<script type="module">import '@mariasan001/ui-wc';</script>
+<gob-table${attrs}>
+  <span slot="title">${title}</span>
+  <div slot="empty">
+    <p>Sin resultados</p>
+    <p>No hay expedientes con ese folio, CURP o RFC.</p>
+  </div>
+</gob-table>`;
+  }
 
   if (lang === 'html') {
     return `<!-- npm i @mariasan001/ui-wc -->
+<!-- gob-table estiliza. Seleccion/orden los cables tu (JS o framework). -->
 <script type="module">import '@mariasan001/ui-wc';</script>
 
 <gob-table${attrs}>
   <span slot="title">${title}</span>
-  <table>
+${example.subtitle ? `  <span slot="subtitle">${example.subtitle}</span>\n` : ''}  <table>
     <thead>
       <tr>
-        <th>Folio</th>
-        <th>Ciudadano</th>
-        <th>Dependencia</th>
-        <th class="num">Monto</th>
-      </tr>
+${withCheck ? `        <th><input class="gob-tb-check" type="checkbox" /></th>\n` : ''}        <th><button type="button" class="gob-tb-sort" data-dir="asc">Expediente</button></th>
+        <th><button type="button" class="gob-tb-sort">Ciudadano</button></th>
+        <th><button type="button" class="gob-tb-sort">Dependencia</button></th>
+        <th><button type="button" class="gob-tb-sort">Fecha</button></th>
+        <th class="num"><button type="button" class="gob-tb-sort">Monto</button></th>
+${withStatus ? `        <th>Estatus</th>\n` : ''}      </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>EXP-2026-01482</td>
-        <td>Garcia Lopez, Ana</td>
-        <td>Salud</td>
-        <td class="num">$4,250.00</td>
-      </tr>
-      <!-- ... miles de filas / paginacion servidor ... -->
+${body}
     </tbody>
   </table>
-  <span slot="footer">Mostrando 1–50 de 12,480</span>
+  <span slot="footer">Mostrando 1–${rows.length} de ${rows.length}</span>
 </gob-table>`;
   }
 
   if (lang === 'react') {
-    return `${iconImports(lang)}export function TablaExpedientes() {
+    return `// npm i @mariasan001/ui-wc
+// Interaccion en React; gob-table solo aporta marco + estilos light-DOM.
+import { useMemo, useState } from 'react';
+import '@mariasan001/ui-wc';
+
+const ROWS = ${sampleRowsJson(3)};
+
+export function TablaExpedientes() {
+  const [query, setQuery] = useState('');
+  const [sortKey, setSortKey] = useState('folio');
+  const [sortDir, setSortDir] = useState('asc');
+${withCheck ? `  const [selected, setSelected] = useState(new Set());\n` : ''}
+  const rows = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const filtered = ROWS.filter((r) =>
+      !q ||
+      r.folio.toLowerCase().includes(q) ||
+      r.ciudadano.toLowerCase().includes(q) ||
+      r.curp.toLowerCase().includes(q)
+    );
+    return [...filtered].sort((a, b) => {
+      const cmp = String(a[sortKey]).localeCompare(String(b[sortKey]), 'es');
+      return sortDir === 'asc' ? cmp : -cmp;
+    });
+  }, [query, sortKey, sortDir]);
+
+  function toggleSort(key) {
+    if (sortKey === key) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    else { setSortKey(key); setSortDir('asc'); }
+  }
+${withCheck ? `
+  function toggle(folio) {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(folio)) next.delete(folio); else next.add(folio);
+      return next;
+    });
+  }
+` : ''}
   return (
     <gob-table${attrs}>
       <span slot="title">${title}</span>
-      <table>{/* thead + tbody densos */}</table>
-      <span slot="footer">Mostrando 1–50 de 12,480</span>
+${example.subtitle ? `      <span slot="subtitle">${example.subtitle}</span>\n` : ''}${example.showActions ? `      <span slot="actions">
+        <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Filtrar…" />
+      </span>\n` : ''}      <table>
+        <thead>
+          <tr>
+${withCheck ? `            <th><input className="gob-tb-check" type="checkbox" /></th>\n` : ''}            <th><button type="button" className="gob-tb-sort" data-dir={sortKey === 'folio' ? sortDir : undefined} onClick={() => toggleSort('folio')}>Expediente</button></th>
+            <th><button type="button" className="gob-tb-sort" data-dir={sortKey === 'ciudadano' ? sortDir : undefined} onClick={() => toggleSort('ciudadano')}>Ciudadano</button></th>
+            <th><button type="button" className="gob-tb-sort" onClick={() => toggleSort('dependencia')}>Dependencia</button></th>
+            <th><button type="button" className="gob-tb-sort" onClick={() => toggleSort('fecha')}>Fecha</button></th>
+            <th className="num"><button type="button" className="gob-tb-sort" onClick={() => toggleSort('monto')}>Monto</button></th>
+${withStatus ? `            <th>Estatus</th>\n` : ''}          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.folio}>
+${withCheck ? `              <td>
+                <input className="gob-tb-check" type="checkbox" checked={selected.has(r.folio)} onChange={() => toggle(r.folio)} />
+              </td>\n` : ''}              <td>
+                <span className="gob-tb-stack">
+                  <span className="gob-tb-primary">{r.folio}</span>
+                  <span className="gob-tb-secondary">Creado: {r.fecha}</span>
+                </span>
+              </td>
+              <td>
+                <span className="gob-tb-cell">
+                  <span className="gob-tb-avatar" data-hue={r.hue}>{r.initials}</span>
+                  <span className="gob-tb-stack">
+                    <span className="gob-tb-primary">{r.ciudadano}</span>
+                    <span className="gob-tb-secondary">{r.curp}</span>
+                  </span>
+                </span>
+              </td>
+              <td>{r.dependencia}</td>
+              <td><span className="gob-tb-secondary">{r.fecha}</span></td>
+              <td className="num">{r.monto}</td>
+${withStatus ? `              <td>
+                <span className="gob-tb-status" data-tone={r.estatus}>
+                  <span className="gob-tb-dot" />
+                  {r.estatusLabel}
+                </span>
+              </td>\n` : ''}            </tr>
+          ))}
+        </tbody>
+      </table>
+      <span slot="footer">
+${withCheck ? `        {selected.size} seleccionados · ` : ''}{rows.length} registros
+      </span>
     </gob-table>
   );
 }`;
   }
 
   if (lang === 'vue') {
-    return `<script setup>
-${iconImports(lang).trimEnd()}
+    return `<!-- npm i @mariasan001/ui-wc -->
+<script setup>
+import { computed, ref } from 'vue';
+import '@mariasan001/ui-wc';
+
+const query = ref('');
+const rows = ref(${sampleRowsJson(3)});
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return rows.value.filter((r) =>
+    !q || r.folio.toLowerCase().includes(q) || r.ciudadano.toLowerCase().includes(q)
+  );
+});
 </script>
 
 <template>
   <gob-table${attrs}>
     <span slot="title">${title}</span>
-    <table><!-- thead + tbody --></table>
-    <span slot="footer">Mostrando 1–50 de 12,480</span>
+${example.showActions ? `    <span slot="actions">
+      <input v-model="query" placeholder="Filtrar…" />
+    </span>\n` : ''}    <table>
+      <thead>
+        <tr>
+          <th>Expediente</th>
+          <th>Ciudadano</th>
+          <th>Dependencia</th>
+          <th class="num">Monto</th>
+${withStatus ? `          <th>Estatus</th>\n` : ''}        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="r in filtered" :key="r.folio">
+          <td>{{ r.folio }}</td>
+          <td>{{ r.ciudadano }}</td>
+          <td>{{ r.dependencia }}</td>
+          <td class="num">{{ r.monto }}</td>
+${withStatus ? `          <td>
+            <span class="gob-tb-status" :data-tone="r.estatus">{{ r.estatusLabel }}</span>
+          </td>\n` : ''}        </tr>
+      </tbody>
+    </table>
+    <span slot="footer">{{ filtered.length }} registros</span>
   </gob-table>
 </template>`;
   }
 
-  return `// app.component.html
-${iconImports(lang)}<gob-table${attrs}>
+  return `// npm i @mariasan001/ui-wc
+// Angular: filtra/ordena en el .ts; gob-table solo estiliza el <table>.
+import '@mariasan001/ui-wc';
+
+<gob-table${attrs}>
   <span slot="title">${title}</span>
-  <table><!-- thead + tbody --></table>
-  <span slot="footer">Mostrando 1–50 de 12,480</span>
+  <table>
+    <thead>
+      <tr>
+        <th>Expediente</th>
+        <th>Ciudadano</th>
+        <th>Dependencia</th>
+        <th class="num">Monto</th>
+${withStatus ? `        <th>Estatus</th>\n` : ''}      </tr>
+    </thead>
+    <tbody>
+${body}
+    </tbody>
+  </table>
+  <span slot="footer">Mostrando 1–${rows.length}</span>
 </gob-table>`;
 }
+
