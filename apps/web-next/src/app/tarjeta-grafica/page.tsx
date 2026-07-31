@@ -13,6 +13,7 @@ import '@mariasan001/ui-wc';
 import {
   CHART_ATTRS,
   CHART_EXAMPLES,
+  CHART_LIB,
   CODE_LANGUAGES,
   COLOR_OPTIONS,
   buildSnippet,
@@ -51,7 +52,8 @@ export default function TarjetaGraficaPage() {
           </Link>
           <h1 className={s.title}>Tarjeta de grafica</h1>
           <p className={s.hint}>
-            Contenedor de graficas con titulo y leyenda. Pasa el mouse y pulsa{' '}
+            Contenedor Gob + graficas con <strong>{CHART_LIB.name}</strong>{' '}
+            (HTML, React, Vue y Angular). Pasa el mouse y pulsa{' '}
             <strong>Copiar</strong> para el codigo en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
@@ -60,6 +62,14 @@ export default function TarjetaGraficaPage() {
 
       <div className={s.panelWrap}>
         <section className={s.panel}>
+          <p className={local.libNote}>
+            Libreria recomendada: <strong>{CHART_LIB.name}</strong> (
+            <code>{CHART_LIB.npm}</code>, {CHART_LIB.license}). Core vanilla
+            compatible con los 4 lenguajes del filtro; wrappers oficiales/comunidad:{' '}
+            <code>echarts-for-react</code>, <code>vue-echarts</code>,{' '}
+            <code>ngx-echarts</code>.
+          </p>
+
           <div className={s.filters}>
             <div className={s.filterBlock}>
               <p className={s.filterLabel}>Lenguaje</p>
