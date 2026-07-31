@@ -29,6 +29,7 @@ export type GridExample = {
   cardTitle: string;
   subtitle?: string;
   showFilters?: boolean;
+  showTabs?: boolean;
   showBulk?: boolean;
   showActions?: boolean;
   footer?: string;
@@ -38,13 +39,15 @@ export const GRID_EXAMPLES: GridExample[] = [
   {
     id: 'filters',
     title: 'Con filtros',
-    description: 'Barra de filtros para consultas masivas por folio, dependencia y estatus.',
+    description:
+      'Tabs de estatus, busqueda y chips — consulta masiva tipo SaaS institucional.',
     variant: 'filters',
-    cardTitle: 'Consulta de expedientes',
-    subtitle: '12,480 registros indexados',
+    cardTitle: 'Expedientes',
+    subtitle: 'Vista completa de todos los expedientes de la dependencia.',
     showFilters: true,
+    showTabs: true,
     showActions: true,
-    footer: 'Filtros activos: 2 · Resultados: 318',
+    footer: '1 – 6 de 12,480',
   },
   {
     id: 'frozen-left',
@@ -52,13 +55,13 @@ export const GRID_EXAMPLES: GridExample[] = [
     description: 'Congela el folio al hacer scroll horizontal en grillas anchas.',
     variant: 'frozen-left',
     cardTitle: 'Padron ampliado',
-    subtitle: 'Scroll horizontal',
+    subtitle: 'Scroll horizontal con folio siempre visible.',
     footer: 'Columna Folio fijada',
   },
   {
     id: 'frozen-right',
     title: 'Acciones fijas',
-    description: 'Columna de acciones siempre visible a la derecha.',
+    description: 'Menu de fila siempre visible a la derecha.',
     variant: 'frozen-right',
     cardTitle: 'Operacion de casos',
     showActions: true,
@@ -70,26 +73,31 @@ export const GRID_EXAMPLES: GridExample[] = [
     description: 'Seleccion multiple con barra de acciones masivas.',
     variant: 'bulk',
     cardTitle: 'Asignacion por lote',
-    subtitle: 'Mesa de control',
+    subtitle: 'Mesa de control · 3 seleccionados',
     showBulk: true,
     footer: 'Ideal para archivar / reasignar cientos de filas',
   },
   {
     id: 'paginated',
     title: 'Con paginacion',
-    description: 'Pie con recorrido de paginas para datasets de servidor.',
+    description: 'Pie moderno con paginas numeradas para datasets de servidor.',
     variant: 'paginated',
     cardTitle: 'Bitacora institucional',
+    subtitle: 'Registros paginados desde servidor.',
+    showTabs: true,
+    showFilters: true,
     showActions: true,
-    footer: 'Pagina 3 de 250 · 50 por pagina',
+    footer: '1 – 6 de 12,480',
   },
   {
     id: 'expandable',
     title: 'Fila expandible',
-    description: 'Detalle del expediente sin salir del listado.',
+    description: 'Detalle anidado del expediente sin salir del listado.',
     variant: 'expandable',
     cardTitle: 'Seguimiento detallado',
-    subtitle: 'Click en + para ver historial',
+    subtitle: 'Expande la fila para ver cargos y documentos.',
+    showTabs: true,
+    showActions: true,
     footer: '1 fila expandida',
   },
   {
@@ -99,26 +107,30 @@ export const GRID_EXAMPLES: GridExample[] = [
     variant: 'column-filter',
     cardTitle: 'Tablero analitico',
     showFilters: true,
+    showTabs: true,
     footer: 'Filtros inline por campo',
   },
   {
     id: 'wide',
     title: 'Muchas columnas',
-    description: 'Grilla ancha tipica de reportes gubernamentales con scroll H.',
+    description: 'Grilla ancha de reportes con scroll H y jerarquia visual.',
     variant: 'wide',
     cardTitle: 'Reporte operativo',
     subtitle: '14 columnas · exportable',
     showFilters: true,
+    showTabs: true,
     showActions: true,
-    footer: 'Desplaza horizontalmente para ver mas campos',
+    footer: '1 – 6 de 12,480',
   },
   {
     id: 'toolbar',
     title: 'Toolbar completa',
-    description: 'Filtros + exportar + refrescar + densidad en un solo bloque.',
+    description: 'Tabs + busqueda + ordenar + filtrar + exportar en un bloque.',
     variant: 'toolbar',
     cardTitle: 'Centro de tramites',
+    subtitle: 'Panel operativo de mesa de control.',
     showFilters: true,
+    showTabs: true,
     showActions: true,
     footer: 'Actualizado hace 45s',
   },
@@ -162,13 +174,19 @@ export const GRID_ATTRS = [
     name: 'slot=actions',
     type: 'slot',
     defaultValue: '—',
-    body: 'Acciones globales (exportar, refrescar).',
+    body: 'Acciones globales (exportar, ordenar, filtrar).',
+  },
+  {
+    name: 'slot=tabs',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Tabs de estatus con conteos (Todos, Activos, etc.).',
   },
   {
     name: 'slot=filters',
     type: 'slot',
     defaultValue: '—',
-    body: 'Barra de filtros superior.',
+    body: 'Barra de busqueda y chips de filtro.',
   },
   {
     name: 'slot=bulk',
@@ -193,83 +211,129 @@ export const GRID_ATTRS = [
 export type DemoRow = {
   folio: string;
   ciudadano: string;
+  curp: string;
   dependencia: string;
   fecha: string;
   monto: string;
+  pagado: string;
   municipio: string;
   programa: string;
-  estatus: 'ok' | 'warn' | 'err';
+  estatus: 'ok' | 'warn' | 'err' | 'info' | 'muted';
   estatusLabel: string;
+  initials: string;
+  hue: number;
+  isNew?: boolean;
+  relative: string;
 };
 
 export const DEMO_ROWS: DemoRow[] = [
   {
     folio: 'EXP-2026-01482',
     ciudadano: 'Garcia Lopez, Ana',
+    curp: 'GALA850312MDFRPN09',
     dependencia: 'Salud',
     fecha: '12/03/2026',
     monto: '$4,250.00',
+    pagado: '$4,250.00',
     municipio: 'Centro',
     programa: 'Apoyo familiar',
     estatus: 'ok',
     estatusLabel: 'Aprobado',
+    initials: 'AG',
+    hue: 0,
+    relative: 'hace 2 h',
   },
   {
     folio: 'EXP-2026-01483',
     ciudadano: 'Hernandez Ruiz, Luis',
+    curp: 'HERL900221HDFRZS08',
     dependencia: 'Educacion',
     fecha: '12/03/2026',
     monto: '$1,180.00',
+    pagado: '$0.00',
     municipio: 'Norte',
     programa: 'Beca basica',
     estatus: 'warn',
     estatusLabel: 'En revision',
+    initials: 'LH',
+    hue: 1,
+    isNew: true,
+    relative: 'hace 5 h',
   },
   {
     folio: 'EXP-2026-01484',
     ciudadano: 'Martinez Soto, Paula',
+    curp: 'MASP880714MDFRTL05',
     dependencia: 'Movilidad',
     fecha: '11/03/2026',
     monto: '$890.00',
+    pagado: '$890.00',
     municipio: 'Sur',
     programa: 'Tarifa social',
     estatus: 'ok',
     estatusLabel: 'Aprobado',
+    initials: 'PM',
+    hue: 2,
+    relative: 'ayer',
   },
   {
     folio: 'EXP-2026-01485',
     ciudadano: 'Jimenez Cruz, Diego',
+    curp: 'JICD750903HDFMRG02',
     dependencia: 'Hacienda',
     fecha: '11/03/2026',
     monto: '$12,400.00',
+    pagado: '$0.00',
     municipio: 'Oriente',
     programa: 'Devolucion',
     estatus: 'err',
     estatusLabel: 'Rechazado',
+    initials: 'DJ',
+    hue: 3,
+    relative: 'ayer',
   },
   {
     folio: 'EXP-2026-01486',
     ciudadano: 'Vargas Neri, Sofia',
+    curp: 'VANS920518MDFRRF07',
     dependencia: 'Seguridad',
     fecha: '10/03/2026',
     monto: '$2,010.00',
+    pagado: '$1,000.00',
     municipio: 'Poniente',
     programa: 'Atencion ciudadana',
-    estatus: 'warn',
-    estatusLabel: 'En revision',
+    estatus: 'info',
+    estatusLabel: 'En transito',
+    initials: 'SV',
+    hue: 4,
+    relative: 'hace 2 d',
   },
   {
     folio: 'EXP-2026-01487',
     ciudadano: 'Ortega Diaz, Mario',
+    curp: 'ORDM830101HDFRTR01',
     dependencia: 'Salud',
     fecha: '10/03/2026',
     monto: '$760.00',
+    pagado: '$760.00',
     municipio: 'Centro',
     programa: 'Medicamentos',
     estatus: 'ok',
     estatusLabel: 'Aprobado',
+    initials: 'MO',
+    hue: 5,
+    relative: 'hace 2 d',
   },
 ];
+
+export const STATUS_TABS = [
+  { id: 'all', label: 'Todos', count: 12480, active: true },
+  { id: 'active', label: 'Activos', count: 3182 },
+  { id: 'review', label: 'En revision', count: 841 },
+  { id: 'transit', label: 'En transito', count: 226 },
+  { id: 'done', label: 'Completados', count: 7904 },
+  { id: 'cancel', label: 'Cancelados', count: 327 },
+] as const;
 
 function iconImports(lang: CodeLang): string {
   if (lang === 'html') return '';
@@ -291,12 +355,13 @@ export function buildSnippet(
 
 <gob-data-grid${attrs}>
   <span slot="title">${example.cardTitle}</span>
-  <div slot="filters"><!-- filtros --></div>
+  <div slot="tabs"><!-- tabs con conteos --></div>
+  <div slot="filters"><!-- busqueda + chips --></div>
   <table>
-    <thead><!-- columnas, incl. fijas --></thead>
-    <tbody><!-- filas densas / paginadas en servidor --></tbody>
+    <thead><!-- columnas sortable --></thead>
+    <tbody><!-- celdas dual-line + avatares + pills --></tbody>
   </table>
-  <span slot="footer">Pagina 1 de 250</span>
+  <span slot="footer">1 – 25 de 12,480</span>
 </gob-data-grid>`;
   }
 
@@ -305,9 +370,10 @@ export function buildSnippet(
   return (
     <gob-data-grid${attrs}>
       <span slot="title">${example.cardTitle}</span>
+      <div slot="tabs">{/* tabs */}</div>
       <div slot="filters">{/* filtros */}</div>
       <table>{/* thead + tbody */}</table>
-      <span slot="footer">Pagina 1 de 250</span>
+      <span slot="footer">1 – 25 de 12,480</span>
     </gob-data-grid>
   );
 }`;
@@ -321,9 +387,10 @@ ${iconImports(lang).trimEnd()}
 <template>
   <gob-data-grid${attrs}>
     <span slot="title">${example.cardTitle}</span>
+    <div slot="tabs"><!-- tabs --></div>
     <div slot="filters"><!-- filtros --></div>
     <table><!-- thead + tbody --></table>
-    <span slot="footer">Pagina 1 de 250</span>
+    <span slot="footer">1 – 25 de 12,480</span>
   </gob-data-grid>
 </template>`;
   }
@@ -331,8 +398,9 @@ ${iconImports(lang).trimEnd()}
   return `// app.component.html
 ${iconImports(lang)}<gob-data-grid${attrs}>
   <span slot="title">${example.cardTitle}</span>
+  <div slot="tabs"><!-- tabs --></div>
   <div slot="filters"><!-- filtros --></div>
   <table><!-- thead + tbody --></table>
-  <span slot="footer">Pagina 1 de 250</span>
+  <span slot="footer">1 – 25 de 12,480</span>
 </gob-data-grid>`;
 }

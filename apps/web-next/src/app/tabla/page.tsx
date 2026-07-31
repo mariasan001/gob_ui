@@ -64,9 +64,9 @@ export default function TablaPage() {
         <section className={s.panel}>
           <p className={local.libNote}>
             Pensada para <strong>padrones, expedientes y bitacoras</strong> con
-            miles de filas: densifica, fija el encabezado, selecciona en lote y
-            pagina en servidor. El markup sigue siendo un{' '}
-            <code>&lt;table&gt;</code> nativo accesible.
+            aire SaaS: celdas dual-line, avatares y pills de estatus. El markup
+            sigue siendo un <code>&lt;table&gt;</code> nativo. Para filtros,
+            tabs y congelado ve <a href="/tabla-avanzada">Tabla avanzada</a>.
           </p>
 
           <div className={s.filters}>

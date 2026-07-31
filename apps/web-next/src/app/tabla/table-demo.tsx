@@ -24,7 +24,6 @@ function SortTh({
     <th className={align === 'right' ? 'num' : undefined}>
       <button type="button" className="gob-tb-sort" data-dir={dir || undefined}>
         {label}
-        <i />
       </button>
     </th>
   );
@@ -47,6 +46,12 @@ export function TableDemo({
   const showStatus =
     example.variant === 'status' || example.variant === 'actions';
   const showRowActions = example.variant === 'actions';
+  const rich =
+    example.variant === 'basic' ||
+    example.variant === 'status' ||
+    example.variant === 'actions' ||
+    example.variant === 'selectable' ||
+    example.variant === 'sortable';
 
   return (
     <div className={local.stageInner}>
@@ -77,12 +82,16 @@ export function TableDemo({
             <tr>
               {showCheck ? (
                 <th style={{ width: 36 }}>
-                  <input className="gob-tb-check" type="checkbox" aria-label="Seleccionar todo" />
+                  <input
+                    className="gob-tb-check"
+                    type="checkbox"
+                    aria-label="Seleccionar todo"
+                  />
                 </th>
               ) : null}
               {showSort ? (
                 <>
-                  <SortTh label="Folio" dir="asc" />
+                  <SortTh label="Expediente" dir="asc" />
                   <SortTh label="Ciudadano" />
                   <SortTh label="Dependencia" />
                   <SortTh label="Fecha" />
@@ -90,7 +99,7 @@ export function TableDemo({
                 </>
               ) : (
                 <>
-                  <th>Folio</th>
+                  <th>Expediente</th>
                   <th>Ciudadano</th>
                   <th>Dependencia</th>
                   <th>Fecha</th>
@@ -98,7 +107,7 @@ export function TableDemo({
                 </>
               )}
               {showStatus ? <th>Estatus</th> : null}
-              {showRowActions ? <th>Acciones</th> : null}
+              {showRowActions ? <th style={{ width: 48 }} /> : null}
             </tr>
           </thead>
           <tbody>
@@ -115,15 +124,39 @@ export function TableDemo({
                   </td>
                 ) : null}
                 <td>
-                  <code className={local.folio}>{row.folio}</code>
+                  {rich ? (
+                    <span className="gob-tb-stack">
+                      <span className="gob-tb-primary">{row.folio}</span>
+                      <span className="gob-tb-secondary">Creado: {row.fecha}</span>
+                    </span>
+                  ) : (
+                    <code className={local.folio}>{row.folio}</code>
+                  )}
                 </td>
-                <td>{row.ciudadano}</td>
+                <td>
+                  {rich ? (
+                    <span className="gob-tb-cell">
+                      <span className="gob-tb-avatar" data-hue={row.hue}>
+                        {row.initials}
+                      </span>
+                      <span className="gob-tb-stack">
+                        <span className="gob-tb-primary">{row.ciudadano}</span>
+                        <span className="gob-tb-secondary">{row.curp}</span>
+                      </span>
+                    </span>
+                  ) : (
+                    row.ciudadano
+                  )}
+                </td>
                 <td>{row.dependencia}</td>
-                <td>{row.fecha}</td>
+                <td>
+                  <span className="gob-tb-secondary">{row.fecha}</span>
+                </td>
                 <td className="num">{row.monto}</td>
                 {showStatus ? (
                   <td>
                     <span className="gob-tb-status" data-tone={row.estatus}>
+                      <span className="gob-tb-dot" />
                       {row.estatusLabel}
                     </span>
                   </td>
@@ -131,8 +164,13 @@ export function TableDemo({
                 {showRowActions ? (
                   <td>
                     <div className="gob-tb-actions">
-                      <button type="button">Ver</button>
-                      <button type="button">PDF</button>
+                      <button
+                        type="button"
+                        className="gob-tb-kebab"
+                        aria-label="Mas acciones"
+                      >
+                        ⋮
+                      </button>
                     </div>
                   </td>
                 ) : null}
@@ -152,7 +190,9 @@ export function TableDemo({
         ) : null}
 
         {example.footer ? (
-          <span slot="footer">{example.footer}</span>
+          <span slot="footer" className={local.footerSlot}>
+            <span>{example.footer}</span>
+          </span>
         ) : null}
       </gob-table>
     </div>

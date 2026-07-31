@@ -66,6 +66,13 @@ class GobDataGridElement extends SafeHTMLElement {
 
     head.append(headText, actions);
 
+    const tabs = document.createElement('div');
+    tabs.className = 'tabs';
+    tabs.setAttribute('part', 'tabs');
+    const tabsSlot = document.createElement('slot');
+    tabsSlot.name = 'tabs';
+    tabs.appendChild(tabsSlot);
+
     const filters = document.createElement('div');
     filters.className = 'filters';
     filters.setAttribute('part', 'filters');
@@ -93,7 +100,7 @@ class GobDataGridElement extends SafeHTMLElement {
     footSlot.name = 'footer';
     foot.appendChild(footSlot);
 
-    this.rootEl.append(head, filters, bulk, scroll, foot);
+    this.rootEl.append(head, tabs, filters, bulk, scroll, foot);
     shadow.append(style, this.rootEl);
   }
 

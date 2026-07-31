@@ -62,9 +62,10 @@ export default function TablaAvanzadaPage() {
       <div className={s.panelWrap}>
         <section className={s.panel}>
           <p className={local.libNote}>
-            Para <strong>padrones y mesas de control</strong>: filtra, congela
-            folio/acciones, opera por lote y pagina en servidor. Usa{' '}
-            <code>gob-data-grid</code> + <code>&lt;table&gt;</code> nativa.
+            Tablas a nivel SaaS para <strong>padrones y mesas de control</strong>:
+            tabs con conteos, busqueda, chips, celdas dual-line, avatares, pills
+            de estatus y paginacion. Usa <code>gob-data-grid</code> +{' '}
+            <code>&lt;table&gt;</code> nativa.
           </p>
 
           <div className={s.filters}>
