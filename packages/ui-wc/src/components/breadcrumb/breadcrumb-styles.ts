@@ -79,13 +79,25 @@ export const breadcrumbStyles = `
 .root[data-variant='basic'],
 .root[data-variant='icons'],
 .root[data-variant='collapsed'],
-.root[data-variant='complete'] {
+.root[data-variant='complete'],
+.root[data-variant='back'],
+.root[data-variant='scroll'] {
   --gob-bc-sep: '/';
 }
 
 .root[data-variant='chevron'] {
   --gob-bc-sep: '›';
   --gob-bc-gap: 6px;
+}
+
+.root[data-variant='dot'] {
+  --gob-bc-sep: '·';
+  --gob-bc-gap: 10px;
+}
+
+.root[data-variant='arrow'] {
+  --gob-bc-sep: '→';
+  --gob-bc-gap: 8px;
 }
 
 .root[data-variant='underline'] {
@@ -103,6 +115,13 @@ export const breadcrumbStyles = `
   --gob-bc-radius: 12px;
   --gob-bc-bg: color-mix(in srgb, var(--gob-bc-accent) 6%, #fff);
   --gob-bc-border: color-mix(in srgb, var(--gob-bc-accent) 14%, transparent);
+}
+
+.root[data-variant='scroll'] {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: thin;
 }
 
 :host([tone='primary']),
