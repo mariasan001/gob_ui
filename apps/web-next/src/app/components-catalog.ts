@@ -14,6 +14,7 @@ export type PreviewKind =
   | 'divider'
   | 'spacer'
   | 'kpi-card'
+  | 'chart-card'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -207,12 +208,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'chart-card',
+    href: '/tarjeta-grafica',
     name: 'Tarjeta de grafica',
     description: 'Contenedor de graficas con titulo y leyenda.',
-    preview: 'soon',
+    preview: 'chart-card',
     category: 'datos',
     tags: ['dashboard', 'chart', 'grafica'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'tabla',

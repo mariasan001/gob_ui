@@ -239,6 +239,22 @@ export type GobKpiCardProps = React.HTMLAttributes<HTMLElement> & {
   progress?: number | string;
 };
 
+export type ChartCardVariant =
+  | 'basic'
+  | 'legend'
+  | 'actions'
+  | 'period'
+  | 'side-legend'
+  | 'dense'
+  | 'elevated';
+
+export type ChartCardTone = Tone;
+
+export type GobChartCardProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ChartCardVariant;
+  tone?: ChartCardTone | Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -258,6 +274,7 @@ declare global {
       'gob-divider': React.DetailedHTMLProps<GobDividerProps, HTMLElement>;
       'gob-spacer': React.DetailedHTMLProps<GobSpacerProps, HTMLElement>;
       'gob-kpi-card': React.DetailedHTMLProps<GobKpiCardProps, HTMLElement>;
+      'gob-chart-card': React.DetailedHTMLProps<GobChartCardProps, HTMLElement>;
     }
   }
 }
