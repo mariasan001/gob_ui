@@ -146,6 +146,14 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'container') {
+    return (
+      <div className={s.fakeContainer} aria-hidden="true">
+        <span className={s.fakeContainerRail} />
+        <span className={s.fakeContainerBody} />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
