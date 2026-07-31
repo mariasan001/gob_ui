@@ -1,4 +1,4 @@
-import type { BreadcrumbVariant, Tone } from '@mariasan001/ui-wc';
+import type { BreadcrumbVariant } from '@mariasan001/ui-wc';
 
 export type CodeLang = 'html' | 'react' | 'vue' | 'angular';
 
@@ -9,13 +9,12 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'angular', label: 'Angular' },
 ];
 
-export const COLOR_OPTIONS: { id: Tone; label: string; swatch: string }[] = [
+export const COLOR_OPTIONS: { id: 'primary' | 'accent'; label: string; swatch: string }[] = [
   { id: 'primary', label: 'Primary', swatch: '#9F2141' },
   { id: 'accent', label: 'Accent', swatch: '#BC945A' },
-  { id: 'dark', label: 'Dark', swatch: '#181511' },
-  { id: 'neutral', label: 'Neutral', swatch: '#EBEBEB' },
-  { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
 ];
+
+export type BreadcrumbTone = (typeof COLOR_OPTIONS)[number]['id'];
 
 export type BreadcrumbExample = {
   id: BreadcrumbVariant;
@@ -80,7 +79,7 @@ export const BREADCRUMB_ATTRS = [
     name: 'tone',
     type: 'string',
     defaultValue: 'primary',
-    body: 'Color de enlaces y acento: primary | accent | dark | neutral | soft',
+    body: 'Color de enlaces y acento: primary | accent',
   },
 ] as const;
 
@@ -186,7 +185,7 @@ import '@mariasan001/ui-wc';
 export function buildSnippet(
   lang: CodeLang,
   example: BreadcrumbExample,
-  tone: Tone,
+  tone: BreadcrumbTone,
 ): string {
   const attrs = ` variant="${example.variant}" tone="${tone}"`;
   const body = bodyFor(lang, example);

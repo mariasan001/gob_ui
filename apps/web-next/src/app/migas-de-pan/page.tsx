@@ -7,7 +7,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import type { Tone } from '@mariasan001/ui-wc';
 import '@mariasan001/ui-wc';
 
 import {
@@ -17,6 +16,7 @@ import {
   COLOR_OPTIONS,
   buildSnippet,
   type BreadcrumbExample,
+  type BreadcrumbTone,
   type CodeLang,
 } from './breadcrumb-data';
 import { BreadcrumbDemo } from './breadcrumb-demo';
@@ -25,7 +25,7 @@ import s from './page.module.css';
 
 export default function MigasDePanPage() {
   const [lang, setLang] = useState<CodeLang>('html');
-  const [tone, setTone] = useState<Tone>('primary');
+  const [tone, setTone] = useState<BreadcrumbTone>('primary');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   useEffect(() => {
