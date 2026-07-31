@@ -52,8 +52,8 @@ export default function TablaAvanzadaPage() {
           <h1 className={s.title}>Tabla avanzada</h1>
           <p className={s.hint}>
             Grid con filtros, columnas fijas y acciones para datos masivos.
-            Pulsa <strong>Copiar</strong> para el codigo en{' '}
-            <strong>{lang.toUpperCase()}</strong>.
+            Pulsa <strong>Copiar</strong> para markup + filas + patron
+            interactivo en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
