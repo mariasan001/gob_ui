@@ -80,8 +80,7 @@ export const breadcrumbStyles = `
 .root[data-variant='icons'],
 .root[data-variant='collapsed'],
 .root[data-variant='complete'],
-.root[data-variant='back'],
-.root[data-variant='scroll'] {
+.root[data-variant='back'] {
   --gob-bc-sep: '/';
 }
 
@@ -115,13 +114,6 @@ export const breadcrumbStyles = `
   --gob-bc-radius: 12px;
   --gob-bc-bg: color-mix(in srgb, var(--gob-bc-accent) 6%, #fff);
   --gob-bc-border: color-mix(in srgb, var(--gob-bc-accent) 14%, transparent);
-}
-
-.root[data-variant='scroll'] {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  max-width: 100%;
-  scrollbar-width: thin;
 }
 
 :host([tone='primary']),

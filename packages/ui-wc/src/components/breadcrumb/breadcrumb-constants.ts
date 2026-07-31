@@ -9,7 +9,6 @@ export const BREADCRUMB_VARIANTS = [
   'dot',
   'arrow',
   'back',
-  'scroll',
 ] as const;
 
 export type BreadcrumbVariant = (typeof BREADCRUMB_VARIANTS)[number];
@@ -36,8 +35,7 @@ export function resolveBreadcrumbVariant(value: string | null): BreadcrumbVarian
     value === 'complete' ||
     value === 'dot' ||
     value === 'arrow' ||
-    value === 'back' ||
-    value === 'scroll'
+    value === 'back'
   ) {
     return value;
   }

@@ -145,8 +145,7 @@ export type BreadcrumbVariant =
   | 'complete'
   | 'dot'
   | 'arrow'
-  | 'back'
-  | 'scroll';
+  | 'back';
 
 export type GobBreadcrumbProps = React.HTMLAttributes<HTMLElement> & {
   variant?: BreadcrumbVariant;

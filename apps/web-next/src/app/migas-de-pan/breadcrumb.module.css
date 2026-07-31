@@ -83,12 +83,6 @@
   justify-content: center;
 }
 
-.stageInnerScroll {
-  justify-content: stretch;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
 .crumb {
   color: var(--gob-bc-text, #6b665f);
   text-decoration: none;

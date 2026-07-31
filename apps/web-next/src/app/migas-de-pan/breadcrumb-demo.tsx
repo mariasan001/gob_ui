@@ -118,44 +118,6 @@ function crumbsFor(variant: BreadcrumbVariant) {
     );
   }
 
-  if (variant === 'scroll') {
-    return (
-      <>
-        <a href="#" className={local.crumb} onClick={(e) => e.preventDefault()}>
-          Inicio
-        </a>
-        <Sep variant={variant} />
-        <a href="#" className={local.crumb} onClick={(e) => e.preventDefault()}>
-          Gobierno
-        </a>
-        <Sep variant={variant} />
-        <a href="#" className={local.crumb} onClick={(e) => e.preventDefault()}>
-          Operaciones
-        </a>
-        <Sep variant={variant} />
-        <a href="#" className={local.crumb} onClick={(e) => e.preventDefault()}>
-          Expedientes
-        </a>
-        <Sep variant={variant} />
-        <a href="#" className={local.crumb} onClick={(e) => e.preventDefault()}>
-          Regionales
-        </a>
-        <Sep variant={variant} />
-        <a href="#" className={local.crumb} onClick={(e) => e.preventDefault()}>
-          2026
-        </a>
-        <Sep variant={variant} />
-        <a href="#" className={local.crumb} onClick={(e) => e.preventDefault()}>
-          Trimestre 1
-        </a>
-        <Sep variant={variant} />
-        <strong className={local.current} aria-current="page">
-          EXP-1842-A
-        </strong>
-      </>
-    );
-  }
-
   return (
     <>
       <a href="#" className={local.crumb} onClick={(e) => e.preventDefault()}>
@@ -181,10 +143,7 @@ export function BreadcrumbDemo({
   tone: BreadcrumbTone;
 }) {
   return (
-    <div
-      className={`${local.stageInner} ${example.variant === 'scroll' ? local.stageInnerScroll : ''}`}
-      style={BREADCRUMB_THEME_VARS[tone]}
-    >
+    <div className={local.stageInner} style={BREADCRUMB_THEME_VARS[tone]}>
       <gob-breadcrumb
         key={`${example.id}-${tone}`}
         variant={example.variant}
