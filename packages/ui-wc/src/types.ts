@@ -284,6 +284,25 @@ export type GobTableProps = React.HTMLAttributes<HTMLElement> & {
   tone?: TableTone | Tone;
 };
 
+export type DataGridVariant =
+  | 'filters'
+  | 'frozen-left'
+  | 'frozen-right'
+  | 'bulk'
+  | 'paginated'
+  | 'expandable'
+  | 'column-filter'
+  | 'wide'
+  | 'toolbar'
+  | 'grouped';
+
+export type DataGridTone = Tone;
+
+export type GobDataGridProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: DataGridVariant;
+  tone?: DataGridTone | Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -305,6 +324,7 @@ declare global {
       'gob-kpi-card': React.DetailedHTMLProps<GobKpiCardProps, HTMLElement>;
       'gob-chart-card': React.DetailedHTMLProps<GobChartCardProps, HTMLElement>;
       'gob-table': React.DetailedHTMLProps<GobTableProps, HTMLElement>;
+      'gob-data-grid': React.DetailedHTMLProps<GobDataGridProps, HTMLElement>;
     }
   }
 }

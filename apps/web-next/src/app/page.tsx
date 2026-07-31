@@ -214,6 +214,17 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'data-grid') {
+    return (
+      <div className={s.fakeDataGrid} aria-hidden="true">
+        <span className={s.fakeDataGridFilters} />
+        <span className={s.fakeTableHead} />
+        <span className={s.fakeTableRow} />
+        <span className={s.fakeTableRow} />
+        <span className={s.fakeTableRow} />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
