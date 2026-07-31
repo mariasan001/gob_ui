@@ -109,6 +109,33 @@
   color: #9f2141;
 }
 
+.toolBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.toolBtn:disabled:hover {
+  border-color: rgba(24, 21, 17, 0.1);
+  color: #4a453e;
+}
+
+.groupToggle {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.pageBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .toolBtnPrimary {
   background: #9f2141;
   border-color: #9f2141;
