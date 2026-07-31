@@ -7,12 +7,12 @@ export const containerStyles = `
   color: var(--gob-ct-text, #6b665f);
   --gob-ct-max: 960px;
   --gob-ct-pad-x: 20px;
-  --gob-ct-pad-y: 0;
+  --gob-ct-pad-y: 16px;
   --gob-ct-text: #6b665f;
   --gob-ct-title: #181511;
   --gob-ct-muted: #8a8278;
   --gob-ct-border: rgba(24, 21, 17, 0.12);
-  --gob-ct-bg: transparent;
+  --gob-ct-bg: #ffffff;
   --gob-ct-radius: 0;
   --gob-ct-shadow: none;
 }
@@ -28,7 +28,7 @@ export const containerStyles = `
   margin-inline: auto;
   padding: var(--gob-ct-pad-y) var(--gob-ct-pad-x);
   background: var(--gob-ct-bg);
-  border: 1px solid transparent;
+  border: 1px solid var(--gob-ct-border);
   border-radius: var(--gob-ct-radius);
   box-shadow: var(--gob-ct-shadow);
   color: var(--gob-ct-text);
@@ -58,14 +58,13 @@ export const containerStyles = `
 .root[data-variant='flush'] {
   --gob-ct-max: 960px;
   --gob-ct-pad-x: 0;
+  --gob-ct-pad-y: 16px;
 }
 
 .root[data-variant='padded'] {
   --gob-ct-max: 960px;
   --gob-ct-pad-x: 36px;
   --gob-ct-pad-y: 28px;
-  --gob-ct-bg: #ffffff;
-  border-color: var(--gob-ct-border);
 }
 
 .root[data-variant='prose'] {
@@ -73,21 +72,14 @@ export const containerStyles = `
   --gob-ct-pad-x: 20px;
 }
 
-/* Caracteristicas: radio y sombra */
-.root[data-radius='true'],
-.root[data-shadow='true'] {
-  --gob-ct-bg: #ffffff;
+/* Solo radio: esquinas cuadradas o redondeadas */
+:host([radius='true']) {
+  --gob-ct-radius: 16px;
 }
 
-.root[data-radius='true']:not([data-variant='padded']),
-.root[data-shadow='true']:not([data-variant='padded']) {
-  --gob-ct-pad-y: 18px;
-  border-color: var(--gob-ct-border);
-}
-
-.root[data-radius='true'][data-variant='flush'],
-.root[data-shadow='true'][data-variant='flush'] {
-  --gob-ct-pad-x: 18px;
+:host([radius='false']),
+:host(:not([radius])) {
+  --gob-ct-radius: 0;
 }
 
 .root[data-radius='true'] {
@@ -98,11 +90,21 @@ export const containerStyles = `
   --gob-ct-radius: 0;
 }
 
+/* Solo sombra */
+:host([shadow='true']) {
+  --gob-ct-shadow: 0 14px 32px rgba(24, 21, 17, 0.12);
+}
+
+:host([shadow='false']),
+:host(:not([shadow])) {
+  --gob-ct-shadow: none;
+}
+
 .root[data-shadow='true'] {
   --gob-ct-shadow: 0 14px 32px rgba(24, 21, 17, 0.12);
 }
 
-.root[data-shadow='true']:not([data-radius='true']):not([data-variant='padded']) {
-  border-color: var(--gob-ct-border);
+.root[data-shadow='false'] {
+  --gob-ct-shadow: none;
 }
 `;
