@@ -22,7 +22,25 @@ export const COLOR_OPTIONS: {
   { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
 ];
 
-export type ChartKind = 'bars' | 'line' | 'area' | 'donut';
+/**
+ * Apache ECharts — core vanilla compatible con HTML / React / Vue / Angular.
+ * Wrappers: echarts-for-react, vue-echarts, ngx-echarts.
+ */
+export const CHART_LIB = {
+  name: 'Apache ECharts',
+  npm: 'echarts',
+  license: 'Apache-2.0',
+  docs: 'https://echarts.apache.org',
+} as const;
+
+export type ChartKind =
+  | 'bars'
+  | 'area'
+  | 'line'
+  | 'donut'
+  | 'heatmap'
+  | 'gauge'
+  | 'radar';
 
 export type ChartExample = {
   id: ChartCardVariant;
@@ -40,16 +58,16 @@ export type ChartExample = {
 export const CHART_EXAMPLES: ChartExample[] = [
   {
     id: 'basic',
-    title: 'Basica',
-    description: 'Titulo y area de grafica, sin leyenda ni acciones.',
+    title: 'Basica · Barras',
+    description: 'Columnas con degradado y esquinas redondeadas (ECharts bar).',
     variant: 'basic',
     cardTitle: 'Tramites por mes',
     chart: 'bars',
   },
   {
     id: 'legend',
-    title: 'Con leyenda',
-    description: 'Leyenda inferior para series o categorias.',
+    title: 'Leyenda · Area apilada',
+    description: 'Areas suaves apiladas para comparar canales en el tiempo.',
     variant: 'legend',
     cardTitle: 'Canales de atencion',
     chart: 'area',
@@ -62,8 +80,8 @@ export const CHART_EXAMPLES: ChartExample[] = [
   },
   {
     id: 'actions',
-    title: 'Con acciones',
-    description: 'Acciones de exportar o filtrar en el encabezado.',
+    title: 'Acciones · Linea + meta',
+    description: 'Serie real vs meta con area degradada y tooltip.',
     variant: 'actions',
     cardTitle: 'Ingresos vs meta',
     chart: 'line',
@@ -71,17 +89,17 @@ export const CHART_EXAMPLES: ChartExample[] = [
   },
   {
     id: 'period',
-    title: 'Con periodo',
-    description: 'Subtitulo con el marco temporal de la serie.',
+    title: 'Periodo · Mapa de calor',
+    description: 'Heatmap de carga operativa por dia y franja horaria.',
     variant: 'period',
     cardTitle: 'Carga operativa',
     subtitle: 'Enero – Junio 2026',
-    chart: 'bars',
+    chart: 'heatmap',
   },
   {
     id: 'side-legend',
-    title: 'Leyenda lateral',
-    description: 'Leyenda a la derecha, util en paneles anchos.',
+    title: 'Lateral · Donut',
+    description: 'Anillo moderno con padAngle y esquinas redondeadas.',
     variant: 'side-legend',
     cardTitle: 'Distribucion por region',
     chart: 'donut',
@@ -94,31 +112,30 @@ export const CHART_EXAMPLES: ChartExample[] = [
   },
   {
     id: 'dense',
-    title: 'Densa',
-    description: 'Padding compacto para grids de tablero.',
+    title: 'Densa · Gauge',
+    description: 'Indicador circular compacto para grids densos.',
     variant: 'dense',
-    cardTitle: 'Tickets abiertos',
-    chart: 'bars',
+    cardTitle: 'Cumplimiento SLA',
+    chart: 'gauge',
     showLegend: true,
     legend: [
-      { label: 'Nuevos', tone: 'a' },
-      { label: 'En curso', tone: 'b' },
+      { label: 'Meta 80', tone: 'a' },
+      { label: 'Actual 74', tone: 'b' },
     ],
   },
   {
     id: 'elevated',
-    title: 'Elevada',
-    description: 'Sombra, periodo, acciones y leyenda juntos.',
+    title: 'Elevada · Radar',
+    description: 'Radar multidimensional de satisfaccion ciudadana.',
     variant: 'elevated',
     cardTitle: 'Satisfaccion ciudadana',
     subtitle: 'Ultimos 90 dias',
-    chart: 'line',
+    chart: 'radar',
     showActions: true,
     showLegend: true,
     legend: [
-      { label: 'Muy satisfecho', tone: 'a' },
-      { label: 'Neutral', tone: 'b' },
-      { label: 'Insatisfecho', tone: 'c' },
+      { label: 'Actual', tone: 'a' },
+      { label: 'Meta', tone: 'b' },
     ],
   },
 ];
@@ -158,7 +175,7 @@ export const CHART_ATTRS = [
     name: 'slot=default',
     type: 'slot',
     defaultValue: '—',
-    body: 'Contenido de la grafica (SVG, canvas o libreria).',
+    body: 'Contenedor de la grafica (recomendado: Apache ECharts).',
   },
   {
     name: 'slot=legend',
@@ -168,30 +185,57 @@ export const CHART_ATTRS = [
   },
 ] as const;
 
-function iconImports(lang: CodeLang): string {
-  if (lang === 'html') return '';
-  return `import '@mariasan001/ui-wc';
-
-`;
+function chartTypeLabel(kind: ChartKind): string {
+  switch (kind) {
+    case 'area':
+      return 'line + areaStyle (stacked)';
+    case 'line':
+      return 'line (smooth)';
+    case 'donut':
+      return 'pie (donut)';
+    case 'heatmap':
+      return 'heatmap';
+    case 'gauge':
+      return 'gauge';
+    case 'radar':
+      return 'radar';
+    default:
+      return 'bar';
+  }
 }
 
-function slotsMarkup(example: ChartExample, indent: string): string {
-  const lines = [
-    `${indent}<span slot="title">${example.cardTitle}</span>`,
-  ];
+function sampleOptionHint(kind: ChartKind): string {
+  switch (kind) {
+    case 'area':
+      return `{ series: [{ type: 'line', stack: 'total', areaStyle: {}, smooth: 0.45 }] }`;
+    case 'line':
+      return `{ series: [{ type: 'line', smooth: 0.5, areaStyle: {} }] }`;
+    case 'donut':
+      return `{ series: [{ type: 'pie', radius: ['58%', '82%'], padAngle: 3 }] }`;
+    case 'heatmap':
+      return `{ series: [{ type: 'heatmap', data: [[0,0,5], ...] }] }`;
+    case 'gauge':
+      return `{ series: [{ type: 'gauge', progress: { show: true }, data: [{ value: 74 }] }] }`;
+    case 'radar':
+      return `{ radar: { indicator: [...] }, series: [{ type: 'radar', data: [...] }] }`;
+    default:
+      return `{ series: [{ type: 'bar', itemStyle: { borderRadius: [10,10,4,4] } }] }`;
+  }
+}
+
+function slotsOnly(example: ChartExample, indent: string): string {
+  const lines = [`${indent}<span slot="title">${example.cardTitle}</span>`];
   if (example.subtitle) {
     lines.push(`${indent}<span slot="subtitle">${example.subtitle}</span>`);
   }
   if (example.showActions) {
-    lines.push(`${indent}<button slot="actions" type="button">Exportar</button>`);
+    lines.push(
+      `${indent}<button slot="actions" type="button">Exportar</button>`,
+    );
   }
-  lines.push(`${indent}<!-- grafica -->`);
-  lines.push(`${indent}<div class="chart-placeholder"></div>`);
   if (example.showLegend && example.legend) {
     for (const item of example.legend) {
-      lines.push(
-        `${indent}<span slot="legend">${item.label}</span>`,
-      );
+      lines.push(`${indent}<span slot="legend">${item.label}</span>`);
     }
   }
   return lines.join('\n');
@@ -203,42 +247,94 @@ export function buildSnippet(
   tone: ChartCardTone,
 ): string {
   const attrs = ` variant="${example.variant}" tone="${tone}"`;
-  const bodyHtml = slotsMarkup(example, '  ');
-  const bodyReact = slotsMarkup(example, '      ');
+  const kind = example.chart;
+  const optionHint = sampleOptionHint(kind);
 
   if (lang === 'html') {
-    return `<!-- npm i @mariasan001/ui-wc -->
-<script type="module">import '@mariasan001/ui-wc';</script>
+    return `<!-- npm i @mariasan001/ui-wc echarts -->
+<!-- Libreria: Apache ECharts (HTML / React / Vue / Angular) -->
+<script type="module">
+  import '@mariasan001/ui-wc';
+  import * as echarts from 'echarts';
+
+  const el = document.querySelector('#chart');
+  const chart = echarts.init(el);
+  chart.setOption(${optionHint});
+  // tipo demo: ${chartTypeLabel(kind)}
+</script>
 
 <gob-chart-card${attrs}>
-${bodyHtml}
+${slotsOnly(example, '  ')}
+  <div id="chart" style="width:100%;height:220px"></div>
 </gob-chart-card>`;
   }
 
   if (lang === 'react') {
-    return `${iconImports(lang)}export function TarjetaGrafica() {
+    return `// npm i @mariasan001/ui-wc echarts
+// Opcional: echarts-for-react
+import { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+import '@mariasan001/ui-wc';
+
+export function TarjetaGrafica() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const chart = echarts.init(ref.current);
+    chart.setOption(${optionHint});
+    return () => chart.dispose();
+  }, []);
+
   return (
     <gob-chart-card${attrs}>
-${bodyReact}
+${slotsOnly(example, '      ')}
+      <div ref={ref} style={{ width: '100%', height: 220 }} />
     </gob-chart-card>
   );
 }`;
   }
 
   if (lang === 'vue') {
-    return `<script setup>
-${iconImports(lang).trimEnd()}
+    return `<!-- npm i @mariasan001/ui-wc echarts -->
+<!-- Opcional wrapper: vue-echarts -->
+<script setup>
+import { onMounted, onBeforeUnmount, ref } from 'vue';
+import * as echarts from 'echarts';
+import '@mariasan001/ui-wc';
+
+const host = ref(null);
+let chart;
+onMounted(() => {
+  chart = echarts.init(host.value);
+  chart.setOption(${optionHint});
+});
+onBeforeUnmount(() => chart?.dispose());
 </script>
 
 <template>
   <gob-chart-card${attrs}>
-${slotsMarkup(example, '    ')}
+${slotsOnly(example, '    ')}
+    <div ref="host" style="width:100%;height:220px" />
   </gob-chart-card>
 </template>`;
   }
 
-  return `// app.component.html
-${iconImports(lang)}<gob-chart-card${attrs}>
-${bodyHtml}
+  return `// npm i @mariasan001/ui-wc echarts ngx-echarts
+// app.component.ts
+import * as echarts from 'echarts';
+import { AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+
+@ViewChild('chartHost', { static: true }) host!: ElementRef<HTMLDivElement>;
+private chart?: echarts.ECharts;
+
+ngAfterViewInit() {
+  this.chart = echarts.init(this.host.nativeElement);
+  this.chart.setOption(${optionHint});
+}
+ngOnDestroy() { this.chart?.dispose(); }
+
+// app.component.html
+<gob-chart-card${attrs}>
+${slotsOnly(example, '  ')}
+  <div #chartHost style="width:100%;height:220px"></div>
 </gob-chart-card>`;
 }
