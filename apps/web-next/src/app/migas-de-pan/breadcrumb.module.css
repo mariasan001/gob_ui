@@ -79,8 +79,40 @@
 
 .stageInner {
   width: min(920px, 100%);
-  display: flex;
-  justify-content: center;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.crumbItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.flash {
+  margin: 0;
+  min-height: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9f2141;
+  text-align: center;
+}
+
+.ellipsisBtn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0 2px;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gob-bc-muted, #8a8278);
+  cursor: pointer;
+}
+
+.ellipsisBtn:hover {
+  color: var(--gob-bc-accent, #9f2141);
 }
 
 .crumb {

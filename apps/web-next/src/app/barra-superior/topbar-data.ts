@@ -127,7 +127,7 @@ ${i}</div>`;
   const center = showSearch
     ? `${i}<label slot="center" class="search">
 ${i}  ${icon(lang, 'MagnifyingGlass')}
-${i}  <span>Buscar expediente</span>
+${i}  <input placeholder="Buscar expediente" />
 ${i}</label>`
     : `${i}<div slot="center"></div>`;
 
@@ -187,9 +187,13 @@ export function buildSnippet(
 ): string {
   const attrs = ` variant="${example.variant}" tone="${tone}"`;
   const body = bodyFor(lang, example);
+  const showSearch = example.variant === 'search' || example.variant === 'complete';
+  const showActions =
+    example.variant === 'actions' || example.variant === 'complete';
 
   if (lang === 'html') {
     return `<!-- npm i @mariasan001/ui-wc -->
+<!-- gob-topbar organiza layout; la interaccion la cables tu. -->
 <script type="module">import '@mariasan001/ui-wc';</script>
 ${iconImports(lang)}<gob-topbar${attrs}>
 ${body}
@@ -197,14 +201,39 @@ ${body}
   }
 
   if (lang === 'react') {
-    const indented = body
-      .split('\n')
-      .map((line) => (line ? `      ${line}` : ''))
-      .join('\n');
-    return `${iconImports(lang)}export function BarraSuperior() {
+    return `// Interaccion en React; gob-topbar solo organiza slots.
+import { useState } from 'react';
+import { Bell, MagnifyingGlass } from '@phosphor-icons/react';
+import '@mariasan001/ui-wc';
+
+export function BarraSuperior() {
+  const [query, setQuery] = useState('');
+  const [unread, setUnread] = useState(3);
+
   return (
     <gob-topbar${attrs}>
-${indented}
+      <div slot="start">
+        <strong>Inicio</strong>
+        <small>Direccion de Operaciones</small>
+      </div>
+${showSearch ? `      <label slot="center" className="search">
+        <MagnifyingGlass weight="thin" size={16} />
+        <input
+          value={query}
+          placeholder="Buscar expediente"
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') console.log('Buscar', query);
+          }}
+        />
+      </label>` : `      <div slot="center" />`}
+${showActions ? `      <button type="button" onClick={() => console.log('Exportar')}>Exportar</button>
+      <button type="button" onClick={() => console.log('Nuevo')}>Nuevo</button>` : ''}
+      <button type="button" aria-label="Notificaciones" onClick={() => setUnread(0)}>
+        <Bell weight="thin" size={18} />
+        {unread > 0 ? <i className="dot" /> : null}
+      </button>
+      <button type="button" onClick={() => console.log('Perfil')}>MG</button>
     </gob-topbar>
   );
 }`;
@@ -212,7 +241,10 @@ ${indented}
 
   if (lang === 'vue') {
     return `<script setup>
+import { ref } from 'vue';
 ${iconImports(lang).trimEnd()}
+const query = ref('');
+const unread = ref(3);
 </script>
 
 <template>
@@ -222,7 +254,7 @@ ${body}
 </template>`;
   }
 
-  return `// app.component.html
+  return `// app.component.html — cables busqueda/acciones en el .ts
 ${iconImports(lang)}<gob-topbar${attrs}>
 ${body}
 </gob-topbar>`;

@@ -236,6 +236,7 @@ export function buildSnippet(
 
   if (lang === 'html') {
     return `<!-- npm i @mariasan001/ui-wc -->
+<!-- gob-breadcrumb estiliza; navegar/expandir lo cables tu. -->
 <script type="module">import '@mariasan001/ui-wc';</script>
 ${iconImports(lang, example)}<gob-breadcrumb${attrs}>
 ${body}
@@ -243,14 +244,34 @@ ${body}
   }
 
   if (lang === 'react') {
-    const indented = body
-      .split('\n')
-      .map((line) => (line ? `      ${line}` : ''))
-      .join('\n');
-    return `${iconImports(lang, example)}export function MigasDePan() {
+    return `// Interaccion en React: truncar ruta al hacer clic en un ancestro.
+import { useState } from 'react';
+${example.variant === 'icons' || example.variant === 'complete' ? `import { House } from '@phosphor-icons/react';\n` : ''}${example.variant === 'back' ? `import { ArrowLeft } from '@phosphor-icons/react';\n` : ''}import '@mariasan001/ui-wc';
+
+const FULL = [
+  { id: 'inicio', label: 'Inicio' },
+  { id: 'exp', label: 'Expedientes' },
+  { id: 'det', label: 'Detalle' },
+];
+
+export function MigasDePan() {
+  const [index, setIndex] = useState(FULL.length - 1);
+  const trail = FULL.slice(0, index + 1);
+
   return (
     <gob-breadcrumb${attrs}>
-${indented}
+      {trail.map((crumb, i) => (
+        <span key={crumb.id}>
+          {i > 0 ? <span data-sep> / </span> : null}
+          {i === index ? (
+            <strong aria-current="page">{crumb.label}</strong>
+          ) : (
+            <button type="button" onClick={() => setIndex(i)}>
+${example.variant === 'icons' || example.variant === 'complete' ? `              {i === 0 ? <House weight="thin" size={14} /> : null}\n` : ''}              {crumb.label}
+            </button>
+          )}
+        </span>
+      ))}
     </gob-breadcrumb>
   );
 }`;
@@ -258,7 +279,9 @@ ${indented}
 
   if (lang === 'vue') {
     return `<script setup>
+import { ref } from 'vue';
 ${iconImports(lang, example).trimEnd()}
+const index = ref(2);
 </script>
 
 <template>
