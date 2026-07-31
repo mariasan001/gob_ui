@@ -20,7 +20,7 @@ export function ContainerDemo({
       </div>
       <div className={local.stageInner}>
         <gob-container
-          key={`${example.id}-${radius}-${shadow}`}
+          key={`${example.id}-r${radius ? 1 : 0}-s${shadow ? 1 : 0}`}
           variant={example.variant}
           radius={radius ? 'true' : 'false'}
           shadow={shadow ? 'true' : 'false'}
