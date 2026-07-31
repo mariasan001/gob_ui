@@ -66,6 +66,30 @@ export const BREADCRUMB_EXAMPLES: BreadcrumbExample[] = [
     description: 'Ruta larga con icono, varios niveles y pagina actual.',
     variant: 'complete',
   },
+  {
+    id: 'dot',
+    title: 'Con puntos',
+    description: 'Separador puntual para rutas cortas y discretas.',
+    variant: 'dot',
+  },
+  {
+    id: 'arrow',
+    title: 'Con flecha',
+    description: 'Separador con flecha para marcar el avance de la ruta.',
+    variant: 'arrow',
+  },
+  {
+    id: 'back',
+    title: 'Con volver',
+    description: 'Accion de regreso al inicio de la jerarquia.',
+    variant: 'back',
+  },
+  {
+    id: 'scroll',
+    title: 'Con scroll',
+    description: 'Ruta larga en una sola linea con desplazamiento horizontal.',
+    variant: 'scroll',
+  },
 ];
 
 export const BREADCRUMB_ATTRS = [
@@ -73,7 +97,7 @@ export const BREADCRUMB_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | chevron | icons | collapsed | underline | dense | complete',
+    body: 'basic | chevron | icons | collapsed | underline | dense | complete | dot | arrow | back | scroll',
   },
   {
     name: 'tone',
@@ -84,7 +108,10 @@ export const BREADCRUMB_ATTRS = [
 ] as const;
 
 function sep(variant: BreadcrumbVariant): string {
-  return variant === 'chevron' ? '›' : '/';
+  if (variant === 'chevron') return '›';
+  if (variant === 'dot') return '·';
+  if (variant === 'arrow') return '→';
+  return '/';
 }
 
 function bodyFor(lang: CodeLang, example: BreadcrumbExample): string {
@@ -127,6 +154,32 @@ ${mark}
 ${i}<strong aria-current="page">EXP-1842</strong>`;
   }
 
+  if (example.variant === 'back') {
+    return `${i}<a href="#" data-crumb class="crumb-back">${icon(lang, 'ArrowLeft', 14)} Volver</a>
+${mark}
+${i}<a href="#">Expedientes</a>
+${mark}
+${i}<strong aria-current="page">Detalle</strong>`;
+  }
+
+  if (example.variant === 'scroll') {
+    return `${i}<a href="#">Inicio</a>
+${mark}
+${i}<a href="#">Gobierno</a>
+${mark}
+${i}<a href="#">Operaciones</a>
+${mark}
+${i}<a href="#">Expedientes</a>
+${mark}
+${i}<a href="#">Regionales</a>
+${mark}
+${i}<a href="#">2026</a>
+${mark}
+${i}<a href="#">Trimestre 1</a>
+${mark}
+${i}<strong aria-current="page">EXP-1842-A</strong>`;
+  }
+
   return `${i}<a href="#">Inicio</a>
 ${mark}
 ${i}<a href="#">Expedientes</a>
@@ -149,8 +202,9 @@ function icon(lang: CodeLang, name: string, size = 14): string {
 
 function iconImports(lang: CodeLang, example: BreadcrumbExample): string {
   const needsHouse = example.variant === 'icons' || example.variant === 'complete';
+  const needsBack = example.variant === 'back';
   if (lang === 'html') {
-    return needsHouse
+    return needsHouse || needsBack
       ? `<!-- Phosphor thin -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/thin/style.css" />
 
@@ -158,22 +212,36 @@ function iconImports(lang: CodeLang, example: BreadcrumbExample): string {
       : '';
   }
   if (lang === 'react') {
-    return needsHouse
-      ? `import { House } from '@phosphor-icons/react';
+    if (needsHouse) {
+      return `import { House } from '@phosphor-icons/react';
 import '@mariasan001/ui-wc';
 
-`
-      : `import '@mariasan001/ui-wc';
+`;
+    }
+    if (needsBack) {
+      return `import { ArrowLeft } from '@phosphor-icons/react';
+import '@mariasan001/ui-wc';
+
+`;
+    }
+    return `import '@mariasan001/ui-wc';
 
 `;
   }
   if (lang === 'vue') {
-    return needsHouse
-      ? `import { PhHouse } from '@phosphor-icons/vue';
+    if (needsHouse) {
+      return `import { PhHouse } from '@phosphor-icons/vue';
 import '@mariasan001/ui-wc';
 
-`
-      : `import '@mariasan001/ui-wc';
+`;
+    }
+    if (needsBack) {
+      return `import { PhArrowLeft } from '@phosphor-icons/vue';
+import '@mariasan001/ui-wc';
+
+`;
+    }
+    return `import '@mariasan001/ui-wc';
 
 `;
   }
