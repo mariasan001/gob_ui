@@ -41,17 +41,20 @@ function MatrixButton({
   mode,
   state,
   label = 'Aceptar',
+  onPress,
 }: {
   tone: Tone;
   appearance: Appearance;
   mode: ContentMode;
   state: ButtonState;
   label?: string;
+  onPress?: () => void;
 }) {
   const loading = state === 'loading' || undefined;
   const disabled = state === 'disabled' || undefined;
   const demoState = state === 'hover' || state === 'pressed' ? state : undefined;
   const showIcon = mode !== 'basic' && state !== 'loading';
+  const interactive = state === 'enabled' && onPress;
 
   if (mode === 'icon-only') {
     return (
@@ -63,6 +66,7 @@ function MatrixButton({
         loading={loading}
         disabled={disabled}
         demo-state={demoState}
+        onClick={interactive ? onPress : undefined}
       >
         {showIcon ? <PlusIcon /> : null}
       </gob-button>
@@ -78,6 +82,7 @@ function MatrixButton({
         loading={loading}
         disabled={disabled}
         demo-state={demoState}
+        onClick={interactive ? onPress : undefined}
       >
         {showIcon ? <PlusIcon /> : null}
         {label}
@@ -92,6 +97,7 @@ function MatrixButton({
       loading={loading}
       disabled={disabled}
       demo-state={demoState}
+      onClick={interactive ? onPress : undefined}
     >
       {label}
     </gob-button>
@@ -102,10 +108,17 @@ export default function BotonesPage() {
   const [lang, setLang] = useState<CodeLang>('html');
   const [tone, setTone] = useState<Tone>('primary');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [flash, setFlash] = useState('');
 
   useEffect(() => {
     void import('@mariasan001/ui-wc');
   }, []);
+
+  useEffect(() => {
+    if (!flash) return;
+    const t = window.setTimeout(() => setFlash(''), 1800);
+    return () => window.clearTimeout(t);
+  }, [flash]);
 
   async function copyCell(mode: ContentMode, appearance: Appearance, state: ButtonState) {
     const key = `${mode}-${appearance}-${state}`;
@@ -129,8 +142,9 @@ export default function BotonesPage() {
           </Link>
           <h1 className={s.title}>Botones</h1>
           <p className={s.hint}>
-            Pasa el mouse sobre un boton y pulsa <strong>Copiar</strong> para obtener el codigo en{' '}
-            <strong>{lang.toUpperCase()}</strong>.
+            Clic en un boton habilitado para probarlo. Pulsa <strong>Copiar</strong>{' '}
+            para el codigo en <strong>{lang.toUpperCase()}</strong>
+            {flash ? ` · ${flash}` : ''}.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
@@ -203,6 +217,7 @@ export default function BotonesPage() {
                     mode={sample.mode}
                     state="enabled"
                     label="Habilitado"
+                    onPress={() => setFlash(`Clic · ${sample.title}`)}
                   />
                 </div>
                 <ul className={s.anatomyMetrics}>
@@ -251,6 +266,14 @@ export default function BotonesPage() {
                             appearance={column.appearance}
                             mode={section.id}
                             state={row.id}
+                            onPress={
+                              row.id === 'enabled'
+                                ? () =>
+                                    setFlash(
+                                      `Clic · ${section.title} / ${column.title}`,
+                                    )
+                                : undefined
+                            }
                           />
                         </div>
                       );

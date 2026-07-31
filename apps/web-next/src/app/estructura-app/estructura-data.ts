@@ -755,10 +755,18 @@ ${bodyMarkup(lang, example)}
   }
 
   if (lang === 'react') {
-    return `${iconImports(lang)}export function ShellDemo() {
+    return `// Interaccion en React; gob-app-shell solo organiza sidebar/topbar/content.
+import { useState } from 'react';
+import '@mariasan001/ui-wc';
+
+export function ShellDemo() {
+  const [active, setActive] = useState('Inicio');
+  const [query, setQuery] = useState('');
+
   return (
     <gob-app-shell${attrs}${style}>
 ${bodyMarkup(lang, example, '      ')}
+      {/* Cables: nav onClick -> setActive, input value={query}, Campana/Nuevo/Salir */}
     </gob-app-shell>
   );
 }`;

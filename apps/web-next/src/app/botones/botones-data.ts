@@ -148,22 +148,66 @@ export function buildSnippet(opts: {
   const loading = opts.state === 'loading' ? ' loading' : '';
   const disabled = opts.state === 'disabled' ? ' disabled' : '';
   const demo =
-    opts.state === 'hover' || opts.state === 'pressed' ? ` demo-state="${opts.state}"` : '';
+    opts.state === 'hover' || opts.state === 'pressed'
+      ? ` demo-state="${opts.state}"`
+      : '';
   const base = `<gob-button tone="${opts.tone}" appearance="${opts.appearance}"${loading}${disabled}${demo}`;
   const icon = iconMarkup(opts.lang);
+  const note =
+    opts.state === 'hover' || opts.state === 'pressed'
+      ? '\n<!-- demo-state solo para docs; en app usa hover/active CSS nativo -->'
+      : '';
+
+  if (opts.lang === 'react') {
+    const reactBase = `<gob-button tone="${opts.tone}" appearance="${opts.appearance}"${loading}${disabled}${demo}`;
+    if (opts.mode === 'icon-only') {
+      return `import { Plus } from '@phosphor-icons/react';
+import '@mariasan001/ui-wc';
+${note ? '// demo-state solo para docs; en app usa hover/active CSS nativo\n' : ''}
+export function Boton() {
+  return (
+    ${reactBase} icon-only aria-label="Aceptar" onClick={() => console.log('Aceptar')}>
+      <Plus weight="thin" size={16} slot="icon" />
+    </gob-button>
+  );
+}`;
+    }
+    if (opts.mode === 'with-icon') {
+      return `import { Plus } from '@phosphor-icons/react';
+import '@mariasan001/ui-wc';
+
+export function Boton() {
+  return (
+    ${reactBase} icon-position="left" onClick={() => console.log('Aceptar')}>
+      <Plus weight="thin" size={16} slot="icon" />
+      Aceptar
+    </gob-button>
+  );
+}`;
+    }
+    return `import '@mariasan001/ui-wc';
+
+export function Boton() {
+  return (
+    ${reactBase} onClick={() => console.log('Aceptar')}>
+      Aceptar
+    </gob-button>
+  );
+}`;
+  }
 
   if (opts.mode === 'icon-only') {
     return `${iconImport(opts.lang)}${base} icon-only aria-label="Aceptar">
   ${icon}
-</gob-button>`;
+</gob-button>${note}`;
   }
 
   if (opts.mode === 'with-icon') {
     return `${iconImport(opts.lang)}${base} icon-position="left">
   ${icon}
   Aceptar
-</gob-button>`;
+</gob-button>${note}`;
   }
 
-  return `${base}>Aceptar</gob-button>`;
+  return `${base}>Aceptar</gob-button>${note}`;
 }

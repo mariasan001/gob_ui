@@ -242,16 +242,66 @@ export function buildSnippet(opts: {
   const attrs = `variant="${opts.variant}" tone="${opts.tone}" page="${opts.page}" total="${opts.total}" lang="es"`;
 
   if (opts.lang === 'react') {
-    return `<gob-pagination ${attrs} />`;
+    return `import { useEffect, useRef, useState } from 'react';
+import '@mariasan001/ui-wc';
+
+export function Paginacion() {
+  const [page, setPage] = useState(${opts.page});
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const onChange = (e) => setPage(e.detail.page);
+    node.addEventListener('gob-page-change', onChange);
+    return () => node.removeEventListener('gob-page-change', onChange);
+  }, []);
+
+  return (
+    <>
+      <p>Pagina {page} de ${opts.total}</p>
+      <gob-pagination
+        ref={ref}
+        ${attrs.replace(`page="${opts.page}"`, 'page={String(page)}')}
+      />
+    </>
+  );
+}`;
   }
 
   if (opts.lang === 'vue') {
-    return `<gob-pagination ${attrs}></gob-pagination>`;
+    return `<script setup>
+import { ref } from 'vue';
+import '@mariasan001/ui-wc';
+const page = ref(${opts.page});
+function onPage(e) { page.value = e.detail.page; }
+</script>
+
+<template>
+  <p>Pagina {{ page }} de ${opts.total}</p>
+  <gob-pagination
+    ${attrs.replace(`page="${opts.page}"`, ':page="String(page)"')}
+    @gob-page-change="onPage"
+  ></gob-pagination>
+</template>`;
   }
 
   if (opts.lang === 'angular') {
-    return `<gob-pagination ${attrs}></gob-pagination>`;
+    return `// Escucha gob-page-change y actualiza [attr.page]
+import '@mariasan001/ui-wc';
+
+<gob-pagination ${attrs}></gob-pagination>`;
   }
 
-  return `<gob-pagination ${attrs}></gob-pagination>`;
+  return `<!-- npm i @mariasan001/ui-wc -->
+<script type="module">
+  import '@mariasan001/ui-wc';
+  const el = document.querySelector('gob-pagination');
+  el.addEventListener('gob-page-change', (e) => {
+    el.setAttribute('page', String(e.detail.page));
+    console.log('Pagina', e.detail.page);
+  });
+</script>
+
+<gob-pagination ${attrs}></gob-pagination>`;
 }

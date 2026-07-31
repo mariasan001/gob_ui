@@ -430,13 +430,13 @@ ${slotsOnly(example, '  ')}
 
   if (lang === 'react') {
     return `// npm i @mariasan001/ui-wc echarts
-// Opcional: echarts-for-react
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 import '@mariasan001/ui-wc';
 
 export function TarjetaGrafica() {
   const ref = useRef(null);
+  const [flash, setFlash] = useState('');
   useEffect(() => {
     const chart = echarts.init(ref.current);
     chart.setOption(${optionHint});
@@ -445,8 +445,12 @@ export function TarjetaGrafica() {
 
   return (
     <gob-chart-card${attrs}>
-${slotsOnly(example, '      ')}
-      <div ref={ref} style={{ width: '100%', height: 220 }} />
+      <span slot="title">${example.cardTitle}</span>
+${example.subtitle ? `      <span slot="subtitle">${example.subtitle}</span>\n` : ''}${example.showActions ? `      <span slot="actions">
+        <button type="button" onClick={() => setFlash('Grafica exportada')}>Exportar</button>
+        <button type="button" onClick={() => setFlash('Mas opciones')}>Mas</button>
+      </span>\n` : ''}      <div ref={ref} style={{ width: '100%', height: 220 }} />
+      <span slot="footer">{flash || '${example.footer || 'Actualizado hace 5 min'}'}</span>
     </gob-chart-card>
   );
 }`;
