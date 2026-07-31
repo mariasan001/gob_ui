@@ -10,7 +10,7 @@ export const CONTAINER_VARIANTS = [
 
 export type ContainerVariant = (typeof CONTAINER_VARIANTS)[number];
 
-export const CONTAINER_OBSERVED_ATTRIBUTES = ['variant'] as const;
+export const CONTAINER_OBSERVED_ATTRIBUTES = ['variant', 'border', 'shadow'] as const;
 
 export function resolveContainerVariant(value: string | null): ContainerVariant {
   if (
@@ -24,4 +24,8 @@ export function resolveContainerVariant(value: string | null): ContainerVariant 
     return value;
   }
   return 'basic';
+}
+
+export function resolveContainerFlag(value: string | null): boolean {
+  return value === 'true' || value === '';
 }

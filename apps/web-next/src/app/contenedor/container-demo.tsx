@@ -3,7 +3,15 @@
 import type { ContainerExample } from './container-data';
 import local from './container.module.css';
 
-export function ContainerDemo({ example }: { example: ContainerExample }) {
+export function ContainerDemo({
+  example,
+  border,
+  shadow,
+}: {
+  example: ContainerExample;
+  border: boolean;
+  shadow: boolean;
+}) {
   return (
     <div className={local.stage}>
       <div className={local.stageRail}>
@@ -11,7 +19,12 @@ export function ContainerDemo({ example }: { example: ContainerExample }) {
         <span>{example.widthLabel}</span>
       </div>
       <div className={local.stageInner}>
-        <gob-container variant={example.variant}>
+        <gob-container
+          key={`${example.id}-${border}-${shadow}`}
+          variant={example.variant}
+          border={border ? 'true' : 'false'}
+          shadow={shadow ? 'true' : 'false'}
+        >
           {example.variant === 'prose' ? (
             <>
               <h2 className={local.proseTitle}>Lineamientos de operacion</h2>
