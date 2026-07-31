@@ -576,6 +576,40 @@
   background: #ebebeb;
 }
 
+.fakeBreadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 150px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeBreadcrumbItem {
+  height: 8px;
+  width: 28px;
+  border-radius: 999px;
+  background: #d8d1c6;
+}
+
+.fakeBreadcrumbItem:first-child {
+  width: 22px;
+}
+
+.fakeBreadcrumbCurrent {
+  width: 36px;
+  background: #181511;
+}
+
+.fakeBreadcrumb i {
+  font-style: normal;
+  font-size: 11px;
+  color: #b0a89e;
+  line-height: 1;
+}
+
 @keyframes rise {
   from {
     opacity: 0;

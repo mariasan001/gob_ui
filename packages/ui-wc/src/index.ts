@@ -8,11 +8,14 @@ import './components/app-shell/gob-app-shell';
 import './components/sidebar/gob-sidebar';
 import './components/topbar/gob-topbar';
 import './components/page-header/gob-page-header';
+import './components/breadcrumb/gob-breadcrumb';
 
 export type {
   Appearance,
+  BreadcrumbVariant,
   ChipTone,
   GobAppShellProps,
+  GobBreadcrumbProps,
   GobButtonProps,
   GobCheckboxProps,
   GobChipProps,
