@@ -81,6 +81,10 @@
   width: min(280px, 100%);
 }
 
+.stageInnerWide {
+  width: min(360px, 100%);
+}
+
 .iconSlot {
   display: grid;
   place-items: center;

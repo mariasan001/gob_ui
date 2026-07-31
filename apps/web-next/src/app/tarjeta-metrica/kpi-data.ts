@@ -9,9 +9,13 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'angular', label: 'Angular' },
 ];
 
+/** Misma paleta que Botones. */
 export const COLOR_OPTIONS: { id: KpiTone; label: string; swatch: string }[] = [
   { id: 'primary', label: 'Primary', swatch: '#9F2141' },
   { id: 'accent', label: 'Accent', swatch: '#BC945A' },
+  { id: 'dark', label: 'Dark', swatch: '#181511' },
+  { id: 'neutral', label: 'Neutral', swatch: '#FFFFFF' },
+  { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
 ];
 
 export type KpiExample = {
@@ -23,6 +27,8 @@ export type KpiExample = {
   value: string;
   trend?: string;
   period?: string;
+  compare?: string;
+  progress?: number;
   showIcon?: boolean;
 };
 
@@ -92,6 +98,64 @@ export const KPI_EXAMPLES: KpiExample[] = [
     period: 'Este mes',
     showIcon: true,
   },
+  {
+    id: 'stripe',
+    title: 'Con franja',
+    description: 'Barra de acento lateral para jerarquia visual.',
+    variant: 'stripe',
+    label: 'Expedientes',
+    value: '518',
+    period: 'En revision',
+  },
+  {
+    id: 'filled',
+    title: 'Rellena',
+    description: 'Fondo tintado con el color activo.',
+    variant: 'filled',
+    label: 'Satisfaccion',
+    value: '4.8',
+    showIcon: true,
+  },
+  {
+    id: 'horizontal',
+    title: 'Horizontal',
+    description: 'Etiqueta e icono a la izquierda, valor a la derecha.',
+    variant: 'horizontal',
+    label: 'Citas hoy',
+    value: '24',
+    showIcon: true,
+  },
+  {
+    id: 'compare',
+    title: 'Comparativa',
+    description: 'Valor actual frente a un periodo anterior.',
+    variant: 'compare',
+    label: 'Altas',
+    value: '312',
+    compare: 'vs 278',
+    period: 'Mes anterior',
+  },
+  {
+    id: 'progress',
+    title: 'Con progreso',
+    description: 'Barra de avance hacia una meta (atributo progress).',
+    variant: 'progress',
+    label: 'Meta anual',
+    value: '72%',
+    progress: 72,
+    period: 'Objetivo 100%',
+  },
+  {
+    id: 'elevated',
+    title: 'Elevada',
+    description: 'Sombra suave para destacar en dashboards.',
+    variant: 'elevated',
+    label: 'NPS',
+    value: '61',
+    trend: '+4',
+    period: 'Trimestre',
+    showIcon: true,
+  },
 ];
 
 export const KPI_ATTRS = [
@@ -99,13 +163,19 @@ export const KPI_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | trend-up | trend-down | period | icon | dense | complete',
+    body: 'basic | trend-up | trend-down | period | icon | dense | complete | stripe | filled | horizontal | compare | progress | elevated',
   },
   {
     name: 'tone',
     type: 'string',
     defaultValue: 'primary',
-    body: 'Color del icono: primary | accent',
+    body: 'primary | accent | dark | neutral | soft',
+  },
+  {
+    name: 'progress',
+    type: 'number',
+    defaultValue: '64',
+    body: 'Porcentaje 0–100 de la barra (solo variant=progress).',
   },
   {
     name: 'slot=label',
@@ -123,7 +193,13 @@ export const KPI_ATTRS = [
     name: 'slot=trend',
     type: 'slot',
     defaultValue: '—',
-    body: 'Texto o chip de tendencia (visible en trend-* / dense / complete).',
+    body: 'Chip de tendencia (trend-* / dense / complete / elevated).',
+  },
+  {
+    name: 'slot=compare',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Texto comparativo (visible en variant=compare).',
   },
   {
     name: 'slot=period',
@@ -135,7 +211,7 @@ export const KPI_ATTRS = [
     name: 'slot=icon',
     type: 'slot',
     defaultValue: '—',
-    body: 'Icono opcional (visible en icon / complete).',
+    body: 'Icono opcional (icon / filled / horizontal / complete / elevated).',
   },
 ] as const;
 
@@ -154,6 +230,9 @@ function slotsMarkup(example: KpiExample, indent: string): string {
   if (example.trend) {
     lines.push(`${indent}<span slot="trend">${example.trend}</span>`);
   }
+  if (example.compare) {
+    lines.push(`${indent}<span slot="compare">${example.compare}</span>`);
+  }
   if (example.period) {
     lines.push(`${indent}<span slot="period">${example.period}</span>`);
   }
@@ -168,7 +247,9 @@ export function buildSnippet(
   example: KpiExample,
   tone: KpiTone,
 ): string {
-  const attrs = ` variant="${example.variant}" tone="${tone}"`;
+  const progressAttr =
+    example.progress != null ? ` progress="${example.progress}"` : '';
+  const attrs = ` variant="${example.variant}" tone="${tone}"${progressAttr}`;
   const bodyHtml = slotsMarkup(example, '  ');
   const bodyReact = slotsMarkup(example, '      ');
 

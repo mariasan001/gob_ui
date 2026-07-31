@@ -219,13 +219,20 @@ export type KpiVariant =
   | 'period'
   | 'icon'
   | 'dense'
-  | 'complete';
+  | 'complete'
+  | 'stripe'
+  | 'filled'
+  | 'horizontal'
+  | 'compare'
+  | 'progress'
+  | 'elevated';
 
-export type KpiTone = 'primary' | 'accent';
+export type KpiTone = Tone;
 
 export type GobKpiCardProps = React.HTMLAttributes<HTMLElement> & {
   variant?: KpiVariant;
   tone?: KpiTone | Tone;
+  progress?: number | string;
 };
 
 declare global {

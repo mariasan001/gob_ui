@@ -147,6 +147,10 @@
   box-shadow: 0 0 0 1px #bdbdbd;
 }
 
+.colorSwatchActive[data-tone='neutral'] {
+  box-shadow: 0 0 0 2px #9f2141;
+}
+
 .spec {
   display: grid;
   gap: 10px;
