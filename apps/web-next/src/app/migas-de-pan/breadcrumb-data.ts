@@ -84,12 +84,6 @@ export const BREADCRUMB_EXAMPLES: BreadcrumbExample[] = [
     description: 'Accion de regreso al inicio de la jerarquia.',
     variant: 'back',
   },
-  {
-    id: 'scroll',
-    title: 'Con scroll',
-    description: 'Ruta larga en una sola linea con desplazamiento horizontal.',
-    variant: 'scroll',
-  },
 ];
 
 export const BREADCRUMB_ATTRS = [
@@ -97,7 +91,7 @@ export const BREADCRUMB_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | chevron | icons | collapsed | underline | dense | complete | dot | arrow | back | scroll',
+    body: 'basic | chevron | icons | collapsed | underline | dense | complete | dot | arrow | back',
   },
   {
     name: 'tone',
@@ -160,24 +154,6 @@ ${mark}
 ${i}<a href="#">Expedientes</a>
 ${mark}
 ${i}<strong aria-current="page">Detalle</strong>`;
-  }
-
-  if (example.variant === 'scroll') {
-    return `${i}<a href="#">Inicio</a>
-${mark}
-${i}<a href="#">Gobierno</a>
-${mark}
-${i}<a href="#">Operaciones</a>
-${mark}
-${i}<a href="#">Expedientes</a>
-${mark}
-${i}<a href="#">Regionales</a>
-${mark}
-${i}<a href="#">2026</a>
-${mark}
-${i}<a href="#">Trimestre 1</a>
-${mark}
-${i}<strong aria-current="page">EXP-1842-A</strong>`;
   }
 
   return `${i}<a href="#">Inicio</a>
