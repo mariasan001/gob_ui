@@ -14,10 +14,13 @@ import './components/grid/gob-grid';
 import './components/divider/gob-divider';
 import './components/spacer/gob-spacer';
 import './components/kpi-card/gob-kpi-card';
+import './components/chart-card/gob-chart-card';
 
 export type {
   Appearance,
   BreadcrumbVariant,
+  ChartCardTone,
+  ChartCardVariant,
   ChipTone,
   ContainerVariant,
   DividerTone,
@@ -25,6 +28,7 @@ export type {
   GobAppShellProps,
   GobBreadcrumbProps,
   GobButtonProps,
+  GobChartCardProps,
   GobCheckboxProps,
   GobChipProps,
   GobContainerProps,

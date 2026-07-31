@@ -737,6 +737,42 @@
   background: rgba(31, 138, 85, 0.28);
 }
 
+.fakeChart {
+  display: grid;
+  gap: 10px;
+  width: 140px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeChartTitle {
+  width: 55%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(24, 21, 17, 0.14);
+}
+
+.fakeChartBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 42px;
+}
+
+.fakeChartBars i {
+  flex: 1 1 0;
+  border-radius: 4px 4px 2px 2px;
+  background: rgba(159, 33, 65, 0.28);
+  font-style: normal;
+}
+
+.fakeChartBars i:nth-child(2),
+.fakeChartBars i:nth-child(4) {
+  background: rgba(159, 33, 65, 0.48);
+}
+
 @keyframes rise {
   from {
     opacity: 0;

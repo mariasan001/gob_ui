@@ -191,6 +191,19 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'chart-card') {
+    return (
+      <div className={s.fakeChart} aria-hidden="true">
+        <span className={s.fakeChartTitle} />
+        <span className={s.fakeChartBars}>
+          <i style={{ height: '40%' }} />
+          <i style={{ height: '70%' }} />
+          <i style={{ height: '55%' }} />
+          <i style={{ height: '85%' }} />
+        </span>
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
