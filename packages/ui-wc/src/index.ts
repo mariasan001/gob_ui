@@ -17,6 +17,9 @@ import './components/kpi-card/gob-kpi-card';
 import './components/chart-card/gob-chart-card';
 import './components/table/gob-table';
 import './components/data-grid/gob-data-grid';
+import './components/filter-bar/gob-filter-bar';
+import './components/toolbar/gob-toolbar';
+import './components/list/gob-list';
 
 export type {
   Appearance,
@@ -29,6 +32,8 @@ export type {
   DataGridVariant,
   DividerTone,
   DividerVariant,
+  FilterBarTone,
+  FilterBarVariant,
   GobAppShellProps,
   GobBreadcrumbProps,
   GobButtonProps,
@@ -38,8 +43,10 @@ export type {
   GobContainerProps,
   GobDataGridProps,
   GobDividerProps,
+  GobFilterBarProps,
   GobGridProps,
   GobKpiCardProps,
+  GobListProps,
   GobPageHeaderProps,
   GobPaginationProps,
   GobRadioProps,
@@ -47,11 +54,14 @@ export type {
   GobSpacerProps,
   GobSwitchProps,
   GobTableProps,
+  GobToolbarProps,
   GobTopbarProps,
   GridGap,
   GridVariant,
   KpiTone,
   KpiVariant,
+  ListTone,
+  ListVariant,
   PageHeaderSurface,
   PageHeaderVariant,
   PaginationLang,
@@ -62,5 +72,7 @@ export type {
   TableTone,
   TableVariant,
   Tone,
+  ToolbarTone,
+  ToolbarVariant,
   TopbarVariant,
 } from './types';

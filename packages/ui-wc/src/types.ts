@@ -311,6 +311,52 @@ export type GobDataGridProps = React.HTMLAttributes<HTMLElement> & {
   tone?: DataGridTone | Tone;
 };
 
+export type FilterBarVariant =
+  | 'basic'
+  | 'search'
+  | 'chips'
+  | 'dense'
+  | 'with-actions'
+  | 'complete';
+
+export type FilterBarTone = Tone;
+
+export type GobFilterBarProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: FilterBarVariant;
+  tone?: FilterBarTone | Tone;
+};
+
+export type ToolbarVariant =
+  | 'basic'
+  | 'actions'
+  | 'density'
+  | 'refresh'
+  | 'complete';
+
+export type ToolbarTone = Tone;
+
+export type GobToolbarProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ToolbarVariant;
+  tone?: ToolbarTone | Tone;
+  dense?: boolean | 'true' | 'false';
+};
+
+export type ListVariant =
+  | 'basic'
+  | 'avatar'
+  | 'meta'
+  | 'actions'
+  | 'dense'
+  | 'selectable'
+  | 'complete';
+
+export type ListTone = Tone;
+
+export type GobListProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ListVariant;
+  tone?: ListTone | Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -333,6 +379,9 @@ declare global {
       'gob-chart-card': React.DetailedHTMLProps<GobChartCardProps, HTMLElement>;
       'gob-table': React.DetailedHTMLProps<GobTableProps, HTMLElement>;
       'gob-data-grid': React.DetailedHTMLProps<GobDataGridProps, HTMLElement>;
+      'gob-filter-bar': React.DetailedHTMLProps<GobFilterBarProps, HTMLElement>;
+      'gob-toolbar': React.DetailedHTMLProps<GobToolbarProps, HTMLElement>;
+      'gob-list': React.DetailedHTMLProps<GobListProps, HTMLElement>;
     }
   }
 }
