@@ -11,6 +11,7 @@ export type PreviewKind =
   | 'breadcrumb'
   | 'container'
   | 'grid'
+  | 'divider'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -174,12 +175,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'divider',
+    href: '/separador',
     name: 'Separador',
     description: 'Lineas divisorias horizontales y verticales.',
-    preview: 'soon',
+    preview: 'divider',
     category: 'layout',
     tags: ['hr', 'separador', 'divider'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'spacer',

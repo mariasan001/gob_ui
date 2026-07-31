@@ -183,6 +183,22 @@ export type GobGridProps = React.HTMLAttributes<HTMLElement> & {
   gap?: GridGap;
 };
 
+export type DividerVariant =
+  | 'basic'
+  | 'vertical'
+  | 'dashed'
+  | 'dotted'
+  | 'thick'
+  | 'label'
+  | 'inset';
+
+export type DividerTone = 'primary' | 'accent';
+
+export type GobDividerProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: DividerVariant;
+  tone?: DividerTone | Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -199,6 +215,7 @@ declare global {
       'gob-breadcrumb': React.DetailedHTMLProps<GobBreadcrumbProps, HTMLElement>;
       'gob-container': React.DetailedHTMLProps<GobContainerProps, HTMLElement>;
       'gob-grid': React.DetailedHTMLProps<GobGridProps, HTMLElement>;
+      'gob-divider': React.DetailedHTMLProps<GobDividerProps, HTMLElement>;
     }
   }
 }

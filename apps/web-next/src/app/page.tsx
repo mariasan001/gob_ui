@@ -164,6 +164,15 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'divider') {
+    return (
+      <div className={s.fakeDivider} aria-hidden="true">
+        <span className={s.fakeDividerLine} />
+        <i>o</i>
+        <span className={s.fakeDividerLine} />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

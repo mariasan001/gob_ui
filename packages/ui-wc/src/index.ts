@@ -11,18 +11,22 @@ import './components/page-header/gob-page-header';
 import './components/breadcrumb/gob-breadcrumb';
 import './components/container/gob-container';
 import './components/grid/gob-grid';
+import './components/divider/gob-divider';
 
 export type {
   Appearance,
   BreadcrumbVariant,
   ChipTone,
   ContainerVariant,
+  DividerTone,
+  DividerVariant,
   GobAppShellProps,
   GobBreadcrumbProps,
   GobButtonProps,
   GobCheckboxProps,
   GobChipProps,
   GobContainerProps,
+  GobDividerProps,
   GobGridProps,
   GobPageHeaderProps,
   GobPaginationProps,
