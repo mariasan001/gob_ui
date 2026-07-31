@@ -52,8 +52,8 @@ export default function EncabezadoPaginaPage() {
           </Link>
           <h1 className={s.title}>Encabezado de pagina</h1>
           <p className={s.hint}>
-            Titulo, migas y acciones de la vista. Pasa el mouse y pulsa{' '}
-            <strong>Copiar</strong> para el codigo en <strong>{lang.toUpperCase()}</strong>.
+            Funcional: migas, estatus y acciones. Pulsa <strong>Copiar</strong>{' '}
+            para markup + patron interactivo en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>

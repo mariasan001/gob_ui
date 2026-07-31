@@ -51,8 +51,9 @@ export default function BarraSuperiorPage() {
           </Link>
           <h1 className={s.title}>Barra superior</h1>
           <p className={s.hint}>
-            Barra de tablero con busqueda, acciones y usuario. Pasa el mouse y pulsa{' '}
-            <strong>Copiar</strong> para el codigo en <strong>{lang.toUpperCase()}</strong>.
+            Funcional: busqueda, notificaciones, acciones y perfil. Pulsa{' '}
+            <strong>Copiar</strong> para markup + patron interactivo en{' '}
+            <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
