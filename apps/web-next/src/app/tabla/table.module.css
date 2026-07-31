@@ -94,6 +94,64 @@
   gap: 12px;
 }
 
+.miniSearch {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+  background: #f7f7f7;
+}
+
+.miniSearch input {
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: #181511;
+  width: 110px;
+}
+
+.actionCell {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  right: 8px;
+  top: calc(100% - 4px);
+  z-index: 5;
+  display: grid;
+  min-width: 140px;
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(24, 21, 17, 0.1);
+}
+
+.menu button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #181511;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background: rgba(159, 33, 65, 0.08);
+  color: #9f2141;
+}
+
 .toolBtn {
   appearance: none;
   display: inline-flex;

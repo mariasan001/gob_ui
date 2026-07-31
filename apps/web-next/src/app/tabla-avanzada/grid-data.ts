@@ -1,5 +1,9 @@
 import type { DataGridTone, DataGridVariant } from '@mariasan001/ui-wc';
 
+import type { TabId } from './grid-logic';
+
+export type { TabId };
+
 export type CodeLang = 'html' | 'react' | 'vue' | 'angular';
 
 export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
@@ -502,14 +506,18 @@ export const DEMO_ROWS: DemoRow[] = [
   },
 ];
 
-export const STATUS_TABS = [
-  { id: 'all', label: 'Todos', count: 12480, active: true },
-  { id: 'active', label: 'Activos', count: 3182 },
-  { id: 'review', label: 'En revision', count: 841 },
-  { id: 'transit', label: 'En transito', count: 226 },
-  { id: 'done', label: 'Completados', count: 7904 },
-  { id: 'cancel', label: 'Cancelados', count: 327 },
-] as const;
+export const STATUS_TABS: {
+  id: TabId;
+  label: string;
+}[] = [
+  { id: 'all', label: 'Todos' },
+  { id: 'active', label: 'Activos' },
+  { id: 'review', label: 'En revision' },
+  { id: 'transit', label: 'En transito' },
+  { id: 'done', label: 'Completados' },
+  { id: 'cancel', label: 'Cancelados' },
+];
+
 
 function iconImports(lang: CodeLang): string {
   if (lang === 'html') return '';
