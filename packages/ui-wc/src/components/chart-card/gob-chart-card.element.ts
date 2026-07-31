@@ -76,7 +76,14 @@ class GobChartCardElement extends SafeHTMLElement {
 
     main.append(chart, legend);
 
-    this.rootEl.append(head, main);
+    const footer = document.createElement('div');
+    footer.className = 'footer';
+    footer.setAttribute('part', 'footer');
+    const footerSlot = document.createElement('slot');
+    footerSlot.name = 'footer';
+    footer.appendChild(footerSlot);
+
+    this.rootEl.append(head, main, footer);
     shadow.append(style, this.rootEl);
   }
 

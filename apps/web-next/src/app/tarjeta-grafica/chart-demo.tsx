@@ -39,7 +39,9 @@ export function ChartDemo({
         <EchartsCanvas
           kind={example.chart}
           tone={tone}
-          compact={example.variant === 'dense'}
+          compact={
+            example.variant === 'dense' || example.variant === 'minimal'
+          }
         />
         {example.showLegend && example.legend
           ? example.legend.map((item) => (
@@ -54,6 +56,9 @@ export function ChartDemo({
               </span>
             ))
           : null}
+        {example.footer ? (
+          <span slot="footer">{example.footer}</span>
+        ) : null}
       </gob-chart-card>
     </div>
   );
