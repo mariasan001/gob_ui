@@ -173,6 +173,24 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'spacer') {
+    return (
+      <div className={s.fakeSpacer} aria-hidden="true">
+        <span className={s.fakeSpacerBlock} />
+        <span className={s.fakeSpacerGap} />
+        <span className={s.fakeSpacerBlock} />
+      </div>
+    );
+  }
+  if (kind === 'kpi-card') {
+    return (
+      <div className={s.fakeKpi} aria-hidden="true">
+        <span className={s.fakeKpiLabel} />
+        <span className={s.fakeKpiValue} />
+        <span className={s.fakeKpiTrend} />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

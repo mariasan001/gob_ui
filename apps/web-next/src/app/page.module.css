@@ -683,6 +683,60 @@
   color: #9f2141;
 }
 
+.fakeSpacer {
+  display: grid;
+  gap: 0;
+  width: 120px;
+  padding: 14px 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeSpacerBlock {
+  height: 10px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.12);
+}
+
+.fakeSpacerGap {
+  height: 16px;
+  margin: 4px 0;
+  border-radius: 3px;
+  background: rgba(159, 33, 65, 0.18);
+}
+
+.fakeKpi {
+  display: grid;
+  gap: 8px;
+  width: 132px;
+  padding: 14px 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeKpiLabel {
+  width: 48%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(24, 21, 17, 0.14);
+}
+
+.fakeKpiValue {
+  width: 62%;
+  height: 14px;
+  border-radius: 6px;
+  background: rgba(159, 33, 65, 0.28);
+}
+
+.fakeKpiTrend {
+  width: 34%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(31, 138, 85, 0.28);
+}
+
 @keyframes rise {
   from {
     opacity: 0;

@@ -199,6 +199,35 @@ export type GobDividerProps = React.HTMLAttributes<HTMLElement> & {
   tone?: DividerTone | Tone;
 };
 
+export type SpacerVariant =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'horizontal'
+  | 'section';
+
+export type GobSpacerProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SpacerVariant;
+};
+
+export type KpiVariant =
+  | 'basic'
+  | 'trend-up'
+  | 'trend-down'
+  | 'period'
+  | 'icon'
+  | 'dense'
+  | 'complete';
+
+export type KpiTone = 'primary' | 'accent';
+
+export type GobKpiCardProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: KpiVariant;
+  tone?: KpiTone | Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -216,6 +245,8 @@ declare global {
       'gob-container': React.DetailedHTMLProps<GobContainerProps, HTMLElement>;
       'gob-grid': React.DetailedHTMLProps<GobGridProps, HTMLElement>;
       'gob-divider': React.DetailedHTMLProps<GobDividerProps, HTMLElement>;
+      'gob-spacer': React.DetailedHTMLProps<GobSpacerProps, HTMLElement>;
+      'gob-kpi-card': React.DetailedHTMLProps<GobKpiCardProps, HTMLElement>;
     }
   }
 }
