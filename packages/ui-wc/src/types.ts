@@ -225,7 +225,11 @@ export type KpiVariant =
   | 'horizontal'
   | 'compare'
   | 'progress'
-  | 'elevated';
+  | 'elevated'
+  | 'sparkline'
+  | 'ring'
+  | 'split'
+  | 'live';
 
 export type KpiTone = Tone;
 

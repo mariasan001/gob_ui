@@ -15,7 +15,9 @@ import local from './kpi.module.css';
 function iconFor(example: KpiExample) {
   if (example.id === 'icon') return Warning;
   if (example.id === 'horizontal') return CalendarBlank;
-  if (example.id === 'progress' || example.id === 'elevated') return Target;
+  if (example.id === 'progress' || example.id === 'elevated' || example.id === 'ring') {
+    return Target;
+  }
   return ChartLineUp;
 }
 
@@ -28,7 +30,12 @@ export function KpiDemo({
 }) {
   const Icon = iconFor(example);
   const wide =
-    example.variant === 'horizontal' || example.variant === 'progress';
+    example.variant === 'horizontal' ||
+    example.variant === 'progress' ||
+    example.variant === 'sparkline' ||
+    example.variant === 'split' ||
+    example.variant === 'ring' ||
+    example.variant === 'live';
 
   return (
     <div className={wide ? local.stageInnerWide : local.stageInner}>
@@ -45,6 +52,12 @@ export function KpiDemo({
         {example.trend ? <span slot="trend">{example.trend}</span> : null}
         {example.compare ? (
           <span slot="compare">{example.compare}</span>
+        ) : null}
+        {example.secondaryLabel ? (
+          <span slot="secondary-label">{example.secondaryLabel}</span>
+        ) : null}
+        {example.secondaryValue ? (
+          <span slot="secondary-value">{example.secondaryValue}</span>
         ) : null}
         {example.period ? <span slot="period">{example.period}</span> : null}
         {example.showIcon ? (

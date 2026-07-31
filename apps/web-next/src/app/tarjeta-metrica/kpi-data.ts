@@ -28,6 +28,8 @@ export type KpiExample = {
   trend?: string;
   period?: string;
   compare?: string;
+  secondaryLabel?: string;
+  secondaryValue?: string;
   progress?: number;
   showIcon?: boolean;
 };
@@ -156,6 +158,48 @@ export const KPI_EXAMPLES: KpiExample[] = [
     period: 'Trimestre',
     showIcon: true,
   },
+  {
+    id: 'sparkline',
+    title: 'Sparkline',
+    description: 'Serie temporal embebida para lectura ejecutiva.',
+    variant: 'sparkline',
+    label: 'Trafico web',
+    value: '128k',
+    trend: '+18%',
+    period: 'Ultimas 8 semanas',
+  },
+  {
+    id: 'ring',
+    title: 'Anillo',
+    description: 'Indicador circular de cumplimiento (progress).',
+    variant: 'ring',
+    label: 'SLA resuelto',
+    value: '86%',
+    trend: '+2.4%',
+    progress: 86,
+    period: 'Acumulado del mes',
+  },
+  {
+    id: 'split',
+    title: 'Doble metrica',
+    description: 'Dos KPIs relacionados en la misma tarjeta.',
+    variant: 'split',
+    label: 'Entrantes',
+    value: '1,042',
+    secondaryLabel: 'Resueltos',
+    secondaryValue: '978',
+    period: 'Hoy · 08:00–18:00',
+  },
+  {
+    id: 'live',
+    title: 'En vivo',
+    description: 'Estado en tiempo real con pulso de actividad.',
+    variant: 'live',
+    label: 'Sesiones activas',
+    value: '347',
+    trend: '+21',
+    period: 'Actualizado hace 12s',
+  },
 ];
 
 export const KPI_ATTRS = [
@@ -163,7 +207,7 @@ export const KPI_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | trend-up | trend-down | period | icon | dense | complete | stripe | filled | horizontal | compare | progress | elevated',
+    body: 'basic | trend-up | trend-down | period | icon | dense | complete | stripe | filled | horizontal | compare | progress | elevated | sparkline | ring | split | live',
   },
   {
     name: 'tone',
@@ -175,7 +219,7 @@ export const KPI_ATTRS = [
     name: 'progress',
     type: 'number',
     defaultValue: '64',
-    body: 'Porcentaje 0–100 de la barra (solo variant=progress).',
+    body: 'Porcentaje 0–100 (variant=progress o ring).',
   },
   {
     name: 'slot=label',
@@ -193,13 +237,25 @@ export const KPI_ATTRS = [
     name: 'slot=trend',
     type: 'slot',
     defaultValue: '—',
-    body: 'Chip de tendencia (trend-* / dense / complete / elevated).',
+    body: 'Chip de tendencia.',
   },
   {
     name: 'slot=compare',
     type: 'slot',
     defaultValue: '—',
-    body: 'Texto comparativo (visible en variant=compare).',
+    body: 'Texto comparativo (variant=compare).',
+  },
+  {
+    name: 'slot=secondary-label',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Etiqueta secundaria (variant=split).',
+  },
+  {
+    name: 'slot=secondary-value',
+    type: 'slot',
+    defaultValue: '—',
+    body: 'Valor secundario (variant=split).',
   },
   {
     name: 'slot=period',
@@ -211,7 +267,7 @@ export const KPI_ATTRS = [
     name: 'slot=icon',
     type: 'slot',
     defaultValue: '—',
-    body: 'Icono opcional (icon / filled / horizontal / complete / elevated).',
+    body: 'Icono opcional.',
   },
 ] as const;
 
@@ -232,6 +288,16 @@ function slotsMarkup(example: KpiExample, indent: string): string {
   }
   if (example.compare) {
     lines.push(`${indent}<span slot="compare">${example.compare}</span>`);
+  }
+  if (example.secondaryLabel) {
+    lines.push(
+      `${indent}<span slot="secondary-label">${example.secondaryLabel}</span>`,
+    );
+  }
+  if (example.secondaryValue) {
+    lines.push(
+      `${indent}<span slot="secondary-value">${example.secondaryValue}</span>`,
+    );
   }
   if (example.period) {
     lines.push(`${indent}<span slot="period">${example.period}</span>`);
