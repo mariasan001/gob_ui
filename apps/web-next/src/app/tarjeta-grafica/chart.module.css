@@ -67,7 +67,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 180px;
+  min-height: 220px;
   padding: 28px 22px;
   border-radius: 16px;
   border: 1px solid #ececec;
@@ -78,17 +78,17 @@
 }
 
 .stageInner {
-  width: min(460px, 100%);
+  width: min(520px, 100%);
 }
 
 .chartHost {
   width: 100%;
-  height: 220px;
+  height: 260px;
 }
 
 .chartHostCompact {
   width: 100%;
-  height: 160px;
+  height: 190px;
 }
 
 .actions {
