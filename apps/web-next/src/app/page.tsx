@@ -204,6 +204,16 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'tabla') {
+    return (
+      <div className={s.fakeTable} aria-hidden="true">
+        <span className={s.fakeTableHead} />
+        <span className={s.fakeTableRow} />
+        <span className={s.fakeTableRow} />
+        <span className={s.fakeTableRow} />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

@@ -15,6 +15,7 @@ export type PreviewKind =
   | 'spacer'
   | 'kpi-card'
   | 'chart-card'
+  | 'tabla'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -218,12 +219,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'tabla',
+    href: '/tabla',
     name: 'Tabla',
     description: 'Listados densos con orden, seleccion y vacios.',
-    preview: 'soon',
+    preview: 'tabla',
     category: 'datos',
-    tags: ['table', 'datos', 'grid', 'dashboard'],
-    status: 'soon',
+    tags: ['table', 'datos', 'grid', 'dashboard', 'expedientes'],
+    status: 'ready',
   },
   {
     id: 'data-grid',
