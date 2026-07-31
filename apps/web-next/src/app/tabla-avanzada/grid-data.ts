@@ -522,69 +522,321 @@ export const STATUS_TABS: {
 function iconImports(lang: CodeLang): string {
   if (lang === 'html') return '';
   return `import '@mariasan001/ui-wc';
-
 `;
 }
 
+function sampleRowsJson(count = 3): string {
+  return JSON.stringify(
+    DEMO_ROWS.slice(0, count).map((r) => ({
+      folio: r.folio,
+      ciudadano: r.ciudadano,
+      curp: r.curp,
+      dependencia: r.dependencia,
+      fecha: r.fecha,
+      monto: r.monto,
+      pagado: r.pagado,
+      saldo: r.saldo,
+      programa: r.programa,
+      estatus: r.estatus,
+      estatusLabel: r.estatusLabel,
+      initials: r.initials,
+      hue: r.hue,
+      relative: r.relative,
+    })),
+    null,
+    2,
+  );
+}
+
+function htmlRow(r: (typeof DEMO_ROWS)[number], indent = '      '): string {
+  return `${indent}<tr>
+${indent}  <td>
+${indent}    <span class="gob-dg-stack">
+${indent}      <span class="gob-dg-primary">${r.folio}</span>
+${indent}      <span class="gob-dg-secondary">Creado: ${r.fecha}</span>
+${indent}    </span>
+${indent}  </td>
+${indent}  <td>
+${indent}    <span class="gob-dg-cell">
+${indent}      <span class="gob-dg-avatar" data-hue="${r.hue}">${r.initials}</span>
+${indent}      <span class="gob-dg-stack">
+${indent}        <span class="gob-dg-primary">${r.ciudadano}</span>
+${indent}        <span class="gob-dg-secondary">${r.curp}</span>
+${indent}      </span>
+${indent}    </span>
+${indent}  </td>
+${indent}  <td>
+${indent}    <span class="gob-dg-stack">
+${indent}      <span class="gob-dg-primary">${r.dependencia}</span>
+${indent}      <span class="gob-dg-secondary">${r.programa}</span>
+${indent}    </span>
+${indent}  </td>
+${indent}  <td><span class="gob-dg-secondary">${r.relative}</span></td>
+${indent}  <td class="num">${r.monto}</td>
+${indent}  <td><span class="gob-dg-status" data-tone="${r.estatus}"><span class="gob-dg-dot"></span>${r.estatusLabel}</span></td>
+${indent}</tr>`;
+}
+
+function chromeSlots(example: GridExample, lang: CodeLang): string {
+  const tabs =
+    example.showTabs
+      ? lang === 'react'
+        ? `      <div slot="tabs">{/* tabs con conteos + onClick */}</div>`
+        : `  <div slot="tabs">
+    <button type="button" data-active>Todos</button>
+    <button type="button">Activos</button>
+    <button type="button">En revision</button>
+  </div>`
+      : '';
+  const filters =
+    example.showFilters
+      ? lang === 'react'
+        ? `      <div slot="filters">
+        <input placeholder="Buscar folio, CURP o nombre..." value={query} onChange={(e) => setQuery(e.target.value)} />
+      </div>`
+        : `  <div slot="filters">
+    <input placeholder="Buscar folio, CURP o nombre..." />
+  </div>`
+      : '';
+  const bulk =
+    example.showBulk
+      ? lang === 'react'
+        ? `      <div slot="bulk">{selected.length} seleccionados</div>`
+        : `  <div slot="bulk">0 seleccionados</div>`
+      : '';
+  return [tabs, filters, bulk].filter(Boolean).join('\n');
+}
+
+/** Snippet completo: markup real + patron interactivo (la logica vive en tu app). */
 export function buildSnippet(
   lang: CodeLang,
   example: GridExample,
   tone: DataGridTone,
 ): string {
   const attrs = ` variant="${example.variant}" tone="${tone}"`;
+  const rows = DEMO_ROWS.slice(0, 3);
+  const htmlBody = rows.map((r) => htmlRow(r)).join('\n');
+  const chrome = chromeSlots(example, lang);
 
   if (lang === 'html') {
     return `<!-- npm i @mariasan001/ui-wc -->
+<!-- gob-data-grid es el cascaron visual. Ordenar/filtrar/paginar lo implementas en tu app. -->
 <script type="module">import '@mariasan001/ui-wc';</script>
 
 <gob-data-grid${attrs}>
   <span slot="title">${example.cardTitle}</span>
-  <div slot="tabs"><!-- tabs con conteos --></div>
-  <div slot="filters"><!-- busqueda + chips --></div>
-  <table>
-    <thead><!-- columnas sortable --></thead>
-    <tbody><!-- celdas dual-line + avatares + pills --></tbody>
+${example.subtitle ? `  <span slot="subtitle">${example.subtitle}</span>\n` : ''}${chrome ? `${chrome}\n` : ''}  <table>
+    <thead>
+      <tr>
+        <th><button type="button" class="gob-dg-sort" data-dir="desc">Expediente</button></th>
+        <th><button type="button" class="gob-dg-sort">Ciudadano</button></th>
+        <th><button type="button" class="gob-dg-sort">Dependencia</button></th>
+        <th><button type="button" class="gob-dg-sort">Actualizado</button></th>
+        <th class="num"><button type="button" class="gob-dg-sort">Monto</button></th>
+        <th><button type="button" class="gob-dg-sort">Estatus</button></th>
+      </tr>
+    </thead>
+    <tbody>
+${htmlBody}
+    </tbody>
   </table>
-  <span slot="footer">1 – 25 de 12,480</span>
+  <span slot="footer">1 – ${rows.length} de ${rows.length}</span>
 </gob-data-grid>`;
   }
 
   if (lang === 'react') {
-    return `${iconImports(lang)}export function TablaAvanzada() {
+    return `// npm i @mariasan001/ui-wc
+// Patron interactivo: el estado (sort/filter/page) vive en React; gob-data-grid solo pinta.
+import { useMemo, useState } from 'react';
+import '@mariasan001/ui-wc';
+
+const ROWS = ${sampleRowsJson(3)};
+
+export function TablaAvanzada() {
+  const [query, setQuery] = useState('');
+  const [sortKey, setSortKey] = useState('folio');
+  const [sortDir, setSortDir] = useState('desc');
+  const [page, setPage] = useState(1);
+  const pageSize = 5;
+${example.showBulk ? `  const [selected, setSelected] = useState([]);\n` : ''}
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return ROWS.filter((r) =>
+      !q ||
+      r.folio.toLowerCase().includes(q) ||
+      r.ciudadano.toLowerCase().includes(q) ||
+      r.curp.toLowerCase().includes(q)
+    );
+  }, [query]);
+
+  const sorted = useMemo(() => {
+    const copy = [...filtered];
+    copy.sort((a, b) => {
+      const av = a[sortKey];
+      const bv = b[sortKey];
+      const cmp = String(av).localeCompare(String(bv), 'es');
+      return sortDir === 'asc' ? cmp : -cmp;
+    });
+    return copy;
+  }, [filtered, sortKey, sortDir]);
+
+  const pageRows = sorted.slice((page - 1) * pageSize, page * pageSize);
+  const from = sorted.length ? (page - 1) * pageSize + 1 : 0;
+  const to = (page - 1) * pageSize + pageRows.length;
+
+  function toggleSort(key) {
+    if (sortKey === key) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    else { setSortKey(key); setSortDir('asc'); }
+  }
+
   return (
     <gob-data-grid${attrs}>
       <span slot="title">${example.cardTitle}</span>
-      <div slot="tabs">{/* tabs */}</div>
-      <div slot="filters">{/* filtros */}</div>
-      <table>{/* thead + tbody */}</table>
-      <span slot="footer">1 – 25 de 12,480</span>
+${example.subtitle ? `      <span slot="subtitle">${example.subtitle}</span>\n` : ''}${chrome ? `${chrome}\n` : ''}      <table>
+        <thead>
+          <tr>
+            <th><button type="button" className="gob-dg-sort" data-dir={sortKey === 'folio' ? sortDir : undefined} onClick={() => toggleSort('folio')}>Expediente</button></th>
+            <th><button type="button" className="gob-dg-sort" data-dir={sortKey === 'ciudadano' ? sortDir : undefined} onClick={() => toggleSort('ciudadano')}>Ciudadano</button></th>
+            <th>Dependencia</th>
+            <th>Actualizado</th>
+            <th className="num">Monto</th>
+            <th>Estatus</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pageRows.map((r) => (
+            <tr key={r.folio}>
+              <td>
+                <span className="gob-dg-stack">
+                  <span className="gob-dg-primary">{r.folio}</span>
+                  <span className="gob-dg-secondary">Creado: {r.fecha}</span>
+                </span>
+              </td>
+              <td>
+                <span className="gob-dg-cell">
+                  <span className="gob-dg-avatar" data-hue={r.hue}>{r.initials}</span>
+                  <span className="gob-dg-stack">
+                    <span className="gob-dg-primary">{r.ciudadano}</span>
+                    <span className="gob-dg-secondary">{r.curp}</span>
+                  </span>
+                </span>
+              </td>
+              <td>
+                <span className="gob-dg-stack">
+                  <span className="gob-dg-primary">{r.dependencia}</span>
+                  <span className="gob-dg-secondary">{r.programa}</span>
+                </span>
+              </td>
+              <td><span className="gob-dg-secondary">{r.relative}</span></td>
+              <td className="num">{r.monto}</td>
+              <td>
+                <span className="gob-dg-status" data-tone={r.estatus}>
+                  <span className="gob-dg-dot" />
+                  {r.estatusLabel}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <span slot="footer">
+        {from} – {to} de {sorted.length}
+        <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>Anterior</button>
+        <button type="button" disabled={to >= sorted.length} onClick={() => setPage((p) => p + 1)}>Siguiente</button>
+      </span>
     </gob-data-grid>
   );
 }`;
   }
 
   if (lang === 'vue') {
-    return `<script setup>
-${iconImports(lang).trimEnd()}
+    return `<!-- npm i @mariasan001/ui-wc -->
+<!-- La interaccion (sort/filter/page) la controlas en script setup; el WC solo estiliza. -->
+<script setup>
+import { computed, ref } from 'vue';
+import '@mariasan001/ui-wc';
+
+const query = ref('');
+const rows = ref(${sampleRowsJson(3)});
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return rows.value.filter((r) =>
+    !q || r.folio.toLowerCase().includes(q) || r.ciudadano.toLowerCase().includes(q)
+  );
+});
 </script>
 
 <template>
   <gob-data-grid${attrs}>
     <span slot="title">${example.cardTitle}</span>
-    <div slot="tabs"><!-- tabs --></div>
-    <div slot="filters"><!-- filtros --></div>
-    <table><!-- thead + tbody --></table>
-    <span slot="footer">1 – 25 de 12,480</span>
+${example.subtitle ? `    <span slot="subtitle">${example.subtitle}</span>\n` : ''}${example.showFilters ? `    <div slot="filters">
+      <input v-model="query" placeholder="Buscar folio, CURP o nombre..." />
+    </div>\n` : ''}    <table>
+      <thead>
+        <tr>
+          <th>Expediente</th>
+          <th>Ciudadano</th>
+          <th>Dependencia</th>
+          <th class="num">Monto</th>
+          <th>Estatus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="r in filtered" :key="r.folio">
+          <td>
+            <span class="gob-dg-stack">
+              <span class="gob-dg-primary">{{ r.folio }}</span>
+              <span class="gob-dg-secondary">Creado: {{ r.fecha }}</span>
+            </span>
+          </td>
+          <td>
+            <span class="gob-dg-cell">
+              <span class="gob-dg-avatar" :data-hue="r.hue">{{ r.initials }}</span>
+              <span class="gob-dg-stack">
+                <span class="gob-dg-primary">{{ r.ciudadano }}</span>
+                <span class="gob-dg-secondary">{{ r.curp }}</span>
+              </span>
+            </span>
+          </td>
+          <td>{{ r.dependencia }}</td>
+          <td class="num">{{ r.monto }}</td>
+          <td>
+            <span class="gob-dg-status" :data-tone="r.estatus">{{ r.estatusLabel }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <span slot="footer">{{ filtered.length }} resultados</span>
   </gob-data-grid>
 </template>`;
   }
 
-  return `// app.component.html
-${iconImports(lang)}<gob-data-grid${attrs}>
+  return `// npm i @mariasan001/ui-wc
+// Angular: controla sort/filter/page en el componente; gob-data-grid solo renderiza slots + table.
+// app.component.ts — rows = ${JSON.stringify(rows.map((r) => r.folio))}
+import '@mariasan001/ui-wc';
+
+// app.component.html
+<gob-data-grid${attrs}>
   <span slot="title">${example.cardTitle}</span>
-  <div slot="tabs"><!-- tabs --></div>
-  <div slot="filters"><!-- filtros --></div>
-  <table><!-- thead + tbody --></table>
-  <span slot="footer">1 – 25 de 12,480</span>
+${example.subtitle ? `  <span slot="subtitle">${example.subtitle}</span>\n` : ''}  <div slot="filters">
+    <input placeholder="Buscar folio, CURP o nombre..." (input)="onSearch($event)" />
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Expediente</th>
+        <th>Ciudadano</th>
+        <th>Dependencia</th>
+        <th class="num">Monto</th>
+        <th>Estatus</th>
+      </tr>
+    </thead>
+    <tbody>
+${htmlBody}
+    </tbody>
+  </table>
+  <span slot="footer">1 – ${rows.length} de ${rows.length}</span>
 </gob-data-grid>`;
 }
+
