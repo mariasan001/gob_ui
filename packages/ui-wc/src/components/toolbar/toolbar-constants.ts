@@ -4,6 +4,11 @@ export const TOOLBAR_VARIANTS = [
   'density',
   'refresh',
   'complete',
+  'search',
+  'views',
+  'print',
+  'bulk',
+  'icons',
 ] as const;
 
 export type ToolbarVariant = (typeof TOOLBAR_VARIANTS)[number];
@@ -25,7 +30,12 @@ export function resolveToolbarVariant(value: string | null): ToolbarVariant {
     value === 'actions' ||
     value === 'density' ||
     value === 'refresh' ||
-    value === 'complete'
+    value === 'complete' ||
+    value === 'search' ||
+    value === 'views' ||
+    value === 'print' ||
+    value === 'bulk' ||
+    value === 'icons'
   ) {
     return value;
   }
@@ -201,5 +211,47 @@ gob-toolbar[dense] .gob-tbx-btn,
 gob-toolbar[dense='true'] .gob-tbx-btn {
   padding: 0 10px;
   font-size: 11px;
+}
+
+gob-toolbar .gob-tbx-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  width: min(240px, 100%);
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--gob-tbx-surface-border);
+  background: var(--gob-tbx-surface);
+  color: var(--gob-tbx-text);
+  font-family: var(--gob-tbx-font);
+}
+gob-toolbar .gob-tbx-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--gob-tbx-title);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+}
+gob-toolbar .gob-tbx-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--gob-tbx-accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+gob-toolbar[tone='dark'] .gob-tbx-badge {
+  color: #181511;
 }
 `;

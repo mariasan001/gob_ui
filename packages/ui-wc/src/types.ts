@@ -317,7 +317,12 @@ export type FilterBarVariant =
   | 'chips'
   | 'dense'
   | 'with-actions'
-  | 'complete';
+  | 'complete'
+  | 'dates'
+  | 'tags'
+  | 'count'
+  | 'region'
+  | 'advanced';
 
 export type FilterBarTone = Tone;
 
@@ -331,7 +336,12 @@ export type ToolbarVariant =
   | 'actions'
   | 'density'
   | 'refresh'
-  | 'complete';
+  | 'complete'
+  | 'search'
+  | 'views'
+  | 'print'
+  | 'bulk'
+  | 'icons';
 
 export type ToolbarTone = Tone;
 
@@ -348,7 +358,12 @@ export type ListVariant =
   | 'actions'
   | 'dense'
   | 'selectable'
-  | 'complete';
+  | 'complete'
+  | 'icon'
+  | 'nav'
+  | 'grouped'
+  | 'status'
+  | 'empty';
 
 export type ListTone = Tone;
 

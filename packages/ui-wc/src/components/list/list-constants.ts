@@ -6,6 +6,11 @@ export const LIST_VARIANTS = [
   'dense',
   'selectable',
   'complete',
+  'icon',
+  'nav',
+  'grouped',
+  'status',
+  'empty',
 ] as const;
 
 export type ListVariant = (typeof LIST_VARIANTS)[number];
@@ -29,7 +34,12 @@ export function resolveListVariant(value: string | null): ListVariant {
     value === 'actions' ||
     value === 'dense' ||
     value === 'selectable' ||
-    value === 'complete'
+    value === 'complete' ||
+    value === 'icon' ||
+    value === 'nav' ||
+    value === 'grouped' ||
+    value === 'status' ||
+    value === 'empty'
   ) {
     return value;
   }
@@ -227,5 +237,63 @@ gob-list .gob-list-action {
 gob-list .gob-list-action:hover {
   background: var(--gob-list-accent-soft);
   color: var(--gob-list-accent-text);
+}
+
+gob-list .gob-list-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gob-list-accent-soft);
+  color: var(--gob-list-accent-text);
+  flex: 0 0 auto;
+}
+gob-list[variant='dense'] .gob-list-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+gob-list .gob-list-group {
+  display: block;
+  padding: 10px 16px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gob-list-muted);
+  background: transparent;
+  border-bottom: 1px solid var(--gob-list-border);
+}
+
+gob-list .gob-list-empty {
+  display: grid;
+  gap: 6px;
+  place-items: center;
+  padding: 36px 20px;
+  text-align: center;
+}
+gob-list .gob-list-empty strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gob-list-title);
+}
+gob-list .gob-list-empty p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gob-list-muted);
+  max-width: 32ch;
+}
+
+gob-list .gob-list-item[data-interactive='true'] {
+  cursor: pointer;
+}
+gob-list .gob-list-chevron {
+  color: var(--gob-list-muted);
+  flex: 0 0 auto;
+  margin-inline-start: auto;
 }
 `;
