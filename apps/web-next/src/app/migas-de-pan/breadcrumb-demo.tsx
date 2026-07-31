@@ -117,14 +117,15 @@ export function BreadcrumbDemo({
   example: BreadcrumbExample;
   tone: Tone;
 }) {
+  // Vars en un wrapper (no en el CE) para evitar mismatch de hidratacion
+  // cuando el custom element muta o reordena el atributo style.
   return (
-    <div className={local.stageInner}>
+    <div className={local.stageInner} style={BREADCRUMB_THEME_VARS[tone]}>
       <gob-breadcrumb
         key={`${example.id}-${tone}`}
         variant={example.variant}
         tone={tone}
         className={example.variant === 'underline' ? local.underline : undefined}
-        style={BREADCRUMB_THEME_VARS[tone]}
       >
         {crumbsFor(example.variant)}
       </gob-breadcrumb>
