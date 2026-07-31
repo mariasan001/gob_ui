@@ -63,8 +63,8 @@ export default function TablaAvanzadaPage() {
         <section className={s.panel}>
           <p className={local.libNote}>
             Tablas a nivel SaaS para <strong>padrones y mesas de control</strong>:
-            tabs con conteos, busqueda, chips, celdas dual-line, avatares, pills
-            de estatus y paginacion. Usa <code>gob-data-grid</code> +{' '}
+            18 variantes (tabs, filas tarjeta, asignados, progreso, tags, live,
+            financiera, alertas, skeleton…). Usa <code>gob-data-grid</code> +{' '}
             <code>&lt;table&gt;</code> nativa.
           </p>
 
