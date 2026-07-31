@@ -173,58 +173,76 @@ export const TABLE_ATTRS = [
 export type DemoRow = {
   folio: string;
   ciudadano: string;
+  curp: string;
   dependencia: string;
   fecha: string;
   monto: string;
   estatus: 'ok' | 'warn' | 'err' | 'info';
   estatusLabel: string;
+  initials: string;
+  hue: number;
 };
 
 export const DEMO_ROWS: DemoRow[] = [
   {
     folio: 'EXP-2026-01482',
     ciudadano: 'Garcia Lopez, Ana',
+    curp: 'GALA850312MDFRPN09',
     dependencia: 'Salud',
     fecha: '12/03/2026',
     monto: '$4,250.00',
     estatus: 'ok',
     estatusLabel: 'Aprobado',
+    initials: 'AG',
+    hue: 0,
   },
   {
     folio: 'EXP-2026-01483',
     ciudadano: 'Hernandez Ruiz, Luis',
+    curp: 'HERL900221HDFRZS08',
     dependencia: 'Educacion',
     fecha: '12/03/2026',
     monto: '$1,180.00',
     estatus: 'warn',
     estatusLabel: 'En revision',
+    initials: 'LH',
+    hue: 1,
   },
   {
     folio: 'EXP-2026-01484',
     ciudadano: 'Martinez Soto, Paula',
+    curp: 'MASP880714MDFRTL05',
     dependencia: 'Movilidad',
     fecha: '11/03/2026',
     monto: '$890.00',
     estatus: 'info',
     estatusLabel: 'Recibido',
+    initials: 'PM',
+    hue: 2,
   },
   {
     folio: 'EXP-2026-01485',
     ciudadano: 'Jimenez Cruz, Diego',
+    curp: 'JICD750903HDFMRG02',
     dependencia: 'Hacienda',
     fecha: '11/03/2026',
     monto: '$12,400.00',
     estatus: 'err',
     estatusLabel: 'Rechazado',
+    initials: 'DJ',
+    hue: 3,
   },
   {
     folio: 'EXP-2026-01486',
     ciudadano: 'Vargas Neri, Sofia',
+    curp: 'VANS920518MDFRRF07',
     dependencia: 'Seguridad',
     fecha: '10/03/2026',
     monto: '$2,010.00',
     estatus: 'ok',
     estatusLabel: 'Aprobado',
+    initials: 'SV',
+    hue: 4,
   },
 ];
 
@@ -234,29 +252,38 @@ export const DEMO_ROWS_LONG: DemoRow[] = [
   {
     folio: 'EXP-2026-01487',
     ciudadano: 'Ortega Diaz, Mario',
+    curp: 'ORDM830101HDFRTR01',
     dependencia: 'Salud',
     fecha: '10/03/2026',
     monto: '$760.00',
     estatus: 'warn',
     estatusLabel: 'En revision',
+    initials: 'MO',
+    hue: 5,
   },
   {
     folio: 'EXP-2026-01488',
     ciudadano: 'Pena Salas, Laura',
+    curp: 'PESL910430MDFNLS04',
     dependencia: 'Educacion',
     fecha: '09/03/2026',
     monto: '$3,320.00',
     estatus: 'info',
     estatusLabel: 'Recibido',
+    initials: 'LP',
+    hue: 1,
   },
   {
     folio: 'EXP-2026-01489',
     ciudadano: 'Ramos Ibarra, Jose',
+    curp: 'RAIJ780212HDFMBS03',
     dependencia: 'Movilidad',
     fecha: '09/03/2026',
     monto: '$510.00',
     estatus: 'ok',
     estatusLabel: 'Aprobado',
+    initials: 'JR',
+    hue: 2,
   },
 ];
 

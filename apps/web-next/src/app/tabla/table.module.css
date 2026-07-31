@@ -78,7 +78,7 @@
 }
 
 .stageInner {
-  width: min(720px, 100%);
+  width: min(780px, 100%);
 }
 
 .toolbar {
@@ -86,14 +86,22 @@
   gap: 6px;
 }
 
+.footerSlot {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .toolBtn {
   appearance: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 30px;
-  padding: 0 10px;
-  border-radius: 9px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 10px;
   border: 1px solid rgba(24, 21, 17, 0.1);
   background: #fff;
   color: #4a453e;
@@ -147,6 +155,19 @@
 .libNote strong {
   color: #9f2141;
   font-weight: 700;
+}
+
+.libNote code {
+  font-family: var(--gob-font-mono, ui-monospace, Menlo, monospace);
+  font-size: 12px;
+  color: #9f2141;
+}
+
+.libNote a {
+  color: #9f2141;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .tableWrap {

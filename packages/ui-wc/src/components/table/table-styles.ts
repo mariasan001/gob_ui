@@ -5,12 +5,12 @@ export const tableStyles = `
   box-sizing: border-box;
   font-family: var(--gob-font-sans, Gotham, Raleway, sans-serif);
   --gob-tb-bg: #ffffff;
-  --gob-tb-border: rgba(24, 21, 17, 0.1);
+  --gob-tb-border: rgba(24, 21, 17, 0.08);
   --gob-tb-title: #181511;
   --gob-tb-muted: #8a8278;
   --gob-tb-accent: #9f2141;
-  --gob-tb-radius: 16px;
-  --gob-tb-shadow: none;
+  --gob-tb-radius: 14px;
+  --gob-tb-shadow: 0 1px 2px rgba(24, 21, 17, 0.04), 0 8px 24px rgba(24, 21, 17, 0.04);
 }
 
 *,
@@ -34,28 +34,29 @@ export const tableStyles = `
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(24, 21, 17, 0.08);
+  gap: 16px;
+  padding: 18px 20px 14px;
 }
 
 .headText {
   display: grid;
-  gap: 2px;
+  gap: 4px;
   min-width: 0;
 }
 
 .title {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--gob-tb-title);
 }
 
 .subtitle {
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
+  line-height: 1.4;
   color: var(--gob-tb-muted);
 }
 
@@ -64,6 +65,8 @@ export const tableStyles = `
   align-items: center;
   gap: 8px;
   flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .scroll {
@@ -72,14 +75,14 @@ export const tableStyles = `
 }
 
 .root[data-variant='sticky'] .scroll {
-  max-height: 260px;
+  max-height: 280px;
 }
 
 .empty {
   display: none;
   place-items: center;
   gap: 8px;
-  padding: 48px 20px;
+  padding: 56px 20px;
   text-align: center;
   color: var(--gob-tb-muted);
 }
@@ -94,7 +97,7 @@ export const tableStyles = `
 
 .emptyTitle {
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--gob-tb-title);
 }
@@ -112,16 +115,16 @@ export const tableStyles = `
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 16px;
-  border-top: 1px solid rgba(24, 21, 17, 0.08);
-  font-size: 12px;
+  padding: 12px 20px;
+  border-top: 1px solid rgba(24, 21, 17, 0.06);
+  font-size: 13px;
   font-weight: 500;
   color: var(--gob-tb-muted);
-  background: #fafafa;
+  background: #fff;
 }
 
 .root[data-variant='dense'] .head {
-  padding: 10px 12px;
+  padding: 12px 14px;
 }
 
 .root[data-variant='basic'] .subtitle,
