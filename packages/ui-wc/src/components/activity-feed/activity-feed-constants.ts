@@ -7,6 +7,11 @@ export const ACTIVITY_FEED_VARIANTS = [
   'unread',
   'complete',
   'status',
+  'icon',
+  'cards',
+  'mentions',
+  'files',
+  'empty',
 ] as const;
 
 export type ActivityFeedVariant = (typeof ACTIVITY_FEED_VARIANTS)[number];
@@ -33,7 +38,12 @@ export function resolveActivityFeedVariant(
     value === 'grouped' ||
     value === 'unread' ||
     value === 'complete' ||
-    value === 'status'
+    value === 'status' ||
+    value === 'icon' ||
+    value === 'cards' ||
+    value === 'mentions' ||
+    value === 'files' ||
+    value === 'empty'
   ) {
     return value;
   }
@@ -340,5 +350,140 @@ gob-activity-feed[variant='status'] .gob-af-head,
 gob-activity-feed[variant='complete'] .gob-af-head,
 gob-activity-feed[variant='unread'] .gob-af-head {
   margin-bottom: 0;
+}
+
+/* Icono de tipo */
+gob-activity-feed .gob-af-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--gob-af-vino-soft);
+  color: var(--gob-af-vino);
+  border: 1.5px solid color-mix(in srgb, var(--gob-af-vino) 16%, transparent);
+  flex: 0 0 auto;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+}
+gob-activity-feed .gob-af-item:nth-child(even of .gob-af-item) .gob-af-icon {
+  background: var(--gob-af-cafe-soft);
+  color: #7a5a2e;
+  border-color: color-mix(in srgb, var(--gob-af-cafe) 28%, transparent);
+}
+gob-activity-feed .gob-af-item:hover .gob-af-icon {
+  transform: scale(1.04);
+  background: var(--gob-af-vino);
+  color: #fff;
+  border-color: transparent;
+}
+gob-activity-feed .gob-af-item:nth-child(even of .gob-af-item):hover .gob-af-icon {
+  background: var(--gob-af-cafe);
+  color: #fff;
+}
+gob-activity-feed[tone='dark'] .gob-af-item:hover .gob-af-icon {
+  color: #181511;
+}
+
+/* Tarjetas */
+gob-activity-feed[variant='cards'] {
+  --gob-af-pad-y: 0;
+  --gob-af-pad-x: 0;
+}
+gob-activity-feed[variant='cards'] .root,
+gob-activity-feed[variant='cards'] {
+  gap: 0;
+}
+gob-activity-feed[variant='cards'] .gob-af-item {
+  margin: 10px 12px;
+  padding: 14px 14px;
+  border: 1px solid color-mix(in srgb, var(--gob-af-cafe) 28%, transparent);
+  border-radius: 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--gob-af-cafe) 28%, transparent);
+  background: #ffffff;
+  box-shadow: none;
+}
+gob-activity-feed[variant='cards'] .gob-af-item:last-child {
+  margin-bottom: 12px;
+}
+gob-activity-feed[variant='cards'] .gob-af-item:hover {
+  border-color: color-mix(in srgb, var(--gob-af-vino) 22%, var(--gob-af-cafe));
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(24, 21, 17, 0.06);
+}
+gob-activity-feed[tone='dark'][variant='cards'] .gob-af-item {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Menciones */
+gob-activity-feed .gob-af-mention {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--gob-af-cafe-soft);
+  color: #7a5a2e;
+  font-weight: 700;
+}
+gob-activity-feed[variant='mentions'] .gob-af-primary strong {
+  color: var(--gob-af-vino);
+}
+
+/* Archivos / adjuntos */
+gob-activity-feed .gob-af-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 2px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--gob-af-cafe) 32%, transparent);
+  background: #ffffff;
+  color: var(--gob-af-title);
+  font-size: 11px;
+  font-weight: 600;
+}
+gob-activity-feed .gob-af-file svg,
+gob-activity-feed .gob-af-file i {
+  color: var(--gob-af-vino);
+  flex: 0 0 auto;
+}
+gob-activity-feed .gob-af-item:nth-child(even of .gob-af-item) .gob-af-file svg,
+gob-activity-feed .gob-af-item:nth-child(even of .gob-af-item) .gob-af-file i {
+  color: #7a5a2e;
+}
+
+/* Vacio */
+gob-activity-feed .gob-af-empty {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 36px 24px;
+  text-align: center;
+  background: #ffffff;
+}
+gob-activity-feed .gob-af-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: var(--gob-af-vino-soft);
+  color: var(--gob-af-vino);
+  border: 1.5px solid color-mix(in srgb, var(--gob-af-vino) 14%, transparent);
+}
+gob-activity-feed .gob-af-empty-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gob-af-title);
+}
+gob-activity-feed .gob-af-empty-desc {
+  margin: 0;
+  max-width: 32ch;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gob-af-text);
 }
 `;
