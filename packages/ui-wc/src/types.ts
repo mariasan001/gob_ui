@@ -379,7 +379,12 @@ export type TimelineVariant =
   | 'dense'
   | 'alternating'
   | 'cards'
-  | 'complete';
+  | 'complete'
+  | 'numbered'
+  | 'dates'
+  | 'milestones'
+  | 'horizontal'
+  | 'grouped';
 
 export type TimelineTone = Tone;
 
