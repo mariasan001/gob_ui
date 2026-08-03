@@ -8,11 +8,15 @@ import {
 } from './timeline-constants';
 import { timelineStyles } from './timeline-styles';
 
-const LIGHT_STYLE_ID = 'gob-timeline-light-dom';
+const LIGHT_STYLE_ID = 'gob-timeline-light-dom-v2';
 
 function ensureLightDomStyles() {
   if (typeof document === 'undefined') return;
-  if (document.getElementById(LIGHT_STYLE_ID)) return;
+  const existing = document.getElementById(LIGHT_STYLE_ID);
+  if (existing) {
+    existing.textContent = timelineLightDomStyles;
+    return;
+  }
   const style = document.createElement('style');
   style.id = LIGHT_STYLE_ID;
   style.textContent = timelineLightDomStyles;
