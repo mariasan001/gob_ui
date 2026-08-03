@@ -91,6 +91,7 @@ export const SAMPLE_EVENTS = [
     title: 'Expediente recibido',
     desc: 'Ingreso por ventanilla digital · EXP-2026-01482',
     status: 'Alta',
+    statusKey: 'alta',
     icon: 'Tray',
   },
   {
@@ -99,6 +100,7 @@ export const SAMPLE_EVENTS = [
     title: 'Asignado a revision',
     desc: 'Turnado a Direccion de Operaciones',
     status: 'Revision',
+    statusKey: 'revision',
     icon: 'User',
   },
   {
@@ -107,6 +109,7 @@ export const SAMPLE_EVENTS = [
     title: 'Dictamen emitido',
     desc: 'Resolucion favorable con observaciones',
     status: 'Cerrado',
+    statusKey: 'cerrado',
     icon: 'CheckCircle',
   },
 ] as const;
@@ -138,7 +141,7 @@ ${i}  </div>
 ${i}  <div class="gob-tl-body">
 ${i}    <div class="gob-tl-head">
 ${i}      <p class="gob-tl-time">${ev.time}</p>
-${showStatus ? `${i}      <span class="gob-tl-pill">${ev.status}</span>` : ''}
+${showStatus ? `${i}      <span class="gob-tl-pill" data-status="${ev.statusKey}">${ev.status}</span>` : ''}
 ${i}    </div>
 ${i}    <p class="gob-tl-title">${ev.title}</p>
 ${i}    <p class="gob-tl-desc">${ev.desc}</p>
