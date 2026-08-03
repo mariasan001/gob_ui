@@ -8,7 +8,7 @@ import {
 } from './activity-feed-constants';
 import { activityFeedStyles } from './activity-feed-styles';
 
-const LIGHT_STYLE_ID = 'gob-activity-feed-light-dom-v2';
+const LIGHT_STYLE_ID = 'gob-activity-feed-light-dom-v3';
 
 function ensureLightDomStyles() {
   if (typeof document === 'undefined') return;

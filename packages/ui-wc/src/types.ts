@@ -401,7 +401,12 @@ export type ActivityFeedVariant =
   | 'grouped'
   | 'unread'
   | 'complete'
-  | 'status';
+  | 'status'
+  | 'icon'
+  | 'cards'
+  | 'mentions'
+  | 'files'
+  | 'empty';
 
 export type ActivityFeedTone = Tone;
 
