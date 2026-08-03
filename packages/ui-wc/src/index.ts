@@ -29,6 +29,7 @@ import './components/spinner/gob-spinner';
 import './components/input/gob-input';
 import './components/textarea/gob-textarea';
 import './components/select/gob-select';
+import './components/combobox/gob-combobox';
 
 export type {
   ActivityFeedTone,
@@ -38,6 +39,9 @@ export type {
   ChartCardTone,
   ChartCardVariant,
   ChipTone,
+  ComboboxSize,
+  ComboboxStatus,
+  ComboboxVariant,
   ContainerVariant,
   DataGridTone,
   DataGridVariant,
@@ -54,6 +58,7 @@ export type {
   GobChartCardProps,
   GobCheckboxProps,
   GobChipProps,
+  GobComboboxProps,
   GobContainerProps,
   GobDataGridProps,
   GobDividerProps,
