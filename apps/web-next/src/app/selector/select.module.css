@@ -13,6 +13,12 @@
   border: 1px solid #ebebeb;
   background: #fff;
   min-width: 0;
+  overflow: visible;
+  z-index: 0;
+}
+
+.exampleCard:focus-within {
+  z-index: 5;
 }
 
 .exampleMeta {
@@ -67,18 +73,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 160px;
-  padding: 28px 22px;
+  min-height: 200px;
+  padding: 32px 22px 120px;
   border-radius: 16px;
   border: 1px solid #ececec;
-  overflow: hidden;
-  background: #ffffff;
+  overflow: visible;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(159, 33, 65, 0.05), transparent 55%),
+    radial-gradient(90% 70% at 0% 100%, rgba(188, 148, 90, 0.08), transparent 50%),
+    #ffffff;
 }
 
 .stageInner {
-  width: min(420px, 100%);
+  width: min(440px, 100%);
   display: grid;
   gap: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .select {

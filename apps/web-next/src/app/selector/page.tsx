@@ -49,8 +49,9 @@ export default function SelectorPage() {
           </Link>
           <h1 className={s.title}>Selector</h1>
           <p className={s.hint}>
-            Listas desplegables nativas del design system. Pulsa{' '}
-            <strong>Copiar</strong> para markup en <strong>{lang.toUpperCase()}</strong>.
+            Listas desplegables modernas del design system: panel custom,
+            busqueda, chips y motion. Pulsa <strong>Copiar</strong> para markup
+            en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
@@ -106,7 +107,7 @@ export default function SelectorPage() {
               <h2 className={s.sectionTitle}>Atributos</h2>
               <p className={s.sectionDesc}>
                 API de <code>gob-select</code>. Emite <code>gob-select</code> al
-                cambiar. Focus con anillo vino / semaforo.
+                cambiar. Panel listbox con teclado, limpia y semaforo.
               </p>
             </div>
             <div className={local.tableWrap}>

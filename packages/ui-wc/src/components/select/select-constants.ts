@@ -10,6 +10,10 @@ export const SELECT_VARIANTS = [
   'icon',
   'group',
   'multiple',
+  'search',
+  'underline',
+  'ghost',
+  'split',
   'complete',
 ] as const;
 
@@ -31,6 +35,7 @@ export type SelectSize = (typeof SELECT_SIZES)[number];
 export type SelectOption = {
   value: string;
   label: string;
+  hint?: string;
   disabled?: boolean;
 };
 
@@ -56,11 +61,12 @@ export const SELECT_OBSERVED_ATTRIBUTES = [
 ] as const;
 
 export const DEFAULT_SELECT_OPTIONS: SelectOption[] = [
-  { value: 'jal', label: 'Jalisco' },
-  { value: 'cdmx', label: 'Ciudad de Mexico' },
-  { value: 'nl', label: 'Nuevo Leon' },
-  { value: 'yuc', label: 'Yucatan' },
-  { value: 'sin', label: 'Sinaloa' },
+  { value: 'jal', label: 'Jalisco', hint: 'Occidente' },
+  { value: 'cdmx', label: 'Ciudad de Mexico', hint: 'Capital' },
+  { value: 'nl', label: 'Nuevo Leon', hint: 'Norte' },
+  { value: 'yuc', label: 'Yucatan', hint: 'Sureste' },
+  { value: 'sin', label: 'Sinaloa', hint: 'Pacifico' },
+  { value: 'qroo', label: 'Quintana Roo', hint: 'Caribe' },
 ];
 
 export const DEFAULT_GROUP_OPTIONS: SelectOptionGroup[] = [
@@ -109,7 +115,9 @@ export function resolveSelectSize(value: string | null): SelectSize {
   return 'md';
 }
 
-function isGroup(item: SelectOption | SelectOptionGroup): item is SelectOptionGroup {
+export function isGroup(
+  item: SelectOption | SelectOptionGroup,
+): item is SelectOptionGroup {
   return Array.isArray((item as SelectOptionGroup).options);
 }
 
@@ -131,4 +139,13 @@ export function parseSelectOptions(
   return DEFAULT_SELECT_OPTIONS;
 }
 
-export { isGroup };
+export function flattenOptions(
+  payload: SelectOptionsPayload,
+): SelectOption[] {
+  const out: SelectOption[] = [];
+  for (const item of payload) {
+    if (isGroup(item)) out.push(...item.options);
+    else out.push(item);
+  }
+  return out;
+}

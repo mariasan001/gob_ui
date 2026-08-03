@@ -615,6 +615,10 @@ export type SelectVariant =
   | 'icon'
   | 'group'
   | 'multiple'
+  | 'search'
+  | 'underline'
+  | 'ghost'
+  | 'split'
   | 'complete';
 
 export type SelectStatus =
