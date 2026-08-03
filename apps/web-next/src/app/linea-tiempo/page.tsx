@@ -2,17 +2,16 @@
 
 /**
  * Docs de Linea de tiempo — cascaron canonico = Botones (/botones).
+ * Color de marca fijo (vino + cafe); sin selector de tone.
  */
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import type { Tone } from '@mariasan001/ui-wc';
 import '@mariasan001/ui-wc';
 
 import {
   CODE_LANGUAGES,
-  COLOR_OPTIONS,
   TIMELINE_ATTRS,
   TIMELINE_EXAMPLES,
   buildSnippet,
@@ -23,9 +22,10 @@ import { TimelineDemo } from './timeline-demo';
 import local from './timeline.module.css';
 import s from './page.module.css';
 
+const BRAND_TONE = 'primary' as const;
+
 export default function LineaTiempoPage() {
   const [lang, setLang] = useState<CodeLang>('html');
-  const [tone, setTone] = useState<Tone>('primary');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function LineaTiempoPage() {
 
   async function copyExample(example: TimelineExample) {
     try {
-      await navigator.clipboard.writeText(buildSnippet(lang, example, tone));
+      await navigator.clipboard.writeText(buildSnippet(lang, example, BRAND_TONE));
       setCopiedKey(example.id);
       window.setTimeout(() => setCopiedKey(null), 1200);
     } catch {
@@ -80,27 +80,6 @@ export default function LineaTiempoPage() {
                 })}
               </div>
             </div>
-            <div className={s.filterBlock}>
-              <p className={s.filterLabel}>Color</p>
-              <div className={s.colorRow}>
-                {COLOR_OPTIONS.map((option) => {
-                  const active = option.id === tone;
-                  return (
-                    <button
-                      key={option.id}
-                      type="button"
-                      className={`${s.colorSwatch} ${active ? s.colorSwatchActive : ''}`}
-                      style={{ background: option.swatch }}
-                      data-tone={option.id}
-                      aria-label={option.label}
-                      aria-pressed={active}
-                      title={option.label}
-                      onClick={() => setTone(option.id)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
           <div className={local.exampleList} aria-label="Ejemplos">
@@ -118,7 +97,7 @@ export default function LineaTiempoPage() {
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
                 <div className={local.stage}>
-                  <TimelineDemo example={example} tone={tone} />
+                  <TimelineDemo example={example} />
                 </div>
               </article>
             ))}
