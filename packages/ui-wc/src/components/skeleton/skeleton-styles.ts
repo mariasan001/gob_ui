@@ -54,11 +54,10 @@ export const skeletonStyles = `
   width: 100%;
   box-sizing: border-box;
   font-family: var(--gob-font-sans, Gotham, Raleway, sans-serif);
-  /* Marca unica: base neutra + shimmer vino/dorado */
-  --gob-sk-base: #ece8e2;
-  --gob-sk-shine: #f7f4ef;
-  --gob-sk-vino: rgba(159, 33, 65, 0.08);
-  --gob-sk-dorado: rgba(188, 148, 90, 0.14);
+  /* Presentacion unica: gris clarito */
+  --gob-sk-base: #e8e8e8;
+  --gob-sk-shine: #f5f5f5;
+  --gob-sk-mid: rgba(255, 255, 255, 0.55);
   --gob-sk-radius: 10px;
   --gob-sk-bg: #ffffff;
   --gob-sk-border: rgba(24, 21, 17, 0.08);
@@ -106,9 +105,9 @@ export const skeletonStyles = `
   background: linear-gradient(
     105deg,
     transparent 0%,
-    var(--gob-sk-dorado) 35%,
+    var(--gob-sk-mid) 42%,
     var(--gob-sk-shine) 50%,
-    var(--gob-sk-vino) 65%,
+    var(--gob-sk-mid) 58%,
     transparent 100%
   );
   transform: translateX(-120%);
