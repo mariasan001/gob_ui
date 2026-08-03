@@ -24,6 +24,7 @@ export type PreviewKind =
   | 'activity-feed'
   | 'empty-state'
   | 'skeleton'
+  | 'progress'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -317,12 +318,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'progress',
+    href: '/progreso',
     name: 'Progreso',
     description: 'Barras y anillos de avance.',
-    preview: 'soon',
+    preview: 'progress',
     category: 'feedback',
     tags: ['progreso', 'carga', 'progress'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'spinner',

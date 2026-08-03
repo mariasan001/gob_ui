@@ -24,6 +24,7 @@ import './components/timeline/gob-timeline';
 import './components/activity-feed/gob-activity-feed';
 import './components/empty-state/gob-empty-state';
 import './components/skeleton/gob-skeleton';
+import './components/progress/gob-progress';
 
 export type {
   ActivityFeedTone,
@@ -59,6 +60,7 @@ export type {
   GobListProps,
   GobPageHeaderProps,
   GobPaginationProps,
+  GobProgressProps,
   GobRadioProps,
   GobSidebarProps,
   GobSkeletonProps,
@@ -78,6 +80,8 @@ export type {
   PageHeaderVariant,
   PaginationLang,
   PaginationVariant,
+  ProgressStatus,
+  ProgressVariant,
   SidebarVariant,
   Size,
   SkeletonVariant,
