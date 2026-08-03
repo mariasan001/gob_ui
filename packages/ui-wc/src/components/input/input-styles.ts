@@ -27,6 +27,10 @@ export const inputStyles = `
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .root {
   display: grid;
   gap: 8px;
