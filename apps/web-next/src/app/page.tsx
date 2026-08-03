@@ -342,6 +342,16 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'textarea') {
+    return (
+      <div className={s.fakeTextarea} aria-hidden="true">
+        <b />
+        <i />
+        <i />
+        <i />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

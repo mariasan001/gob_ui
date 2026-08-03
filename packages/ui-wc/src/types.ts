@@ -564,6 +564,45 @@ export type GobInputProps = React.HTMLAttributes<HTMLElement> & {
   required?: boolean;
 };
 
+export type TextareaVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'counter'
+  | 'auto'
+  | 'dense'
+  | 'filled'
+  | 'soft'
+  | 'floating'
+  | 'resize'
+  | 'code'
+  | 'complete';
+
+export type TextareaStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type TextareaSize = 'sm' | 'md' | 'lg';
+
+export type GobTextareaProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TextareaVariant;
+  label?: string;
+  placeholder?: string;
+  helper?: string;
+  value?: string;
+  status?: TextareaStatus;
+  size?: TextareaSize;
+  name?: string;
+  rows?: number | string;
+  maxlength?: number | string;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -599,6 +638,7 @@ declare global {
       'gob-progress': React.DetailedHTMLProps<GobProgressProps, HTMLElement>;
       'gob-spinner': React.DetailedHTMLProps<GobSpinnerProps, HTMLElement>;
       'gob-input': React.DetailedHTMLProps<GobInputProps, HTMLElement>;
+      'gob-textarea': React.DetailedHTMLProps<GobTextareaProps, HTMLElement>;
     }
   }
 }

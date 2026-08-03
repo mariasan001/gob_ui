@@ -27,6 +27,7 @@ import './components/skeleton/gob-skeleton';
 import './components/progress/gob-progress';
 import './components/spinner/gob-spinner';
 import './components/input/gob-input';
+import './components/textarea/gob-textarea';
 
 export type {
   ActivityFeedTone,
@@ -71,6 +72,7 @@ export type {
   GobSpinnerProps,
   GobSwitchProps,
   GobTableProps,
+  GobTextareaProps,
   GobTimelineProps,
   GobToolbarProps,
   GobTopbarProps,
@@ -98,6 +100,9 @@ export type {
   SpinnerVariant,
   TableTone,
   TableVariant,
+  TextareaSize,
+  TextareaStatus,
+  TextareaVariant,
   TimelineTone,
   TimelineVariant,
   Tone,
