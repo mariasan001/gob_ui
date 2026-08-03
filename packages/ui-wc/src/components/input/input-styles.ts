@@ -250,4 +250,123 @@ export const inputStyles = `
   justify-content: space-between;
   gap: 10px;
 }
+
+/* Floating */
+.root[data-variant='floating'] {
+  gap: 6px;
+}
+.root[data-variant='floating'] .control {
+  align-items: flex-end;
+  min-height: 58px;
+  padding: 18px 14px 10px;
+}
+.root[data-variant='floating'] .float-label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  color: #b0aaa1;
+  pointer-events: none;
+  transition:
+    top 180ms var(--gob-in-ease),
+    transform 180ms var(--gob-in-ease),
+    font-size 180ms var(--gob-in-ease),
+    color 180ms var(--gob-in-ease);
+}
+.root[data-variant='floating'][data-focused='true'] .float-label,
+.root[data-variant='floating'][data-filled='true'] .float-label {
+  top: 10px;
+  transform: none;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gob-in-dorado);
+}
+.root[data-variant='floating'] .field {
+  height: 24px;
+}
+
+/* Underline */
+.root[data-variant='underline'] .control {
+  border: 0;
+  border-bottom: 2px solid #e5e1da;
+  border-radius: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+  background: transparent;
+  box-shadow: none;
+}
+.root[data-variant='underline'] .control:hover {
+  border-bottom-color: color-mix(in srgb, var(--gob-in-dorado) 55%, #e5e1da);
+}
+.root[data-variant='underline'][data-focused='true'] .control {
+  border-bottom-color: var(--gob-in-focus);
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Pill */
+.root[data-variant='pill'] .control {
+  border-radius: 999px;
+  padding-left: 18px;
+  padding-right: 18px;
+  background: #fff;
+}
+
+/* Soft filled — tinte vino ligero */
+.root[data-variant='soft'] .control {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--gob-in-vino) 7%, #ffffff);
+}
+.root[data-variant='soft'] .control:hover {
+  background: color-mix(in srgb, var(--gob-in-vino) 11%, #ffffff);
+  border-color: transparent;
+}
+.root[data-variant='soft'][data-focused='true'] .control {
+  background: #ffffff;
+  border-color: var(--gob-in-focus);
+}
+.root[data-variant='soft'] .affix {
+  color: var(--gob-in-vino);
+}
+
+/* Code / OTP */
+.root[data-variant='code'] .control {
+  justify-content: center;
+  border-radius: 16px;
+  letter-spacing: 0.28em;
+}
+.root[data-variant='code'] .field {
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+.root[data-variant='code'] .field::placeholder {
+  letter-spacing: 0.2em;
+  font-weight: 600;
+}
+
+/* Clearable */
+.clear {
+  appearance: none;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(24, 21, 17, 0.06);
+  color: var(--gob-in-muted);
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+.clear:hover {
+  background: rgba(159, 33, 65, 0.12);
+  color: var(--gob-in-vino);
+}
 `;

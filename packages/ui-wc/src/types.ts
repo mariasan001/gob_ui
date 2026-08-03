@@ -530,7 +530,13 @@ export type InputVariant =
   | 'prefix'
   | 'suffix'
   | 'dense'
-  | 'complete';
+  | 'complete'
+  | 'floating'
+  | 'underline'
+  | 'pill'
+  | 'clearable'
+  | 'code'
+  | 'soft';
 
 export type InputStatus =
   | 'default'

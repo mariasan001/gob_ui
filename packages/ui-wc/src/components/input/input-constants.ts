@@ -9,6 +9,12 @@ export const INPUT_VARIANTS = [
   'suffix',
   'dense',
   'complete',
+  'floating',
+  'underline',
+  'pill',
+  'clearable',
+  'code',
+  'soft',
 ] as const;
 
 export type InputVariant = (typeof INPUT_VARIANTS)[number];
