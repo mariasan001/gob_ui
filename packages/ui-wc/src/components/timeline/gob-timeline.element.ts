@@ -8,7 +8,7 @@ import {
 } from './timeline-constants';
 import { timelineStyles } from './timeline-styles';
 
-const LIGHT_STYLE_ID = 'gob-timeline-light-dom-v3';
+const LIGHT_STYLE_ID = 'gob-timeline-light-dom-v4';
 
 function ensureLightDomStyles() {
   if (typeof document === 'undefined') return;
