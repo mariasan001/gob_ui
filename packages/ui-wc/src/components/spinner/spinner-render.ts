@@ -45,6 +45,66 @@ function visualFor(variant: SpinnerVariant): string {
   <span class="bar"></span>
   <span class="bar"></span>
 </div>`;
+    case 'orbit':
+      return `<div class="visual" aria-hidden="true">
+  <div class="orbit">
+    <span class="orbit-core"></span>
+    <span class="orbit-sat"></span>
+  </div>
+</div>`;
+    case 'arc':
+      return `<div class="visual" aria-hidden="true">
+  <svg class="arc" viewBox="0 0 48 48">
+    <circle class="arc-track" cx="24" cy="24" r="18"></circle>
+    <circle class="arc-stroke" cx="24" cy="24" r="18"></circle>
+  </svg>
+</div>`;
+    case 'dash':
+      return `<div class="visual" aria-hidden="true"><span class="dash"></span></div>`;
+    case 'comet':
+      return `<div class="visual" aria-hidden="true">
+  <div class="comet">
+    <span class="comet-tail"></span>
+    <span class="comet-head"></span>
+  </div>
+</div>`;
+    case 'petals':
+      return `<div class="visual" aria-hidden="true">
+  <div class="petals">
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+  </div>
+</div>`;
+    case 'metro':
+      return `<div class="visual" aria-hidden="true">
+  <div class="metro">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</div>`;
+    case 'wave':
+      return `<div class="wave" aria-hidden="true">
+  <i></i><i></i><i></i><i></i><i></i>
+</div>`;
+    case 'radar':
+      return `<div class="visual" aria-hidden="true">
+  <div class="radar">
+    <span class="radar-sweep"></span>
+    <span class="radar-dot"></span>
+  </div>
+</div>`;
+    case 'infinity':
+      return `<div class="visual" aria-hidden="true">
+  <div class="infinity">
+    <span class="infinity-path"></span>
+    <span class="infinity-a"></span>
+    <span class="infinity-b"></span>
+  </div>
+</div>`;
+    case 'morph':
+      return `<div class="visual" aria-hidden="true"><span class="morph"></span></div>`;
     case 'button':
     case 'inline':
     case 'ring':
@@ -60,7 +120,8 @@ export function renderSpinnerMarkup(options: {
 }): string {
   const { variant, label, status } = options;
   const visual = visualFor(variant);
-  const showPill = status !== 'default' || variant === 'complete' || variant === 'overlay';
+  const showPill =
+    status !== 'default' || variant === 'complete' || variant === 'overlay';
   const showLabel =
     variant === 'inline' ||
     variant === 'page' ||

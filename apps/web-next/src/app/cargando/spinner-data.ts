@@ -95,6 +95,73 @@ export const SPINNER_EXAMPLES: SpinnerExample[] = [
     size: 'lg',
     status: 'warning',
   },
+  {
+    id: 'orbit',
+    title: 'Orbita',
+    description: 'Nucleo vino con satelite dorado en orbita.',
+    variant: 'orbit',
+    size: 'lg',
+  },
+  {
+    id: 'arc',
+    title: 'Arco',
+    description: 'Trazo SVG moderno con pista suave.',
+    variant: 'arc',
+    size: 'lg',
+  },
+  {
+    id: 'dash',
+    title: 'Guiones',
+    description: 'Anillo punteado en rotacion continua.',
+    variant: 'dash',
+  },
+  {
+    id: 'comet',
+    title: 'Cometa',
+    description: 'Cola de marca con cabeza dorada.',
+    variant: 'comet',
+    size: 'lg',
+  },
+  {
+    id: 'petals',
+    title: 'Petalos',
+    description: 'Flor minimal rotando en vino y dorado.',
+    variant: 'petals',
+    size: 'lg',
+  },
+  {
+    id: 'metro',
+    title: 'Metro',
+    description: 'Cuatro bloques con pulso escalonado.',
+    variant: 'metro',
+  },
+  {
+    id: 'wave',
+    title: 'Ola',
+    description: 'Cinco puntos en onda sincronizada.',
+    variant: 'wave',
+  },
+  {
+    id: 'radar',
+    title: 'Radar',
+    description: 'Barrido conico con punto de marca.',
+    variant: 'radar',
+    size: 'lg',
+  },
+  {
+    id: 'infinity',
+    title: 'Infinito',
+    description: 'Dos nodos que se cruzan en loop.',
+    variant: 'infinity',
+    size: 'lg',
+  },
+  {
+    id: 'morph',
+    title: 'Morph',
+    description: 'Blob que muta entre vino y dorado.',
+    variant: 'morph',
+    size: 'lg',
+  },
 ];
 
 export const SPINNER_ATTRS = [
@@ -102,7 +169,7 @@ export const SPINNER_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'ring',
-    body: 'ring | dual | dots | pulse | bars | button | inline | page | overlay | complete',
+    body: 'ring | dual | dots | pulse | bars | button | inline | page | overlay | complete | orbit | arc | dash | comet | petals | metro | wave | radar | infinity | morph',
   },
   {
     name: 'label',
