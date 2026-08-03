@@ -20,8 +20,13 @@ import './components/data-grid/gob-data-grid';
 import './components/filter-bar/gob-filter-bar';
 import './components/toolbar/gob-toolbar';
 import './components/list/gob-list';
+import './components/timeline/gob-timeline';
+import './components/activity-feed/gob-activity-feed';
+import './components/empty-state/gob-empty-state';
 
 export type {
+  ActivityFeedTone,
+  ActivityFeedVariant,
   Appearance,
   BreadcrumbVariant,
   ChartCardTone,
@@ -32,8 +37,11 @@ export type {
   DataGridVariant,
   DividerTone,
   DividerVariant,
+  EmptyStateTone,
+  EmptyStateVariant,
   FilterBarTone,
   FilterBarVariant,
+  GobActivityFeedProps,
   GobAppShellProps,
   GobBreadcrumbProps,
   GobButtonProps,
@@ -43,6 +51,7 @@ export type {
   GobContainerProps,
   GobDataGridProps,
   GobDividerProps,
+  GobEmptyStateProps,
   GobFilterBarProps,
   GobGridProps,
   GobKpiCardProps,
@@ -54,6 +63,7 @@ export type {
   GobSpacerProps,
   GobSwitchProps,
   GobTableProps,
+  GobTimelineProps,
   GobToolbarProps,
   GobTopbarProps,
   GridGap,
@@ -71,6 +81,8 @@ export type {
   SpacerVariant,
   TableTone,
   TableVariant,
+  TimelineTone,
+  TimelineVariant,
   Tone,
   ToolbarTone,
   ToolbarVariant,

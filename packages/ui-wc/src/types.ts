@@ -372,6 +372,54 @@ export type GobListProps = React.HTMLAttributes<HTMLElement> & {
   tone?: ListTone | Tone;
 };
 
+export type TimelineVariant =
+  | 'basic'
+  | 'icons'
+  | 'status'
+  | 'dense'
+  | 'alternating'
+  | 'cards'
+  | 'complete';
+
+export type TimelineTone = Tone;
+
+export type GobTimelineProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TimelineVariant;
+  tone?: TimelineTone | Tone;
+};
+
+export type ActivityFeedVariant =
+  | 'basic'
+  | 'avatar'
+  | 'actions'
+  | 'dense'
+  | 'grouped'
+  | 'unread'
+  | 'complete';
+
+export type ActivityFeedTone = Tone;
+
+export type GobActivityFeedProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ActivityFeedVariant;
+  tone?: ActivityFeedTone | Tone;
+};
+
+export type EmptyStateVariant =
+  | 'basic'
+  | 'icon'
+  | 'actions'
+  | 'search'
+  | 'error'
+  | 'dense'
+  | 'complete';
+
+export type EmptyStateTone = Tone;
+
+export type GobEmptyStateProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: EmptyStateVariant;
+  tone?: EmptyStateTone | Tone;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -397,6 +445,12 @@ declare global {
       'gob-filter-bar': React.DetailedHTMLProps<GobFilterBarProps, HTMLElement>;
       'gob-toolbar': React.DetailedHTMLProps<GobToolbarProps, HTMLElement>;
       'gob-list': React.DetailedHTMLProps<GobListProps, HTMLElement>;
+      'gob-timeline': React.DetailedHTMLProps<GobTimelineProps, HTMLElement>;
+      'gob-activity-feed': React.DetailedHTMLProps<
+        GobActivityFeedProps,
+        HTMLElement
+      >;
+      'gob-empty-state': React.DetailedHTMLProps<GobEmptyStateProps, HTMLElement>;
     }
   }
 }

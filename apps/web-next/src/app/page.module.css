@@ -941,6 +941,101 @@
   flex: 0 1 65%;
 }
 
+.fakeTimeline {
+  display: grid;
+  gap: 8px;
+  width: 148px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeTimelineRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fakeTimelineRow i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #9f2141;
+  flex: 0 0 auto;
+}
+
+.fakeTimelineRow b {
+  flex: 1;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.12);
+}
+
+.fakeActivity {
+  display: grid;
+  gap: 8px;
+  width: 148px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+}
+
+.fakeActivityRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fakeActivityRow i {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(159, 33, 65, 0.18);
+  flex: 0 0 auto;
+}
+
+.fakeActivityRow b {
+  flex: 1;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.12);
+}
+
+.fakeEmpty {
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  width: 148px;
+  height: 88px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fafafa;
+  border: 1px dashed rgba(24, 21, 17, 0.14);
+}
+
+.fakeEmpty i {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  background: rgba(159, 33, 65, 0.16);
+}
+
+.fakeEmpty b {
+  width: 58%;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.16);
+}
+
+.fakeEmpty span {
+  width: 42%;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.1);
+}
+
 @keyframes rise {
   from {
     opacity: 0;
