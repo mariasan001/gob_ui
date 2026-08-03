@@ -26,6 +26,7 @@ import './components/empty-state/gob-empty-state';
 import './components/skeleton/gob-skeleton';
 import './components/progress/gob-progress';
 import './components/spinner/gob-spinner';
+import './components/input/gob-input';
 
 export type {
   ActivityFeedTone,
@@ -57,6 +58,7 @@ export type {
   GobEmptyStateProps,
   GobFilterBarProps,
   GobGridProps,
+  GobInputProps,
   GobKpiCardProps,
   GobListProps,
   GobPageHeaderProps,
@@ -74,6 +76,9 @@ export type {
   GobTopbarProps,
   GridGap,
   GridVariant,
+  InputSize,
+  InputStatus,
+  InputVariant,
   KpiTone,
   KpiVariant,
   ListTone,

@@ -520,6 +520,44 @@ export type GobSpinnerProps = React.HTMLAttributes<HTMLElement> & {
   status?: SpinnerStatus;
 };
 
+export type InputVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'icon'
+  | 'search'
+  | 'password'
+  | 'prefix'
+  | 'suffix'
+  | 'dense'
+  | 'complete';
+
+export type InputStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type InputSize = 'sm' | 'md' | 'lg';
+
+export type GobInputProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: InputVariant;
+  label?: string;
+  placeholder?: string;
+  helper?: string;
+  value?: string;
+  type?: string;
+  status?: InputStatus;
+  size?: InputSize;
+  name?: string;
+  prefix?: string;
+  suffix?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -554,6 +592,7 @@ declare global {
       'gob-skeleton': React.DetailedHTMLProps<GobSkeletonProps, HTMLElement>;
       'gob-progress': React.DetailedHTMLProps<GobProgressProps, HTMLElement>;
       'gob-spinner': React.DetailedHTMLProps<GobSpinnerProps, HTMLElement>;
+      'gob-input': React.DetailedHTMLProps<GobInputProps, HTMLElement>;
     }
   }
 }
