@@ -10,8 +10,6 @@ import {
   Warning,
 } from '@phosphor-icons/react';
 
-import type { Tone } from '@mariasan001/ui-wc';
-
 import {
   eventsFor,
   type TimelineEvent,
@@ -28,13 +26,7 @@ const ICONS = {
   Stamp,
 } as const;
 
-export function TimelineDemo({
-  example,
-  tone,
-}: {
-  example: TimelineExample;
-  tone: Tone;
-}) {
+export function TimelineDemo({ example }: { example: TimelineExample }) {
   const variant = example.variant;
   const events = useMemo(() => eventsFor(variant), [variant]);
   const [active, setActive] = useState<string>(events[1]?.id ?? events[0]?.id ?? '');
@@ -73,9 +65,9 @@ export function TimelineDemo({
       className={`${local.stageInner} ${variant === 'horizontal' ? local.stageWide : ''}`}
     >
       <gob-timeline
-        key={`${example.id}-${tone}`}
+        key={example.id}
         variant={variant}
-        tone={tone}
+        tone="primary"
         className={local.timeline}
       >
         {blocks.map((block) => {

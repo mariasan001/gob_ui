@@ -9,14 +9,6 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'angular', label: 'Angular' },
 ];
 
-export const COLOR_OPTIONS: { id: Tone; label: string; swatch: string }[] = [
-  { id: 'primary', label: 'Primary', swatch: '#9F2141' },
-  { id: 'accent', label: 'Accent', swatch: '#BC945A' },
-  { id: 'dark', label: 'Dark', swatch: '#181511' },
-  { id: 'neutral', label: 'Neutral', swatch: '#EBEBEB' },
-  { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
-];
-
 export type TimelineExample = {
   id: TimelineVariant;
   title: string;
@@ -110,7 +102,7 @@ export const TIMELINE_ATTRS = [
     name: 'tone',
     type: 'string',
     defaultValue: 'primary',
-    body: 'Acento de nodos y pills: primary | accent | dark | neutral | soft',
+    body: 'Marca fija vino + cafe (primary). No hay selector de color en docs.',
   },
 ] as const;
 
