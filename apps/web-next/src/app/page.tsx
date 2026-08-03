@@ -318,6 +318,14 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'progress') {
+    return (
+      <div className={s.fakeProgress} aria-hidden="true">
+        <b />
+        <i />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

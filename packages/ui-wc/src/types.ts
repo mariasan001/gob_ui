@@ -454,6 +454,34 @@ export type GobSkeletonProps = React.HTMLAttributes<HTMLElement> & {
   animated?: boolean | string;
 };
 
+export type ProgressVariant =
+  | 'bar'
+  | 'labeled'
+  | 'thin'
+  | 'thick'
+  | 'ring'
+  | 'steps'
+  | 'segmented'
+  | 'indeterminate'
+  | 'stacked'
+  | 'complete';
+
+export type ProgressStatus =
+  | 'default'
+  | 'info'
+  | 'warning'
+  | 'success'
+  | 'danger';
+
+export type GobProgressProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ProgressVariant;
+  value?: number | string;
+  max?: number | string;
+  label?: string;
+  status?: ProgressStatus;
+  steps?: number | string;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -486,6 +514,7 @@ declare global {
       >;
       'gob-empty-state': React.DetailedHTMLProps<GobEmptyStateProps, HTMLElement>;
       'gob-skeleton': React.DetailedHTMLProps<GobSkeletonProps, HTMLElement>;
+      'gob-progress': React.DetailedHTMLProps<GobProgressProps, HTMLElement>;
     }
   }
 }
