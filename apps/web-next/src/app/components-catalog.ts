@@ -26,6 +26,7 @@ export type PreviewKind =
   | 'skeleton'
   | 'progress'
   | 'spinner'
+  | 'input'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -339,12 +340,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'input',
+    href: '/campo-texto',
     name: 'Campo de texto',
     description: 'Entrada de texto con ayuda y validacion.',
-    preview: 'soon',
+    preview: 'input',
     category: 'formularios',
     tags: ['form', 'textfield', 'input'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'textarea',

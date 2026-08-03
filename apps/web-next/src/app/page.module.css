@@ -1139,6 +1139,33 @@
   background: rgba(24, 21, 17, 0.12);
 }
 
+.fakeInput {
+  display: grid;
+  gap: 8px;
+  width: 148px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeInput b {
+  width: 40%;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.14);
+}
+
+.fakeInput i {
+  display: block;
+  width: 100%;
+  height: 28px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(159, 33, 65, 0.28);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(159, 33, 65, 0.1);
+}
+
 @keyframes rise {
   from {
     opacity: 0;
