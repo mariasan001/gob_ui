@@ -39,7 +39,7 @@ export const INPUT_OBSERVED_ATTRIBUTES = [
   'disabled',
   'readonly',
   'required',
-  'prefix',
+  'lead',
   'suffix',
 ] as const;
 

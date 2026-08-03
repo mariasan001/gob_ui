@@ -167,7 +167,7 @@ class GobInputElement extends SafeHTMLElement {
     const label = this.getAttribute('label')?.trim() || '';
     const placeholder = this.getAttribute('placeholder') ?? '';
     const helper = this.getAttribute('helper')?.trim() || '';
-    const prefix = this.getAttribute('prefix')?.trim() || '';
+    const lead = this.getAttribute('lead')?.trim() || '';
     const suffix = this.getAttribute('suffix')?.trim() || '';
     const name = this.getAttribute('name') ?? '';
     const rawType = this.getAttribute('type') || 'text';
@@ -221,14 +221,14 @@ class GobInputElement extends SafeHTMLElement {
     if (this.field.value !== value) this.field.value = value;
 
     const leadIcon = this.leadingFor(variant, status);
-    const showPrefix = variant === 'prefix' || Boolean(prefix);
+    const showPrefix = variant === 'prefix' || Boolean(lead);
     const showSuffix = variant === 'suffix' || Boolean(suffix);
     const showStatusIcon =
       status === 'error' || status === 'success' || status === 'warning';
 
-    if (showPrefix && prefix) {
+    if (showPrefix && lead) {
       this.leadEl.hidden = false;
-      this.leadEl.textContent = prefix;
+      this.leadEl.textContent = lead;
       this.leadEl.style.color = 'var(--gob-in-dorado)';
     } else if (leadIcon) {
       this.leadEl.hidden = false;

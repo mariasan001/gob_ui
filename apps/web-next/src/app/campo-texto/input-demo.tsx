@@ -15,7 +15,7 @@ export function InputDemo({ example }: { example: InputExample }) {
         value={example.value}
         status={example.status}
         size={example.size}
-        prefix={example.prefix}
+        lead={example.lead}
         suffix={example.suffix}
         type={example.type}
         {...(example.required ? { required: true } : {})}
