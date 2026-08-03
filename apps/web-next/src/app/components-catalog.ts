@@ -23,6 +23,7 @@ export type PreviewKind =
   | 'timeline'
   | 'activity-feed'
   | 'empty-state'
+  | 'skeleton'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -306,12 +307,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'skeleton',
+    href: '/esqueleto-carga',
     name: 'Esqueleto de carga',
     description: 'Placeholders de carga para tarjetas y tablas.',
-    preview: 'soon',
+    preview: 'skeleton',
     category: 'feedback',
     tags: ['loading', 'carga', 'dashboard', 'skeleton'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'progress',

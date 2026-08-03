@@ -436,6 +436,24 @@ export type GobEmptyStateProps = React.HTMLAttributes<HTMLElement> & {
   tone?: EmptyStateTone | Tone;
 };
 
+export type SkeletonVariant =
+  | 'text'
+  | 'avatar'
+  | 'card'
+  | 'table'
+  | 'list'
+  | 'media'
+  | 'kpi'
+  | 'form'
+  | 'dense'
+  | 'complete';
+
+export type GobSkeletonProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SkeletonVariant;
+  rows?: number | string;
+  animated?: boolean | string;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -467,6 +485,7 @@ declare global {
         HTMLElement
       >;
       'gob-empty-state': React.DetailedHTMLProps<GobEmptyStateProps, HTMLElement>;
+      'gob-skeleton': React.DetailedHTMLProps<GobSkeletonProps, HTMLElement>;
     }
   }
 }
