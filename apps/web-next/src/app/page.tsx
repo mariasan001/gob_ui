@@ -352,6 +352,16 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'select') {
+    return (
+      <div className={s.fakeSelect} aria-hidden="true">
+        <b />
+        <i>
+          <span />
+        </i>
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

@@ -28,6 +28,7 @@ export type PreviewKind =
   | 'spinner'
   | 'input'
   | 'textarea'
+  | 'select'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -361,12 +362,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'select',
+    href: '/selector',
     name: 'Selector',
     description: 'Lista desplegable simple o con busqueda.',
-    preview: 'soon',
+    preview: 'select',
     category: 'formularios',
     tags: ['form', 'dropdown', 'lista', 'select'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'combobox',
