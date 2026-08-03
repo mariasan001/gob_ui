@@ -72,9 +72,7 @@
   border-radius: 16px;
   border: 1px solid #ececec;
   overflow: hidden;
-  background:
-    radial-gradient(120% 90% at 80% 0%, rgba(159, 33, 65, 0.05), transparent 50%),
-    linear-gradient(165deg, #f7f7f7 0%, #efefef 100%);
+  background: #ffffff;
 }
 
 .stageInner {

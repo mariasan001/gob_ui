@@ -2,17 +2,16 @@
 
 /**
  * Docs de Estado vacio — cascaron canonico = Botones (/botones).
+ * Color de marca fijo (vino + dorado); sin selector de tone.
  */
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import type { Tone } from '@mariasan001/ui-wc';
 import '@mariasan001/ui-wc';
 
 import {
   CODE_LANGUAGES,
-  COLOR_OPTIONS,
   EMPTY_ATTRS,
   EMPTY_EXAMPLES,
   buildSnippet,
@@ -23,9 +22,10 @@ import { EmptyDemo } from './empty-demo';
 import local from './empty.module.css';
 import s from './page.module.css';
 
+const BRAND_TONE = 'primary' as const;
+
 export default function EstadoVacioPage() {
   const [lang, setLang] = useState<CodeLang>('html');
-  const [tone, setTone] = useState<Tone>('primary');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +34,9 @@ export default function EstadoVacioPage() {
 
   async function copyExample(example: EmptyExample) {
     try {
-      await navigator.clipboard.writeText(buildSnippet(lang, example, tone));
+      await navigator.clipboard.writeText(
+        buildSnippet(lang, example, BRAND_TONE),
+      );
       setCopiedKey(example.id);
       window.setTimeout(() => setCopiedKey(null), 1200);
     } catch {
@@ -51,8 +53,8 @@ export default function EstadoVacioPage() {
           </Link>
           <h1 className={s.title}>Estado vacio</h1>
           <p className={s.hint}>
-            Funcional: vacios utiles con CTA. Pulsa <strong>Copiar</strong> para
-            markup en <strong>{lang.toUpperCase()}</strong>.
+            Funcional: vacios utiles con CTA y semaforo. Pulsa{' '}
+            <strong>Copiar</strong> para markup en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
@@ -80,27 +82,6 @@ export default function EstadoVacioPage() {
                 })}
               </div>
             </div>
-            <div className={s.filterBlock}>
-              <p className={s.filterLabel}>Color</p>
-              <div className={s.colorRow}>
-                {COLOR_OPTIONS.map((option) => {
-                  const active = option.id === tone;
-                  return (
-                    <button
-                      key={option.id}
-                      type="button"
-                      className={`${s.colorSwatch} ${active ? s.colorSwatchActive : ''}`}
-                      style={{ background: option.swatch }}
-                      data-tone={option.id}
-                      aria-label={option.label}
-                      aria-pressed={active}
-                      title={option.label}
-                      onClick={() => setTone(option.id)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
           <div className={local.exampleList} aria-label="Ejemplos">
@@ -118,7 +99,7 @@ export default function EstadoVacioPage() {
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
                 <div className={local.stage}>
-                  <EmptyDemo example={example} tone={tone} />
+                  <EmptyDemo example={example} />
                 </div>
               </article>
             ))}
@@ -130,7 +111,7 @@ export default function EstadoVacioPage() {
               <p className={s.sectionDesc}>
                 API de <code>gob-empty-state</code>. Contenido con clases{' '}
                 <code>gob-es-inner</code>, <code>gob-es-icon</code>,{' '}
-                <code>gob-es-btn</code>.
+                <code>gob-es-pill</code>, <code>gob-es-btn</code>.
               </p>
             </div>
             <div className={local.tableWrap}>

@@ -8,11 +8,15 @@ import {
 } from './empty-state-constants';
 import { emptyStateStyles } from './empty-state-styles';
 
-const LIGHT_STYLE_ID = 'gob-empty-state-light-dom';
+const LIGHT_STYLE_ID = 'gob-empty-state-light-dom-v2';
 
 function ensureLightDomStyles() {
   if (typeof document === 'undefined') return;
-  if (document.getElementById(LIGHT_STYLE_ID)) return;
+  const existing = document.getElementById(LIGHT_STYLE_ID);
+  if (existing) {
+    existing.textContent = emptyStateLightDomStyles;
+    return;
+  }
   const style = document.createElement('style');
   style.id = LIGHT_STYLE_ID;
   style.textContent = emptyStateLightDomStyles;
