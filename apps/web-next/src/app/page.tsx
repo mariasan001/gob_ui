@@ -362,6 +362,17 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'combobox') {
+    return (
+      <div className={s.fakeCombobox} aria-hidden="true">
+        <b />
+        <i>
+          <em />
+          <span />
+        </i>
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

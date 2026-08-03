@@ -29,6 +29,7 @@ export type PreviewKind =
   | 'input'
   | 'textarea'
   | 'select'
+  | 'combobox'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -372,12 +373,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'combobox',
+    href: '/selector-busqueda',
     name: 'Selector con busqueda',
     description: 'Campo + lista filtrable de opciones.',
-    preview: 'soon',
+    preview: 'combobox',
     category: 'formularios',
     tags: ['form', 'autocomplete', 'busqueda', 'combobox'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'checkbox',

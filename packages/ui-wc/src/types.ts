@@ -644,6 +644,43 @@ export type GobSelectProps = React.HTMLAttributes<HTMLElement> & {
   required?: boolean;
 };
 
+export type ComboboxVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'filled'
+  | 'soft'
+  | 'floating'
+  | 'pill'
+  | 'icon'
+  | 'create'
+  | 'loading'
+  | 'complete';
+
+export type ComboboxStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type ComboboxSize = 'sm' | 'md' | 'lg';
+
+export type GobComboboxProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ComboboxVariant;
+  label?: string;
+  placeholder?: string;
+  helper?: string;
+  value?: string;
+  status?: ComboboxStatus;
+  size?: ComboboxSize;
+  name?: string;
+  options?: string;
+  disabled?: boolean;
+  required?: boolean;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -681,6 +718,7 @@ declare global {
       'gob-input': React.DetailedHTMLProps<GobInputProps, HTMLElement>;
       'gob-textarea': React.DetailedHTMLProps<GobTextareaProps, HTMLElement>;
       'gob-select': React.DetailedHTMLProps<GobSelectProps, HTMLElement>;
+      'gob-combobox': React.DetailedHTMLProps<GobComboboxProps, HTMLElement>;
     }
   }
 }
