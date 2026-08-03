@@ -400,7 +400,8 @@ export type ActivityFeedVariant =
   | 'dense'
   | 'grouped'
   | 'unread'
-  | 'complete';
+  | 'complete'
+  | 'status';
 
 export type ActivityFeedTone = Tone;
 

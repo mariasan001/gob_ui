@@ -9,14 +9,6 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'angular', label: 'Angular' },
 ];
 
-export const COLOR_OPTIONS: { id: Tone; label: string; swatch: string }[] = [
-  { id: 'primary', label: 'Primary', swatch: '#9F2141' },
-  { id: 'accent', label: 'Accent', swatch: '#BC945A' },
-  { id: 'dark', label: 'Dark', swatch: '#181511' },
-  { id: 'neutral', label: 'Neutral', swatch: '#EBEBEB' },
-  { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
-];
-
 export type ActivityExample = {
   id: ActivityFeedVariant;
   title: string;
@@ -62,9 +54,15 @@ export const ACTIVITY_EXAMPLES: ActivityExample[] = [
     variant: 'unread',
   },
   {
+    id: 'status',
+    title: 'Con estatus',
+    description: 'Pill de semaforo institucional por actividad.',
+    variant: 'status',
+  },
+  {
     id: 'complete',
     title: 'Completa',
-    description: 'Avatar, acciones y no leidas juntos.',
+    description: 'Avatar, estatus, acciones y no leidas juntos.',
     variant: 'complete',
   },
 ];
@@ -74,17 +72,29 @@ export const ACTIVITY_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | avatar | actions | dense | grouped | unread | complete',
+    body: 'basic | avatar | actions | dense | grouped | unread | status | complete',
   },
   {
     name: 'tone',
     type: 'string',
     defaultValue: 'primary',
-    body: 'Acento de avatar y no leidas: primary | accent | dark | neutral | soft',
+    body: 'Marca fija vino + cafe (primary). No hay selector de color en docs.',
   },
 ] as const;
 
-export const SAMPLE_ACTIVITY = [
+export type ActivityRow = {
+  id: string;
+  initials: string;
+  actor: string;
+  text: string;
+  meta: string;
+  group: string;
+  unread: boolean;
+  status: string;
+  statusKey: 'alta' | 'revision' | 'cerrado' | 'rechazado';
+};
+
+export const SAMPLE_ACTIVITY: ActivityRow[] = [
   {
     id: '1',
     initials: 'MG',
@@ -93,6 +103,8 @@ export const SAMPLE_ACTIVITY = [
     meta: 'hace 12 min',
     group: 'Hoy',
     unread: true,
+    status: 'Alta',
+    statusKey: 'alta',
   },
   {
     id: '2',
@@ -102,6 +114,8 @@ export const SAMPLE_ACTIVITY = [
     meta: 'hace 1 h',
     group: 'Hoy',
     unread: true,
+    status: 'Revision',
+    statusKey: 'revision',
   },
   {
     id: '3',
@@ -111,24 +125,31 @@ export const SAMPLE_ACTIVITY = [
     meta: 'ayer',
     group: 'Ayer',
     unread: false,
+    status: 'Cerrado',
+    statusKey: 'cerrado',
   },
-] as const;
+];
 
-function itemMarkup(
-  example: ActivityExample,
-  row: (typeof SAMPLE_ACTIVITY)[number],
-): string {
+function itemMarkup(example: ActivityExample, row: ActivityRow): string {
   const i = '  ';
   const v = example.variant;
   const showAvatar =
-    v === 'avatar' || v === 'complete' || v === 'dense' || v === 'unread';
+    v === 'avatar' ||
+    v === 'complete' ||
+    v === 'dense' ||
+    v === 'unread' ||
+    v === 'status';
   const showActions = v === 'actions' || v === 'complete';
+  const showStatus = v === 'status' || v === 'complete' || v === 'unread';
   const unread = (v === 'unread' || v === 'complete') && row.unread;
 
   return `${i}<div class="gob-af-item"${unread ? ' data-unread="true"' : ''} role="article">
 ${showAvatar ? `${i}  <span class="gob-af-avatar">${row.initials}</span>` : `${i}  <span class="gob-af-dot"></span>`}
 ${i}  <div class="gob-af-body">
-${i}    <p class="gob-af-primary"><strong>${row.actor}</strong> ${row.text}</p>
+${i}    <div class="gob-af-head">
+${i}      <p class="gob-af-primary"><strong>${row.actor}</strong> ${row.text}</p>
+${showStatus ? `${i}      <span class="gob-af-pill" data-status="${row.statusKey}">${row.status}</span>` : ''}
+${i}    </div>
 ${i}    <p class="gob-af-secondary">${row.meta}</p>
 ${i}  </div>
 ${showActions ? `${i}  <button type="button" class="gob-af-action">Ver</button>` : `${i}  <span class="gob-af-meta">${row.meta}</span>`}
@@ -138,17 +159,19 @@ ${i}</div>`;
 export function buildSnippet(
   lang: CodeLang,
   example: ActivityExample,
-  tone: Tone,
+  tone: Tone = 'primary',
 ): string {
   let body: string;
   if (example.variant === 'grouped') {
-    body = (['Hoy', 'Ayer'] as const)
-      .map((g) => {
-        const rows = SAMPLE_ACTIVITY.filter((r) => r.group === g);
-        return `  <div class="gob-af-group">${g}</div>
-${rows.map((r) => itemMarkup(example, r)).join('\n')}`;
-      })
-      .join('\n');
+    let last = '';
+    body = SAMPLE_ACTIVITY.map((row) => {
+      const group =
+        row.group !== last
+          ? `  <div class="gob-af-group">${row.group}</div>\n`
+          : '';
+      last = row.group;
+      return `${group}${itemMarkup(example, row)}`;
+    }).join('\n');
   } else {
     body = SAMPLE_ACTIVITY.map((r) => itemMarkup(example, r)).join('\n');
   }
