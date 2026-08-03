@@ -25,6 +25,7 @@ import './components/activity-feed/gob-activity-feed';
 import './components/empty-state/gob-empty-state';
 import './components/skeleton/gob-skeleton';
 import './components/progress/gob-progress';
+import './components/spinner/gob-spinner';
 
 export type {
   ActivityFeedTone,
@@ -65,6 +66,7 @@ export type {
   GobSidebarProps,
   GobSkeletonProps,
   GobSpacerProps,
+  GobSpinnerProps,
   GobSwitchProps,
   GobTableProps,
   GobTimelineProps,
@@ -86,6 +88,9 @@ export type {
   Size,
   SkeletonVariant,
   SpacerVariant,
+  SpinnerSize,
+  SpinnerStatus,
+  SpinnerVariant,
   TableTone,
   TableVariant,
   TimelineTone,
