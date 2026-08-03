@@ -482,6 +482,34 @@ export type GobProgressProps = React.HTMLAttributes<HTMLElement> & {
   steps?: number | string;
 };
 
+export type SpinnerVariant =
+  | 'ring'
+  | 'dual'
+  | 'dots'
+  | 'pulse'
+  | 'bars'
+  | 'button'
+  | 'inline'
+  | 'page'
+  | 'overlay'
+  | 'complete';
+
+export type SpinnerSize = 'sm' | 'md' | 'lg';
+
+export type SpinnerStatus =
+  | 'default'
+  | 'info'
+  | 'warning'
+  | 'success'
+  | 'danger';
+
+export type GobSpinnerProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SpinnerVariant;
+  label?: string;
+  size?: SpinnerSize;
+  status?: SpinnerStatus;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -515,6 +543,7 @@ declare global {
       'gob-empty-state': React.DetailedHTMLProps<GobEmptyStateProps, HTMLElement>;
       'gob-skeleton': React.DetailedHTMLProps<GobSkeletonProps, HTMLElement>;
       'gob-progress': React.DetailedHTMLProps<GobProgressProps, HTMLElement>;
+      'gob-spinner': React.DetailedHTMLProps<GobSpinnerProps, HTMLElement>;
     }
   }
 }

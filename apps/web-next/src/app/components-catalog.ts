@@ -25,6 +25,7 @@ export type PreviewKind =
   | 'empty-state'
   | 'skeleton'
   | 'progress'
+  | 'spinner'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -328,12 +329,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'spinner',
+    href: '/cargando',
     name: 'Cargando',
     description: 'Indicador de espera en linea o de pagina.',
-    preview: 'soon',
+    preview: 'spinner',
     category: 'feedback',
     tags: ['loading', 'espera', 'spinner'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'input',
