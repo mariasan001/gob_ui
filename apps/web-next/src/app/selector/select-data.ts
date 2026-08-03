@@ -127,7 +127,6 @@ export const SELECT_EXAMPLES: SelectExample[] = [
     description: 'Label dentro del control que sube al abrir o elegir.',
     variant: 'floating',
     label: 'Region',
-    placeholder: ' ',
   },
   {
     id: 'underline',
