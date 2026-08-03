@@ -603,6 +603,43 @@ export type GobTextareaProps = React.HTMLAttributes<HTMLElement> & {
   required?: boolean;
 };
 
+export type SelectVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'filled'
+  | 'soft'
+  | 'floating'
+  | 'pill'
+  | 'icon'
+  | 'group'
+  | 'multiple'
+  | 'complete';
+
+export type SelectStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type SelectSize = 'sm' | 'md' | 'lg';
+
+export type GobSelectProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SelectVariant;
+  label?: string;
+  placeholder?: string;
+  helper?: string;
+  value?: string;
+  status?: SelectStatus;
+  size?: SelectSize;
+  name?: string;
+  options?: string;
+  disabled?: boolean;
+  required?: boolean;
+};
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -639,6 +676,7 @@ declare global {
       'gob-spinner': React.DetailedHTMLProps<GobSpinnerProps, HTMLElement>;
       'gob-input': React.DetailedHTMLProps<GobInputProps, HTMLElement>;
       'gob-textarea': React.DetailedHTMLProps<GobTextareaProps, HTMLElement>;
+      'gob-select': React.DetailedHTMLProps<GobSelectProps, HTMLElement>;
     }
   }
 }

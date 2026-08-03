@@ -28,6 +28,7 @@ import './components/progress/gob-progress';
 import './components/spinner/gob-spinner';
 import './components/input/gob-input';
 import './components/textarea/gob-textarea';
+import './components/select/gob-select';
 
 export type {
   ActivityFeedTone,
@@ -66,6 +67,7 @@ export type {
   GobPaginationProps,
   GobProgressProps,
   GobRadioProps,
+  GobSelectProps,
   GobSidebarProps,
   GobSkeletonProps,
   GobSpacerProps,
@@ -91,6 +93,9 @@ export type {
   PaginationVariant,
   ProgressStatus,
   ProgressVariant,
+  SelectSize,
+  SelectStatus,
+  SelectVariant,
   SidebarVariant,
   Size,
   SkeletonVariant,
