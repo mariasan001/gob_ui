@@ -16,6 +16,9 @@ const ICONS = {
   eyeOff: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9.5 9.6A3 3 0 0 0 14.4 14.5M7.1 7.3C4.7 8.7 3 12 3 12s3.4 6 9 6c1.7 0 3.2-.5 4.5-1.2M10.2 6.3C10.8 6.1 11.4 6 12 6c5.6 0 9 6 9 6a14.7 14.7 0 0 1-1.8 2.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
   check: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   alert: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.25" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1" fill="currentColor"/></svg>`,
+  mail: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 7.5L12 13l7.5-5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  phone: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8.2 4.8h2.3l1.1 3.2-1.5 1.1a11.5 11.5 0 0 0 5.3 5.3l1.1-1.5 3.2 1.1v2.3c0 .7-.5 1.3-1.2 1.4A14.7 14.7 0 0 1 6.8 6c.1-.7.7-1.2 1.4-1.2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
+  x: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
 };
 
 function statusPill(status: string): string {
@@ -48,6 +51,8 @@ class GobInputElement extends SafeHTMLElement {
   private readonly leadEl: HTMLSpanElement;
   private readonly trailEl: HTMLSpanElement;
   private readonly toggleBtn: HTMLButtonElement;
+  private readonly clearBtn: HTMLButtonElement;
+  private readonly floatLabelEl: HTMLSpanElement;
   private showPassword = false;
 
   private fieldId = `gob-in-${Math.random().toString(36).slice(2, 9)}`;
@@ -78,6 +83,10 @@ class GobInputElement extends SafeHTMLElement {
     this.controlEl.className = 'control';
     this.controlEl.setAttribute('part', 'control');
 
+    this.floatLabelEl = document.createElement('span');
+    this.floatLabelEl.className = 'float-label';
+    this.floatLabelEl.hidden = true;
+
     this.leadEl = document.createElement('span');
     this.leadEl.className = 'affix';
     this.leadEl.hidden = true;
@@ -96,10 +105,19 @@ class GobInputElement extends SafeHTMLElement {
     this.toggleBtn.hidden = true;
     this.toggleBtn.setAttribute('aria-label', 'Mostrar contrasena');
 
+    this.clearBtn = document.createElement('button');
+    this.clearBtn.type = 'button';
+    this.clearBtn.className = 'clear';
+    this.clearBtn.hidden = true;
+    this.clearBtn.setAttribute('aria-label', 'Limpiar');
+    this.clearBtn.innerHTML = ICONS.x;
+
     this.controlEl.append(
+      this.floatLabelEl,
       this.leadEl,
       this.field,
       this.trailEl,
+      this.clearBtn,
       this.toggleBtn,
     );
 
@@ -116,6 +134,7 @@ class GobInputElement extends SafeHTMLElement {
     this.field.addEventListener('blur', this.onBlur);
     this.field.addEventListener('input', this.onInput);
     this.toggleBtn.addEventListener('click', this.onToggle);
+    this.clearBtn.addEventListener('click', this.onClear);
     this.sync();
   }
 
@@ -124,6 +143,7 @@ class GobInputElement extends SafeHTMLElement {
     this.field.removeEventListener('blur', this.onBlur);
     this.field.removeEventListener('input', this.onInput);
     this.toggleBtn.removeEventListener('click', this.onToggle);
+    this.clearBtn.removeEventListener('click', this.onClear);
   }
 
   attributeChangedCallback() {
@@ -139,6 +159,8 @@ class GobInputElement extends SafeHTMLElement {
   };
 
   private readonly onInput = () => {
+    this.rootEl.dataset.filled = this.field.value ? 'true' : 'false';
+    this.updateClearButton();
     this.dispatchEvent(
       new CustomEvent('gob-input', {
         detail: { value: this.field.value },
@@ -153,10 +175,34 @@ class GobInputElement extends SafeHTMLElement {
     this.sync();
   };
 
-  private leadingFor(variant: InputVariant, status: string): string | null {
-    if (variant === 'search') return ICONS.search;
+  private readonly onClear = () => {
+    this.field.value = '';
+    this.rootEl.dataset.filled = 'false';
+    this.updateClearButton();
+    this.field.focus();
+    this.dispatchEvent(
+      new CustomEvent('gob-input', {
+        detail: { value: '' },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  };
+
+  private updateClearButton() {
+    const variant = resolveInputVariant(this.getAttribute('variant'));
+    const show =
+      variant === 'clearable' &&
+      Boolean(this.field.value) &&
+      !this.hasAttribute('disabled') &&
+      !this.hasAttribute('readonly');
+    this.clearBtn.hidden = !show;
+  }
+
+  private leadingFor(variant: InputVariant): string | null {
+    if (variant === 'search' || variant === 'pill') return ICONS.search;
     if (variant === 'icon' || variant === 'complete') return ICONS.user;
-    if (status === 'success' && variant === 'helper') return null;
+    if (variant === 'soft') return ICONS.mail;
     return null;
   }
 
@@ -182,11 +228,18 @@ class GobInputElement extends SafeHTMLElement {
     this.rootEl.dataset.disabled = disabled ? 'true' : 'false';
     this.rootEl.dataset.readonly = readonly ? 'true' : 'false';
 
+    const isFloating = variant === 'floating';
     const showLabel =
-      Boolean(label) ||
-      variant === 'labeled' ||
-      variant === 'helper' ||
-      variant === 'complete';
+      !isFloating &&
+      (Boolean(label) ||
+        variant === 'labeled' ||
+        variant === 'helper' ||
+        variant === 'complete' ||
+        variant === 'underline' ||
+        variant === 'pill' ||
+        variant === 'clearable' ||
+        variant === 'code' ||
+        variant === 'soft');
     this.headEl.hidden = !showLabel && status === 'default';
     this.labelEl.hidden = !showLabel;
     this.labelEl.replaceChildren();
@@ -212,16 +265,37 @@ class GobInputElement extends SafeHTMLElement {
         : 'password'
       : variant === 'search'
         ? 'search'
-        : rawType;
-    this.field.placeholder = placeholder;
+        : variant === 'soft'
+          ? 'email'
+          : rawType;
+    this.field.placeholder = isFloating ? ' ' : placeholder;
     this.field.name = name;
     this.field.disabled = disabled;
     this.field.readOnly = readonly;
     this.field.required = required;
+    if (variant === 'code') {
+      this.field.maxLength = 6;
+      this.field.autocomplete = 'one-time-code';
+      this.field.inputMode = 'numeric';
+    } else {
+      this.field.removeAttribute('maxlength');
+      this.field.autocomplete = 'on';
+      this.field.inputMode = 'text';
+    }
     if (this.field.value !== value) this.field.value = value;
+    this.rootEl.dataset.filled = this.field.value ? 'true' : 'false';
 
-    const leadIcon = this.leadingFor(variant, status);
-    const showPrefix = variant === 'prefix' || Boolean(lead);
+    if (isFloating) {
+      this.floatLabelEl.hidden = false;
+      this.floatLabelEl.textContent = label || 'Etiqueta';
+    } else {
+      this.floatLabelEl.hidden = true;
+      this.floatLabelEl.textContent = '';
+    }
+
+    const leadIcon = this.leadingFor(variant);
+    const showPrefix =
+      variant === 'prefix' || Boolean(lead) || variant === 'soft';
     const showSuffix = variant === 'suffix' || Boolean(suffix);
     const showStatusIcon =
       status === 'error' || status === 'success' || status === 'warning';
@@ -229,6 +303,7 @@ class GobInputElement extends SafeHTMLElement {
     if (showPrefix && lead) {
       this.leadEl.hidden = false;
       this.leadEl.textContent = lead;
+      this.leadEl.innerHTML = '';
       this.leadEl.style.color = 'var(--gob-in-dorado)';
     } else if (leadIcon) {
       this.leadEl.hidden = false;
@@ -248,6 +323,7 @@ class GobInputElement extends SafeHTMLElement {
         this.showPassword ? 'Ocultar contrasena' : 'Mostrar contrasena',
       );
       this.trailEl.hidden = true;
+      this.clearBtn.hidden = true;
     } else {
       this.toggleBtn.hidden = true;
       if (showSuffix && suffix) {
@@ -264,6 +340,7 @@ class GobInputElement extends SafeHTMLElement {
         this.trailEl.textContent = '';
         this.trailEl.innerHTML = '';
       }
+      this.updateClearButton();
     }
 
     const showHelper =
