@@ -78,7 +78,7 @@
 }
 
 .stageInner {
-  width: min(520px, 100%);
+  width: min(560px, 100%);
   display: grid;
   gap: 10px;
 }
@@ -89,11 +89,10 @@
 
 .clickable {
   cursor: pointer;
-  border-radius: 8px;
 }
 
-.clickable:focus-visible {
-  outline: 2px solid rgba(159, 33, 65, 0.35);
+.clickable:focus-visible .gob-tl-body {
+  outline: 2px solid rgba(159, 33, 65, 0.28);
   outline-offset: 2px;
 }
 

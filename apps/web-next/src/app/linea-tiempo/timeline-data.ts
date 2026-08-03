@@ -128,17 +128,20 @@ function itemMarkup(lang: CodeLang, example: TimelineExample, ev: (typeof SAMPLE
   const i = '  ';
   const v = example.variant;
   const showIcon = v === 'icons' || v === 'complete';
-  const showStatus = v === 'status' || v === 'complete' || v === 'cards';
+  const showStatus =
+    v === 'status' || v === 'complete' || v === 'cards' || v === 'icons';
 
   return `${i}<div class="gob-tl-item" role="listitem">
 ${i}  <div class="gob-tl-rail">
-${i}    ${showIcon ? `<span class="gob-tl-icon">${icon(lang, ev.icon)}</span>` : '<span class="gob-tl-dot"></span>'}
+${i}    ${showIcon ? `<span class="gob-tl-icon">${icon(lang, ev.icon, 16)}</span>` : '<span class="gob-tl-dot"></span>'}
 ${i}  </div>
 ${i}  <div class="gob-tl-body">
-${i}    <p class="gob-tl-time">${ev.time}</p>
+${i}    <div class="gob-tl-head">
+${i}      <p class="gob-tl-time">${ev.time}</p>
+${showStatus ? `${i}      <span class="gob-tl-pill">${ev.status}</span>` : ''}
+${i}    </div>
 ${i}    <p class="gob-tl-title">${ev.title}</p>
 ${i}    <p class="gob-tl-desc">${ev.desc}</p>
-${showStatus ? `${i}    <span class="gob-tl-pill">${ev.status}</span>` : ''}
 ${i}  </div>
 ${i}</div>`;
 }
