@@ -67,6 +67,36 @@ export const TIMELINE_EXAMPLES: TimelineExample[] = [
     description: 'Iconos, estatus y tarjetas juntos.',
     variant: 'complete',
   },
+  {
+    id: 'numbered',
+    title: 'Numerada',
+    description: 'Pasos numerados para flujos o checklists.',
+    variant: 'numbered',
+  },
+  {
+    id: 'dates',
+    title: 'Con fechas',
+    description: 'Fecha completa mas hora en cada evento.',
+    variant: 'dates',
+  },
+  {
+    id: 'milestones',
+    title: 'Hitos',
+    description: 'Nodos mas grandes para hitos clave del expediente.',
+    variant: 'milestones',
+  },
+  {
+    id: 'horizontal',
+    title: 'Horizontal',
+    description: 'Linea en fila para etapas cortas o resumen.',
+    variant: 'horizontal',
+  },
+  {
+    id: 'grouped',
+    title: 'Agrupada',
+    description: 'Eventos agrupados por dia (Hoy, Ayer…).',
+    variant: 'grouped',
+  },
 ];
 
 export const TIMELINE_ATTRS = [
@@ -74,7 +104,7 @@ export const TIMELINE_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | icons | status | dense | alternating | cards | complete',
+    body: 'basic | icons | status | dense | alternating | cards | complete | numbered | dates | milestones | horizontal | grouped',
   },
   {
     name: 'tone',
@@ -84,7 +114,19 @@ export const TIMELINE_ATTRS = [
   },
 ] as const;
 
-export const SAMPLE_EVENTS = [
+export type TimelineEvent = {
+  id: string;
+  time: string;
+  title: string;
+  desc: string;
+  status: string;
+  statusKey: string;
+  icon: 'Tray' | 'User' | 'CheckCircle' | 'Warning' | 'FileText' | 'Stamp';
+  date?: string;
+  group?: string;
+};
+
+export const SAMPLE_EVENTS: TimelineEvent[] = [
   {
     id: '1',
     time: '09:12',
@@ -93,6 +135,8 @@ export const SAMPLE_EVENTS = [
     status: 'Alta',
     statusKey: 'alta',
     icon: 'Tray',
+    date: '14 mar 2026',
+    group: 'Hoy · 14 mar',
   },
   {
     id: '2',
@@ -102,6 +146,8 @@ export const SAMPLE_EVENTS = [
     status: 'Revision',
     statusKey: 'revision',
     icon: 'User',
+    date: '14 mar 2026',
+    group: 'Hoy · 14 mar',
   },
   {
     id: '3',
@@ -111,8 +157,50 @@ export const SAMPLE_EVENTS = [
     status: 'Cerrado',
     statusKey: 'cerrado',
     icon: 'CheckCircle',
+    date: '13 mar 2026',
+    group: 'Ayer · 13 mar',
   },
-] as const;
+];
+
+export const MILESTONE_EVENTS: TimelineEvent[] = [
+  {
+    id: 'm1',
+    time: 'Lun',
+    title: 'Apertura',
+    desc: 'Expediente dado de alta',
+    status: 'Alta',
+    statusKey: 'alta',
+    icon: 'FileText',
+    date: '10 mar',
+  },
+  {
+    id: 'm2',
+    time: 'Mie',
+    title: 'Revision tecnica',
+    desc: 'Analisis de requisitos',
+    status: 'Revision',
+    statusKey: 'revision',
+    icon: 'Stamp',
+    date: '12 mar',
+  },
+  {
+    id: 'm3',
+    time: 'Vie',
+    title: 'Resolucion',
+    desc: 'Dictamen favorable',
+    status: 'Cerrado',
+    statusKey: 'cerrado',
+    icon: 'CheckCircle',
+    date: '14 mar',
+  },
+];
+
+export function eventsFor(variant: TimelineVariant): TimelineEvent[] {
+  if (variant === 'milestones' || variant === 'horizontal') {
+    return MILESTONE_EVENTS;
+  }
+  return SAMPLE_EVENTS;
+}
 
 function icon(lang: CodeLang, name: string, size = 14): string {
   const kebab = name
@@ -127,20 +215,44 @@ function icon(lang: CodeLang, name: string, size = 14): string {
   return `<i class="ph-thin ph-${kebab}" aria-hidden="true"></i>`;
 }
 
-function itemMarkup(lang: CodeLang, example: TimelineExample, ev: (typeof SAMPLE_EVENTS)[number]): string {
+function railMarkup(
+  lang: CodeLang,
+  example: TimelineExample,
+  ev: TimelineEvent,
+  index: number,
+): string {
+  const v = example.variant;
+  if (v === 'icons' || v === 'complete') {
+    return `<span class="gob-tl-icon">${icon(lang, ev.icon, 16)}</span>`;
+  }
+  if (v === 'numbered') {
+    return `<span class="gob-tl-num">${index + 1}</span>`;
+  }
+  return '<span class="gob-tl-dot"></span>';
+}
+
+function itemMarkup(
+  lang: CodeLang,
+  example: TimelineExample,
+  ev: TimelineEvent,
+  index: number,
+): string {
   const i = '  ';
   const v = example.variant;
-  const showIcon = v === 'icons' || v === 'complete';
   const showStatus =
     v === 'status' || v === 'complete' || v === 'cards' || v === 'icons';
+  const showDate = v === 'dates';
 
   return `${i}<div class="gob-tl-item" role="listitem">
 ${i}  <div class="gob-tl-rail">
-${i}    ${showIcon ? `<span class="gob-tl-icon">${icon(lang, ev.icon, 16)}</span>` : '<span class="gob-tl-dot"></span>'}
+${i}    ${railMarkup(lang, example, ev, index)}
 ${i}  </div>
 ${i}  <div class="gob-tl-body">
 ${i}    <div class="gob-tl-head">
-${i}      <p class="gob-tl-time">${ev.time}</p>
+${showDate ? `${i}      <div class="gob-tl-when">
+${i}        <p class="gob-tl-date">${ev.date}</p>
+${i}        <p class="gob-tl-time">${ev.time}</p>
+${i}      </div>` : `${i}      <p class="gob-tl-time">${ev.time}</p>`}
 ${showStatus ? `${i}      <span class="gob-tl-pill" data-status="${ev.statusKey}">${ev.status}</span>` : ''}
 ${i}    </div>
 ${i}    <p class="gob-tl-title">${ev.title}</p>
@@ -150,10 +262,31 @@ ${i}</div>`;
 }
 
 export function buildSnippet(lang: CodeLang, example: TimelineExample, tone: Tone): string {
-  const body = SAMPLE_EVENTS.map((ev) => itemMarkup(lang, example, ev)).join('\n');
+  const events = eventsFor(example.variant);
+  const v = example.variant;
+  let body = '';
+
+  if (v === 'grouped') {
+    let lastGroup = '';
+    body = events
+      .map((ev, index) => {
+        const group =
+          ev.group && ev.group !== lastGroup
+            ? `  <div class="gob-tl-group">${ev.group}</div>\n`
+            : '';
+        lastGroup = ev.group ?? lastGroup;
+        return `${group}${itemMarkup(lang, example, ev, index)}`;
+      })
+      .join('\n');
+  } else {
+    body = events.map((ev, index) => itemMarkup(lang, example, ev, index)).join('\n');
+  }
+
+  const needsIcons = v === 'icons' || v === 'complete';
+  const iconNames = [...new Set(events.map((e) => e.icon))];
   const imports =
-    lang === 'react'
-      ? `import { CheckCircle, Tray, User } from '@phosphor-icons/react';
+    lang === 'react' && needsIcons
+      ? `import { ${iconNames.join(', ')} } from '@phosphor-icons/react';
 import '@mariasan001/ui-wc';
 
 `

@@ -32,6 +32,17 @@ export const timelineStyles = `
   border-radius: 14px;
 }
 
+.root[data-variant='horizontal'] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  padding: 20px 18px 18px;
+  scrollbar-width: thin;
+}
+
 :host([tone='primary']),
 :host(:not([tone])),
 .root[data-tone='primary'] {

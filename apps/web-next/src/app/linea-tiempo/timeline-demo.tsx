@@ -1,17 +1,31 @@
 'use client';
 
-import { useState } from 'react';
-import { CheckCircle, Tray, User } from '@phosphor-icons/react';
+import { useMemo, useState } from 'react';
+import {
+  CheckCircle,
+  FileText,
+  Stamp,
+  Tray,
+  User,
+  Warning,
+} from '@phosphor-icons/react';
 
 import type { Tone } from '@mariasan001/ui-wc';
 
-import { SAMPLE_EVENTS, type TimelineExample } from './timeline-data';
+import {
+  eventsFor,
+  type TimelineEvent,
+  type TimelineExample,
+} from './timeline-data';
 import local from './timeline.module.css';
 
 const ICONS = {
   Tray,
   User,
   CheckCircle,
+  Warning,
+  FileText,
+  Stamp,
 } as const;
 
 export function TimelineDemo({
@@ -22,25 +36,61 @@ export function TimelineDemo({
   tone: Tone;
 }) {
   const variant = example.variant;
-  const [active, setActive] = useState<string>('2');
+  const events = useMemo(() => eventsFor(variant), [variant]);
+  const [active, setActive] = useState<string>(events[1]?.id ?? events[0]?.id ?? '');
+
   const showIcon = variant === 'icons' || variant === 'complete';
+  const showNumber = variant === 'numbered';
+  const showDate = variant === 'dates';
   const showStatus =
     variant === 'status' ||
     variant === 'complete' ||
     variant === 'cards' ||
     variant === 'icons';
+  const showGrouped = variant === 'grouped';
+
+  const blocks = useMemo(() => {
+    if (!showGrouped) {
+      return events.map((ev, index) => ({ type: 'item' as const, ev, index }));
+    }
+    const out: Array<
+      | { type: 'group'; label: string }
+      | { type: 'item'; ev: TimelineEvent; index: number }
+    > = [];
+    let last = '';
+    events.forEach((ev, index) => {
+      if (ev.group && ev.group !== last) {
+        out.push({ type: 'group', label: ev.group });
+        last = ev.group;
+      }
+      out.push({ type: 'item', ev, index });
+    });
+    return out;
+  }, [events, showGrouped]);
 
   return (
-    <div className={local.stageInner}>
+    <div
+      className={`${local.stageInner} ${variant === 'horizontal' ? local.stageWide : ''}`}
+    >
       <gob-timeline
         key={`${example.id}-${tone}`}
         variant={variant}
         tone={tone}
         className={local.timeline}
       >
-        {SAMPLE_EVENTS.map((ev) => {
-          const Icon = ICONS[ev.icon as keyof typeof ICONS];
+        {blocks.map((block) => {
+          if (block.type === 'group') {
+            return (
+              <div key={`g-${block.label}`} className="gob-tl-group">
+                {block.label}
+              </div>
+            );
+          }
+
+          const { ev, index } = block;
+          const Icon = ICONS[ev.icon];
           const isActive = active === ev.id;
+
           return (
             <div
               key={ev.id}
@@ -61,13 +111,22 @@ export function TimelineDemo({
                   <span className="gob-tl-icon">
                     <Icon weight="thin" size={16} aria-hidden="true" />
                   </span>
+                ) : showNumber ? (
+                  <span className="gob-tl-num">{index + 1}</span>
                 ) : (
                   <span className="gob-tl-dot" />
                 )}
               </div>
               <div className="gob-tl-body">
                 <div className="gob-tl-head">
-                  <p className="gob-tl-time">{ev.time}</p>
+                  {showDate ? (
+                    <div className="gob-tl-when">
+                      <p className="gob-tl-date">{ev.date}</p>
+                      <p className="gob-tl-time">{ev.time}</p>
+                    </div>
+                  ) : (
+                    <p className="gob-tl-time">{ev.time}</p>
+                  )}
                   {showStatus ? (
                     <span className="gob-tl-pill" data-status={ev.statusKey}>
                       {ev.status}
@@ -83,7 +142,7 @@ export function TimelineDemo({
       </gob-timeline>
       {active ? (
         <p className={local.flash}>
-          Evento: {SAMPLE_EVENTS.find((e) => e.id === active)?.title}
+          Evento: {events.find((e) => e.id === active)?.title}
         </p>
       ) : null}
     </div>
