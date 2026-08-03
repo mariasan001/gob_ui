@@ -23,10 +23,7 @@ export const timelineStyles = `
   padding: 22px 20px 16px;
   border: 1px solid var(--gob-tl-border);
   border-radius: var(--gob-tl-radius);
-  background:
-    radial-gradient(90% 70% at 0% 0%, rgba(159, 33, 65, 0.05), transparent 42%),
-    radial-gradient(80% 60% at 100% 100%, rgba(188, 148, 90, 0.08), transparent 46%),
-    var(--gob-tl-bg);
+  background: var(--gob-tl-bg);
   box-shadow: var(--gob-tl-shadow);
 }
 
@@ -43,7 +40,7 @@ export const timelineStyles = `
 
 :host([tone='accent']),
 .root[data-tone='accent'] {
-  --gob-tl-bg: #fbf7f1;
+  --gob-tl-bg: #ffffff;
 }
 
 :host([tone='dark']),
@@ -51,19 +48,15 @@ export const timelineStyles = `
   --gob-tl-bg: #181511;
   --gob-tl-border: rgba(255, 255, 255, 0.1);
   --gob-tl-shadow: none;
-  background:
-    radial-gradient(90% 70% at 0% 0%, rgba(255, 255, 255, 0.05), transparent 42%),
-    radial-gradient(80% 60% at 100% 100%, rgba(224, 197, 154, 0.08), transparent 46%),
-    var(--gob-tl-bg);
 }
 
 :host([tone='neutral']),
 .root[data-tone='neutral'] {
-  --gob-tl-bg: #f5f5f5;
+  --gob-tl-bg: #ffffff;
 }
 
 :host([tone='soft']),
 .root[data-tone='soft'] {
-  --gob-tl-bg: #f3ebe0;
+  --gob-tl-bg: #ffffff;
 }
 `;
