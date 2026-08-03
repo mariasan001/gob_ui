@@ -9,6 +9,16 @@ export const SPINNER_VARIANTS = [
   'page',
   'overlay',
   'complete',
+  'orbit',
+  'arc',
+  'dash',
+  'comet',
+  'petals',
+  'metro',
+  'wave',
+  'radar',
+  'infinity',
+  'morph',
 ] as const;
 
 export type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
@@ -33,19 +43,8 @@ export const SPINNER_OBSERVED_ATTRIBUTES = [
 ] as const;
 
 export function resolveSpinnerVariant(value: string | null): SpinnerVariant {
-  if (
-    value === 'dual' ||
-    value === 'dots' ||
-    value === 'pulse' ||
-    value === 'bars' ||
-    value === 'button' ||
-    value === 'inline' ||
-    value === 'page' ||
-    value === 'overlay' ||
-    value === 'complete' ||
-    value === 'ring'
-  ) {
-    return value;
+  if ((SPINNER_VARIANTS as readonly string[]).includes(value ?? '')) {
+    return value as SpinnerVariant;
   }
   return 'ring';
 }

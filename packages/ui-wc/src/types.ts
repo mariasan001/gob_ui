@@ -492,7 +492,17 @@ export type SpinnerVariant =
   | 'inline'
   | 'page'
   | 'overlay'
-  | 'complete';
+  | 'complete'
+  | 'orbit'
+  | 'arc'
+  | 'dash'
+  | 'comet'
+  | 'petals'
+  | 'metro'
+  | 'wave'
+  | 'radar'
+  | 'infinity'
+  | 'morph';
 
 export type SpinnerSize = 'sm' | 'md' | 'lg';
 
