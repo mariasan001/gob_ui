@@ -350,6 +350,27 @@ export const selectStyles = `
   padding-top: 20px;
   padding-bottom: 10px;
 }
+.root[data-variant='floating'] .float-label {
+  left: var(--gob-sel-pad-x);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.root[data-variant='floating'] .value-wrap {
+  width: 100%;
+  min-height: 22px;
+}
+.root[data-variant='floating'] .value[data-placeholder='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+.root[data-variant='floating'][data-open='true'] .value[data-placeholder='true'],
+.root[data-variant='floating'][data-focused='true'] .value[data-placeholder='true'] {
+  opacity: 1;
+}
+.root[data-variant='floating'] .meta {
+  display: none;
+}
 .root[data-variant='floating'] .lead ~ .value-wrap {
   padding-top: 2px;
 }

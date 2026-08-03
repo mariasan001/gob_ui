@@ -341,6 +341,7 @@ class GobSelectElement extends SafeHTMLElement {
     this.rootEl.dataset.focused = next ? 'true' : 'false';
     this.triggerEl.setAttribute('aria-expanded', next ? 'true' : 'false');
     this.panelEl.hidden = !next;
+    this.renderValue();
     if (next) {
       this.query = '';
       this.searchInput.value = '';
@@ -399,8 +400,7 @@ class GobSelectElement extends SafeHTMLElement {
     const status = resolveSelectStatus(this.getAttribute('status'));
     const size = resolveSelectSize(this.getAttribute('size'));
     const label = this.getAttribute('label')?.trim() || '';
-    const placeholder =
-      this.getAttribute('placeholder')?.trim() || 'Selecciona una opcion';
+    const placeholder = this.resolvePlaceholder(variant);
     const helper = this.getAttribute('helper')?.trim() || '';
     const name = this.getAttribute('name') ?? '';
     const disabled = this.hasAttribute('disabled');
@@ -510,11 +510,21 @@ class GobSelectElement extends SafeHTMLElement {
     if (this.open || fromConnect) this.renderList();
   }
 
+  private resolvePlaceholder(variant: SelectVariant): string {
+    const raw = this.getAttribute('placeholder');
+    if (raw !== null && raw.trim() === '' && variant === 'floating') {
+      return 'Elige una opcion';
+    }
+    const trimmed = raw?.trim() || '';
+    if (trimmed) return trimmed;
+    if (variant === 'floating') return 'Elige una opcion';
+    return 'Selecciona una opcion';
+  }
+
   private renderValue() {
     const variant = resolveSelectVariant(this.getAttribute('variant'));
     const multiple = variant === 'multiple';
-    const placeholder =
-      this.getAttribute('placeholder')?.trim() || 'Selecciona una opcion';
+    const placeholder = this.resolvePlaceholder(variant);
     const selectedOpts = this.flatOptions.filter((o) =>
       this.selected.includes(o.value),
     );
@@ -555,7 +565,7 @@ class GobSelectElement extends SafeHTMLElement {
     if (current) {
       this.valueEl.textContent = current.label;
       this.valueEl.dataset.placeholder = 'false';
-      if (current.hint) {
+      if (current.hint && variant !== 'floating') {
         this.metaEl.hidden = false;
         this.metaEl.textContent = current.hint;
       } else {
