@@ -100,7 +100,7 @@ export const SKELETON_ATTRS = [
     name: 'animated',
     type: 'boolean',
     defaultValue: 'true',
-    body: 'Shimmer de marca (vino + dorado). Usa animated="false" para estatico.',
+    body: 'Shimmer en gris clarito. Usa animated="false" para estatico.',
   },
 ] as const;
 

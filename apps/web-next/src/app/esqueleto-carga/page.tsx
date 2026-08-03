@@ -2,7 +2,7 @@
 
 /**
  * Docs de Esqueleto de carga — cascaron canonico = Botones (/botones).
- * Presentacion unica de marca (vino + dorado); sin selector de color.
+ * Presentacion unica en gris clarito; sin selector de color.
  * Nativo en @mariasan001/ui-wc para HTML / React / Vue / Angular.
  */
 
