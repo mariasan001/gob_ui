@@ -27,6 +27,7 @@ export type PreviewKind =
   | 'progress'
   | 'spinner'
   | 'input'
+  | 'textarea'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -350,12 +351,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'textarea',
+    href: '/area-texto',
     name: 'Area de texto',
     description: 'Texto multilinea para notas y observaciones.',
-    preview: 'soon',
+    preview: 'textarea',
     category: 'formularios',
     tags: ['form', 'texto', 'textarea'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'select',
