@@ -69,7 +69,9 @@ export function TimelineDemo({
                 <div className="gob-tl-head">
                   <p className="gob-tl-time">{ev.time}</p>
                   {showStatus ? (
-                    <span className="gob-tl-pill">{ev.status}</span>
+                    <span className="gob-tl-pill" data-status={ev.statusKey}>
+                      {ev.status}
+                    </span>
                   ) : null}
                 </div>
                 <p className="gob-tl-title">{ev.title}</p>

@@ -230,6 +230,48 @@ gob-timeline .gob-tl-pill {
   flex: 0 0 auto;
 }
 
+/* Semaforo institucional (colores/fundamentos) */
+gob-timeline .gob-tl-pill[data-status='alta'],
+gob-timeline .gob-tl-pill[data-tone='info'] {
+  background: rgba(47, 95, 138, 0.12);
+  color: #2f5f8a;
+}
+gob-timeline .gob-tl-pill[data-status='revision'],
+gob-timeline .gob-tl-pill[data-tone='warning'] {
+  background: rgba(208, 146, 26, 0.16);
+  color: #a87412;
+}
+gob-timeline .gob-tl-pill[data-status='cerrado'],
+gob-timeline .gob-tl-pill[data-tone='success'] {
+  background: rgba(31, 138, 85, 0.14);
+  color: #1f8a55;
+}
+gob-timeline .gob-tl-pill[data-status='rechazado'],
+gob-timeline .gob-tl-pill[data-tone='danger'] {
+  background: rgba(198, 40, 40, 0.12);
+  color: #c62828;
+}
+gob-timeline[tone='dark'] .gob-tl-pill[data-status='alta'],
+gob-timeline[tone='dark'] .gob-tl-pill[data-tone='info'] {
+  background: rgba(47, 95, 138, 0.28);
+  color: #9ec0e0;
+}
+gob-timeline[tone='dark'] .gob-tl-pill[data-status='revision'],
+gob-timeline[tone='dark'] .gob-tl-pill[data-tone='warning'] {
+  background: rgba(208, 146, 26, 0.28);
+  color: #f0c56a;
+}
+gob-timeline[tone='dark'] .gob-tl-pill[data-status='cerrado'],
+gob-timeline[tone='dark'] .gob-tl-pill[data-tone='success'] {
+  background: rgba(31, 138, 85, 0.28);
+  color: #7dcea0;
+}
+gob-timeline[tone='dark'] .gob-tl-pill[data-status='rechazado'],
+gob-timeline[tone='dark'] .gob-tl-pill[data-tone='danger'] {
+  background: rgba(198, 40, 40, 0.28);
+  color: #f0a0a0;
+}
+
 /* Hover / active */
 gob-timeline .gob-tl-item:hover .gob-tl-body,
 gob-timeline .gob-tl-item:focus-visible .gob-tl-body,
