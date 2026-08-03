@@ -9,14 +9,6 @@ export const CODE_LANGUAGES: { id: CodeLang; label: string }[] = [
   { id: 'angular', label: 'Angular' },
 ];
 
-export const COLOR_OPTIONS: { id: Tone; label: string; swatch: string }[] = [
-  { id: 'primary', label: 'Primary', swatch: '#9F2141' },
-  { id: 'accent', label: 'Accent', swatch: '#BC945A' },
-  { id: 'dark', label: 'Dark', swatch: '#181511' },
-  { id: 'neutral', label: 'Neutral', swatch: '#EBEBEB' },
-  { id: 'soft', label: 'Soft', swatch: '#E7D7BD' },
-];
-
 export type EmptyExample = {
   id: EmptyStateVariant;
   title: string;
@@ -52,7 +44,7 @@ export const EMPTY_EXAMPLES: EmptyExample[] = [
   {
     id: 'error',
     title: 'Error',
-    description: 'Fallo al cargar con reintento.',
+    description: 'Fallo al cargar con reintento (semaforo danger).',
     variant: 'error',
   },
   {
@@ -67,6 +59,36 @@ export const EMPTY_EXAMPLES: EmptyExample[] = [
     description: 'Icono, mensaje y acciones juntos.',
     variant: 'complete',
   },
+  {
+    id: 'filter',
+    title: 'Sin filtros',
+    description: 'Ningun registro cumple los filtros (semaforo info).',
+    variant: 'filter',
+  },
+  {
+    id: 'permission',
+    title: 'Sin permiso',
+    description: 'Acceso restringido (semaforo warning).',
+    variant: 'permission',
+  },
+  {
+    id: 'success',
+    title: 'Al dia',
+    description: 'Nada pendiente por atender (semaforo success).',
+    variant: 'success',
+  },
+  {
+    id: 'upload',
+    title: 'Carga vacia',
+    description: 'Zona para subir el primer documento.',
+    variant: 'upload',
+  },
+  {
+    id: 'inline',
+    title: 'Inline',
+    description: 'Layout horizontal para barras y paneles estrechos.',
+    variant: 'inline',
+  },
 ];
 
 export const EMPTY_ATTRS = [
@@ -74,37 +96,97 @@ export const EMPTY_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | icon | actions | search | error | dense | complete',
+    body: 'basic | icon | actions | search | error | dense | complete | filter | permission | success | upload | inline',
   },
   {
     name: 'tone',
     type: 'string',
     defaultValue: 'primary',
-    body: 'Acento de icono y CTA: primary | accent | dark | neutral | soft',
+    body: 'Marca fija vino + dorado (primary). No hay selector de color en docs.',
   },
 ] as const;
 
-function copyFor(example: EmptyExample): { title: string; desc: string } {
+export type EmptyCopy = {
+  title: string;
+  desc: string;
+  pill?: string;
+  pillTone?: 'info' | 'warning' | 'success' | 'danger';
+  hints?: string[];
+  primaryLabel?: string;
+  secondaryLabel?: string;
+};
+
+export function copyFor(example: EmptyExample): EmptyCopy {
   switch (example.variant) {
     case 'search':
       return {
         title: 'Sin resultados',
-        desc: 'No encontramos expedientes con esos filtros. Prueba otra busqueda.',
+        desc: 'No encontramos expedientes con esos criterios. Prueba otra busqueda.',
+        pill: 'Busqueda',
+        pillTone: 'info',
+        primaryLabel: 'Nueva busqueda',
+        secondaryLabel: 'Limpiar filtros',
       };
     case 'error':
       return {
         title: 'No se pudo cargar',
         desc: 'Ocurrio un problema al obtener los datos. Intenta de nuevo.',
+        pill: 'Error',
+        pillTone: 'danger',
+        primaryLabel: 'Reintentar',
+        secondaryLabel: 'Reportar',
       };
     case 'dense':
       return {
         title: 'Sin actividad',
         desc: 'Aun no hay eventos en este periodo.',
       };
+    case 'filter':
+      return {
+        title: 'Ningun expediente coincide',
+        desc: 'Ajusta o limpia los filtros para ver resultados.',
+        pill: 'Filtros',
+        pillTone: 'info',
+        hints: ['Estatus', 'Fecha', 'Region'],
+        primaryLabel: 'Limpiar filtros',
+        secondaryLabel: 'Ver todos',
+      };
+    case 'permission':
+      return {
+        title: 'No tienes acceso',
+        desc: 'Tu perfil no incluye permisos para ver este modulo. Solicita acceso.',
+        pill: 'Restringido',
+        pillTone: 'warning',
+        primaryLabel: 'Solicitar acceso',
+        secondaryLabel: 'Volver',
+      };
+    case 'success':
+      return {
+        title: 'Todo al dia',
+        desc: 'No hay pendientes. Los nuevos movimientos apareceran aqui.',
+        pill: 'Al dia',
+        pillTone: 'success',
+        primaryLabel: 'Ver historial',
+      };
+    case 'upload':
+      return {
+        title: 'Sin documentos',
+        desc: 'Arrastra un archivo o selecciona uno para iniciar el expediente.',
+        primaryLabel: 'Subir archivo',
+        secondaryLabel: 'Crear vacio',
+      };
+    case 'inline':
+      return {
+        title: 'Sin notificaciones',
+        desc: 'Cuando haya avisos apareceran en esta barra.',
+        primaryLabel: 'Actualizar',
+      };
     default:
       return {
         title: 'Sin expedientes',
         desc: 'Cuando existan registros apareceran aqui. Puedes crear el primero.',
+        primaryLabel: 'Nuevo expediente',
+        secondaryLabel: 'Limpiar filtros',
       };
   }
 }
@@ -122,39 +204,105 @@ function icon(lang: CodeLang, name: string, size = 24): string {
   return `<i class="ph-thin ph-${kebab}" aria-hidden="true"></i>`;
 }
 
+export function iconNameFor(variant: EmptyStateVariant): string {
+  switch (variant) {
+    case 'error':
+      return 'WarningCircle';
+    case 'search':
+    case 'filter':
+      return 'MagnifyingGlass';
+    case 'permission':
+      return 'Lock';
+    case 'success':
+      return 'CheckCircle';
+    case 'upload':
+      return 'UploadSimple';
+    case 'inline':
+      return 'Bell';
+    default:
+      return 'FolderOpen';
+  }
+}
+
 export function buildSnippet(
   lang: CodeLang,
   example: EmptyExample,
-  tone: Tone,
+  tone: Tone = 'primary',
 ): string {
   const v = example.variant;
   const copy = copyFor(example);
   const showIcon =
-    v === 'icon' || v === 'complete' || v === 'search' || v === 'error' || v === 'dense';
-  const showActions = v === 'actions' || v === 'complete' || v === 'error';
-  const iconName =
-    v === 'error' ? 'WarningCircle' : v === 'search' ? 'MagnifyingGlass' : 'FolderOpen';
+    v === 'icon' ||
+    v === 'complete' ||
+    v === 'search' ||
+    v === 'error' ||
+    v === 'dense' ||
+    v === 'filter' ||
+    v === 'permission' ||
+    v === 'success' ||
+    v === 'upload' ||
+    v === 'inline';
+  const showActions =
+    v === 'actions' ||
+    v === 'complete' ||
+    v === 'error' ||
+    v === 'filter' ||
+    v === 'permission' ||
+    v === 'success' ||
+    v === 'upload' ||
+    v === 'inline' ||
+    v === 'search';
+  const showPill = Boolean(copy.pill);
+  const showHints = Boolean(copy.hints?.length);
+  const iconName = iconNameFor(v);
+  const iconSize = v === 'inline' || v === 'dense' ? 20 : 24;
 
   const i = '  ';
   const parts: string[] = [`${i}<div class="gob-es-inner">`];
   if (showIcon) {
     parts.push(
-      `${i}  <span class="gob-es-icon">${icon(lang, iconName)}</span>`,
+      `${i}  <span class="gob-es-icon">${icon(lang, iconName, iconSize)}</span>`,
+    );
+  }
+  if (showPill && copy.pill && copy.pillTone) {
+    parts.push(
+      `${i}  <span class="gob-es-pill" data-tone="${copy.pillTone}">${copy.pill}</span>`,
     );
   }
   parts.push(`${i}  <p class="gob-es-title">${copy.title}</p>`);
   parts.push(`${i}  <p class="gob-es-desc">${copy.desc}</p>`);
+  if (showHints && copy.hints) {
+    parts.push(`${i}  <div class="gob-es-hints">`);
+    copy.hints.forEach((h) => {
+      parts.push(`${i}    <span class="gob-es-hint">${h}</span>`);
+    });
+    parts.push(`${i}  </div>`);
+  }
   if (showActions) {
-    parts.push(`${i}  <div class="gob-es-actions">
-${i}    <button type="button" class="gob-es-btn">Limpiar filtros</button>
-${i}    <button type="button" class="gob-es-btn gob-es-btn-primary">${v === 'error' ? 'Reintentar' : 'Nuevo expediente'}</button>
-${i}  </div>`);
+    const secondary = copy.secondaryLabel ?? 'Limpiar filtros';
+    const primary = copy.primaryLabel ?? 'Nuevo expediente';
+    const hasSecondary = Boolean(copy.secondaryLabel) || v === 'actions' || v === 'complete';
+    parts.push(`${i}  <div class="gob-es-actions">`);
+    if (hasSecondary && copy.secondaryLabel !== undefined) {
+      parts.push(
+        `${i}    <button type="button" class="gob-es-btn">${secondary}</button>`,
+      );
+    } else if (v === 'actions' || v === 'complete') {
+      parts.push(
+        `${i}    <button type="button" class="gob-es-btn">${secondary}</button>`,
+      );
+    }
+    parts.push(
+      `${i}    <button type="button" class="gob-es-btn gob-es-btn-primary">${primary}</button>`,
+    );
+    parts.push(`${i}  </div>`);
   }
   parts.push(`${i}</div>`);
 
+  const iconImport = iconName;
   const imports =
     lang === 'react'
-      ? `import { FolderOpen, MagnifyingGlass, WarningCircle } from '@phosphor-icons/react';
+      ? `import { ${iconImport} } from '@phosphor-icons/react';
 import '@mariasan001/ui-wc';
 
 `
@@ -172,5 +320,3 @@ ${parts.join('\n')}
 </gob-empty-state>
 `;
 }
-
-export { copyFor };

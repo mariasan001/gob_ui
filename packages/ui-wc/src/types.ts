@@ -422,7 +422,12 @@ export type EmptyStateVariant =
   | 'search'
   | 'error'
   | 'dense'
-  | 'complete';
+  | 'complete'
+  | 'filter'
+  | 'permission'
+  | 'success'
+  | 'upload'
+  | 'inline';
 
 export type EmptyStateTone = Tone;
 
