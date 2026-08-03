@@ -20,7 +20,7 @@ export type InputExample = {
   value?: string;
   status?: InputStatus;
   size?: InputSize;
-  prefix?: string;
+  lead?: string;
   suffix?: string;
   required?: boolean;
   disabled?: boolean;
@@ -86,7 +86,7 @@ export const INPUT_EXAMPLES: InputExample[] = [
     variant: 'prefix',
     label: 'Monto',
     placeholder: '0.00',
-    prefix: '$',
+    lead: '$',
   },
   {
     id: 'suffix',
@@ -177,10 +177,10 @@ export const INPUT_ATTRS = [
     body: 'sm | md | lg',
   },
   {
-    name: 'prefix / suffix',
+    name: 'lead / suffix',
     type: 'string',
     defaultValue: '',
-    body: 'Afiches de texto a izquierda o derecha.',
+    body: 'Afiches de texto a izquierda (lead) o derecha (suffix).',
   },
   {
     name: 'disabled / readonly / required',
@@ -201,7 +201,7 @@ export function buildSnippet(lang: CodeLang, example: InputExample): string {
       ? `status="${example.status}"`
       : null,
     example.size && example.size !== 'md' ? `size="${example.size}"` : null,
-    example.prefix ? `prefix="${example.prefix}"` : null,
+    example.lead ? `lead="${example.lead}"` : null,
     example.suffix ? `suffix="${example.suffix}"` : null,
     example.required ? 'required' : null,
     example.disabled ? 'disabled' : null,

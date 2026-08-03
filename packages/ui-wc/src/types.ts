@@ -551,7 +551,7 @@ export type GobInputProps = React.HTMLAttributes<HTMLElement> & {
   status?: InputStatus;
   size?: InputSize;
   name?: string;
-  prefix?: string;
+  lead?: string;
   suffix?: string;
   disabled?: boolean;
   readonly?: boolean;
