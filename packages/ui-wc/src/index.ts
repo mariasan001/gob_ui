@@ -23,6 +23,7 @@ import './components/list/gob-list';
 import './components/timeline/gob-timeline';
 import './components/activity-feed/gob-activity-feed';
 import './components/empty-state/gob-empty-state';
+import './components/skeleton/gob-skeleton';
 
 export type {
   ActivityFeedTone,
@@ -60,6 +61,7 @@ export type {
   GobPaginationProps,
   GobRadioProps,
   GobSidebarProps,
+  GobSkeletonProps,
   GobSpacerProps,
   GobSwitchProps,
   GobTableProps,
@@ -78,6 +80,7 @@ export type {
   PaginationVariant,
   SidebarVariant,
   Size,
+  SkeletonVariant,
   SpacerVariant,
   TableTone,
   TableVariant,
