@@ -20,6 +20,9 @@ export type PreviewKind =
   | 'filter-bar'
   | 'toolbar'
   | 'list'
+  | 'timeline'
+  | 'activity-feed'
+  | 'empty-state'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -273,30 +276,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'timeline',
+    href: '/linea-tiempo',
     name: 'Linea de tiempo',
     description: 'Historial de eventos y bitacoras.',
-    preview: 'soon',
+    preview: 'timeline',
     category: 'datos',
     tags: ['historial', 'actividad', 'dashboard', 'timeline'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'activity-feed',
+    href: '/actividad-reciente',
     name: 'Actividad reciente',
     description: 'Flujo de actividad reciente del sistema.',
-    preview: 'soon',
+    preview: 'activity-feed',
     category: 'datos',
     tags: ['actividad', 'dashboard', 'notificaciones'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'empty-state',
+    href: '/estado-vacio',
     name: 'Estado vacio',
     description: 'Vacios utiles con CTA cuando no hay datos.',
-    preview: 'soon',
+    preview: 'empty-state',
     category: 'datos',
     tags: ['vacio', 'placeholder', 'dashboard'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'skeleton',

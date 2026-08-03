@@ -263,6 +263,51 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'timeline') {
+    return (
+      <div className={s.fakeTimeline} aria-hidden="true">
+        <span className={s.fakeTimelineRow}>
+          <i />
+          <b />
+        </span>
+        <span className={s.fakeTimelineRow}>
+          <i />
+          <b />
+        </span>
+        <span className={s.fakeTimelineRow}>
+          <i />
+          <b />
+        </span>
+      </div>
+    );
+  }
+  if (kind === 'activity-feed') {
+    return (
+      <div className={s.fakeActivity} aria-hidden="true">
+        <span className={s.fakeActivityRow}>
+          <i />
+          <b />
+        </span>
+        <span className={s.fakeActivityRow}>
+          <i />
+          <b />
+        </span>
+        <span className={s.fakeActivityRow}>
+          <i />
+          <b />
+        </span>
+      </div>
+    );
+  }
+  if (kind === 'empty-state') {
+    return (
+      <div className={s.fakeEmpty} aria-hidden="true">
+        <i />
+        <b />
+        <span />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
