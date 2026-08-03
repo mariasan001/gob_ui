@@ -2,18 +2,10 @@
 
 import { useEffect, useState } from 'react';
 
-import type { Tone } from '@mariasan001/ui-wc';
-
-import { SAMPLE_ACTIVITY, type ActivityExample } from './activity-data';
+import { SAMPLE_ACTIVITY, type ActivityExample, type ActivityRow } from './activity-data';
 import local from './activity.module.css';
 
-export function ActivityDemo({
-  example,
-  tone,
-}: {
-  example: ActivityExample;
-  tone: Tone;
-}) {
+export function ActivityDemo({ example }: { example: ActivityExample }) {
   const variant = example.variant;
   const [flash, setFlash] = useState('');
   const [unread, setUnread] = useState<Set<string>>(
@@ -30,12 +22,15 @@ export function ActivityDemo({
     variant === 'avatar' ||
     variant === 'complete' ||
     variant === 'dense' ||
-    variant === 'unread';
+    variant === 'unread' ||
+    variant === 'status';
   const showActions = variant === 'actions' || variant === 'complete';
   const showUnread = variant === 'unread' || variant === 'complete';
+  const showStatus =
+    variant === 'status' || variant === 'complete' || variant === 'unread';
   const showGrouped = variant === 'grouped';
 
-  function renderRow(row: (typeof SAMPLE_ACTIVITY)[number]) {
+  function renderRow(row: ActivityRow) {
     const isUnread = showUnread && unread.has(row.id);
     return (
       <div
@@ -50,9 +45,16 @@ export function ActivityDemo({
           <span className="gob-af-dot" />
         )}
         <div className="gob-af-body">
-          <p className="gob-af-primary">
-            <strong>{row.actor}</strong> {row.text}
-          </p>
+          <div className="gob-af-head">
+            <p className="gob-af-primary">
+              <strong>{row.actor}</strong> {row.text}
+            </p>
+            {showStatus ? (
+              <span className="gob-af-pill" data-status={row.statusKey}>
+                {row.status}
+              </span>
+            ) : null}
+          </div>
           <p className="gob-af-secondary">{row.meta}</p>
         </div>
         {showActions ? (
@@ -77,21 +79,40 @@ export function ActivityDemo({
     );
   }
 
+  const blocks: Array<
+    | { type: 'group'; label: string }
+    | { type: 'item'; row: ActivityRow }
+  > = [];
+
+  if (showGrouped) {
+    let last = '';
+    SAMPLE_ACTIVITY.forEach((row) => {
+      if (row.group !== last) {
+        blocks.push({ type: 'group', label: row.group });
+        last = row.group;
+      }
+      blocks.push({ type: 'item', row });
+    });
+  }
+
   return (
     <div className={local.stageInner}>
       <gob-activity-feed
-        key={`${example.id}-${tone}`}
+        key={example.id}
         variant={variant}
-        tone={tone}
+        tone="primary"
         className={local.feed}
       >
         {showGrouped
-          ? (['Hoy', 'Ayer'] as const).map((group) => (
-              <div key={group}>
-                <div className="gob-af-group">{group}</div>
-                {SAMPLE_ACTIVITY.filter((r) => r.group === group).map(renderRow)}
-              </div>
-            ))
+          ? blocks.map((block) =>
+              block.type === 'group' ? (
+                <div key={`g-${block.label}`} className="gob-af-group">
+                  {block.label}
+                </div>
+              ) : (
+                renderRow(block.row)
+              ),
+            )
           : SAMPLE_ACTIVITY.map(renderRow)}
       </gob-activity-feed>
       {flash ? <p className={local.flash}>{flash}</p> : null}

@@ -2,19 +2,18 @@
 
 /**
  * Docs de Actividad reciente — cascaron canonico = Botones (/botones).
+ * Color de marca fijo (vino + cafe); sin selector de tone.
  */
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import type { Tone } from '@mariasan001/ui-wc';
 import '@mariasan001/ui-wc';
 
 import {
   ACTIVITY_ATTRS,
   ACTIVITY_EXAMPLES,
   CODE_LANGUAGES,
-  COLOR_OPTIONS,
   buildSnippet,
   type ActivityExample,
   type CodeLang,
@@ -23,9 +22,10 @@ import { ActivityDemo } from './activity-demo';
 import local from './activity.module.css';
 import s from './page.module.css';
 
+const BRAND_TONE = 'primary' as const;
+
 export default function ActividadRecientePage() {
   const [lang, setLang] = useState<CodeLang>('html');
-  const [tone, setTone] = useState<Tone>('primary');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +34,9 @@ export default function ActividadRecientePage() {
 
   async function copyExample(example: ActivityExample) {
     try {
-      await navigator.clipboard.writeText(buildSnippet(lang, example, tone));
+      await navigator.clipboard.writeText(
+        buildSnippet(lang, example, BRAND_TONE),
+      );
       setCopiedKey(example.id);
       window.setTimeout(() => setCopiedKey(null), 1200);
     } catch {
@@ -51,8 +53,8 @@ export default function ActividadRecientePage() {
           </Link>
           <h1 className={s.title}>Actividad reciente</h1>
           <p className={s.hint}>
-            Funcional: feed con no leidas y acciones. Pulsa <strong>Copiar</strong>{' '}
-            para markup en <strong>{lang.toUpperCase()}</strong>.
+            Funcional: feed con no leidas, semaforo y acciones. Pulsa{' '}
+            <strong>Copiar</strong> para markup en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
@@ -80,27 +82,6 @@ export default function ActividadRecientePage() {
                 })}
               </div>
             </div>
-            <div className={s.filterBlock}>
-              <p className={s.filterLabel}>Color</p>
-              <div className={s.colorRow}>
-                {COLOR_OPTIONS.map((option) => {
-                  const active = option.id === tone;
-                  return (
-                    <button
-                      key={option.id}
-                      type="button"
-                      className={`${s.colorSwatch} ${active ? s.colorSwatchActive : ''}`}
-                      style={{ background: option.swatch }}
-                      data-tone={option.id}
-                      aria-label={option.label}
-                      aria-pressed={active}
-                      title={option.label}
-                      onClick={() => setTone(option.id)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
           <div className={local.exampleList} aria-label="Ejemplos">
@@ -118,7 +99,7 @@ export default function ActividadRecientePage() {
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
                 <div className={local.stage}>
-                  <ActivityDemo example={example} tone={tone} />
+                  <ActivityDemo example={example} />
                 </div>
               </article>
             ))}
@@ -130,7 +111,7 @@ export default function ActividadRecientePage() {
               <p className={s.sectionDesc}>
                 API de <code>gob-activity-feed</code>. Items con clases{' '}
                 <code>gob-af-item</code>, <code>gob-af-avatar</code>,{' '}
-                <code>gob-af-action</code>.
+                <code>gob-af-pill</code>, <code>gob-af-action</code>.
               </p>
             </div>
             <div className={local.tableWrap}>

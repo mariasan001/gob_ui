@@ -8,11 +8,15 @@ import {
 } from './activity-feed-constants';
 import { activityFeedStyles } from './activity-feed-styles';
 
-const LIGHT_STYLE_ID = 'gob-activity-feed-light-dom';
+const LIGHT_STYLE_ID = 'gob-activity-feed-light-dom-v2';
 
 function ensureLightDomStyles() {
   if (typeof document === 'undefined') return;
-  if (document.getElementById(LIGHT_STYLE_ID)) return;
+  const existing = document.getElementById(LIGHT_STYLE_ID);
+  if (existing) {
+    existing.textContent = activityFeedLightDomStyles;
+    return;
+  }
   const style = document.createElement('style');
   style.id = LIGHT_STYLE_ID;
   style.textContent = activityFeedLightDomStyles;
