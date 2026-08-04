@@ -21,6 +21,7 @@ export function FormFieldDemo({ example }: { example: FormFieldExample }) {
         <gob-input
           variant={example.variant === 'soft' ? 'soft' : 'basic'}
           placeholder={example.controlPlaceholder || 'Escribe aqui…'}
+          value={example.controlValue}
           {...(example.disabled ? { disabled: true } : {})}
         />
         {example.variant === 'inline' ? (

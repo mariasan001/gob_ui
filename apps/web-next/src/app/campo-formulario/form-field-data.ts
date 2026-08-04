@@ -26,6 +26,7 @@ export type FormFieldExample = {
   required?: boolean;
   disabled?: boolean;
   controlPlaceholder?: string;
+  controlValue?: string;
 };
 
 export const FORM_FIELD_EXAMPLES: FormFieldExample[] = [
@@ -129,14 +130,14 @@ export const FORM_FIELD_EXAMPLES: FormFieldExample[] = [
   {
     id: 'complete',
     title: 'Completo',
-    description: 'Hint + pill + ayuda + semaforo.',
+    description: 'Label, required, ayuda y semaforo.',
     variant: 'complete',
     label: 'Expediente',
-    hint: 'Obligatorio',
     helper: 'Usa el folio del oficio de origen.',
     required: true,
     status: 'info',
     controlPlaceholder: 'OF-8842',
+    controlValue: 'OF-8842',
   },
 ];
 
@@ -203,8 +204,11 @@ export function buildSnippet(lang: CodeLang, example: FormFieldExample): string 
 `;
 
   const placeholder = example.controlPlaceholder || '…';
+  const valueAttr = example.controlValue
+    ? ` value="${example.controlValue}"`
+    : '';
   return `${imports}<gob-form-field ${attrs}>
-  <gob-input variant="basic" placeholder="${placeholder}"></gob-input>
+  <gob-input variant="basic" placeholder="${placeholder}"${valueAttr}></gob-input>
 </gob-form-field>
 `;
 }
