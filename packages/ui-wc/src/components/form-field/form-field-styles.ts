@@ -45,13 +45,14 @@ export const formFieldStyles = `
 .head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
 }
 
 .label {
   margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -65,6 +66,7 @@ export const formFieldStyles = `
 
 .hint {
   margin: 0;
+  flex: 0 0 auto;
   font-size: 11px;
   font-weight: 600;
   color: var(--gob-ff-muted);
@@ -182,11 +184,18 @@ export const formFieldStyles = `
 }
 
 .root[data-variant='complete'] {
-  gap: 10px;
-  padding: 16px;
-  border-radius: 18px;
-  border: 1px solid color-mix(in srgb, var(--gob-ff-dorado) 35%, #ebe6df);
-  background: linear-gradient(180deg, #fff 0%, #fbf8f3 100%);
+  gap: 8px;
+  padding: 2px 0 2px 14px;
+  border: 0;
+  border-radius: 0;
+  border-left: 3px solid var(--gob-ff-focus);
+  background: transparent;
+}
+.root[data-variant='complete'] .label {
+  font-size: 13px;
+}
+.root[data-variant='complete'][data-status='default'] {
+  border-left-color: var(--gob-ff-dorado);
 }
 
 .root[data-disabled='true'] {
