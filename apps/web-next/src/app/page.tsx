@@ -440,6 +440,34 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'form-field') {
+    return (
+      <div className={s.fakeFormField} aria-hidden="true">
+        <em />
+        <b />
+        <i />
+      </div>
+    );
+  }
+  if (kind === 'form') {
+    return (
+      <div className={s.fakeForm} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+    );
+  }
+  if (kind === 'tabs') {
+    return (
+      <div className={s.fakeTabs} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

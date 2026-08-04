@@ -38,6 +38,9 @@ export type PreviewKind =
   | 'file-upload'
   | 'slider'
   | 'search-field'
+  | 'form-field'
+  | 'form'
+  | 'tabs'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -471,30 +474,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'form-field',
+    href: '/campo-formulario',
     name: 'Campo de formulario',
     description: 'Etiqueta + control + error + ayuda.',
-    preview: 'soon',
+    preview: 'form-field',
     category: 'formularios',
     tags: ['form', 'label', 'validacion'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'form',
+    href: '/diseno-formulario',
     name: 'Diseno de formulario',
     description: 'Layouts de formulario de 1 o 2 columnas.',
-    preview: 'soon',
+    preview: 'form',
     category: 'formularios',
     tags: ['form', 'layout'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'tabs',
+    href: '/pestanas',
     name: 'Pestanas',
     description: 'Navegacion por pestanas en paneles y bandejas.',
-    preview: 'soon',
+    preview: 'tabs',
     category: 'navegacion',
     tags: ['tabs', 'panel', 'dashboard'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'steps',
