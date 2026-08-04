@@ -6,7 +6,6 @@ import {
   resolveDrawerSize,
   resolveDrawerVariant,
 } from './drawer-constants';
-import { resolveDrawerIcon } from './drawer-icons';
 import { drawerStyles } from './drawer-styles';
 
 const CLOSE_SVG = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`;
@@ -18,8 +17,6 @@ class GobDrawerElement extends SafeHTMLElement {
 
   private readonly backdropEl: HTMLElement;
   private readonly panelEl: HTMLElement;
-  private readonly iconEl: HTMLElement;
-  private readonly eyebrowEl: HTMLElement;
   private readonly titleEl: HTMLElement;
   private readonly descEl: HTMLElement;
   private readonly bodyCardEl: HTMLElement;
@@ -48,15 +45,8 @@ class GobDrawerElement extends SafeHTMLElement {
     const head = document.createElement('div');
     head.className = 'head';
 
-    this.iconEl = document.createElement('span');
-    this.iconEl.className = 'icon';
-    this.iconEl.setAttribute('aria-hidden', 'true');
-
     const copy = document.createElement('div');
     copy.className = 'copy';
-
-    this.eyebrowEl = document.createElement('p');
-    this.eyebrowEl.className = 'eyebrow';
 
     this.titleEl = document.createElement('h2');
     this.titleEl.className = 'title';
@@ -65,7 +55,7 @@ class GobDrawerElement extends SafeHTMLElement {
     this.descEl = document.createElement('p');
     this.descEl.className = 'description';
 
-    copy.append(this.eyebrowEl, this.titleEl, this.descEl);
+    copy.append(this.titleEl, this.descEl);
 
     this.closeBtn = document.createElement('button');
     this.closeBtn.type = 'button';
@@ -73,30 +63,15 @@ class GobDrawerElement extends SafeHTMLElement {
     this.closeBtn.setAttribute('aria-label', 'Cerrar');
     this.closeBtn.innerHTML = CLOSE_SVG;
 
-    head.append(this.iconEl, copy, this.closeBtn);
+    head.append(copy, this.closeBtn);
 
     const body = document.createElement('div');
     body.className = 'body';
     body.setAttribute('part', 'body');
 
-    const meta = document.createElement('div');
-    meta.className = 'meta';
-    meta.setAttribute('aria-hidden', 'true');
-    for (const [label, tone] of [
-      ['Expediente', 'accent'],
-      ['Revision', ''],
-      ['GobMX', ''],
-    ] as const) {
-      const chip = document.createElement('span');
-      chip.className = 'chip';
-      if (tone) chip.dataset.tone = tone;
-      chip.textContent = label;
-      meta.appendChild(chip);
-    }
-
     this.bodyCardEl = document.createElement('div');
     this.bodyCardEl.className = 'body-card';
-    body.append(meta, this.bodyCardEl);
+    body.appendChild(this.bodyCardEl);
 
     const actions = document.createElement('div');
     actions.className = 'actions';
@@ -188,15 +163,6 @@ class GobDrawerElement extends SafeHTMLElement {
     this.backdropEl.dataset.size = size;
     this.backdropEl.dataset.preview = preview ? 'true' : 'false';
 
-    this.eyebrowEl.textContent =
-      variant === 'filters'
-        ? 'Filtros'
-        : variant === 'danger'
-          ? 'Accion critica'
-          : variant === 'form'
-            ? 'Captura'
-            : 'Panel lateral';
-    this.iconEl.innerHTML = resolveDrawerIcon(variant);
     this.titleEl.textContent = title;
     this.descEl.textContent = description;
     this.bodyCardEl.textContent = body;
