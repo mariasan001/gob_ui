@@ -34,12 +34,15 @@ class GobCheckboxElement extends SafeHTMLElement {
   private readonly boxEl: HTMLSpanElement;
   private readonly copyEl: HTMLElement;
   private readonly labelEl: HTMLSpanElement;
+  private readonly labelTextEl: HTMLSpanElement;
   private readonly descEl: HTMLParagraphElement;
   private readonly helperEl: HTMLParagraphElement;
   private readonly statusEl: HTMLSpanElement;
   private readonly slotEl: HTMLSlotElement;
+  private readonly reqEl: HTMLSpanElement;
 
   private fieldId = `gob-ck-${Math.random().toString(36).slice(2, 9)}`;
+  private syncing = false;
 
   constructor() {
     super();
@@ -75,7 +78,18 @@ class GobCheckboxElement extends SafeHTMLElement {
     this.labelEl = document.createElement('span');
     this.labelEl.className = 'label';
 
+    this.labelTextEl = document.createElement('span');
+    this.labelTextEl.className = 'label-text';
+
     this.slotEl = document.createElement('slot');
+
+    this.reqEl = document.createElement('span');
+    this.reqEl.className = 'req';
+    this.reqEl.textContent = '*';
+    this.reqEl.hidden = true;
+
+    // Slot stays mounted once — never re-appended (avoids slotchange loops).
+    this.labelEl.append(this.labelTextEl, this.slotEl, this.reqEl);
 
     this.descEl = document.createElement('p');
     this.descEl.className = 'description';
@@ -107,18 +121,26 @@ class GobCheckboxElement extends SafeHTMLElement {
     this.slotEl.removeEventListener('slotchange', this.onSlotChange);
   }
 
-  attributeChangedCallback() {
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+    if (oldValue === newValue) return;
     this.syncState();
   }
 
   private readonly onSlotChange = () => {
-    this.syncLabelContent();
+    if (this.syncing) return;
+    this.updateLabelVisibility();
   };
 
   private readonly handleChange = () => {
-    if (this.inputEl.checked) this.setAttribute('checked', '');
-    else this.removeAttribute('checked');
-    this.removeAttribute('indeterminate');
+    const nextChecked = this.inputEl.checked;
+    if (nextChecked) {
+      if (!this.hasAttribute('checked')) this.setAttribute('checked', '');
+    } else if (this.hasAttribute('checked')) {
+      this.removeAttribute('checked');
+    }
+    if (this.hasAttribute('indeterminate')) {
+      this.removeAttribute('indeterminate');
+    }
     this.syncState();
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     this.dispatchEvent(
@@ -133,104 +155,107 @@ class GobCheckboxElement extends SafeHTMLElement {
     );
   };
 
-  private syncLabelContent() {
-    const attrLabel = this.getAttribute('label')?.trim() || '';
-    const assigned = this.slotEl.assignedNodes({ flatten: true });
-    const hasSlotText = assigned.some((node) => {
+  private hasSlotContent(): boolean {
+    return this.slotEl.assignedNodes({ flatten: true }).some((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
         return Boolean(node.textContent?.trim());
       }
-      if (node.nodeType === Node.ELEMENT_NODE) return true;
-      return false;
+      return node.nodeType === Node.ELEMENT_NODE;
     });
+  }
 
-    this.slotEl.hidden = false;
-    this.labelEl.replaceChildren();
+  private updateLabelVisibility() {
+    const attrLabel = this.getAttribute('label')?.trim() || '';
+    const hasSlot = this.hasSlotContent();
 
-    if (hasSlotText) {
-      this.labelEl.appendChild(this.slotEl);
+    if (hasSlot) {
+      this.labelTextEl.hidden = true;
+      this.labelTextEl.textContent = '';
+      this.slotEl.hidden = false;
     } else if (attrLabel) {
-      this.labelEl.append(document.createTextNode(attrLabel));
-      // keep slot in DOM for future light-dom content
-      this.labelEl.appendChild(this.slotEl);
+      this.labelTextEl.hidden = false;
+      this.labelTextEl.textContent = attrLabel;
       this.slotEl.hidden = true;
     } else {
-      this.labelEl.appendChild(this.slotEl);
+      this.labelTextEl.hidden = true;
+      this.labelTextEl.textContent = '';
+      this.slotEl.hidden = false;
     }
 
-    if (this.hasAttribute('required')) {
-      const req = document.createElement('span');
-      req.className = 'req';
-      req.textContent = '*';
-      this.labelEl.appendChild(req);
-    }
+    this.reqEl.hidden = !this.hasAttribute('required');
   }
 
   private syncState() {
-    const variant = resolveCheckboxVariant(this.getAttribute('variant'));
-    const status = resolveCheckboxStatus(this.getAttribute('status'));
-    const size = resolveCheckboxSize(this.getAttribute('size'));
-    const checked = this.hasAttribute('checked');
-    const indeterminate = this.hasAttribute('indeterminate');
-    const disabled = this.hasAttribute('disabled');
-    const required = this.hasAttribute('required');
-    const description = this.getAttribute('description')?.trim() || '';
-    const helper = this.getAttribute('helper')?.trim() || '';
+    if (this.syncing) return;
+    this.syncing = true;
+    try {
+      const variant = resolveCheckboxVariant(this.getAttribute('variant'));
+      const status = resolveCheckboxStatus(this.getAttribute('status'));
+      const size = resolveCheckboxSize(this.getAttribute('size'));
+      const checked = this.hasAttribute('checked');
+      const indeterminate = this.hasAttribute('indeterminate');
+      const disabled = this.hasAttribute('disabled');
+      const required = this.hasAttribute('required');
+      const description = this.getAttribute('description')?.trim() || '';
+      const helper = this.getAttribute('helper')?.trim() || '';
 
-    this.rootEl.dataset.variant = variant;
-    this.rootEl.dataset.status = status;
-    this.rootEl.dataset.size = size;
-    this.rootEl.dataset.checked = checked && !indeterminate ? 'true' : 'false';
-    this.rootEl.dataset.indeterminate = indeterminate ? 'true' : 'false';
-    this.rootEl.dataset.disabled = disabled ? 'true' : 'false';
+      this.rootEl.dataset.variant = variant;
+      this.rootEl.dataset.status = status;
+      this.rootEl.dataset.size = size;
+      this.rootEl.dataset.checked = checked && !indeterminate ? 'true' : 'false';
+      this.rootEl.dataset.indeterminate = indeterminate ? 'true' : 'false';
+      this.rootEl.dataset.disabled = disabled ? 'true' : 'false';
 
-    this.inputEl.id = this.fieldId;
-    this.controlEl.htmlFor = this.fieldId;
-    this.inputEl.checked = checked && !indeterminate;
-    this.inputEl.indeterminate = indeterminate;
-    this.inputEl.disabled = disabled;
-    this.inputEl.required = required;
-    this.inputEl.name = this.getAttribute('name') || '';
-    this.inputEl.value = this.getAttribute('value') || 'on';
+      this.inputEl.id = this.fieldId;
+      this.controlEl.htmlFor = this.fieldId;
+      this.inputEl.checked = checked && !indeterminate;
+      this.inputEl.indeterminate = indeterminate;
+      this.inputEl.disabled = disabled;
+      this.inputEl.required = required;
+      this.inputEl.name = this.getAttribute('name') || '';
+      this.inputEl.value = this.getAttribute('value') || 'on';
 
-    const ariaLabel = this.getAttribute('aria-label');
-    const ariaLabelledby = this.getAttribute('aria-labelledby');
-    if (ariaLabel === null) this.inputEl.removeAttribute('aria-label');
-    else this.inputEl.setAttribute('aria-label', ariaLabel);
-    if (ariaLabelledby === null) this.inputEl.removeAttribute('aria-labelledby');
-    else this.inputEl.setAttribute('aria-labelledby', ariaLabelledby);
+      const ariaLabel = this.getAttribute('aria-label');
+      const ariaLabelledby = this.getAttribute('aria-labelledby');
+      if (ariaLabel === null) this.inputEl.removeAttribute('aria-label');
+      else this.inputEl.setAttribute('aria-label', ariaLabel);
+      if (ariaLabelledby === null) this.inputEl.removeAttribute('aria-labelledby');
+      else this.inputEl.setAttribute('aria-labelledby', ariaLabelledby);
 
-    this.syncLabelContent();
+      this.updateLabelVisibility();
 
-    const descText =
-      description ||
-      (variant === 'complete'
-        ? 'Incluye detalle de apoyo para la decision.'
-        : variant === 'card' || variant === 'tile'
-          ? 'Toca para seleccionar esta opcion.'
-          : '');
-    this.descEl.hidden = !descText;
-    this.descEl.textContent = descText;
-
-    const pill = statusPill(status);
-    this.statusEl.hidden = !pill;
-    this.statusEl.textContent = pill;
-
-    const showHelper =
-      Boolean(helper) ||
-      variant === 'helper' ||
-      variant === 'complete' ||
-      status !== 'default';
-    this.helperEl.hidden = !showHelper;
-    this.helperEl.textContent =
-      helper ||
-      (status === 'error'
-        ? 'Debes aceptar para continuar'
-        : status === 'success'
-          ? 'Seleccion confirmada'
-          : status === 'warning'
-            ? 'Requiere revision'
+      const descText =
+        description ||
+        (variant === 'complete'
+          ? 'Incluye detalle de apoyo para la decision.'
+          : variant === 'card' || variant === 'tile'
+            ? 'Toca para seleccionar esta opcion.'
             : '');
+      this.descEl.hidden = !descText;
+      this.descEl.textContent = descText;
+
+      const pill = statusPill(status);
+      this.statusEl.hidden = !pill;
+      this.statusEl.textContent = pill;
+
+      const showHelper =
+        Boolean(helper) ||
+        variant === 'helper' ||
+        variant === 'complete' ||
+        status !== 'default';
+      this.helperEl.hidden = !showHelper;
+      this.helperEl.textContent =
+        helper ||
+        (status === 'error'
+          ? 'Debes aceptar para continuar'
+          : status === 'success'
+            ? 'Seleccion confirmada'
+            : status === 'warning'
+              ? 'Requiere revision'
+              : '');
+    } finally {
+      this.syncing = false;
+    }
   }
 }
 
