@@ -249,6 +249,9 @@ class GobSearchFieldElement extends SafeHTMLElement {
     this.rootEl.dataset.clearable = clearable ? 'true' : 'false';
     this.rootEl.dataset.loading = loading ? 'true' : 'false';
     this.rootEl.dataset.filled = value ? 'true' : 'false';
+    if (this.rootEl.dataset.focused !== 'true') {
+      this.rootEl.dataset.focused = 'false';
+    }
 
     this.field.id = this.fieldId;
     this.labelEl.htmlFor = this.fieldId;
