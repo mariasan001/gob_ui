@@ -68,6 +68,9 @@ export type PreviewKind =
   | 'user-menu'
   | 'accordion'
   | 'content-section'
+  | 'hero-block'
+  | 'footer'
+  | 'table-of-contents'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -801,30 +804,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'hero-block',
+    href: '/bloque-heroe',
     name: 'Bloque heroe',
     description: 'Bloque principal para paginas publicas.',
-    preview: 'soon',
+    preview: 'hero-block',
     category: 'contenido',
     tags: ['web', 'landing', 'marca', 'hero'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'footer',
+    href: '/pie-pagina',
     name: 'Pie de pagina',
     description: 'Pie institucional de sitio.',
-    preview: 'soon',
+    preview: 'footer',
     category: 'contenido',
     tags: ['web', 'pie', 'footer'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'table-of-contents',
+    href: '/indice-contenidos',
     name: 'Indice de contenidos',
     description: 'Indice lateral para documentos largos.',
-    preview: 'soon',
+    preview: 'table-of-contents',
     category: 'contenido',
     tags: ['docs', 'indice'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'code-block',

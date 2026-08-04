@@ -1100,6 +1100,66 @@ export type GobContentSectionProps = React.HTMLAttributes<HTMLElement> & {
   'action-label'?: string;
 };
 
+export type HeroBlockVariant =
+  | 'basic'
+  | 'soft'
+  | 'split'
+  | 'centered'
+  | 'dense'
+  | 'outline'
+  | 'compact'
+  | 'feature'
+  | 'brand'
+  | 'complete';
+
+export type GobHeroBlockProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: HeroBlockVariant;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  'primary-label'?: string;
+  'secondary-label'?: string;
+};
+
+export type FooterVariant =
+  | 'basic'
+  | 'soft'
+  | 'dense'
+  | 'outline'
+  | 'columns'
+  | 'legal'
+  | 'compact'
+  | 'wide'
+  | 'brand'
+  | 'complete';
+
+export type GobFooterProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: FooterVariant;
+  brand?: string;
+  tagline?: string;
+  links?: string;
+  legal?: string;
+};
+
+export type TableOfContentsVariant =
+  | 'basic'
+  | 'soft'
+  | 'dense'
+  | 'outline'
+  | 'numbered'
+  | 'sticky'
+  | 'minimal'
+  | 'rail'
+  | 'brand'
+  | 'complete';
+
+export type GobTableOfContentsProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TableOfContentsVariant;
+  title?: string;
+  items?: string;
+  active?: number | string;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1809,6 +1869,12 @@ declare global {
       'gob-accordion': React.DetailedHTMLProps<GobAccordionProps, HTMLElement>;
       'gob-content-section': React.DetailedHTMLProps<
         GobContentSectionProps,
+        HTMLElement
+      >;
+      'gob-hero-block': React.DetailedHTMLProps<GobHeroBlockProps, HTMLElement>;
+      'gob-footer': React.DetailedHTMLProps<GobFooterProps, HTMLElement>;
+      'gob-table-of-contents': React.DetailedHTMLProps<
+        GobTableOfContentsProps,
         HTMLElement
       >;
     }
