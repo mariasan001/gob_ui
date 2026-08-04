@@ -2633,7 +2633,7 @@
   border: 1px solid rgba(24, 21, 17, 0.06);
 }
 
-.fakeAccordion i { height: 34px; background: color-mix(in srgb, #9f2141 6%, #fff); }
+.fakeAccordion i { height: 34px; background: #fafafa; }
 
 .fakeContentSection {
   display: grid;
