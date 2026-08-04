@@ -96,7 +96,7 @@ export const RADIO_EXAMPLES: RadioExample[] = [
   {
     id: 'soft',
     title: 'Suave',
-    description: 'Degrade vino + cafe, barra vino al elegir.',
+    description: 'Fondo tinte vino por opcion.',
     variant: 'soft',
     name: 'dictamen-soft',
     items: [
@@ -116,7 +116,7 @@ export const RADIO_EXAMPLES: RadioExample[] = [
   {
     id: 'card',
     title: 'Tarjeta',
-    description: 'Halo vino y brillo dorado al elegir.',
+    description: 'Opciones en cards con anillo al elegir.',
     variant: 'card',
     name: 'pago-card',
     items: [
@@ -136,7 +136,7 @@ export const RADIO_EXAMPLES: RadioExample[] = [
   {
     id: 'pill',
     title: 'Pildora',
-    description: 'Chip cafe; vino + dorado al elegir.',
+    description: 'Contorno redondeado tipo chip.',
     variant: 'pill',
     name: 'turno-pill',
     items: [
@@ -147,7 +147,7 @@ export const RADIO_EXAMPLES: RadioExample[] = [
   {
     id: 'tile',
     title: 'Baldosa',
-    description: 'Punto dorado, barra vino y lavado cafe.',
+    description: 'Radio a la derecha, acento dorado.',
     variant: 'tile',
     name: 'firma-tile',
     items: [
@@ -214,7 +214,7 @@ export const RADIO_EXAMPLES: RadioExample[] = [
   {
     id: 'complete',
     title: 'Completo',
-    description: 'Doble anillo vino/dorado + ayuda + required.',
+    description: 'Card + ayuda + required + info.',
     variant: 'complete',
     name: 'responsable-complete',
     helper: 'Quien firma el dictamen final.',
