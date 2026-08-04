@@ -65,7 +65,7 @@
 
 .stage {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   min-height: 180px;
   padding: 32px 22px;
@@ -77,8 +77,20 @@
 
 .stageInner {
   width: min(520px, 100%);
-  display: grid;
-  gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-height: 56px;
+}
+
+.stageTall {
+  min-height: 240px;
+  align-items: flex-end;
+}
+
+.stageOpen {
+  min-height: 320px;
+  align-items: flex-end;
 }
 
 .search {

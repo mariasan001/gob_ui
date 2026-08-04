@@ -22,7 +22,104 @@ export const fabStyles = `
 [hidden] { display: none !important; }
 
 .root {
+  position: relative;
   display: inline-flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.actions {
+  display: none;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 10px;
+  padding-bottom: 2px;
+}
+
+.root[data-variant='actions'][data-open='true'] .actions {
+  display: flex;
+}
+
+.actionRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  animation: gob-fab-rise 160ms var(--gob-fab-ease) both;
+}
+
+.actionLabel {
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--gob-fab-bg);
+  border: 1px solid var(--gob-fab-border);
+  color: var(--gob-fab-title);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(24, 21, 17, 0.08);
+}
+
+.actionBtn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 14px;
+  border: 1px solid var(--gob-fab-border);
+  background: var(--gob-fab-bg);
+  color: var(--gob-fab-vino-deep);
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(24, 21, 17, 0.1);
+  transition:
+    background 150ms var(--gob-fab-ease),
+    color 150ms var(--gob-fab-ease),
+    transform 150ms var(--gob-fab-ease);
+}
+
+.actionBtn:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--gob-fab-vino) 8%, #fff);
+  color: var(--gob-fab-vino);
+  transform: translateY(-1px);
+}
+
+.actionBtn:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--gob-fab-vino) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.actionBtn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.actionBtn .icon {
+  width: 18px;
+  height: 18px;
+}
+.actionBtn .icon svg { width: 18px; height: 18px; }
+
+.root[data-variant='actions'] .btn .icon {
+  transition: transform 180ms var(--gob-fab-ease);
+}
+.root[data-variant='actions'][data-open='true'] .btn .icon {
+  transform: rotate(45deg);
+}
+
+.root[data-variant='actions'][data-open='true'] .btn {
+  box-shadow:
+    0 1px 0 rgba(24, 21, 17, 0.04),
+    0 0 0 3px color-mix(in srgb, var(--gob-fab-vino) 16%, transparent),
+    0 14px 28px rgba(159, 33, 65, 0.32);
+}
+
+@keyframes gob-fab-rise {
+  from { opacity: 0; transform: translateY(8px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .btn {
