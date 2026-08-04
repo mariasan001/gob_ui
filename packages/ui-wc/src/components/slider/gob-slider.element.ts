@@ -46,8 +46,10 @@ class GobSliderElement extends SafeHTMLElement {
   private readonly controlEl: HTMLElement;
   private readonly trackEl: HTMLElement;
   private readonly fillEl: HTMLElement;
+  private readonly segmentsEl: HTMLElement;
   private readonly thumbA: HTMLButtonElement;
   private readonly thumbB: HTMLButtonElement;
+  private readonly tooltipEl: HTMLElement;
   private readonly marksEl: HTMLElement;
   private readonly boundsEl: HTMLElement;
   private readonly helperEl: HTMLParagraphElement;
@@ -60,6 +62,7 @@ class GobSliderElement extends SafeHTMLElement {
   private a = 50;
   private b = 50;
   private isRange = false;
+  private isVertical = false;
   private activeThumb: 'a' | 'b' | null = null;
   private fieldId = `gob-sl-${Math.random().toString(36).slice(2, 9)}`;
 
@@ -108,10 +111,18 @@ class GobSliderElement extends SafeHTMLElement {
     this.fillEl = document.createElement('div');
     this.fillEl.className = 'fill';
 
+    this.segmentsEl = document.createElement('div');
+    this.segmentsEl.className = 'segments';
+    this.segmentsEl.setAttribute('aria-hidden', 'true');
+
     this.thumbA = document.createElement('button');
     this.thumbA.type = 'button';
     this.thumbA.className = 'thumb';
     this.thumbA.dataset.thumb = 'a';
+
+    this.tooltipEl = document.createElement('span');
+    this.tooltipEl.className = 'tooltip';
+    this.thumbA.appendChild(this.tooltipEl);
 
     this.thumbB = document.createElement('button');
     this.thumbB.type = 'button';
@@ -119,7 +130,13 @@ class GobSliderElement extends SafeHTMLElement {
     this.thumbB.dataset.thumb = 'b';
     this.thumbB.hidden = true;
 
-    this.controlEl.append(this.trackEl, this.fillEl, this.thumbA, this.thumbB);
+    this.controlEl.append(
+      this.trackEl,
+      this.fillEl,
+      this.segmentsEl,
+      this.thumbA,
+      this.thumbB,
+    );
 
     this.marksEl = document.createElement('div');
     this.marksEl.className = 'marks';
@@ -184,7 +201,7 @@ class GobSliderElement extends SafeHTMLElement {
     if (target?.dataset.thumb === 'a' || target?.dataset.thumb === 'b') {
       this.activeThumb = target.dataset.thumb as 'a' | 'b';
     } else {
-      const value = this.valueFromClientX(e.clientX);
+      const value = this.valueFromPointer(e);
       if (this.isRange) {
         const distA = Math.abs(value - this.a);
         const distB = Math.abs(value - this.b);
@@ -199,7 +216,7 @@ class GobSliderElement extends SafeHTMLElement {
 
   private readonly onPointerMove = (e: PointerEvent) => {
     if (!this.activeThumb) return;
-    this.setThumbValue(this.activeThumb, this.valueFromClientX(e.clientX), false);
+    this.setThumbValue(this.activeThumb, this.valueFromPointer(e), false);
   };
 
   private readonly onPointerUp = () => {
@@ -223,11 +240,16 @@ class GobSliderElement extends SafeHTMLElement {
     this.setThumbValue(thumb, current + dir * this.step, true);
   };
 
-  private valueFromClientX(clientX: number): number {
+  private valueFromPointer(e: PointerEvent): number {
     const rect = this.trackEl.getBoundingClientRect();
-    const ratio = rect.width ? clamp((clientX - rect.left) / rect.width, 0, 1) : 0;
-    const raw = this.min + ratio * (this.max - this.min);
-    return snap(raw, this.min, this.max, this.step);
+    if (this.isVertical) {
+      const ratio = rect.height
+        ? clamp((rect.bottom - e.clientY) / rect.height, 0, 1)
+        : 0;
+      return snap(this.min + ratio * (this.max - this.min), this.min, this.max, this.step);
+    }
+    const ratio = rect.width ? clamp((e.clientX - rect.left) / rect.width, 0, 1) : 0;
+    return snap(this.min + ratio * (this.max - this.min), this.min, this.max, this.step);
   }
 
   private setThumbValue(thumb: 'a' | 'b', value: number, emitChange: boolean) {
@@ -280,33 +302,90 @@ class GobSliderElement extends SafeHTMLElement {
     const unit = this.unit;
     const pa = percent(this.a, this.min, this.max);
     const pb = percent(this.b, this.min, this.max);
+    const label = this.isRange
+      ? `${formatValue(this.a, unit)} – ${formatValue(this.b, unit)}`
+      : formatValue(this.a, unit);
 
-    if (this.isRange) {
+    if (this.isVertical) {
+      if (this.isRange) {
+        this.fillEl.style.bottom = `${pa}%`;
+        this.fillEl.style.height = `${Math.max(0, pb - pa)}%`;
+        this.fillEl.style.top = 'auto';
+        this.fillEl.style.width = '';
+        this.fillEl.style.left = '';
+        this.thumbB.hidden = false;
+        this.thumbB.style.bottom = `${pb}%`;
+        this.thumbB.style.top = 'auto';
+        this.thumbB.style.left = '50%';
+      } else {
+        this.fillEl.style.bottom = '0%';
+        this.fillEl.style.height = `${pa}%`;
+        this.fillEl.style.top = 'auto';
+        this.fillEl.style.width = '';
+        this.fillEl.style.left = '';
+        this.thumbB.hidden = true;
+      }
+      this.thumbA.style.bottom = `${pa}%`;
+      this.thumbA.style.top = 'auto';
+      this.thumbA.style.left = '50%';
+    } else if (this.isRange) {
       this.fillEl.style.left = `${pa}%`;
       this.fillEl.style.width = `${Math.max(0, pb - pa)}%`;
+      this.fillEl.style.bottom = '';
+      this.fillEl.style.height = '';
+      this.fillEl.style.top = '';
       this.thumbB.hidden = false;
       this.thumbB.style.left = `${pb}%`;
-      this.valuePillEl.textContent = `${formatValue(this.a, unit)} – ${formatValue(this.b, unit)}`;
+      this.thumbB.style.bottom = '';
+      this.thumbB.style.top = '';
+      this.thumbA.style.left = `${pa}%`;
+      this.thumbA.style.bottom = '';
+      this.thumbA.style.top = '';
     } else {
       this.fillEl.style.left = '0%';
       this.fillEl.style.width = `${pa}%`;
+      this.fillEl.style.bottom = '';
+      this.fillEl.style.height = '';
+      this.fillEl.style.top = '';
       this.thumbB.hidden = true;
-      this.valuePillEl.textContent = formatValue(this.a, unit);
+      this.thumbA.style.left = `${pa}%`;
+      this.thumbA.style.bottom = '';
+      this.thumbA.style.top = '';
     }
 
-    this.thumbA.style.left = `${pa}%`;
+    this.valuePillEl.textContent = label;
+    this.tooltipEl.textContent = label;
+    this.tooltipEl.style.left = this.isVertical ? '' : '50%';
+
     this.thumbA.setAttribute('aria-valuenow', String(this.a));
     this.thumbB.setAttribute('aria-valuenow', String(this.b));
 
     this.boundsEl.innerHTML = `<span>${formatValue(this.min, unit)}</span><span>${formatValue(this.max, unit)}</span>`;
   }
 
+  private renderSegments() {
+    const variant = resolveSliderVariant(this.getAttribute('variant'));
+    this.segmentsEl.replaceChildren();
+    if (variant !== 'segmented') return;
+
+    const count = Math.min(
+      24,
+      Math.max(2, Math.round((this.max - this.min) / this.step) + 1),
+    );
+    for (let i = 1; i < count - 1; i += 1) {
+      const el = document.createElement('span');
+      el.className = 'segment';
+      el.style.left = `${(i / (count - 1)) * 100}%`;
+      this.segmentsEl.appendChild(el);
+    }
+  }
+
   private renderMarks() {
     const variant = resolveSliderVariant(this.getAttribute('variant'));
-    const show = variant === 'marks' || variant === 'complete';
-    this.marksEl.hidden = !show;
+    const show = variant === 'marks' || variant === 'complete' || variant === 'segmented';
+    this.marksEl.hidden = !show || this.isVertical;
     this.marksEl.replaceChildren();
-    if (!show) return;
+    if (!show || this.isVertical) return;
 
     for (const mark of buildMarks(this.min, this.max, this.step)) {
       const el = document.createElement('div');
@@ -336,6 +415,7 @@ class GobSliderElement extends SafeHTMLElement {
     }
     this.step = Math.max(0.0001, toNumber(this.getAttribute('step'), 1));
     this.isRange = variant === 'range';
+    this.isVertical = variant === 'vertical';
 
     const parsed = parseSliderValue(
       this.getAttribute('value'),
@@ -357,11 +437,13 @@ class GobSliderElement extends SafeHTMLElement {
     this.rootEl.dataset.disabled = disabled ? 'true' : 'false';
     this.rootEl.dataset.readonly = readonly ? 'true' : 'false';
     this.rootEl.dataset.range = this.isRange ? 'true' : 'false';
+    this.rootEl.dataset.orientation = this.isVertical ? 'vertical' : 'horizontal';
 
     this.labelEl.htmlFor = this.fieldId;
     this.thumbA.id = this.fieldId;
 
-    const showLabel = Boolean(label) && variant !== 'basic';
+    const showLabel =
+      Boolean(label) && variant !== 'basic' && variant !== 'pill';
     this.labelEl.hidden = !showLabel;
     this.labelEl.innerHTML = '';
     if (showLabel) {
@@ -422,6 +504,7 @@ class GobSliderElement extends SafeHTMLElement {
             : '');
 
     this.renderMarks();
+    this.renderSegments();
     this.renderVisual();
   }
 }

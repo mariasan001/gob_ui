@@ -7,6 +7,12 @@ export const SLIDER_VARIANTS = [
   'marks',
   'range',
   'complete',
+  'pill',
+  'tooltip',
+  'segmented',
+  'vertical',
+  'duo',
+  'inset',
 ] as const;
 
 export type SliderVariant = (typeof SLIDER_VARIANTS)[number];
