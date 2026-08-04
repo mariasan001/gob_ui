@@ -94,7 +94,7 @@ export default function BotonFlotantePage() {
                   <h3 className={local.exampleTitle}>{example.title}</h3>
                   <p className={local.exampleDesc}>{example.description}</p>
                 </div>
-                <div className={local.stage}>
+                <div className={`${local.stage} ${example.tall ? local.stageOpen : ''}`.trim()}>
                   <FabDemo example={example} />
                 </div>
               </article>

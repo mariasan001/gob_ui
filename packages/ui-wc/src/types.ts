@@ -659,7 +659,8 @@ export type FabVariant =
   | 'outline'
   | 'danger'
   | 'success'
-  | 'complete';
+  | 'complete'
+  | 'actions';
 
 export type FabSize = 'sm' | 'md' | 'lg';
 
@@ -668,6 +669,8 @@ export type GobFabProps = React.HTMLAttributes<HTMLElement> & {
   size?: FabSize;
   icon?: string;
   label?: string;
+  actions?: string;
+  open?: boolean;
   disabled?: boolean;
 };
 
