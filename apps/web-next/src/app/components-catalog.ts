@@ -50,6 +50,9 @@ export type PreviewKind =
   | 'button-group'
   | 'dropdown-menu'
   | 'split-button'
+  | 'fab'
+  | 'alert'
+  | 'toast'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -603,30 +606,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'fab',
+    href: '/boton-flotante',
     name: 'Boton flotante',
     description: 'Accion primaria flotante en movil.',
-    preview: 'soon',
+    preview: 'fab',
     category: 'acciones',
     tags: ['button', 'flotante', 'fab'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'alert',
+    href: '/alerta',
     name: 'Alerta',
     description: 'Avisos persistentes dentro de la pagina.',
-    preview: 'soon',
+    preview: 'alert',
     category: 'feedback',
     tags: ['alerta', 'banner', 'semaforo'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'toast',
+    href: '/aviso-temporal',
     name: 'Aviso temporal',
     description: 'Mensajes breves de exito, error e informacion.',
-    preview: 'soon',
+    preview: 'toast',
     category: 'feedback',
     tags: ['snackbar', 'notificacion', 'toast'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'banner',

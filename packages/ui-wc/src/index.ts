@@ -47,10 +47,15 @@ import './components/icon-button/gob-icon-button';
 import './components/button-group/gob-button-group';
 import './components/dropdown-menu/gob-dropdown-menu';
 import './components/split-button/gob-split-button';
+import './components/fab/gob-fab';
+import './components/alert/gob-alert';
+import './components/toast/gob-toast';
 
 export type {
   ActivityFeedTone,
   ActivityFeedVariant,
+  AlertTone,
+  AlertVariant,
   Appearance,
   BreadcrumbVariant,
   ButtonGroupSize,
@@ -77,6 +82,8 @@ export type {
   DropdownMenuVariant,
   EmptyStateTone,
   EmptyStateVariant,
+  FabSize,
+  FabVariant,
   FilterBarTone,
   FilterBarVariant,
   FileUploadSize,
@@ -88,6 +95,7 @@ export type {
   FormGap,
   FormVariant,
   GobActivityFeedProps,
+  GobAlertProps,
   GobAppShellProps,
   GobBreadcrumbProps,
   GobButtonGroupProps,
@@ -102,6 +110,7 @@ export type {
   GobDividerProps,
   GobDropdownMenuProps,
   GobEmptyStateProps,
+  GobFabProps,
   GobFilterBarProps,
   GobFileUploadProps,
   GobFormFieldProps,
@@ -134,6 +143,7 @@ export type {
   GobTextareaProps,
   GobTimelineProps,
   GobTimepickerProps,
+  GobToastProps,
   GobToolbarProps,
   GobTopbarProps,
   GridGap,
@@ -200,6 +210,8 @@ export type {
   TimepickerSize,
   TimepickerStatus,
   TimepickerVariant,
+  ToastTone,
+  ToastVariant,
   Tone,
   ToolbarTone,
   ToolbarVariant,
