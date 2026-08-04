@@ -192,6 +192,44 @@ export type GobDatepickerProps = React.HTMLAttributes<HTMLElement> & {
   required?: boolean;
 };
 
+export type TimepickerVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'floating'
+  | 'underline'
+  | 'pill'
+  | 'clearable'
+  | 'complete';
+
+export type TimepickerStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type TimepickerSize = 'sm' | 'md' | 'lg';
+
+export type GobTimepickerProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TimepickerVariant;
+  label?: string;
+  placeholder?: string;
+  helper?: string;
+  value?: string;
+  status?: TimepickerStatus;
+  size?: TimepickerSize;
+  step?: number | string;
+  min?: string;
+  max?: string;
+  name?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -845,6 +883,7 @@ declare global {
       'gob-select': React.DetailedHTMLProps<GobSelectProps, HTMLElement>;
       'gob-combobox': React.DetailedHTMLProps<GobComboboxProps, HTMLElement>;
       'gob-datepicker': React.DetailedHTMLProps<GobDatepickerProps, HTMLElement>;
+      'gob-timepicker': React.DetailedHTMLProps<GobTimepickerProps, HTMLElement>;
     }
   }
 }

@@ -31,6 +31,7 @@ import './components/textarea/gob-textarea';
 import './components/select/gob-select';
 import './components/combobox/gob-combobox';
 import './components/datepicker/gob-datepicker';
+import './components/timepicker/gob-timepicker';
 
 export type {
   ActivityFeedTone,
@@ -90,6 +91,7 @@ export type {
   GobTableProps,
   GobTextareaProps,
   GobTimelineProps,
+  GobTimepickerProps,
   GobToolbarProps,
   GobTopbarProps,
   GridGap,
@@ -130,6 +132,9 @@ export type {
   TextareaVariant,
   TimelineTone,
   TimelineVariant,
+  TimepickerSize,
+  TimepickerStatus,
+  TimepickerVariant,
   Tone,
   ToolbarTone,
   ToolbarVariant,
