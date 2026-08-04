@@ -274,7 +274,13 @@ export type SliderVariant =
   | 'soft'
   | 'marks'
   | 'range'
-  | 'complete';
+  | 'complete'
+  | 'pill'
+  | 'tooltip'
+  | 'segmented'
+  | 'vertical'
+  | 'duo'
+  | 'inset';
 
 export type SliderStatus =
   | 'default'
