@@ -36,6 +36,7 @@ export const stepsStyles = `
   padding: 0;
   list-style: none;
   min-width: 0;
+  width: 100%;
 }
 
 .root[data-variant='vertical'] .list {
@@ -43,13 +44,14 @@ export const stepsStyles = `
   gap: 0;
 }
 
+/* Horizontal: icon row + label below (connector never crosses text) */
 .step {
   appearance: none;
   position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: start;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
   flex: 1 1 0;
   min-width: 0;
   padding: 0;
@@ -62,10 +64,12 @@ export const stepsStyles = `
 }
 
 .root[data-variant='vertical'] .step {
+  flex-direction: row;
+  align-items: flex-start;
   flex: 0 0 auto;
   width: 100%;
-  padding: 4px 0 18px;
-  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  padding: 0 0 20px;
 }
 
 .step:disabled {
@@ -74,13 +78,25 @@ export const stepsStyles = `
 }
 
 .marker-wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--gob-st-dot);
+}
+
+.root[data-variant='vertical'] .marker-wrap {
+  position: relative;
   display: grid;
   justify-items: center;
-  gap: 0;
-  min-width: var(--gob-st-dot);
+  width: var(--gob-st-dot);
+  flex: 0 0 var(--gob-st-dot);
+  align-self: stretch;
 }
 
 .marker {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
   width: var(--gob-st-dot);
   height: var(--gob-st-dot);
   border-radius: 999px;
@@ -103,49 +119,30 @@ export const stepsStyles = `
 }
 .marker .icon svg { width: 14px; height: 14px; display: block; }
 
-.connector {
-  display: none;
-}
-
-.root[data-variant='basic'] .list,
-.root[data-variant='numbered'] .list,
-.root[data-variant='labeled'] .list,
-.root[data-variant='progress'] .list,
-.root[data-variant='complete'] .list,
-.root[data-variant='soft'] .list,
-.root[data-variant='outlined'] .list,
-.root[data-variant='compact'] .list {
-  gap: 0;
-}
+/* Horizontal connector: flex line after the circle only */
 .root:not([data-variant='vertical']):not([data-variant='dots']) .step:not(:last-child) .marker-wrap::after {
   content: '';
-  position: absolute;
-  top: calc(var(--gob-st-dot) / 2);
-  left: calc(var(--gob-st-dot) + 8px);
-  right: 8px;
+  flex: 1 1 auto;
   height: 1.5px;
+  margin-left: 8px;
+  margin-right: 8px;
   background: var(--gob-st-border);
-}
-.root:not([data-variant='vertical']):not([data-variant='dots']) .step {
-  position: relative;
-  padding-right: 12px;
+  min-width: 12px;
 }
 .root:not([data-variant='vertical']):not([data-variant='dots']) .step[data-state='done']:not(:last-child) .marker-wrap::after {
   background: var(--gob-st-vino);
 }
 
+/* Vertical connector under the circle */
 .root[data-variant='vertical'] .step:not(:last-child) .marker-wrap::after {
   content: '';
   position: absolute;
-  top: calc(var(--gob-st-dot) + 4px);
-  left: calc(var(--gob-st-dot) / 2);
-  width: 1.5px;
-  bottom: 4px;
+  top: var(--gob-st-dot);
+  left: 50%;
   transform: translateX(-50%);
+  width: 1.5px;
+  bottom: 0;
   background: var(--gob-st-border);
-}
-.root[data-variant='vertical'] .step {
-  position: relative;
 }
 .root[data-variant='vertical'] .step[data-state='done']:not(:last-child) .marker-wrap::after {
   background: var(--gob-st-vino);
@@ -155,7 +152,17 @@ export const stepsStyles = `
   display: grid;
   gap: 2px;
   min-width: 0;
-  padding-top: 4px;
+  padding-right: 12px;
+}
+
+.root[data-variant='vertical'] .copy {
+  padding-right: 0;
+  padding-top: 2px;
+  flex: 1 1 auto;
+}
+
+.root:not([data-variant='vertical']):not([data-variant='dots']) .step:last-child .copy {
+  padding-right: 0;
 }
 
 .label {
@@ -194,10 +201,15 @@ export const stepsStyles = `
 .root[data-variant='dots'] .list {
   gap: 10px;
   justify-content: center;
+  align-items: center;
 }
 .root[data-variant='dots'] .step {
   flex: 0 0 auto;
-  grid-template-columns: auto;
+  flex-direction: row;
+  align-items: center;
+}
+.root[data-variant='dots'] .marker-wrap {
+  width: auto;
 }
 .root[data-variant='dots'] .copy { display: none; }
 .root[data-variant='dots'] .marker {
@@ -213,6 +225,17 @@ export const stepsStyles = `
 }
 .root[data-variant='dots'] .marker .num,
 .root[data-variant='dots'] .marker .icon { display: none; }
+.root[data-variant='dots'] .step:not(:last-child) .marker-wrap::after {
+  content: '';
+  flex: 0 0 18px;
+  height: 1.5px;
+  margin-left: 8px;
+  margin-right: 0;
+  background: var(--gob-st-border);
+}
+.root[data-variant='dots'] .step[data-state='done']:not(:last-child) .marker-wrap::after {
+  background: var(--gob-st-vino);
+}
 
 .root[data-variant='compact'] .copy .desc { display: none; }
 .root[data-variant='compact'] { --gob-st-dot: 24px; }
@@ -275,18 +298,40 @@ export const stepsStyles = `
   .root:not([data-variant='dots']) .list {
     flex-direction: column;
   }
-  .root:not([data-variant='dots']) .step:not(:last-child) .marker-wrap::after {
-    top: calc(var(--gob-st-dot) + 4px);
-    left: calc(var(--gob-st-dot) / 2);
-    right: auto;
-    width: 1.5px;
-    bottom: 4px;
-    height: auto;
-    transform: translateX(-50%);
+  .root:not([data-variant='dots']):not([data-variant='vertical']) .step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 18px;
   }
-  .root:not([data-variant='dots']) .step {
+  .root:not([data-variant='dots']):not([data-variant='vertical']) .marker-wrap {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    width: var(--gob-st-dot);
+    flex: 0 0 var(--gob-st-dot);
+    align-self: stretch;
+  }
+  .root:not([data-variant='dots']):not([data-variant='vertical']) .step:not(:last-child) .marker-wrap::after {
+    content: '';
+    position: absolute;
+    top: var(--gob-st-dot);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.5px;
+    bottom: 0;
+    height: auto;
+    margin: 0;
+    flex: none;
+    min-width: 0;
+    background: var(--gob-st-border);
+  }
+  .root:not([data-variant='dots']):not([data-variant='vertical']) .step[data-state='done']:not(:last-child) .marker-wrap::after {
+    background: var(--gob-st-vino);
+  }
+  .root:not([data-variant='dots']):not([data-variant='vertical']) .copy {
     padding-right: 0;
-    padding-bottom: 16px;
+    flex: 1 1 auto;
   }
 }
 `;
