@@ -37,6 +37,7 @@ export type PreviewKind =
   | 'timepicker'
   | 'file-upload'
   | 'slider'
+  | 'search-field'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -460,12 +461,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'search-field',
+    href: '/campo-busqueda',
     name: 'Campo de busqueda',
     description: 'Busqueda con icono, limpiar y atajos.',
-    preview: 'soon',
+    preview: 'search-field',
     category: 'formularios',
     tags: ['buscar', 'filtro', 'dashboard'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'form-field',

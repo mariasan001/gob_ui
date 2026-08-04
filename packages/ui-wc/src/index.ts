@@ -34,6 +34,7 @@ import './components/datepicker/gob-datepicker';
 import './components/timepicker/gob-timepicker';
 import './components/file-upload/gob-file-upload';
 import './components/slider/gob-slider';
+import './components/search-field/gob-search-field';
 
 export type {
   ActivityFeedTone,
@@ -90,6 +91,7 @@ export type {
   GobRadioProps,
   GobSelectProps,
   GobSidebarProps,
+  GobSearchFieldProps,
   GobSkeletonProps,
   GobSliderProps,
   GobSpacerProps,
@@ -122,6 +124,9 @@ export type {
   SelectSize,
   SelectStatus,
   SelectVariant,
+  SearchFieldSize,
+  SearchFieldStatus,
+  SearchFieldVariant,
   SidebarVariant,
   Size,
   SkeletonVariant,

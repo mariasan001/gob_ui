@@ -308,6 +308,45 @@ export type GobSliderProps = React.HTMLAttributes<HTMLElement> & {
   required?: boolean;
 };
 
+export type SearchFieldVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'floating'
+  | 'underline'
+  | 'pill'
+  | 'clearable'
+  | 'shortcut'
+  | 'loading'
+  | 'complete';
+
+export type SearchFieldStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type SearchFieldSize = 'sm' | 'md' | 'lg';
+
+export type GobSearchFieldProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SearchFieldVariant;
+  label?: string;
+  placeholder?: string;
+  helper?: string;
+  value?: string;
+  status?: SearchFieldStatus;
+  size?: SearchFieldSize;
+  shortcut?: string;
+  name?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+  loading?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -964,6 +1003,7 @@ declare global {
       'gob-timepicker': React.DetailedHTMLProps<GobTimepickerProps, HTMLElement>;
       'gob-file-upload': React.DetailedHTMLProps<GobFileUploadProps, HTMLElement>;
       'gob-slider': React.DetailedHTMLProps<GobSliderProps, HTMLElement>;
+      'gob-search-field': React.DetailedHTMLProps<GobSearchFieldProps, HTMLElement>;
     }
   }
 }
