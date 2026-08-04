@@ -13,6 +13,40 @@
   gap: 40px;
 }
 
+.credit {
+  display: grid;
+  gap: 6px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(24, 21, 17, 0.08);
+}
+
+.creditTitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #181511;
+}
+
+.creditText {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #6f6a63;
+  max-width: 54ch;
+  line-height: 1.45;
+}
+
+.creditText a {
+  color: #9f2141;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.creditText a:hover {
+  text-decoration: underline;
+}
+
 .hero {
   display: grid;
   gap: 12px;

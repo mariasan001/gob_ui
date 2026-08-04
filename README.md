@@ -201,6 +201,25 @@ Confirma:
 
 Los tokens viven en `packages/tokens/src/tokens.json`.
 
+## Autoria y proteccion
+
+**Creadora:** [mariasan001](https://github.com/mariasan001) (Maria Guadalupe Sandoval Perez)
+
+Este sistema es obra de mariasan001. Puedes usarlo y modificarlo, pero:
+
+- la atribucion es **obligatoria**
+- **no** se puede eliminar ni cambiar el nombre del creador
+- deben conservarse `LICENSE`, `NOTICE` y `AUTHORSHIP.md`
+
+Credito minimo:
+
+```text
+Gob UI — creado por mariasan001
+https://github.com/mariasan001/gob_ui
+```
+
+Ver detalles en [`LICENSE`](./LICENSE) y [`AUTHORSHIP.md`](./AUTHORSHIP.md).
+
 ## Autor
 
 - GitHub: [mariasan001](https://github.com/mariasan001)

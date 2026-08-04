@@ -8,7 +8,10 @@ import WebComponentsRegistry from './web-components';
 
 export const metadata: Metadata = {
   title: 'Gob UI',
-  description: 'Sistema de botones para flujos institucionales',
+  description:
+    'Sistema de diseno institucional Gob UI. Creado por mariasan001.',
+  authors: [{ name: 'mariasan001', url: 'https://github.com/mariasan001' }],
+  creator: 'mariasan001',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

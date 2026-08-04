@@ -1,0 +1,46 @@
+Copyright (c) 2026 mariasan001
+Autora: Maria Guadalupe Sandoval Perez
+Repositorio: https://github.com/mariasan001/gob_ui
+
+Todos los derechos reservados.
+
+Este repositorio, su catalogo, tokens, estilos y Web Components
+(incluyendo @mariasan001/ui-wc y @mariasan001/styles) son obra de
+mariasan001.
+
+## Uso permitido
+
+Se permite clonar, descargar, estudiar, usar y modificar este trabajo
+en proyectos propios o institucionales, siempre que se cumplan todas
+estas condiciones:
+
+1. Se mantiene la atribucion al creador de forma visible e inalterable.
+2. No se elimina ni se altera el nombre del autor, ni se sustituye por
+   otra persona, equipo o dependencia.
+3. Se conservan los archivos LICENSE, NOTICE y AUTHORSHIP.md en cualquier
+   copia sustancial del codigo o de los packages.
+4. En productos derivados se incluye, al menos, este credito:
+
+   "Gob UI — creado por mariasan001
+   https://github.com/mariasan001/gob_ui"
+
+## Uso no permitido
+
+Sin autorizacion escrita de la autora, no se permite:
+
+- Presentar este trabajo como propio o de terceros
+- Remover, ocultar o reescribir la autoria
+- Republicar el repo o packages bajo otro nombre de creador
+- Vaciar, reempaquetar o redistribuir el sistema omitiendo el credito
+
+## Modificaciones
+
+Puedes adaptar y extender el codigo. Las modificaciones no cambian la
+autoria original del sistema base. El credito a mariasan001 permanece.
+
+## Contacto / excepciones
+
+Para licencias distintas, cesion o uso sin estas condiciones,
+contacta a la autora a traves del perfil de GitHub:
+
+https://github.com/mariasan001

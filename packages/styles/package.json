@@ -2,6 +2,12 @@
   "name": "@mariasan001/styles",
   "version": "0.1.2",
   "private": false,
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "mariasan001",
+    "url": "https://github.com/mariasan001"
+  },
+  "description": "Estilos del sistema de diseno Gob UI. Creado por mariasan001.",
   "type": "module",
   "files": [
     "base.css",
@@ -9,7 +15,9 @@
     "utilities.css",
     "fonts.css",
     "src",
-    "src/fonts"
+    "src/fonts",
+    "LICENSE",
+    "NOTICE"
   ],
   "sideEffects": [
     "*.css",
@@ -23,5 +31,11 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariasan001/gob_ui.git",
+    "directory": "packages/styles"
+  },
+  "homepage": "https://github.com/mariasan001/gob_ui#readme"
 }

@@ -914,6 +914,21 @@ export default function HomePage() {
             </div>
           )}
         </section>
+
+        <footer className={s.credit}>
+          <p className={s.creditTitle}>Gob UI</p>
+          <p className={s.creditText}>
+            Creado por{' '}
+            <a
+              href="https://github.com/mariasan001"
+              target="_blank"
+              rel="noreferrer"
+            >
+              mariasan001
+            </a>
+            . Autoria protegida — ver LICENSE.
+          </p>
+        </footer>
       </main>
     </div>
   );

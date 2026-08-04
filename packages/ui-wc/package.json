@@ -2,10 +2,17 @@
   "name": "@mariasan001/ui-wc",
   "version": "0.2.0",
   "private": false,
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "mariasan001",
+    "url": "https://github.com/mariasan001"
+  },
   "type": "module",
   "sideEffects": true,
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "NOTICE"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,6 +34,7 @@
   "bugs": {
     "url": "https://github.com/mariasan001/gob_ui/issues"
   },
+  "description": "Web Components del sistema de diseno Gob UI. Creado por mariasan001.",
   "scripts": {
     "build": "tsup",
     "prepack": "pnpm build",
