@@ -891,6 +891,80 @@ export type GobModalProps = React.HTMLAttributes<HTMLElement> & {
   'cancel-label'?: string;
 };
 
+export type DrawerVariant =
+  | 'basic'
+  | 'filters'
+  | 'detail'
+  | 'form'
+  | 'danger'
+  | 'dense'
+  | 'left'
+  | 'right'
+  | 'wide'
+  | 'complete';
+
+export type DrawerSide = 'right' | 'left';
+export type DrawerSize = 'sm' | 'md' | 'lg';
+
+export type GobDrawerProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: DrawerVariant;
+  side?: DrawerSide;
+  size?: DrawerSize;
+  title?: string;
+  description?: string;
+  body?: string;
+  open?: boolean;
+  preview?: boolean;
+  'confirm-label'?: string;
+  'cancel-label'?: string;
+};
+
+export type PopoverVariant =
+  | 'basic'
+  | 'soft'
+  | 'solid'
+  | 'outline'
+  | 'dense'
+  | 'menu'
+  | 'rich'
+  | 'brand'
+  | 'success'
+  | 'complete';
+
+export type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
+
+export type GobPopoverProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: PopoverVariant;
+  placement?: PopoverPlacement;
+  title?: string;
+  description?: string;
+  trigger?: string;
+  open?: boolean;
+};
+
+export type SheetVariant =
+  | 'basic'
+  | 'actions'
+  | 'form'
+  | 'danger'
+  | 'success'
+  | 'dense'
+  | 'peek'
+  | 'tall'
+  | 'brand'
+  | 'complete';
+
+export type GobSheetProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SheetVariant;
+  title?: string;
+  description?: string;
+  body?: string;
+  open?: boolean;
+  preview?: boolean;
+  'confirm-label'?: string;
+  'cancel-label'?: string;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1587,6 +1661,9 @@ declare global {
         HTMLElement
       >;
       'gob-modal': React.DetailedHTMLProps<GobModalProps, HTMLElement>;
+      'gob-drawer': React.DetailedHTMLProps<GobDrawerProps, HTMLElement>;
+      'gob-popover': React.DetailedHTMLProps<GobPopoverProps, HTMLElement>;
+      'gob-sheet': React.DetailedHTMLProps<GobSheetProps, HTMLElement>;
     }
   }
 }

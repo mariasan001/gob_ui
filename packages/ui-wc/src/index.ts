@@ -56,6 +56,9 @@ import './components/tag/gob-tag';
 import './components/tooltip/gob-tooltip';
 import './components/helper-text/gob-helper-text';
 import './components/modal/gob-modal';
+import './components/drawer/gob-drawer';
+import './components/popover/gob-popover';
+import './components/sheet/gob-sheet';
 
 export type {
   ActivityFeedTone,
@@ -89,6 +92,9 @@ export type {
   DatepickerVariant,
   DividerTone,
   DividerVariant,
+  DrawerSide,
+  DrawerSize,
+  DrawerVariant,
   DropdownMenuSize,
   DropdownMenuVariant,
   EmptyStateTone,
@@ -121,6 +127,7 @@ export type {
   GobDataGridProps,
   GobDatepickerProps,
   GobDividerProps,
+  GobDrawerProps,
   GobDropdownMenuProps,
   GobEmptyStateProps,
   GobFabProps,
@@ -140,10 +147,12 @@ export type {
   GobPageHeaderProps,
   GobPaginationBarProps,
   GobPaginationProps,
+  GobPopoverProps,
   GobSegmentedProps,
   GobProgressProps,
   GobRadioProps,
   GobSelectProps,
+  GobSheetProps,
   GobSidebarProps,
   GobSearchFieldProps,
   GobSkeletonProps,
@@ -189,6 +198,8 @@ export type {
   PaginationBarVariant,
   PaginationLang,
   PaginationVariant,
+  PopoverPlacement,
+  PopoverVariant,
   ProgressStatus,
   ProgressVariant,
   RadioSize,
@@ -202,6 +213,7 @@ export type {
   SearchFieldVariant,
   SegmentedSize,
   SegmentedVariant,
+  SheetVariant,
   SidebarVariant,
   Size,
   SkeletonVariant,
