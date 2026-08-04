@@ -224,29 +224,53 @@ export const datepickerStyles = `
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
-  font-weight: 550;
-  color: var(--gob-dp-muted);
+  font-weight: 500;
+  color: #b0aaa1;
   pointer-events: none;
+  z-index: 1;
   transition:
-    top 160ms var(--gob-dp-ease),
-    transform 160ms var(--gob-dp-ease),
-    font-size 160ms var(--gob-dp-ease),
-    color 160ms var(--gob-dp-ease);
+    top 180ms var(--gob-dp-ease),
+    transform 180ms var(--gob-dp-ease),
+    font-size 180ms var(--gob-dp-ease),
+    color 180ms var(--gob-dp-ease);
 }
 
-.root[data-variant='floating'][data-filled='true'] .float-label,
-.root[data-variant='floating'][data-open='true'] .float-label {
-  top: 8px;
-  transform: none;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--gob-dp-focus);
+.root[data-variant='floating'] .trigger {
+  align-items: flex-end;
+  min-height: 60px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.root[data-variant='floating'] .lead,
+.root[data-variant='floating'] .trail,
+.root[data-variant='floating'] .clear {
+  align-self: center;
 }
 
 .root[data-variant='floating'] .value {
-  padding-top: 12px;
+  padding-top: 2px;
+  min-height: 22px;
+}
+
+/* Empty + closed: only the float label (avoid overlap with placeholder). */
+.root[data-variant='floating'] .value[data-placeholder='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.root[data-variant='floating'][data-open='true'] .value[data-placeholder='true'] {
+  opacity: 1;
+}
+
+.root[data-variant='floating'][data-open='true'] .float-label,
+.root[data-variant='floating'][data-filled='true'] .float-label {
+  top: 10px;
+  transform: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--gob-dp-dorado);
 }
 
 .icon-btn {
