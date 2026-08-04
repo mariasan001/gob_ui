@@ -48,9 +48,10 @@ export default function ModalPage() {
           </Link>
           <h1 className={s.title}>Modal</h1>
           <p className={s.hint}>
-            Ventana de confirmacion o formulario corto. Pulsa{' '}
-            <strong>Abrir modal</strong> en cada ejemplo o <strong>Copiar</strong>{' '}
-            para markup en <strong>{lang.toUpperCase()}</strong>.
+            Ventana de confirmacion o formulario corto. Cada tarjeta muestra el
+            dialogo en linea; pulsa <strong>Probar overlay</strong> o{' '}
+            <strong>Copiar</strong> para markup en{' '}
+            <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
