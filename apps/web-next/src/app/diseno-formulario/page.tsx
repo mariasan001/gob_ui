@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Docs de Diseno de formulario — cascaron canonico = Botones (/botones).
+ * Docs de Diseño de formulario — cascaron canonico = Botones (/botones).
  * Presentacion unica (vino + dorado / semaforo); sin selector de color.
  */
 
@@ -47,7 +47,7 @@ export default function DisenoFormularioPage() {
           <Link className={s.back} href="/">
             ← Componentes
           </Link>
-          <h1 className={s.title}>Diseno de formulario</h1>
+          <h1 className={s.title}>Diseño de formulario</h1>
           <p className={s.hint}>
             Layouts de 1, 2 o 3 columnas. Pulsa <strong>Copiar</strong> para markup
             en <strong>{lang.toUpperCase()}</strong>.
