@@ -2716,6 +2716,123 @@
 
 .fakeContentSection em { display: none; }
 
+.fakeHeroBlock {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 8px;
+  width: 156px;
+  min-height: 92px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(24, 21, 17, 0.08);
+}
+.fakeHeroBlock i {
+  margin: 14px 10px;
+  min-height: 52px;
+  background:
+    linear-gradient(#181511, #181511) 0 0 / 78% 10px no-repeat,
+    linear-gradient(rgba(24, 21, 17, 0.2), rgba(24, 21, 17, 0.2)) 0 16px / 90% 5px no-repeat,
+    linear-gradient(#9f2141, #9f2141) 0 34px / 42% 14px no-repeat;
+}
+.fakeHeroBlock b {
+  margin: 0;
+  height: 100%;
+  min-height: 92px;
+  background: #ebe7e2;
+  position: relative;
+}
+.fakeHeroBlock b::before,
+.fakeHeroBlock b::after {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+}
+.fakeHeroBlock b::before {
+  width: 40px;
+  height: 40px;
+  left: 10px;
+  top: 18px;
+  background: rgba(159, 33, 65, 0.18);
+}
+.fakeHeroBlock b::after {
+  width: 26px;
+  height: 26px;
+  right: 8px;
+  bottom: 12px;
+  background: rgba(188, 148, 90, 0.45);
+}
+.fakeHeroBlock em { display: none; }
+
+.fakeFooter {
+  display: grid;
+  gap: 8px;
+  width: 156px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+}
+.fakeFooter i {
+  width: 48%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.18);
+}
+.fakeFooter b {
+  display: flex;
+  gap: 6px;
+  height: 8px;
+  background: transparent;
+}
+.fakeFooter b::before,
+.fakeFooter b::after {
+  content: '';
+  flex: 1;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.1);
+}
+.fakeFooter em {
+  width: 70%;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.08);
+  border-top: 1px solid rgba(24, 21, 17, 0.08);
+  padding-top: 6px;
+  margin-top: 2px;
+}
+
+.fakeToc {
+  display: grid;
+  gap: 6px;
+  width: 132px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+}
+.fakeToc i {
+  width: 42%;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.16);
+  margin-bottom: 2px;
+}
+.fakeToc b,
+.fakeToc em {
+  height: 18px;
+  border-radius: 8px;
+  background: #f3f3f3;
+}
+.fakeToc b {
+  width: 100%;
+  background: #f7eef1;
+  box-shadow: inset 3px 0 0 #9f2141;
+}
+.fakeToc em { width: 88%; }
+
 @keyframes rise {
   from {
     opacity: 0;

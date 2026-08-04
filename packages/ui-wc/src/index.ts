@@ -65,6 +65,9 @@ import './components/avatar/gob-avatar';
 import './components/user-menu/gob-user-menu';
 import './components/accordion/gob-accordion';
 import './components/content-section/gob-content-section';
+import './components/hero-block/gob-hero-block';
+import './components/footer/gob-footer';
+import './components/table-of-contents/gob-table-of-contents';
 
 export type {
   ActivityFeedTone,
@@ -98,6 +101,7 @@ export type {
   ContainerVariant,
   ContentSectionVariant,
   DataGridTone,
+  FooterVariant,
   DataGridVariant,
   DatepickerMode,
   DatepickerSize,
@@ -151,10 +155,12 @@ export type {
   GobFabProps,
   GobFilterBarProps,
   GobFileUploadProps,
+  GobFooterProps,
   GobFormFieldProps,
   GobFormProps,
   GobGridProps,
   GobHelperTextProps,
+  GobHeroBlockProps,
   GobIconButtonProps,
   GobInputProps,
   GobKpiCardProps,
@@ -182,6 +188,7 @@ export type {
   GobSwitchProps,
   GobTabsProps,
   GobTagProps,
+  GobTableOfContentsProps,
   GobTableProps,
   GobTextareaProps,
   GobTimelineProps,
@@ -195,6 +202,7 @@ export type {
   GridVariant,
   HelperTextTone,
   HelperTextVariant,
+  HeroBlockVariant,
   IconButtonSize,
   IconButtonVariant,
   InputSize,
@@ -255,6 +263,7 @@ export type {
   TagVariant,
   TabsSize,
   TabsVariant,
+  TableOfContentsVariant,
   TableTone,
   TableVariant,
   TextareaSize,

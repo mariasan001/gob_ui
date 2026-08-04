@@ -711,6 +711,33 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'hero-block') {
+    return (
+      <div className={s.fakeHeroBlock} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'footer') {
+    return (
+      <div className={s.fakeFooter} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'table-of-contents') {
+    return (
+      <div className={s.fakeToc} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
