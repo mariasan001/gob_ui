@@ -198,6 +198,179 @@ export const formStyles = `
   border-top: 1px solid var(--gob-fm-border);
 }
 
+/* Outline: marco fino sin relleno */
+.root[data-variant='outline'] {
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--gob-fm-radius);
+  background: transparent;
+  border: 1.5px solid var(--gob-fm-border-strong);
+}
+.root[data-variant='outline'] .head {
+  gap: 4px;
+}
+.root[data-variant='outline'] .title {
+  font-size: 15px;
+}
+
+/* Rail: acento vino a la izquierda */
+.root[data-variant='rail'] {
+  gap: 16px;
+  padding: 4px 0 4px 16px;
+  border-left: 3px solid var(--gob-fm-vino);
+  background: transparent;
+}
+.root[data-variant='rail'] .title {
+  font-size: 16px;
+}
+
+/* Inset: superficie hundida plana */
+.root[data-variant='inset'] {
+  gap: 16px;
+  padding: 18px;
+  border-radius: var(--gob-fm-radius);
+  background: var(--gob-fm-fill);
+  border: 1px solid transparent;
+}
+.root[data-variant='inset'] .title {
+  font-size: 15px;
+}
+
+/* Flat: tipografia protagonista, cero marco */
+.root[data-variant='flat'] {
+  gap: 14px;
+}
+.root[data-variant='flat'] .head {
+  gap: 2px;
+}
+.root[data-variant='flat'] .title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.root[data-variant='flat'] .description {
+  font-size: 12px;
+}
+
+/* Wide: dos columnas con mas aire */
+.root[data-variant='wide'] {
+  gap: 20px;
+  --gob-fm-gap: 20px 24px;
+}
+.root[data-variant='wide'] .head {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gob-fm-border);
+}
+.root[data-variant='wide'] .title {
+  font-size: 18px;
+}
+
+/* Split: primera columna estrecha de contexto */
+.root[data-variant='split'] {
+  gap: 18px;
+}
+.root[data-variant='split'] .head {
+  display: grid;
+  gap: 6px;
+  max-width: 36ch;
+}
+.root[data-variant='split'] .title {
+  font-size: 16px;
+}
+.root[data-variant='split'] .body {
+  --gob-fm-gap: 16px 28px;
+}
+
+/* Panel: bloque institucional sobrio */
+.root[data-variant='panel'] {
+  gap: 18px;
+  padding: 22px;
+  border-radius: 4px;
+  background: var(--gob-fm-bg);
+  border: 1px solid var(--gob-fm-border);
+  border-top: 3px solid var(--gob-fm-vino);
+}
+.root[data-variant='panel'] .title {
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.root[data-variant='panel'] .actions {
+  padding-top: 14px;
+  border-top: 1px solid var(--gob-fm-border);
+}
+
+/* Toolbar: fila compacta de filtros */
+.root[data-variant='toolbar'] {
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--gob-fm-bg);
+  border: 1px solid var(--gob-fm-border);
+  align-items: end;
+}
+.root[data-variant='toolbar'] .head {
+  display: none;
+}
+.root[data-variant='toolbar'] .body {
+  --gob-fm-gap: 10px;
+  align-items: end;
+}
+.root[data-variant='toolbar'] .actions {
+  justify-content: flex-start;
+  padding-top: 0;
+}
+
+/* Bleed: borde a borde del contenedor */
+.root[data-variant='bleed'] {
+  gap: 0;
+  border-radius: 0;
+  background: var(--gob-fm-bg);
+  border: 0;
+  border-top: 1px solid var(--gob-fm-border);
+  border-bottom: 1px solid var(--gob-fm-border);
+  padding: 20px 0;
+}
+.root[data-variant='bleed'] .head {
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--gob-fm-border);
+}
+.root[data-variant='bleed'] .actions {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gob-fm-border);
+}
+
+/* Dashboard: filtros densos en tablero */
+.root[data-variant='dashboard'] {
+  gap: 14px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--gob-fm-bg);
+  border: 1px solid var(--gob-fm-border);
+}
+.root[data-variant='dashboard'] .title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--gob-fm-muted);
+}
+.root[data-variant='dashboard'] .description {
+  display: none;
+}
+.root[data-variant='dashboard'] .body {
+  --gob-fm-gap: 12px;
+}
+.root[data-variant='dashboard'] .actions {
+  justify-content: stretch;
+  gap: 8px;
+}
+.root[data-variant='dashboard'] .actions ::slotted(*) {
+  flex: 1 1 auto;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -221,8 +394,19 @@ export const formStyles = `
 
   .root[data-variant='card'],
   .root[data-variant='soft'],
-  .root[data-variant='complete'] {
+  .root[data-variant='complete'],
+  .root[data-variant='outline'],
+  .root[data-variant='inset'],
+  .root[data-variant='panel'],
+  .root[data-variant='dashboard'] {
     padding: 16px;
+  }
+
+  .root[data-variant='split'] .body,
+  .root[data-variant='wide'] .body,
+  .root[data-variant='dashboard'] .body,
+  .root[data-variant='toolbar'] .body {
+    grid-template-columns: 1fr;
   }
 }
 `;

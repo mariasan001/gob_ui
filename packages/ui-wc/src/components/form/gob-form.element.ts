@@ -89,7 +89,13 @@ class GobFormElement extends SafeHTMLElement {
   private readonly onActionsChange = () => {
     const hasActions = this.actionsSlot.assignedNodes({ flatten: true }).length > 0;
     const variant = resolveFormVariant(this.getAttribute('variant'));
-    this.actionsEl.hidden = !hasActions && variant !== 'complete';
+    this.actionsEl.hidden =
+      !hasActions &&
+      variant !== 'complete' &&
+      variant !== 'panel' &&
+      variant !== 'dashboard' &&
+      variant !== 'toolbar' &&
+      variant !== 'bleed';
   };
 
   private syncFromAttributes() {
@@ -108,11 +114,26 @@ class GobFormElement extends SafeHTMLElement {
       Boolean(description) ||
       variant === 'card' ||
       variant === 'sections' ||
-      variant === 'complete';
-    this.headEl.hidden = !showHead;
-    this.titleEl.hidden = !title && variant !== 'complete' && variant !== 'card';
+      variant === 'complete' ||
+      variant === 'outline' ||
+      variant === 'rail' ||
+      variant === 'inset' ||
+      variant === 'flat' ||
+      variant === 'wide' ||
+      variant === 'split' ||
+      variant === 'panel' ||
+      variant === 'bleed' ||
+      variant === 'dashboard';
+    this.headEl.hidden = !showHead || variant === 'toolbar';
+    this.titleEl.hidden =
+      (!title &&
+        variant !== 'complete' &&
+        variant !== 'card' &&
+        variant !== 'panel' &&
+        variant !== 'dashboard') ||
+      variant === 'toolbar';
     this.titleEl.textContent = title || 'Formulario';
-    this.descriptionEl.hidden = !description;
+    this.descriptionEl.hidden = !description || variant === 'dashboard' || variant === 'toolbar';
     this.descriptionEl.textContent = description;
     this.onActionsChange();
   }

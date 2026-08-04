@@ -27,10 +27,14 @@ export function FormDemo({ example }: { example: FormExample }) {
         {example.showActions ? (
           <>
             <gob-button slot="actions" tone="neutral" appearance="outline" size="sm">
-              Cancelar
+              {example.variant === 'toolbar' || example.variant === 'dashboard'
+                ? 'Limpiar'
+                : 'Cancelar'}
             </gob-button>
             <gob-button slot="actions" tone="primary" size="sm">
-              Guardar
+              {example.variant === 'toolbar' || example.variant === 'dashboard'
+                ? 'Filtrar'
+                : 'Guardar'}
             </gob-button>
           </>
         ) : null}
