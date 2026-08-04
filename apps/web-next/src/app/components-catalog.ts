@@ -35,6 +35,7 @@ export type PreviewKind =
   | 'switch'
   | 'datepicker'
   | 'timepicker'
+  | 'file-upload'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -438,12 +439,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'file-upload',
+    href: '/carga-archivos',
     name: 'Carga de archivos',
     description: 'Subida de archivos, arrastrar y soltar, progreso.',
-    preview: 'soon',
+    preview: 'file-upload',
     category: 'formularios',
     tags: ['archivo', 'upload', 'form'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'slider',

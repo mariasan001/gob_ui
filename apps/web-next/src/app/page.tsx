@@ -415,6 +415,14 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'file-upload') {
+    return (
+      <div className={s.fakeFileUpload} aria-hidden="true">
+        <i />
+        <b />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
