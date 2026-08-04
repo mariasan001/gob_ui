@@ -53,6 +53,9 @@ export type PreviewKind =
   | 'fab'
   | 'alert'
   | 'toast'
+  | 'banner'
+  | 'badge'
+  | 'tag'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -636,30 +639,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'banner',
+    href: '/banner',
     name: 'Banner',
     description: 'Aviso de sistema a ancho completo.',
-    preview: 'soon',
+    preview: 'banner',
     category: 'feedback',
     tags: ['alerta', 'sistema'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'badge',
+    href: '/insignia',
     name: 'Insignia',
     description: 'Etiquetas de estado y conteos.',
-    preview: 'soon',
+    preview: 'badge',
     category: 'feedback',
     tags: ['tag', 'estado', 'dashboard', 'badge'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'tag',
+    href: '/etiqueta',
     name: 'Etiqueta',
     description: 'Chips removibles para filtros activos.',
-    preview: 'soon',
+    preview: 'tag',
     category: 'feedback',
     tags: ['filtro', 'chip', 'dashboard'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'tooltip',
