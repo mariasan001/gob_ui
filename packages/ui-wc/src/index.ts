@@ -35,6 +35,9 @@ import './components/timepicker/gob-timepicker';
 import './components/file-upload/gob-file-upload';
 import './components/slider/gob-slider';
 import './components/search-field/gob-search-field';
+import './components/form-field/gob-form-field';
+import './components/form/gob-form';
+import './components/tabs/gob-tabs';
 
 export type {
   ActivityFeedTone,
@@ -66,6 +69,11 @@ export type {
   FileUploadSize,
   FileUploadStatus,
   FileUploadVariant,
+  FormFieldSize,
+  FormFieldStatus,
+  FormFieldVariant,
+  FormGap,
+  FormVariant,
   GobActivityFeedProps,
   GobAppShellProps,
   GobBreadcrumbProps,
@@ -81,6 +89,8 @@ export type {
   GobEmptyStateProps,
   GobFilterBarProps,
   GobFileUploadProps,
+  GobFormFieldProps,
+  GobFormProps,
   GobGridProps,
   GobInputProps,
   GobKpiCardProps,
@@ -97,6 +107,7 @@ export type {
   GobSpacerProps,
   GobSpinnerProps,
   GobSwitchProps,
+  GobTabsProps,
   GobTableProps,
   GobTextareaProps,
   GobTimelineProps,
@@ -140,6 +151,8 @@ export type {
   SwitchSize,
   SwitchStatus,
   SwitchVariant,
+  TabsSize,
+  TabsVariant,
   TableTone,
   TableVariant,
   TextareaSize,

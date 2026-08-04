@@ -347,6 +347,81 @@ export type GobSearchFieldProps = React.HTMLAttributes<HTMLElement> & {
   loading?: boolean;
 };
 
+export type FormFieldVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'horizontal'
+  | 'stacked'
+  | 'inline'
+  | 'complete';
+
+export type FormFieldStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type FormFieldSize = 'sm' | 'md' | 'lg';
+
+export type GobFormFieldProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: FormFieldVariant;
+  label?: string;
+  helper?: string;
+  hint?: string;
+  status?: FormFieldStatus;
+  size?: FormFieldSize;
+  required?: boolean;
+  disabled?: boolean;
+};
+
+export type FormVariant =
+  | 'basic'
+  | 'single'
+  | 'dual'
+  | 'triple'
+  | 'stacked'
+  | 'dense'
+  | 'soft'
+  | 'card'
+  | 'sections'
+  | 'complete';
+
+export type FormGap = 'sm' | 'md' | 'lg';
+
+export type GobFormProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: FormVariant;
+  title?: string;
+  description?: string;
+  gap?: FormGap;
+  columns?: 1 | 2 | 3 | '1' | '2' | '3';
+};
+
+export type TabsVariant =
+  | 'basic'
+  | 'underline'
+  | 'pills'
+  | 'soft'
+  | 'vertical'
+  | 'dense'
+  | 'icons'
+  | 'segmented'
+  | 'bordered'
+  | 'complete';
+
+export type TabsSize = 'sm' | 'md' | 'lg';
+
+export type GobTabsProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TabsVariant;
+  size?: TabsSize;
+  value?: string;
+  items?: string;
+  disabled?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1004,6 +1079,9 @@ declare global {
       'gob-file-upload': React.DetailedHTMLProps<GobFileUploadProps, HTMLElement>;
       'gob-slider': React.DetailedHTMLProps<GobSliderProps, HTMLElement>;
       'gob-search-field': React.DetailedHTMLProps<GobSearchFieldProps, HTMLElement>;
+      'gob-form-field': React.DetailedHTMLProps<GobFormFieldProps, HTMLElement>;
+      'gob-form': React.DetailedHTMLProps<GobFormProps, HTMLElement>;
+      'gob-tabs': React.DetailedHTMLProps<GobTabsProps, HTMLElement>;
     }
   }
 }

@@ -1667,6 +1667,80 @@
   background: rgba(24, 21, 17, 0.14);
 }
 
+.fakeFormField {
+  display: grid;
+  gap: 8px;
+  width: 148px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeFormField em {
+  width: 42%;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.2);
+}
+
+.fakeFormField b {
+  height: 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+  background: #faf9f7;
+}
+
+.fakeFormField i {
+  width: 58%;
+  height: 5px;
+  border-radius: 4px;
+  background: rgba(159, 33, 65, 0.35);
+}
+
+.fakeForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 148px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeForm span {
+  height: 22px;
+  border-radius: 8px;
+  background: #f3efe8;
+  border: 1px solid rgba(188, 148, 90, 0.28);
+}
+
+.fakeTabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 148px;
+  padding: 14px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeTabs i,
+.fakeTabs b,
+.fakeTabs em {
+  flex: 1 1 auto;
+  height: 22px;
+  border-radius: 8px;
+  background: #f3efe8;
+}
+
+.fakeTabs i {
+  background: color-mix(in srgb, #9f2141 14%, #fff);
+  box-shadow: inset 0 -2px 0 #9f2141;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
