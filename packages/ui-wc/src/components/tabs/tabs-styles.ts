@@ -354,16 +354,48 @@ export const tabsStyles = `
 }
 
 .icon {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: currentColor;
-  opacity: 0.4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
   flex: 0 0 auto;
+  color: currentColor;
+  opacity: 0.72;
+}
+.icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 .tab[aria-selected='true'] .icon {
   opacity: 1;
-  background: var(--gob-tb-dorado);
+  color: var(--gob-tb-dorado);
+}
+.root[data-variant='icons'] .icon,
+.root[data-variant='complete'] .icon,
+.root[data-variant='rail'] .icon,
+.root[data-variant='card'] .icon {
+  width: 17px;
+  height: 17px;
+}
+.root[data-variant='icons'] .icon svg,
+.root[data-variant='complete'] .icon svg,
+.root[data-variant='rail'] .icon svg,
+.root[data-variant='card'] .icon svg {
+  width: 17px;
+  height: 17px;
+}
+.root[data-size='sm'] .icon,
+.root[data-size='sm'] .icon svg,
+.root[data-variant='dense'] .icon,
+.root[data-variant='dense'] .icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.label {
+  min-width: 0;
 }
 
 .badge {
