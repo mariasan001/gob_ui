@@ -10,7 +10,16 @@ import {
 } from './nav-menu-constants';
 import { navMenuStyles } from './nav-menu-styles';
 
-const FALLBACK_ICONS = ['house', 'folder', 'users', 'chart', 'gear', 'bell'] as const;
+const FALLBACK_ICONS = [
+  'house',
+  'folder',
+  'users',
+  'chart',
+  'gear',
+  'bell',
+  'file',
+  'building',
+] as const;
 
 class GobNavMenuElement extends SafeHTMLElement {
   static get observedAttributes() {
@@ -69,6 +78,12 @@ class GobNavMenuElement extends SafeHTMLElement {
     this.rootEl.dataset.variant = variant;
     this.rootEl.dataset.size = size;
     this.rootEl.dataset.disabled = disabled ? 'true' : 'false';
+    this.listEl.setAttribute(
+      'role',
+      variant === 'vertical' || variant === 'rail' || variant === 'sidebar'
+        ? 'menu'
+        : 'menubar',
+    );
     this.render();
   }
 
@@ -78,7 +93,15 @@ class GobNavMenuElement extends SafeHTMLElement {
       variant === 'icons' ||
       variant === 'vertical' ||
       variant === 'complete' ||
-      variant === 'soft';
+      variant === 'soft' ||
+      variant === 'rail' ||
+      variant === 'sidebar' ||
+      variant === 'dock' ||
+      variant === 'floating';
+    const showDesc =
+      variant === 'vertical' ||
+      variant === 'rail' ||
+      variant === 'sidebar';
 
     this.listEl.replaceChildren();
     this.items.forEach((item, index) => {
@@ -103,17 +126,27 @@ class GobNavMenuElement extends SafeHTMLElement {
       const iconName =
         item.icon || (forceIcons ? FALLBACK_ICONS[index % FALLBACK_ICONS.length] : undefined);
       const iconSvg = resolveNavIcon(iconName);
-      if (iconSvg || item.icon) {
+      if (iconSvg) {
         const icon = document.createElement('span');
         icon.className = 'icon';
         icon.setAttribute('aria-hidden', 'true');
-        icon.innerHTML = iconSvg || resolveNavIcon('house') || '';
+        icon.innerHTML = iconSvg;
         el.appendChild(icon);
       }
 
+      const copy = document.createElement('span');
+      copy.className = 'copy';
       const label = document.createElement('span');
+      label.className = 'label';
       label.textContent = item.label;
-      el.appendChild(label);
+      copy.appendChild(label);
+      if (showDesc && item.description) {
+        const desc = document.createElement('span');
+        desc.className = 'desc';
+        desc.textContent = item.description;
+        copy.appendChild(desc);
+      }
+      el.appendChild(copy);
 
       if (item.badge) {
         const badge = document.createElement('span');

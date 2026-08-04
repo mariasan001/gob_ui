@@ -470,7 +470,12 @@ export type NavMenuVariant =
   | 'dense'
   | 'icons'
   | 'bordered'
-  | 'complete';
+  | 'complete'
+  | 'rail'
+  | 'ghost'
+  | 'dock'
+  | 'sidebar'
+  | 'floating';
 
 export type NavMenuSize = 'sm' | 'md' | 'lg';
 

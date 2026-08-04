@@ -9,6 +9,11 @@ export const NAV_MENU_VARIANTS = [
   'icons',
   'bordered',
   'complete',
+  'rail',
+  'ghost',
+  'dock',
+  'sidebar',
+  'floating',
 ] as const;
 
 export type NavMenuVariant = (typeof NAV_MENU_VARIANTS)[number];
@@ -31,6 +36,7 @@ export type NavMenuItem = {
   icon?: string;
   disabled?: boolean;
   badge?: string;
+  description?: string;
 };
 
 export const NAV_ICONS: Record<string, string> = {
@@ -42,6 +48,8 @@ export const NAV_ICONS: Record<string, string> = {
   bell: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 16.5h11l-1.2-1.5V10a4.3 4.3 0 0 0-8.6 0v5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 18.5a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
   file: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.5 4.5h6l4 4v11a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 4.5v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   building: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 20.5h15M6.5 20.5V7.5l5-3 5 3v13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  search: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.25" stroke="currentColor" stroke-width="1.5"/><path d="M16.2 16.2 20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  squares: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>`,
 };
 
 export function resolveNavIcon(name?: string): string | null {
@@ -64,10 +72,10 @@ export function resolveNavMenuSize(value: string | null): NavMenuSize {
 export function parseNavMenuItems(raw: string | null): NavMenuItem[] {
   if (!raw?.trim()) {
     return [
-      { id: 'inicio', label: 'Inicio', icon: 'house' },
-      { id: 'tramites', label: 'Tramites', icon: 'folder' },
-      { id: 'ciudadanos', label: 'Ciudadanos', icon: 'users' },
-      { id: 'reportes', label: 'Reportes', icon: 'chart' },
+      { id: 'inicio', label: 'Inicio', icon: 'house', description: 'Panel principal' },
+      { id: 'tramites', label: 'Tramites', icon: 'folder', description: 'Gestiones activas' },
+      { id: 'ciudadanos', label: 'Ciudadanos', icon: 'users', description: 'Padron' },
+      { id: 'reportes', label: 'Reportes', icon: 'chart', description: 'Indicadores' },
     ];
   }
   try {
@@ -92,6 +100,8 @@ export function parseNavMenuItems(raw: string | null): NavMenuItem[] {
           icon: typeof row.icon === 'string' ? row.icon : undefined,
           disabled: Boolean(row.disabled),
           badge: typeof row.badge === 'string' ? row.badge : undefined,
+          description:
+            typeof row.description === 'string' ? row.description : undefined,
         } satisfies NavMenuItem;
       })
       .filter((item): item is NavMenuItem => Boolean(item));
