@@ -2,14 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import type { FabExample } from './fab-data';
+import {
+  resolveFabNotice,
+  type FabExample,
+  type FabNotice,
+} from './fab-data';
 import local from './fab.module.css';
-
-type FabNotice = {
-  title: string;
-  description: string;
-  tone: 'info' | 'success' | 'warning' | 'danger' | 'neutral';
-};
 
 type FabEventDetail = {
   action?: string;
@@ -28,32 +26,21 @@ export function FabDemo({ example }: { example: FabExample }) {
     if (!root) return;
 
     const onFab = (event: Event) => {
+      // Speed dial: el FAB principal solo abre/cierra, no muestra aviso repetido.
       const detail = (event as CustomEvent<FabEventDetail>).detail || {};
-      if (detail.action === 'menu') {
-        const label = detail.item?.label || detail.value || 'Accion';
-        setNotice({
-          title: label,
-          description: `Se ejecuto la accion “${label}”.`,
-          tone: 'success',
-        });
+      if (example.variant === 'actions' && detail.action !== 'menu') {
         return;
       }
-
-      const label = detail.label || example.label || 'Accion';
-      setNotice({
-        title: label,
-        description: `Boton flotante activado: ${label}.`,
-        tone: 'info',
-      });
+      setNotice(resolveFabNotice(example.id, detail));
     };
 
     root.addEventListener('gob-fab', onFab);
     return () => root.removeEventListener('gob-fab', onFab);
-  }, [example.label]);
+  }, [example.id, example.variant]);
 
   useEffect(() => {
     if (!notice) return;
-    const timer = window.setTimeout(() => setNotice(null), 2600);
+    const timer = window.setTimeout(() => setNotice(null), 2800);
     return () => window.clearTimeout(timer);
   }, [notice]);
 
