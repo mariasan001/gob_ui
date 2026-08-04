@@ -67,16 +67,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 150px;
-  padding: 32px 22px;
-  border-radius: 18px;
+  min-height: 220px;
+  padding: 36px 24px;
+  border-radius: 20px;
   border: 1px solid #ebebeb;
   overflow: visible;
-  background: #f3f3f3;
+  background: #f7f6f4;
 }
 
 .stageInner {
-  width: min(520px, 100%);
+  width: min(640px, 100%);
   display: grid;
   gap: 10px;
   justify-items: stretch;
