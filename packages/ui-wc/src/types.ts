@@ -152,6 +152,46 @@ export type GobChipProps =
     'aria-label'?: string;
   };
 
+export type DatepickerVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'floating'
+  | 'underline'
+  | 'pill'
+  | 'clearable'
+  | 'range'
+  | 'complete';
+
+export type DatepickerStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type DatepickerSize = 'sm' | 'md' | 'lg';
+export type DatepickerMode = 'single' | 'range';
+
+export type GobDatepickerProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: DatepickerVariant;
+  label?: string;
+  placeholder?: string;
+  helper?: string;
+  value?: string;
+  status?: DatepickerStatus;
+  size?: DatepickerSize;
+  mode?: DatepickerMode;
+  min?: string;
+  max?: string;
+  name?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -804,6 +844,7 @@ declare global {
       'gob-textarea': React.DetailedHTMLProps<GobTextareaProps, HTMLElement>;
       'gob-select': React.DetailedHTMLProps<GobSelectProps, HTMLElement>;
       'gob-combobox': React.DetailedHTMLProps<GobComboboxProps, HTMLElement>;
+      'gob-datepicker': React.DetailedHTMLProps<GobDatepickerProps, HTMLElement>;
     }
   }
 }
