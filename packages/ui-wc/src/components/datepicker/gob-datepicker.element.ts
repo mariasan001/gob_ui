@@ -58,7 +58,9 @@ class GobDatepickerElement extends SafeHTMLElement {
   private readonly clearBtn: HTMLButtonElement;
   private readonly trailEl: HTMLSpanElement;
   private readonly panelEl: HTMLElement;
+  private readonly summaryEl: HTMLElement;
   private readonly calTitleEl: HTMLElement;
+  private readonly calYearEl: HTMLElement;
   private readonly daysEl: HTMLElement;
   private readonly helperEl: HTMLParagraphElement;
   private readonly hiddenInput: HTMLInputElement;
@@ -136,6 +138,13 @@ class GobDatepickerElement extends SafeHTMLElement {
     this.panelEl.setAttribute('role', 'dialog');
     this.panelEl.setAttribute('aria-label', 'Calendario');
 
+    const accent = document.createElement('div');
+    accent.className = 'panel-accent';
+    accent.setAttribute('aria-hidden', 'true');
+
+    this.summaryEl = document.createElement('div');
+    this.summaryEl.className = 'summary';
+
     const calHead = document.createElement('div');
     calHead.className = 'cal-head';
 
@@ -149,8 +158,16 @@ class GobDatepickerElement extends SafeHTMLElement {
       this.shiftMonth(-1);
     });
 
+    const titleWrap = document.createElement('div');
+    titleWrap.className = 'cal-title-wrap';
+
     this.calTitleEl = document.createElement('p');
     this.calTitleEl.className = 'cal-title';
+
+    this.calYearEl = document.createElement('span');
+    this.calYearEl.className = 'cal-year';
+
+    titleWrap.append(this.calTitleEl, this.calYearEl);
 
     const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
@@ -162,7 +179,7 @@ class GobDatepickerElement extends SafeHTMLElement {
       this.shiftMonth(1);
     });
 
-    calHead.append(prevBtn, this.calTitleEl, nextBtn);
+    calHead.append(prevBtn, titleWrap, nextBtn);
 
     const weekdays = document.createElement('div');
     weekdays.className = 'weekdays';
@@ -181,7 +198,7 @@ class GobDatepickerElement extends SafeHTMLElement {
 
     const todayBtn = document.createElement('button');
     todayBtn.type = 'button';
-    todayBtn.className = 'foot-btn';
+    todayBtn.className = 'foot-btn foot-primary';
     todayBtn.textContent = 'Hoy';
     todayBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -191,7 +208,6 @@ class GobDatepickerElement extends SafeHTMLElement {
     const clearFoot = document.createElement('button');
     clearFoot.type = 'button';
     clearFoot.className = 'foot-btn';
-    clearFoot.dataset.muted = 'true';
     clearFoot.textContent = 'Limpiar';
     clearFoot.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -199,7 +215,7 @@ class GobDatepickerElement extends SafeHTMLElement {
     });
 
     foot.append(todayBtn, clearFoot);
-    this.panelEl.append(calHead, weekdays, this.daysEl, foot);
+    this.panelEl.append(accent, this.summaryEl, calHead, weekdays, this.daysEl, foot);
 
     this.helperEl = document.createElement('p');
     this.helperEl.className = 'helper';
@@ -395,10 +411,25 @@ class GobDatepickerElement extends SafeHTMLElement {
     this.rootEl.dataset.filled = filled ? 'true' : 'false';
     this.valueEl.dataset.placeholder = filled ? 'false' : 'true';
     this.valueEl.textContent = filled ? text : placeholder;
+
+    if (mode === 'range') {
+      if (this.start && this.end) {
+        this.summaryEl.innerHTML = `<strong>${formatDisplay(this.start)}</strong><span>al</span><strong>${formatDisplay(this.end)}</strong>`;
+      } else if (this.start) {
+        this.summaryEl.innerHTML = `<strong>${formatDisplay(this.start)}</strong><span>elige el fin</span>`;
+      } else {
+        this.summaryEl.innerHTML = `<span>Selecciona inicio y fin</span>`;
+      }
+    } else if (this.start) {
+      this.summaryEl.innerHTML = `<strong>${formatDisplay(this.start)}</strong>`;
+    } else {
+      this.summaryEl.innerHTML = `<span>Sin fecha seleccionada</span>`;
+    }
   }
 
   private renderCalendar() {
-    this.calTitleEl.textContent = `${MONTHS_ES[this.viewMonth]} ${this.viewYear}`;
+    this.calTitleEl.textContent = MONTHS_ES[this.viewMonth];
+    this.calYearEl.textContent = String(this.viewYear);
     this.daysEl.replaceChildren();
 
     const first = new Date(this.viewYear, this.viewMonth, 1);
