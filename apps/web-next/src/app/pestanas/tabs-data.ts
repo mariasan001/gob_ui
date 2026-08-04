@@ -21,42 +21,49 @@ export type TabsExample = {
 };
 
 const ITEMS_BASIC = JSON.stringify([
-  { id: 'general', label: 'General' },
-  { id: 'detalle', label: 'Detalle' },
-  { id: 'historial', label: 'Historial' },
+  { id: 'general', label: 'General', icon: 'house' },
+  { id: 'detalle', label: 'Detalle', icon: 'file' },
+  { id: 'historial', label: 'Historial', icon: 'history' },
 ]);
 
 const ITEMS_BADGE = JSON.stringify([
-  { id: 'inbox', label: 'Bandeja', badge: '12' },
-  { id: 'sent', label: 'Enviados' },
-  { id: 'archive', label: 'Archivo', badge: '3' },
+  { id: 'inbox', label: 'Bandeja', icon: 'tray', badge: '12' },
+  { id: 'sent', label: 'Enviados', icon: 'envelope' },
+  { id: 'archive', label: 'Archivo', icon: 'archive', badge: '3' },
 ]);
 
 const ITEMS_DISABLED = JSON.stringify([
-  { id: 'datos', label: 'Datos' },
-  { id: 'anexos', label: 'Anexos', disabled: true },
-  { id: 'firma', label: 'Firma' },
+  { id: 'datos', label: 'Datos', icon: 'user' },
+  { id: 'anexos', label: 'Anexos', icon: 'folder', disabled: true },
+  { id: 'firma', label: 'Firma', icon: 'pen' },
 ]);
 
 const ITEMS_VIEWS = JSON.stringify([
-  { id: 'resumen', label: 'Resumen' },
-  { id: 'tabla', label: 'Tabla' },
-  { id: 'mapa', label: 'Mapa' },
-  { id: 'export', label: 'Exportar' },
+  { id: 'resumen', label: 'Resumen', icon: 'chart' },
+  { id: 'tabla', label: 'Tabla', icon: 'table' },
+  { id: 'mapa', label: 'Mapa', icon: 'map' },
+  { id: 'export', label: 'Exportar', icon: 'export' },
+]);
+
+const ITEMS_SETTINGS = JSON.stringify([
+  { id: 'perfil', label: 'Perfil', icon: 'user' },
+  { id: 'seguridad', label: 'Seguridad', icon: 'shield' },
+  { id: 'avisos', label: 'Avisos', icon: 'bell' },
+  { id: 'ajustes', label: 'Ajustes', icon: 'gear' },
 ]);
 
 export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'basic',
     title: 'Basico',
-    description: 'Pestañas simples con panel.',
+    description: 'Pestañas con iconos Phosphor thin.',
     variant: 'basic',
     items: ITEMS_BASIC,
   },
   {
     id: 'underline',
     title: 'Subrayado',
-    description: 'Indicador inferior vino.',
+    description: 'Indicador inferior vino + iconos.',
     variant: 'underline',
     value: 'detalle',
     items: ITEMS_BASIC,
@@ -64,28 +71,28 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'pills',
     title: 'Pildoras',
-    description: 'Grupo con fondo suave plano.',
+    description: 'Grupo suave con iconografia.',
     variant: 'pills',
     items: ITEMS_BASIC,
   },
   {
     id: 'soft',
     title: 'Suave',
-    description: 'Activa con tinte vino.',
+    description: 'Tinte vino e iconos.',
     variant: 'soft',
-    items: ITEMS_BASIC,
+    items: ITEMS_SETTINGS,
   },
   {
     id: 'vertical',
     title: 'Vertical',
-    description: 'Lista lateral + panel.',
+    description: 'Lista lateral con iconos.',
     variant: 'vertical',
-    items: ITEMS_BASIC,
+    items: ITEMS_SETTINGS,
   },
   {
     id: 'dense',
     title: 'Compacto',
-    description: 'Altura reducida.',
+    description: 'Altura reducida e iconos 14px.',
     variant: 'dense',
     size: 'sm',
     items: ITEMS_BASIC,
@@ -93,39 +100,39 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'icons',
     title: 'Con iconos',
-    description: 'Punto dorado en activa.',
+    description: 'Iconografia protagonista (stroke thin).',
     variant: 'icons',
     items: ITEMS_BASIC,
   },
   {
     id: 'segmented',
     title: 'Segmentado',
-    description: 'Control compacto de vistas.',
+    description: 'Dia / semana / mes con iconos.',
     variant: 'segmented',
     items: JSON.stringify([
-      { id: 'dia', label: 'Dia' },
-      { id: 'semana', label: 'Semana' },
-      { id: 'mes', label: 'Mes' },
+      { id: 'dia', label: 'Dia', icon: 'day' },
+      { id: 'semana', label: 'Semana', icon: 'week' },
+      { id: 'mes', label: 'Mes', icon: 'month' },
     ]),
   },
   {
     id: 'bordered',
     title: 'Con borde',
-    description: 'Bloque tabular.',
+    description: 'Bloque tabular + iconos.',
     variant: 'bordered',
     items: ITEMS_BASIC,
   },
   {
     id: 'badges',
     title: 'Con conteo',
-    description: 'Badges en las pestañas.',
+    description: 'Icono + badge de conteo.',
     variant: 'pills',
     items: ITEMS_BADGE,
   },
   {
     id: 'item-disabled',
     title: 'Item deshabilitado',
-    description: 'Una pestaña no disponible.',
+    description: 'Anexos bloqueado con candado visual.',
     variant: 'underline',
     items: ITEMS_DISABLED,
   },
@@ -140,7 +147,7 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'complete',
     title: 'Completo',
-    description: 'Underline + iconos + panel con riel dorado.',
+    description: 'Iconos + badges + riel dorado.',
     variant: 'complete',
     items: ITEMS_BADGE,
     value: 'inbox',
@@ -148,7 +155,7 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'line',
     title: 'Linea',
-    description: 'Indicador dorado editorial.',
+    description: 'Indicador dorado e iconos.',
     variant: 'line',
     value: 'detalle',
     items: ITEMS_BASIC,
@@ -156,21 +163,21 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'ghost',
     title: 'Fantasma',
-    description: 'Minimo chrome, tipografia protagonista.',
+    description: 'Tipografia + iconos sin chrome.',
     variant: 'ghost',
     items: ITEMS_BASIC,
   },
   {
     id: 'card',
     title: 'Tarjeta',
-    description: 'Cada pestaña como superficie bordada.',
+    description: 'Superficies bordadas con iconos.',
     variant: 'card',
-    items: ITEMS_BASIC,
+    items: ITEMS_SETTINGS,
   },
   {
     id: 'rail',
     title: 'Riel',
-    description: 'Vertical con acento vino a la izquierda.',
+    description: 'Vertical con iconos de vista.',
     variant: 'rail',
     items: ITEMS_VIEWS,
     value: 'tabla',
@@ -178,19 +185,19 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'flush',
     title: 'A borde',
-    description: 'Pestañas a todo el ancho.',
+    description: 'Ancho completo con iconos.',
     variant: 'flush',
     items: ITEMS_BASIC,
   },
   {
     id: 'editorial',
     title: 'Editorial',
-    description: 'Uppercase con tracking y regla negra.',
+    description: 'Uppercase + iconos institucionales.',
     variant: 'editorial',
     items: JSON.stringify([
-      { id: 'resumen', label: 'Resumen' },
-      { id: 'anexos', label: 'Anexos' },
-      { id: 'bitacora', label: 'Bitacora' },
+      { id: 'resumen', label: 'Resumen', icon: 'paper' },
+      { id: 'anexos', label: 'Anexos', icon: 'files' },
+      { id: 'bitacora', label: 'Bitacora', icon: 'list' },
     ]),
   },
 ];
@@ -206,7 +213,7 @@ export const TABS_ATTRS = [
     name: 'items',
     type: 'JSON string',
     defaultValue: '[]',
-    body: 'Arreglo [{ id, label, badge?, disabled? }].',
+    body: 'Arreglo [{ id, label, icon?, badge?, disabled? }]. icon: house | user | file | folder | gear | bell | tray | …',
   },
   {
     name: 'value',

@@ -3,11 +3,14 @@ import { SafeHTMLElement } from '../../lib/safe-html-element';
 import {
   TABS_OBSERVED_ATTRIBUTES,
   parseTabsItems,
+  resolveTabsIcon,
   resolveTabsSize,
   resolveTabsVariant,
   type TabsItem,
 } from './tabs-constants';
 import { tabsStyles } from './tabs-styles';
+
+const DEFAULT_ICONS = ['house', 'file', 'history', 'gear', 'user', 'folder'] as const;
 
 class GobTabsElement extends SafeHTMLElement {
   static get observedAttributes() {
@@ -79,12 +82,15 @@ class GobTabsElement extends SafeHTMLElement {
 
   private renderTabs() {
     this.listEl.replaceChildren();
-    const showIcons =
-      this.rootEl.dataset.variant === 'icons' ||
-      this.rootEl.dataset.variant === 'complete' ||
-      this.rootEl.dataset.variant === 'rail';
+    const variant = this.rootEl.dataset.variant || 'basic';
+    const forceIcons =
+      variant === 'icons' ||
+      variant === 'complete' ||
+      variant === 'rail' ||
+      variant === 'card' ||
+      variant === 'vertical';
 
-    for (const item of this.items) {
+    this.items.forEach((item, index) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'tab';
@@ -95,14 +101,21 @@ class GobTabsElement extends SafeHTMLElement {
       btn.setAttribute('aria-selected', item.id === this.selectedId ? 'true' : 'false');
       btn.disabled = Boolean(item.disabled) || this.hasAttribute('disabled');
 
-      if (showIcons || item.icon) {
+      const iconName =
+        item.icon || (forceIcons ? DEFAULT_ICONS[index % DEFAULT_ICONS.length] : undefined);
+      const iconSvg = resolveTabsIcon(iconName);
+      if (iconSvg) {
         const icon = document.createElement('span');
         icon.className = 'icon';
         icon.setAttribute('aria-hidden', 'true');
+        icon.innerHTML = iconSvg;
         btn.appendChild(icon);
       }
 
-      btn.append(document.createTextNode(item.label));
+      const label = document.createElement('span');
+      label.className = 'label';
+      label.textContent = item.label;
+      btn.appendChild(label);
 
       if (item.badge) {
         const badge = document.createElement('span');
@@ -113,7 +126,7 @@ class GobTabsElement extends SafeHTMLElement {
 
       btn.addEventListener('click', () => this.selectTab(item.id));
       this.listEl.appendChild(btn);
-    }
+    });
   }
 
   private renderPanel() {
