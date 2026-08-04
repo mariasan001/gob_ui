@@ -81,7 +81,36 @@ export type GobCheckboxProps =
     };
 
 export type GobRadioProps =
-  React.HTMLAttributes<HTMLElement> & CommonControlProps;
+  React.HTMLAttributes<HTMLElement> &
+    CommonControlProps & {
+      variant?: RadioVariant;
+      label?: string;
+      description?: string;
+      helper?: string;
+      status?: RadioStatus;
+      size?: RadioSize;
+      required?: boolean;
+    };
+
+export type RadioVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'card'
+  | 'pill'
+  | 'tile'
+  | 'complete';
+
+export type RadioStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type RadioSize = 'sm' | 'md' | 'lg';
 
 export type GobSwitchProps =
   React.HTMLAttributes<HTMLElement> & CommonControlProps;
