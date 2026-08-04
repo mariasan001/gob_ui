@@ -62,6 +62,9 @@ import './components/sheet/gob-sheet';
 import './components/confirm-dialog/gob-confirm-dialog';
 import './components/card/gob-card';
 import './components/avatar/gob-avatar';
+import './components/user-menu/gob-user-menu';
+import './components/accordion/gob-accordion';
+import './components/content-section/gob-content-section';
 
 export type {
   ActivityFeedTone,
@@ -69,6 +72,7 @@ export type {
   AlertTone,
   AlertVariant,
   Appearance,
+  AccordionVariant,
   AvatarSize,
   AvatarTone,
   AvatarVariant,
@@ -92,6 +96,7 @@ export type {
   ComboboxVariant,
   ConfirmDialogVariant,
   ContainerVariant,
+  ContentSectionVariant,
   DataGridTone,
   DataGridVariant,
   DatepickerMode,
@@ -120,6 +125,7 @@ export type {
   FormGap,
   FormVariant,
   GobActivityFeedProps,
+  GobAccordionProps,
   GobAlertProps,
   GobAppShellProps,
   GobAvatarProps,
@@ -135,6 +141,7 @@ export type {
   GobComboboxProps,
   GobConfirmDialogProps,
   GobContainerProps,
+  GobContentSectionProps,
   GobDataGridProps,
   GobDatepickerProps,
   GobDividerProps,
@@ -183,6 +190,7 @@ export type {
   GobToolbarProps,
   GobTooltipProps,
   GobTopbarProps,
+  GobUserMenuProps,
   GridGap,
   GridVariant,
   HelperTextTone,
@@ -265,4 +273,5 @@ export type {
   ToolbarTone,
   ToolbarVariant,
   TopbarVariant,
+  UserMenuVariant,
 } from './types';
