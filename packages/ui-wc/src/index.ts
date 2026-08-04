@@ -41,6 +41,9 @@ import './components/tabs/gob-tabs';
 import './components/steps/gob-steps';
 import './components/nav-menu/gob-nav-menu';
 import './components/pagination-bar/gob-pagination-bar';
+import './components/link/gob-link';
+import './components/segmented/gob-segmented';
+import './components/icon-button/gob-icon-button';
 
 export type {
   ActivityFeedTone,
@@ -95,13 +98,16 @@ export type {
   GobFormFieldProps,
   GobFormProps,
   GobGridProps,
+  GobIconButtonProps,
   GobInputProps,
   GobKpiCardProps,
+  GobLinkProps,
   GobListProps,
   GobNavMenuProps,
   GobPageHeaderProps,
   GobPaginationBarProps,
   GobPaginationProps,
+  GobSegmentedProps,
   GobProgressProps,
   GobRadioProps,
   GobSelectProps,
@@ -122,7 +128,12 @@ export type {
   GobTopbarProps,
   GridGap,
   GridVariant,
+  IconButtonSize,
+  IconButtonVariant,
   InputSize,
+  LinkSize,
+  LinkTone,
+  LinkVariant,
   InputStatus,
   InputVariant,
   KpiTone,
@@ -148,6 +159,8 @@ export type {
   SearchFieldSize,
   SearchFieldStatus,
   SearchFieldVariant,
+  SegmentedSize,
+  SegmentedVariant,
   SidebarVariant,
   Size,
   SkeletonVariant,
