@@ -59,6 +59,9 @@ export type PreviewKind =
   | 'tooltip'
   | 'helper-text'
   | 'modal'
+  | 'drawer'
+  | 'popover'
+  | 'sheet'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -702,30 +705,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'drawer',
+    href: '/panel-deslizable',
     name: 'Panel deslizable',
     description: 'Panel lateral para detalle o filtros.',
-    preview: 'soon',
+    preview: 'drawer',
     category: 'overlays',
     tags: ['panel', 'sidebar', 'dashboard', 'drawer'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'popover',
+    href: '/ventana-anclada',
     name: 'Ventana anclada',
     description: 'Contenido emergente anclado a un trigger.',
-    preview: 'soon',
+    preview: 'popover',
     category: 'overlays',
     tags: ['overlay', 'menu', 'popover'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'sheet',
+    href: '/hoja-inferior',
     name: 'Hoja inferior',
     description: 'Panel desde abajo para acciones en movil.',
-    preview: 'soon',
+    preview: 'sheet',
     category: 'overlays',
     tags: ['movil', 'overlay', 'sheet'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'confirm-dialog',

@@ -628,6 +628,34 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'drawer') {
+    return (
+      <div className={s.fakeDrawer} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+        <span />
+      </div>
+    );
+  }
+  if (kind === 'popover') {
+    return (
+      <div className={s.fakePopover} aria-hidden="true">
+        <i />
+        <b />
+      </div>
+    );
+  }
+  if (kind === 'sheet') {
+    return (
+      <div className={s.fakeSheet} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+        <span />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
