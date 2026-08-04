@@ -495,8 +495,8 @@ export const COMPONENTS: ComponentItem[] = [
   {
     id: 'tabs',
     href: '/pestanas',
-    name: 'Pestanas',
-    description: 'Navegacion por pestanas en paneles y bandejas.',
+    name: 'Pestañas',
+    description: 'Navegacion por pestañas en paneles y bandejas.',
     preview: 'tabs',
     category: 'navegacion',
     tags: ['tabs', 'panel', 'dashboard'],

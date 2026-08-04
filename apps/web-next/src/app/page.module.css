@@ -1733,13 +1733,31 @@
 .fakeTabs em {
   flex: 1 1 auto;
   height: 22px;
-  border-radius: 8px;
-  background: #f3efe8;
+  border-radius: 0;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  position: relative;
 }
 
 .fakeTabs i {
-  background: color-mix(in srgb, #9f2141 14%, #fff);
-  box-shadow: inset 0 -2px 0 #9f2141;
+  border-bottom-color: #9f2141;
+}
+
+.fakeTabs i::after,
+.fakeTabs b::after,
+.fakeTabs em::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 8px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(24, 21, 17, 0.12);
+}
+
+.fakeTabs i::after {
+  background: rgba(159, 33, 65, 0.45);
 }
 
 @keyframes rise {

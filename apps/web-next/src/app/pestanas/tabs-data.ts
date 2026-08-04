@@ -38,11 +38,18 @@ const ITEMS_DISABLED = JSON.stringify([
   { id: 'firma', label: 'Firma' },
 ]);
 
+const ITEMS_VIEWS = JSON.stringify([
+  { id: 'resumen', label: 'Resumen' },
+  { id: 'tabla', label: 'Tabla' },
+  { id: 'mapa', label: 'Mapa' },
+  { id: 'export', label: 'Exportar' },
+]);
+
 export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'basic',
     title: 'Basico',
-    description: 'Pestanas simples con panel.',
+    description: 'Pestañas simples con panel.',
     variant: 'basic',
     items: ITEMS_BASIC,
   },
@@ -57,7 +64,7 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'pills',
     title: 'Pildoras',
-    description: 'Grupo con fondo suave.',
+    description: 'Grupo con fondo suave plano.',
     variant: 'pills',
     items: ITEMS_BASIC,
   },
@@ -111,14 +118,14 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'badges',
     title: 'Con conteo',
-    description: 'Badges en las pestanas.',
+    description: 'Badges en las pestañas.',
     variant: 'pills',
     items: ITEMS_BADGE,
   },
   {
     id: 'item-disabled',
     title: 'Item deshabilitado',
-    description: 'Una pestana no disponible.',
+    description: 'Una pestaña no disponible.',
     variant: 'underline',
     items: ITEMS_DISABLED,
   },
@@ -133,10 +140,58 @@ export const TABS_EXAMPLES: TabsExample[] = [
   {
     id: 'complete',
     title: 'Completo',
-    description: 'Underline + iconos + panel dorado.',
+    description: 'Underline + iconos + panel con riel dorado.',
     variant: 'complete',
     items: ITEMS_BADGE,
     value: 'inbox',
+  },
+  {
+    id: 'line',
+    title: 'Linea',
+    description: 'Indicador dorado editorial.',
+    variant: 'line',
+    value: 'detalle',
+    items: ITEMS_BASIC,
+  },
+  {
+    id: 'ghost',
+    title: 'Fantasma',
+    description: 'Minimo chrome, tipografia protagonista.',
+    variant: 'ghost',
+    items: ITEMS_BASIC,
+  },
+  {
+    id: 'card',
+    title: 'Tarjeta',
+    description: 'Cada pestaña como superficie bordada.',
+    variant: 'card',
+    items: ITEMS_BASIC,
+  },
+  {
+    id: 'rail',
+    title: 'Riel',
+    description: 'Vertical con acento vino a la izquierda.',
+    variant: 'rail',
+    items: ITEMS_VIEWS,
+    value: 'tabla',
+  },
+  {
+    id: 'flush',
+    title: 'A borde',
+    description: 'Pestañas a todo el ancho.',
+    variant: 'flush',
+    items: ITEMS_BASIC,
+  },
+  {
+    id: 'editorial',
+    title: 'Editorial',
+    description: 'Uppercase con tracking y regla negra.',
+    variant: 'editorial',
+    items: JSON.stringify([
+      { id: 'resumen', label: 'Resumen' },
+      { id: 'anexos', label: 'Anexos' },
+      { id: 'bitacora', label: 'Bitacora' },
+    ]),
   },
 ];
 
@@ -145,7 +200,7 @@ export const TABS_ATTRS = [
     name: 'variant',
     type: 'string',
     defaultValue: 'basic',
-    body: 'basic | underline | pills | soft | vertical | dense | icons | segmented | bordered | complete',
+    body: 'basic | underline | pills | soft | vertical | dense | icons | segmented | bordered | complete | line | ghost | card | rail | flush | editorial',
   },
   {
     name: 'items',
@@ -157,7 +212,7 @@ export const TABS_ATTRS = [
     name: 'value',
     type: 'string',
     defaultValue: 'primer item',
-    body: 'Id de la pestana activa.',
+    body: 'Id de la pestaña activa.',
   },
   {
     name: 'size',

@@ -81,7 +81,8 @@ class GobTabsElement extends SafeHTMLElement {
     this.listEl.replaceChildren();
     const showIcons =
       this.rootEl.dataset.variant === 'icons' ||
-      this.rootEl.dataset.variant === 'complete';
+      this.rootEl.dataset.variant === 'complete' ||
+      this.rootEl.dataset.variant === 'rail';
 
     for (const item of this.items) {
       const btn = document.createElement('button');
@@ -120,7 +121,7 @@ class GobTabsElement extends SafeHTMLElement {
     this.panelEl.setAttribute('aria-labelledby', current ? `tab-${current.id}` : '');
     this.panelEl.textContent = current
       ? `Contenido de ${current.label}`
-      : 'Selecciona una pestana';
+      : 'Selecciona una pestaña';
   }
 
   private selectTab(id: string) {

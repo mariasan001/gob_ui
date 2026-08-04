@@ -420,7 +420,13 @@ export type TabsVariant =
   | 'icons'
   | 'segmented'
   | 'bordered'
-  | 'complete';
+  | 'complete'
+  | 'line'
+  | 'ghost'
+  | 'card'
+  | 'rail'
+  | 'flush'
+  | 'editorial';
 
 export type TabsSize = 'sm' | 'md' | 'lg';
 

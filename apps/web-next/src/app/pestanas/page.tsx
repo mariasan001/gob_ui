@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Docs de Pestanas — cascaron canonico = Botones (/botones).
+ * Docs de Pestañas — cascaron canonico = Botones (/botones).
  * Presentacion unica (vino + dorado / semaforo); sin selector de color.
  */
 
@@ -47,9 +47,9 @@ export default function PestanasPage() {
           <Link className={s.back} href="/">
             ← Componentes
           </Link>
-          <h1 className={s.title}>Pestanas</h1>
+          <h1 className={s.title}>Pestañas</h1>
           <p className={s.hint}>
-            Navegacion por pestanas en paneles. Pulsa <strong>Copiar</strong> para
+            Navegacion por pestañas en paneles. Pulsa <strong>Copiar</strong> para
             markup en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
