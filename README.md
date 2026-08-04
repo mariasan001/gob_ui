@@ -29,7 +29,7 @@ Demo Next.js:
 pnpm dev
 ```
 
-Abre `http://localhost:3000`.
+Abre `http://localhost:9090`.
 
 Build de la demo Next.js:
 
