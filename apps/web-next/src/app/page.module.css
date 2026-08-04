@@ -2486,6 +2486,105 @@
   margin-right: 8px;
 }
 
+.fakeConfirm {
+  display: grid;
+  gap: 8px;
+  width: 148px;
+  padding: 14px 12px 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+  box-shadow: 0 10px 22px rgba(24, 21, 17, 0.08);
+  overflow: hidden;
+}
+
+.fakeConfirm::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 8px;
+  background: color-mix(in srgb, #c62828 14%, #fff);
+  border: 1px solid color-mix(in srgb, #c62828 18%, transparent);
+}
+
+.fakeConfirm i,
+.fakeConfirm b,
+.fakeConfirm em {
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.14);
+}
+
+.fakeConfirm i { width: 48%; }
+.fakeConfirm b { width: 78%; background: rgba(24, 21, 17, 0.08); }
+.fakeConfirm em {
+  width: 100%;
+  height: 28px;
+  border-radius: 8px;
+  background: #f3f3f3;
+}
+
+.fakeConfirm span {
+  justify-self: end;
+  width: 40px;
+  height: 14px;
+  border-radius: 8px;
+  background: #c62828;
+}
+
+.fakeCard {
+  display: grid;
+  gap: 8px;
+  width: 148px;
+  padding: 14px 12px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+}
+
+.fakeCard i,
+.fakeCard b,
+.fakeCard em {
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.14);
+}
+
+.fakeCard i { width: 36%; }
+.fakeCard b { width: 72%; background: rgba(24, 21, 17, 0.08); }
+.fakeCard em {
+  width: 100%;
+  height: 28px;
+  border-radius: 8px;
+  background: #f3f3f3;
+}
+
+.fakeAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 148px;
+  padding: 14px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeAvatar i,
+.fakeAvatar b,
+.fakeAvatar em {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #9f2141 14%, #fff);
+  border: 1px solid color-mix(in srgb, #9f2141 18%, transparent);
+}
+
+.fakeAvatar b { width: 24px; height: 24px; }
+.fakeAvatar em { width: 20px; height: 20px; }
+
 @keyframes rise {
   from {
     opacity: 0;

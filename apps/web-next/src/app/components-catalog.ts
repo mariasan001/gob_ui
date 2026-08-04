@@ -62,6 +62,9 @@ export type PreviewKind =
   | 'drawer'
   | 'popover'
   | 'sheet'
+  | 'confirm-dialog'
+  | 'card'
+  | 'avatar'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -735,30 +738,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'confirm-dialog',
+    href: '/confirmacion',
     name: 'Confirmacion',
     description: 'Dialogo para acciones destructivas o criticas.',
-    preview: 'soon',
+    preview: 'confirm-dialog',
     category: 'overlays',
     tags: ['modal', 'peligro'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'card',
+    href: '/tarjeta',
     name: 'Tarjeta',
     description: 'Contenedor de contenido y acciones.',
-    preview: 'soon',
+    preview: 'card',
     category: 'contenido',
     tags: ['panel', 'dashboard', 'web', 'card'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'avatar',
+    href: '/avatar',
     name: 'Avatar',
     description: 'Foto o iniciales de usuario.',
-    preview: 'soon',
+    preview: 'avatar',
     category: 'contenido',
     tags: ['usuario', 'perfil'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'user-menu',
