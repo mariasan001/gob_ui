@@ -49,8 +49,8 @@ export default function OpcionUnicaPage() {
           </Link>
           <h1 className={s.title}>Opcion unica</h1>
           <p className={s.hint}>
-            Radios nativos del design system. Pulsa <strong>Copiar</strong> para
-            markup en <strong>{lang.toUpperCase()}</strong>.
+            Radios nativos del design system con vino y cafe. Pulsa{' '}
+            <strong>Copiar</strong> para markup en <strong>{lang.toUpperCase()}</strong>.
           </p>
           <p className={s.version}>Version 1.0 / Libreria Gob_v2</p>
         </div>
