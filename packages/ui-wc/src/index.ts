@@ -44,12 +44,17 @@ import './components/pagination-bar/gob-pagination-bar';
 import './components/link/gob-link';
 import './components/segmented/gob-segmented';
 import './components/icon-button/gob-icon-button';
+import './components/button-group/gob-button-group';
+import './components/dropdown-menu/gob-dropdown-menu';
+import './components/split-button/gob-split-button';
 
 export type {
   ActivityFeedTone,
   ActivityFeedVariant,
   Appearance,
   BreadcrumbVariant,
+  ButtonGroupSize,
+  ButtonGroupVariant,
   ChartCardTone,
   ChartCardVariant,
   CheckboxSize,
@@ -68,6 +73,8 @@ export type {
   DatepickerVariant,
   DividerTone,
   DividerVariant,
+  DropdownMenuSize,
+  DropdownMenuVariant,
   EmptyStateTone,
   EmptyStateVariant,
   FilterBarTone,
@@ -83,6 +90,7 @@ export type {
   GobActivityFeedProps,
   GobAppShellProps,
   GobBreadcrumbProps,
+  GobButtonGroupProps,
   GobButtonProps,
   GobChartCardProps,
   GobCheckboxProps,
@@ -92,6 +100,7 @@ export type {
   GobDataGridProps,
   GobDatepickerProps,
   GobDividerProps,
+  GobDropdownMenuProps,
   GobEmptyStateProps,
   GobFilterBarProps,
   GobFileUploadProps,
@@ -117,6 +126,7 @@ export type {
   GobSliderProps,
   GobSpacerProps,
   GobSpinnerProps,
+  GobSplitButtonProps,
   GobStepsProps,
   GobSwitchProps,
   GobTabsProps,
@@ -168,6 +178,8 @@ export type {
   SliderStatus,
   SliderVariant,
   SpacerVariant,
+  SplitButtonSize,
+  SplitButtonVariant,
   SpinnerSize,
   SpinnerStatus,
   SpinnerVariant,

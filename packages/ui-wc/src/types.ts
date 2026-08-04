@@ -582,6 +582,73 @@ export type GobIconButtonProps = React.HTMLAttributes<HTMLElement> & {
   loading?: boolean;
 };
 
+export type ButtonGroupVariant =
+  | 'basic'
+  | 'solid'
+  | 'outline'
+  | 'soft'
+  | 'ghost'
+  | 'split'
+  | 'vertical'
+  | 'dense'
+  | 'bordered'
+  | 'complete';
+
+export type ButtonGroupSize = 'sm' | 'md' | 'lg';
+
+export type GobButtonGroupProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ButtonGroupVariant;
+  size?: ButtonGroupSize;
+  items?: string;
+  disabled?: boolean;
+};
+
+export type DropdownMenuVariant =
+  | 'basic'
+  | 'solid'
+  | 'soft'
+  | 'outline'
+  | 'ghost'
+  | 'dense'
+  | 'icons'
+  | 'danger'
+  | 'bordered'
+  | 'complete';
+
+export type DropdownMenuSize = 'sm' | 'md' | 'lg';
+
+export type GobDropdownMenuProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: DropdownMenuVariant;
+  size?: DropdownMenuSize;
+  label?: string;
+  items?: string;
+  open?: boolean;
+  disabled?: boolean;
+};
+
+export type SplitButtonVariant =
+  | 'basic'
+  | 'solid'
+  | 'soft'
+  | 'outline'
+  | 'ghost'
+  | 'dense'
+  | 'tonal'
+  | 'danger'
+  | 'bordered'
+  | 'complete';
+
+export type SplitButtonSize = 'sm' | 'md' | 'lg';
+
+export type GobSplitButtonProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SplitButtonVariant;
+  size?: SplitButtonSize;
+  label?: string;
+  items?: string;
+  open?: boolean;
+  disabled?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1252,6 +1319,18 @@ declare global {
       'gob-segmented': React.DetailedHTMLProps<GobSegmentedProps, HTMLElement>;
       'gob-icon-button': React.DetailedHTMLProps<
         GobIconButtonProps,
+        HTMLElement
+      >;
+      'gob-button-group': React.DetailedHTMLProps<
+        GobButtonGroupProps,
+        HTMLElement
+      >;
+      'gob-dropdown-menu': React.DetailedHTMLProps<
+        GobDropdownMenuProps,
+        HTMLElement
+      >;
+      'gob-split-button': React.DetailedHTMLProps<
+        GobSplitButtonProps,
         HTMLElement
       >;
     }

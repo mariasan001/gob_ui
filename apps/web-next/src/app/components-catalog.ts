@@ -47,6 +47,9 @@ export type PreviewKind =
   | 'link'
   | 'segmented'
   | 'icon-button'
+  | 'button-group'
+  | 'dropdown-menu'
+  | 'split-button'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -570,30 +573,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'button-group',
+    href: '/grupo-botones',
     name: 'Grupo de botones',
     description: 'Grupo de acciones relacionadas.',
-    preview: 'soon',
+    preview: 'button-group',
     category: 'acciones',
     tags: ['button', 'toolbar'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'dropdown-menu',
+    href: '/menu-desplegable',
     name: 'Menu desplegable',
     description: 'Menu contextual de acciones.',
-    preview: 'soon',
+    preview: 'dropdown-menu',
     category: 'acciones',
     tags: ['menu', 'acciones', 'dashboard'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'split-button',
+    href: '/boton-dividido',
     name: 'Boton dividido',
     description: 'Accion principal + menu de variantes.',
-    preview: 'soon',
+    preview: 'split-button',
     category: 'acciones',
     tags: ['button', 'menu'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'fab',
