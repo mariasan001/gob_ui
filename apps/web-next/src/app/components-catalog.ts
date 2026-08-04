@@ -56,6 +56,9 @@ export type PreviewKind =
   | 'banner'
   | 'badge'
   | 'tag'
+  | 'tooltip'
+  | 'helper-text'
+  | 'modal'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -669,30 +672,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'tooltip',
+    href: '/descripcion-emergente',
     name: 'Descripcion emergente',
     description: 'Ayuda contextual al pasar el cursor.',
-    preview: 'soon',
+    preview: 'tooltip',
     category: 'feedback',
     tags: ['ayuda', 'hover', 'tooltip'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'helper-text',
+    href: '/texto-ayuda',
     name: 'Texto de ayuda',
     description: 'Texto de apoyo y error bajo controles.',
-    preview: 'soon',
+    preview: 'helper-text',
     category: 'feedback',
     tags: ['form', 'error'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'modal',
+    href: '/modal',
     name: 'Modal',
     description: 'Ventana de confirmacion o formulario corto.',
-    preview: 'soon',
+    preview: 'modal',
     category: 'overlays',
     tags: ['dialog', 'overlay'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'drawer',

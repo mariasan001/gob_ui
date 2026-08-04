@@ -601,6 +601,33 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'tooltip') {
+    return (
+      <div className={s.fakeTooltip} aria-hidden="true">
+        <i />
+        <b />
+      </div>
+    );
+  }
+  if (kind === 'helper-text') {
+    return (
+      <div className={s.fakeHelperText} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'modal') {
+    return (
+      <div className={s.fakeModal} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+        <span />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

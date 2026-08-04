@@ -816,6 +816,80 @@ export type GobTagProps = React.HTMLAttributes<HTMLElement> & {
   disabled?: boolean;
 };
 
+export type TooltipVariant =
+  | 'basic'
+  | 'soft'
+  | 'solid'
+  | 'outline'
+  | 'dense'
+  | 'rich'
+  | 'inverse'
+  | 'brand'
+  | 'success'
+  | 'complete';
+
+export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
+
+export type GobTooltipProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TooltipVariant;
+  placement?: TooltipPlacement;
+  label?: string;
+  trigger?: string;
+  open?: boolean;
+};
+
+export type HelperTextVariant =
+  | 'basic'
+  | 'hint'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info'
+  | 'dense'
+  | 'icon'
+  | 'counter'
+  | 'complete';
+
+export type HelperTextTone =
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'danger';
+
+export type GobHelperTextProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: HelperTextVariant;
+  tone?: HelperTextTone;
+  label?: string;
+  count?: number | string;
+  max?: number | string;
+};
+
+export type ModalVariant =
+  | 'basic'
+  | 'confirm'
+  | 'form'
+  | 'danger'
+  | 'success'
+  | 'dense'
+  | 'center'
+  | 'sheet'
+  | 'wide'
+  | 'complete';
+
+export type ModalSize = 'sm' | 'md' | 'lg';
+
+export type GobModalProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ModalVariant;
+  size?: ModalSize;
+  title?: string;
+  description?: string;
+  body?: string;
+  open?: boolean;
+  'confirm-label'?: string;
+  'cancel-label'?: string;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1506,6 +1580,12 @@ declare global {
       'gob-banner': React.DetailedHTMLProps<GobBannerProps, HTMLElement>;
       'gob-badge': React.DetailedHTMLProps<GobBadgeProps, HTMLElement>;
       'gob-tag': React.DetailedHTMLProps<GobTagProps, HTMLElement>;
+      'gob-tooltip': React.DetailedHTMLProps<GobTooltipProps, HTMLElement>;
+      'gob-helper-text': React.DetailedHTMLProps<
+        GobHelperTextProps,
+        HTMLElement
+      >;
+      'gob-modal': React.DetailedHTMLProps<GobModalProps, HTMLElement>;
     }
   }
 }
