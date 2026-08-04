@@ -32,6 +32,7 @@ import './components/select/gob-select';
 import './components/combobox/gob-combobox';
 import './components/datepicker/gob-datepicker';
 import './components/timepicker/gob-timepicker';
+import './components/file-upload/gob-file-upload';
 
 export type {
   ActivityFeedTone,
@@ -60,6 +61,9 @@ export type {
   EmptyStateVariant,
   FilterBarTone,
   FilterBarVariant,
+  FileUploadSize,
+  FileUploadStatus,
+  FileUploadVariant,
   GobActivityFeedProps,
   GobAppShellProps,
   GobBreadcrumbProps,
@@ -74,6 +78,7 @@ export type {
   GobDividerProps,
   GobEmptyStateProps,
   GobFilterBarProps,
+  GobFileUploadProps,
   GobGridProps,
   GobInputProps,
   GobKpiCardProps,

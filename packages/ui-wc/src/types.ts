@@ -230,6 +230,42 @@ export type GobTimepickerProps = React.HTMLAttributes<HTMLElement> & {
   required?: boolean;
 };
 
+export type FileUploadVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'button'
+  | 'compact'
+  | 'multiple'
+  | 'complete';
+
+export type FileUploadStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type FileUploadSize = 'sm' | 'md' | 'lg';
+
+export type GobFileUploadProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: FileUploadVariant;
+  label?: string;
+  helper?: string;
+  hint?: string;
+  accept?: string;
+  status?: FileUploadStatus;
+  size?: FileUploadSize;
+  'max-size'?: string;
+  'max-files'?: number | string;
+  name?: string;
+  multiple?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -884,6 +920,7 @@ declare global {
       'gob-combobox': React.DetailedHTMLProps<GobComboboxProps, HTMLElement>;
       'gob-datepicker': React.DetailedHTMLProps<GobDatepickerProps, HTMLElement>;
       'gob-timepicker': React.DetailedHTMLProps<GobTimepickerProps, HTMLElement>;
+      'gob-file-upload': React.DetailedHTMLProps<GobFileUploadProps, HTMLElement>;
     }
   }
 }
