@@ -9,6 +9,12 @@ export const TABS_VARIANTS = [
   'segmented',
   'bordered',
   'complete',
+  'line',
+  'ghost',
+  'card',
+  'rail',
+  'flush',
+  'editorial',
 ] as const;
 
 export type TabsVariant = (typeof TABS_VARIANTS)[number];
