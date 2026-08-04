@@ -497,6 +497,32 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'link') {
+    return (
+      <div className={s.fakeLink} aria-hidden="true">
+        <i />
+        <b />
+      </div>
+    );
+  }
+  if (kind === 'segmented') {
+    return (
+      <div className={s.fakeSegmented} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'icon-button') {
+    return (
+      <div className={s.fakeIconButton} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

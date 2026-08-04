@@ -44,6 +44,9 @@ export type PreviewKind =
   | 'steps'
   | 'nav-menu'
   | 'pagination-bar'
+  | 'link'
+  | 'segmented'
+  | 'icon-button'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -537,30 +540,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'link',
+    href: '/enlace',
     name: 'Enlace',
     description: 'Enlaces tipograficos e en linea.',
-    preview: 'soon',
+    preview: 'link',
     category: 'navegacion',
     tags: ['anchor', 'texto', 'link'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'segmented',
+    href: '/control-segmentado',
     name: 'Control segmentado',
     description: 'Selector compacto de vistas o periodos.',
-    preview: 'soon',
+    preview: 'segmented',
     category: 'navegacion',
     tags: ['toggle', 'filtro', 'dashboard'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'icon-button',
+    href: '/boton-icono',
     name: 'Boton de icono',
     description: 'Accion compacta solo con icono.',
-    preview: 'soon',
+    preview: 'icon-button',
     category: 'acciones',
     tags: ['button', 'icon'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'button-group',

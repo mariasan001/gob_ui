@@ -511,6 +511,77 @@ export type GobPaginationBarProps = React.HTMLAttributes<HTMLElement> & {
   disabled?: boolean;
 };
 
+export type LinkVariant =
+  | 'basic'
+  | 'inline'
+  | 'subtle'
+  | 'underline'
+  | 'strong'
+  | 'soft'
+  | 'external'
+  | 'nav'
+  | 'muted'
+  | 'complete';
+
+export type LinkTone = 'primary' | 'neutral' | 'success' | 'warning' | 'danger';
+
+export type LinkSize = 'sm' | 'md' | 'lg';
+
+export type GobLinkProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: LinkVariant;
+  tone?: LinkTone;
+  size?: LinkSize;
+  href?: string;
+  label?: string;
+  external?: boolean;
+  disabled?: boolean;
+};
+
+export type SegmentedVariant =
+  | 'basic'
+  | 'pills'
+  | 'soft'
+  | 'underline'
+  | 'dense'
+  | 'icons'
+  | 'bordered'
+  | 'ghost'
+  | 'block'
+  | 'complete';
+
+export type SegmentedSize = 'sm' | 'md' | 'lg';
+
+export type GobSegmentedProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SegmentedVariant;
+  size?: SegmentedSize;
+  value?: string;
+  items?: string;
+  disabled?: boolean;
+};
+
+export type IconButtonVariant =
+  | 'basic'
+  | 'solid'
+  | 'soft'
+  | 'outline'
+  | 'ghost'
+  | 'danger'
+  | 'success'
+  | 'tonal'
+  | 'square'
+  | 'complete';
+
+export type IconButtonSize = 'sm' | 'md' | 'lg';
+
+export type GobIconButtonProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: IconButtonVariant;
+  size?: IconButtonSize;
+  icon?: string;
+  label?: string;
+  disabled?: boolean;
+  loading?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1175,6 +1246,12 @@ declare global {
       'gob-nav-menu': React.DetailedHTMLProps<GobNavMenuProps, HTMLElement>;
       'gob-pagination-bar': React.DetailedHTMLProps<
         GobPaginationBarProps,
+        HTMLElement
+      >;
+      'gob-link': React.DetailedHTMLProps<GobLinkProps, HTMLElement>;
+      'gob-segmented': React.DetailedHTMLProps<GobSegmentedProps, HTMLElement>;
+      'gob-icon-button': React.DetailedHTMLProps<
+        GobIconButtonProps,
         HTMLElement
       >;
     }
