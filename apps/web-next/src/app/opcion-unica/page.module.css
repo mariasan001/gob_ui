@@ -6,10 +6,7 @@
 
 .hero {
   padding: 32px 20px 96px;
-  background:
-    radial-gradient(90% 70% at 100% 0%, rgba(188, 148, 90, 0.28), transparent 55%),
-    radial-gradient(70% 55% at 0% 100%, rgba(212, 181, 126, 0.18), transparent 50%),
-    linear-gradient(165deg, #6e142c 0%, #9f2141 42%, #7a1832 100%);
+  background: linear-gradient(165deg, #6e142c 0%, #9f2141 42%, #7a1832 100%);
   color: #fff;
 }
 
@@ -127,9 +124,8 @@
 }
 
 .langChipActive {
-  background: linear-gradient(135deg, color-mix(in srgb, #9f2141 12%, #fff), color-mix(in srgb, #bc945a 14%, #fff));
-  color: #7a1832;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, #bc945a 40%, transparent);
+  background: #efefef;
+  color: #181511;
 }
 
 .colorSwatch {

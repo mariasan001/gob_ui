@@ -1,32 +1,18 @@
 .exampleList {
   display: grid;
-  gap: 20px;
+  gap: 18px;
   padding-top: 6px;
 }
 
 .exampleCard {
   position: relative;
   display: grid;
-  gap: 14px;
-  padding: 20px;
+  gap: 12px;
+  padding: 18px;
   border-radius: 20px;
-  border: 1px solid color-mix(in srgb, #bc945a 22%, #ebebeb);
-  background:
-    linear-gradient(180deg, #fff 0%, #fffcf8 100%);
-  box-shadow: 0 1px 0 rgba(188, 148, 90, 0.08);
+  border: 1px solid #ebebeb;
+  background: #fff;
   min-width: 0;
-  overflow: hidden;
-}
-
-.exampleCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #9f2141 0%, #bc945a 55%, #d4b57e 100%);
-  opacity: 0.85;
 }
 
 .exampleMeta {
@@ -54,12 +40,12 @@
 .copyBtn {
   appearance: none;
   position: absolute;
-  top: 18px;
+  top: 16px;
   right: 16px;
   z-index: 2;
-  border: 1px solid color-mix(in srgb, #bc945a 35%, #e5e5e5);
-  background: linear-gradient(180deg, #fff, #faf6ef);
-  color: #7a1832;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #333;
   border-radius: 999px;
   min-height: 22px;
   padding: 0 10px;
@@ -68,11 +54,7 @@
   font-weight: 700;
   cursor: pointer;
   opacity: 0;
-  transition:
-    opacity 140ms ease,
-    background 140ms ease,
-    border-color 140ms ease,
-    color 140ms ease;
+  transition: opacity 140ms ease;
   white-space: nowrap;
 }
 
@@ -81,26 +63,19 @@
   opacity: 1;
 }
 
-.copyBtn:hover {
-  background: linear-gradient(135deg, #9f2141, #7a1832);
-  border-color: #9f2141;
-  color: #fff;
-}
-
 .stage {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 168px;
-  padding: 30px 24px;
+  min-height: 160px;
+  padding: 28px 22px;
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, #bc945a 20%, #ececec);
+  border: 1px solid #ececec;
   overflow: hidden;
   background:
-    radial-gradient(110% 85% at 100% 0%, rgba(159, 33, 65, 0.09), transparent 52%),
-    radial-gradient(95% 80% at 0% 100%, rgba(188, 148, 90, 0.16), transparent 48%),
-    radial-gradient(60% 50% at 50% 50%, rgba(255, 255, 255, 0.7), transparent 70%),
-    linear-gradient(165deg, #fffdf9 0%, #ffffff 48%, #faf6ef 100%);
+    radial-gradient(120% 80% at 100% 0%, rgba(159, 33, 65, 0.05), transparent 55%),
+    radial-gradient(90% 70% at 0% 100%, rgba(188, 148, 90, 0.08), transparent 50%),
+    #ffffff;
 }
 
 .stageInner {
@@ -115,7 +90,7 @@
 
 .tableWrap {
   overflow: auto;
-  border: 1px solid color-mix(in srgb, #bc945a 18%, #ebebeb);
+  border: 1px solid #ebebeb;
   border-radius: 14px;
 }
 
@@ -138,8 +113,8 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #8a6a3d;
-  background: linear-gradient(180deg, #faf7f2, #f7f3ec);
+  color: #8a8278;
+  background: #fafafa;
 }
 
 .table td {
