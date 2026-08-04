@@ -361,17 +361,15 @@ export const datepickerStyles = `
   top: calc(100% + 10px);
   left: 0;
   width: min(336px, 100%);
-  padding: 0 14px 14px;
+  padding: 14px;
   border-radius: 20px;
-  border: 1px solid color-mix(in srgb, var(--gob-dp-dorado) 22%, rgba(24,21,17,.08));
-  background:
-    radial-gradient(120% 80% at 100% 0%, rgba(188,148,90,.1), transparent 45%),
-    #fff;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+  background: #fff;
   box-shadow:
     0 22px 48px rgba(24, 21, 17, 0.14),
     0 2px 8px rgba(24, 21, 17, 0.05);
   display: none;
-  gap: 12px;
+  gap: 10px;
   overflow: hidden;
   transform-origin: top center;
   animation: gob-dp-in 180ms var(--gob-dp-ease);
@@ -393,9 +391,7 @@ export const datepickerStyles = `
 }
 
 .panel-accent {
-  height: 4px;
-  margin: 0 -14px;
-  background: linear-gradient(90deg, var(--gob-dp-vino) 0%, var(--gob-dp-dorado) 55%, var(--gob-dp-dorado-soft) 100%);
+  display: none;
 }
 
 .summary {
@@ -403,12 +399,10 @@ export const datepickerStyles = `
   flex-wrap: wrap;
   align-items: baseline;
   gap: 6px 8px;
-  margin-top: 12px;
   padding: 10px 12px;
   border-radius: 12px;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--gob-dp-vino) 8%, #fff), color-mix(in srgb, var(--gob-dp-dorado) 10%, #fff));
-  border: 1px solid color-mix(in srgb, var(--gob-dp-dorado) 24%, transparent);
+  background: #f7f4ef;
+  border: 1px solid rgba(24, 21, 17, 0.08);
   font-size: 12px;
   font-weight: 500;
   color: var(--gob-dp-muted);
@@ -503,13 +497,14 @@ export const datepickerStyles = `
 .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 3px;
+  gap: 2px;
 }
 
 .day {
   appearance: none;
+  width: 100%;
   aspect-ratio: 1;
-  min-height: 38px;
+  min-height: 0;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -545,9 +540,9 @@ export const datepickerStyles = `
 .day[data-range-start='true'],
 .day[data-range-end='true'],
 .day[data-selected='true'] {
-  background: linear-gradient(160deg, var(--gob-dp-vino) 0%, var(--gob-dp-vino-deep) 100%);
+  background: var(--gob-dp-vino);
   color: #fff;
-  box-shadow: 0 6px 14px rgba(159, 33, 65, 0.28);
+  box-shadow: 0 4px 12px rgba(159, 33, 65, 0.22);
   border-radius: 999px;
   font-weight: 750;
 }
@@ -594,12 +589,11 @@ export const datepickerStyles = `
 }
 .foot-btn.foot-primary {
   color: #fff;
-  background: linear-gradient(135deg, var(--gob-dp-vino), var(--gob-dp-vino-deep));
+  background: var(--gob-dp-vino);
   border-color: transparent;
-  box-shadow: 0 4px 12px rgba(159, 33, 65, 0.22);
 }
 .foot-btn.foot-primary:hover {
-  background: linear-gradient(135deg, #b0284a, var(--gob-dp-vino));
+  background: var(--gob-dp-vino-deep);
   color: #fff;
 }
 `;
