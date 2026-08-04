@@ -8,12 +8,12 @@ export const iconButtonStyles = `
   --gob-ib-dorado: #bc945a;
   --gob-ib-title: #181511;
   --gob-ib-muted: #6f6a63;
-  --gob-ib-border: rgba(24, 21, 17, 0.12);
+  --gob-ib-border: rgba(24, 21, 17, 0.1);
   --gob-ib-fill: #f3f3f3;
   --gob-ib-bg: #ffffff;
-  --gob-ib-size: 40px;
+  --gob-ib-size: 42px;
   --gob-ib-icon: 18px;
-  --gob-ib-radius: 12px;
+  --gob-ib-radius: 14px;
   --gob-ib-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -34,16 +34,23 @@ export const iconButtonStyles = `
   background: var(--gob-ib-fill);
   color: var(--gob-ib-title);
   cursor: pointer;
-  transition: background 150ms var(--gob-ib-ease), color 150ms var(--gob-ib-ease), border-color 150ms var(--gob-ib-ease), transform 150ms var(--gob-ib-ease);
+  box-shadow: 0 1px 0 rgba(24, 21, 17, 0.03);
+  transition:
+    background 160ms var(--gob-ib-ease),
+    color 160ms var(--gob-ib-ease),
+    border-color 160ms var(--gob-ib-ease),
+    box-shadow 160ms var(--gob-ib-ease),
+    transform 140ms var(--gob-ib-ease);
 }
 
 .btn:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--gob-ib-vino) 10%, #fff);
+  background: color-mix(in srgb, var(--gob-ib-vino) 8%, #fff);
   color: var(--gob-ib-vino-deep);
+  border-color: color-mix(in srgb, var(--gob-ib-vino) 16%, transparent);
 }
 
 .btn:active:not(:disabled) {
-  transform: scale(0.96);
+  transform: scale(0.95);
 }
 
 .btn:focus-visible {
@@ -52,28 +59,36 @@ export const iconButtonStyles = `
 }
 
 .btn:disabled {
-  opacity: 0.42;
+  opacity: 0.4;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-.root[data-size='sm'] { --gob-ib-size: 32px; --gob-ib-icon: 15px; --gob-ib-radius: 10px; }
-.root[data-size='lg'] { --gob-ib-size: 48px; --gob-ib-icon: 20px; --gob-ib-radius: 14px; }
+.root[data-size='sm'] { --gob-ib-size: 34px; --gob-ib-icon: 15px; --gob-ib-radius: 11px; }
+.root[data-size='lg'] { --gob-ib-size: 50px; --gob-ib-icon: 20px; --gob-ib-radius: 16px; }
 
 .root[data-variant='basic'] .btn {
   background: var(--gob-ib-fill);
   color: var(--gob-ib-title);
+  border-color: transparent;
+  box-shadow: none;
 }
 .root[data-variant='solid'] .btn {
   background: var(--gob-ib-vino);
   color: #fff;
+  border-color: var(--gob-ib-vino);
+  box-shadow: none;
 }
 .root[data-variant='solid'] .btn:hover:not(:disabled) {
   background: var(--gob-ib-vino-deep);
+  border-color: var(--gob-ib-vino-deep);
   color: #fff;
 }
 .root[data-variant='soft'] .btn {
-  background: color-mix(in srgb, var(--gob-ib-vino) 10%, #fff);
+  background: color-mix(in srgb, var(--gob-ib-vino) 9%, #fff);
   color: var(--gob-ib-vino-deep);
+  border-color: color-mix(in srgb, var(--gob-ib-vino) 12%, transparent);
+  box-shadow: none;
 }
 .root[data-variant='outline'] .btn {
   background: var(--gob-ib-bg);
@@ -81,40 +96,49 @@ export const iconButtonStyles = `
   color: var(--gob-ib-title);
 }
 .root[data-variant='outline'] .btn:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--gob-ib-vino) 35%, transparent);
+  border-color: color-mix(in srgb, var(--gob-ib-vino) 40%, transparent);
   color: var(--gob-ib-vino);
 }
 .root[data-variant='ghost'] .btn {
   background: transparent;
   color: var(--gob-ib-muted);
+  box-shadow: none;
 }
 .root[data-variant='ghost'] .btn:hover:not(:disabled) {
   background: rgba(24, 21, 17, 0.05);
   color: var(--gob-ib-title);
+  border-color: transparent;
 }
 .root[data-variant='danger'] .btn {
-  background: color-mix(in srgb, #c62828 10%, #fff);
+  background: color-mix(in srgb, #c62828 8%, #fff);
   color: #c62828;
+  border-color: color-mix(in srgb, #c62828 18%, transparent);
+  box-shadow: none;
 }
 .root[data-variant='danger'] .btn:hover:not(:disabled) {
   background: #c62828;
+  border-color: #c62828;
   color: #fff;
 }
 .root[data-variant='success'] .btn {
-  background: color-mix(in srgb, #1f8a55 12%, #fff);
+  background: color-mix(in srgb, #1f8a55 10%, #fff);
   color: #1f8a55;
+  border-color: color-mix(in srgb, #1f8a55 18%, transparent);
+  box-shadow: none;
 }
 .root[data-variant='success'] .btn:hover:not(:disabled) {
   background: #1f8a55;
+  border-color: #1f8a55;
   color: #fff;
 }
 .root[data-variant='tonal'] .btn {
-  background: color-mix(in srgb, var(--gob-ib-dorado) 18%, #fff);
-  color: var(--gob-ib-title);
-  border-color: color-mix(in srgb, var(--gob-ib-dorado) 30%, transparent);
+  background: color-mix(in srgb, var(--gob-ib-dorado) 16%, #fff);
+  color: #3d3428;
+  border-color: color-mix(in srgb, var(--gob-ib-dorado) 34%, transparent);
+  box-shadow: none;
 }
 .root[data-variant='square'] .btn {
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--gob-ib-bg);
   border-color: var(--gob-ib-border);
 }
@@ -123,6 +147,7 @@ export const iconButtonStyles = `
   border: 1px solid var(--gob-ib-border);
   border-left: 3px solid var(--gob-ib-dorado);
   color: var(--gob-ib-vino-deep);
+  box-shadow: none;
 }
 
 .icon {
