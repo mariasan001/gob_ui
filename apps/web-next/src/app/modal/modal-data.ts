@@ -44,6 +44,7 @@ export const MODAL_ATTRS = [
   { name: 'body', type: 'string', defaultValue: '—', body: 'Contenido principal del dialogo.' },
   { name: 'confirm-label / cancel-label', type: 'string', defaultValue: 'Confirmar / Cancelar', body: 'Etiquetas de botones.' },
   { name: 'open', type: 'boolean', defaultValue: 'false', body: 'Controla la visibilidad.' },
+  { name: 'preview', type: 'boolean', defaultValue: 'false', body: 'Muestra el dialogo en linea (docs / demos).' },
 ] as const;
 
 export function buildSnippet(lang: CodeLang, example: ModalExample): string {

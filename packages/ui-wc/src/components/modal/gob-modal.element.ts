@@ -2,6 +2,7 @@ import { defineCustomElement } from '../../lib/define-custom-element';
 import { SafeHTMLElement } from '../../lib/safe-html-element';
 import {
   MODAL_OBSERVED_ATTRIBUTES,
+  resolveModalIcon,
   resolveModalSize,
   resolveModalVariant,
 } from './modal-constants';
@@ -16,12 +17,16 @@ class GobModalElement extends SafeHTMLElement {
 
   private readonly backdropEl: HTMLElement;
   private readonly dialogEl: HTMLElement;
+  private readonly handleEl: HTMLElement;
+  private readonly iconEl: HTMLElement;
   private readonly titleEl: HTMLElement;
   private readonly descEl: HTMLElement;
   private readonly bodyEl: HTMLElement;
   private readonly confirmBtn: HTMLButtonElement;
   private readonly cancelBtn: HTMLButtonElement;
   private readonly closeBtn: HTMLButtonElement;
+  private readonly titleId = `gob-md-title-${Math.random().toString(36).slice(2, 9)}`;
+  private readonly descId = `gob-md-desc-${Math.random().toString(36).slice(2, 9)}`;
 
   constructor() {
     super();
@@ -38,23 +43,44 @@ class GobModalElement extends SafeHTMLElement {
     this.dialogEl.setAttribute('part', 'dialog');
     this.dialogEl.setAttribute('role', 'dialog');
     this.dialogEl.setAttribute('aria-modal', 'true');
+    this.dialogEl.setAttribute('aria-labelledby', this.titleId);
+    this.dialogEl.setAttribute('aria-describedby', this.descId);
+
+    this.handleEl = document.createElement('div');
+    this.handleEl.className = 'handle';
+    this.handleEl.setAttribute('aria-hidden', 'true');
+    const handleBar = document.createElement('i');
+    this.handleEl.appendChild(handleBar);
 
     const head = document.createElement('div');
     head.className = 'head';
 
+    this.iconEl = document.createElement('span');
+    this.iconEl.className = 'icon';
+    this.iconEl.setAttribute('aria-hidden', 'true');
+    this.iconEl.setAttribute('part', 'icon');
+
+    const copy = document.createElement('div');
+    copy.className = 'copy';
+
     this.titleEl = document.createElement('h2');
     this.titleEl.className = 'title';
+    this.titleEl.id = this.titleId;
 
     this.descEl = document.createElement('p');
     this.descEl.className = 'description';
+    this.descEl.id = this.descId;
 
-    head.append(this.titleEl, this.descEl);
+    copy.append(this.titleEl, this.descEl);
 
     this.closeBtn = document.createElement('button');
     this.closeBtn.type = 'button';
     this.closeBtn.className = 'close';
     this.closeBtn.setAttribute('aria-label', 'Cerrar');
+    this.closeBtn.setAttribute('part', 'close');
     this.closeBtn.innerHTML = CLOSE_SVG;
+
+    head.append(this.iconEl, copy, this.closeBtn);
 
     this.bodyEl = document.createElement('div');
     this.bodyEl.className = 'body';
@@ -62,26 +88,37 @@ class GobModalElement extends SafeHTMLElement {
 
     const actions = document.createElement('div');
     actions.className = 'actions';
+    actions.setAttribute('part', 'actions');
 
     this.cancelBtn = document.createElement('button');
     this.cancelBtn.type = 'button';
     this.cancelBtn.className = 'btn cancel';
+    this.cancelBtn.setAttribute('part', 'cancel');
 
     this.confirmBtn = document.createElement('button');
     this.confirmBtn.type = 'button';
     this.confirmBtn.className = 'btn confirm';
+    this.confirmBtn.setAttribute('part', 'confirm');
 
     actions.append(this.cancelBtn, this.confirmBtn);
-    this.dialogEl.append(head, this.closeBtn, this.bodyEl, actions);
+    this.dialogEl.append(this.handleEl, head, this.bodyEl, actions);
     this.backdropEl.appendChild(this.dialogEl);
     shadow.append(style, this.backdropEl);
 
     this.backdropEl.addEventListener('click', (event) => {
+      if (this.hasAttribute('preview')) return;
       if (event.target === this.backdropEl) this.close('backdrop');
     });
-    this.closeBtn.addEventListener('click', () => this.close('close'));
-    this.cancelBtn.addEventListener('click', () => this.close('cancel'));
+    this.closeBtn.addEventListener('click', () => {
+      if (this.hasAttribute('preview')) return;
+      this.close('close');
+    });
+    this.cancelBtn.addEventListener('click', () => {
+      if (this.hasAttribute('preview')) return;
+      this.close('cancel');
+    });
     this.confirmBtn.addEventListener('click', () => {
+      if (this.hasAttribute('preview')) return;
       this.close('confirm');
     });
   }
@@ -100,7 +137,11 @@ class GobModalElement extends SafeHTMLElement {
   }
 
   private readonly onKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape' && this.hasAttribute('open')) {
+    if (
+      event.key === 'Escape' &&
+      this.hasAttribute('open') &&
+      !this.hasAttribute('preview')
+    ) {
       this.close('escape');
     }
   };
@@ -119,6 +160,7 @@ class GobModalElement extends SafeHTMLElement {
   private syncFromAttributes() {
     const variant = resolveModalVariant(this.getAttribute('variant'));
     const size = resolveModalSize(this.getAttribute('size'));
+    const preview = this.hasAttribute('preview');
     const title = this.getAttribute('title')?.trim() || 'Confirmar accion';
     const description =
       this.getAttribute('description')?.trim() ||
@@ -130,16 +172,23 @@ class GobModalElement extends SafeHTMLElement {
     const confirm =
       this.getAttribute('confirm-label')?.trim() || 'Confirmar';
     const cancel = this.getAttribute('cancel-label')?.trim() || 'Cancelar';
+    const icon = resolveModalIcon(variant);
 
     this.backdropEl.dataset.variant = variant;
     this.backdropEl.dataset.size = size;
+    this.backdropEl.dataset.hasIcon = icon ? 'true' : 'false';
+    this.backdropEl.dataset.preview = preview ? 'true' : 'false';
 
     this.titleEl.textContent = title;
-    this.dialogEl.setAttribute('aria-label', title);
     this.descEl.textContent = description;
     this.bodyEl.textContent = body;
     this.confirmBtn.textContent = confirm;
     this.cancelBtn.textContent = cancel;
+    this.iconEl.innerHTML = icon || '';
+
+    this.dialogEl.setAttribute('aria-modal', preview ? 'false' : 'true');
+    this.closeBtn.tabIndex = preview ? -1 : 0;
+    this.closeBtn.setAttribute('aria-hidden', preview ? 'true' : 'false');
   }
 }
 

@@ -14,33 +14,35 @@ export function ModalDemo({ example }: { example: ModalExample }) {
     if (!root) return;
     const onModal = (event: Event) => {
       const detail = (event as CustomEvent<{ action?: string }>).detail;
-      if (detail?.action && detail.action !== 'confirm') {
-        setOpen(false);
-      }
-      if (detail?.action === 'confirm') setOpen(false);
+      if (detail?.action) setOpen(false);
     };
     root.addEventListener('gob-modal', onModal);
     return () => root.removeEventListener('gob-modal', onModal);
   }, []);
 
+  const shared = {
+    variant: example.variant,
+    size: example.size,
+    title: example.modalTitle,
+    description: example.modalDescription,
+    body: example.body,
+    'confirm-label': example.confirmLabel,
+    'cancel-label': example.cancelLabel,
+  } as const;
+
   return (
     <div ref={wrapRef} className={local.stageInner}>
+      <gob-modal key={`preview-${example.id}`} preview open {...shared} />
       <button
         type="button"
         className={local.openBtn}
         onClick={() => setOpen(true)}
       >
-        Abrir modal
+        Probar overlay
       </button>
       <gob-modal
-        key={`${example.id}-${open ? 'open' : 'closed'}`}
-        variant={example.variant}
-        size={example.size}
-        title={example.modalTitle}
-        description={example.modalDescription}
-        body={example.body}
-        confirm-label={example.confirmLabel}
-        cancel-label={example.cancelLabel}
+        key={`overlay-${example.id}-${open ? 'open' : 'closed'}`}
+        {...shared}
         {...(open ? { open: true } : {})}
       />
     </div>

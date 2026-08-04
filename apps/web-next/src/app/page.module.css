@@ -2283,12 +2283,24 @@
 .fakeModal {
   position: relative;
   display: grid;
-  gap: 6px;
+  gap: 8px;
   width: 148px;
-  padding: 14px 12px;
+  padding: 14px 12px 12px;
   border-radius: 14px;
-  background: rgba(24, 21, 17, 0.08);
-  border: 1px solid rgba(24, 21, 17, 0.06);
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+  box-shadow: 0 10px 22px rgba(24, 21, 17, 0.08);
+  overflow: hidden;
+}
+
+.fakeModal::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: #9f2141;
 }
 
 .fakeModal i,
@@ -2296,20 +2308,24 @@
 .fakeModal em {
   height: 7px;
   border-radius: 4px;
-  background: #fff;
+  background: rgba(24, 21, 17, 0.14);
 }
 
-.fakeModal i { width: 48%; }
-.fakeModal b { width: 78%; background: rgba(255, 255, 255, 0.75); }
-.fakeModal em { width: 64%; background: rgba(255, 255, 255, 0.55); }
+.fakeModal i { width: 42%; margin-top: 4px; }
+.fakeModal b { width: 78%; background: rgba(24, 21, 17, 0.08); }
+.fakeModal em {
+  width: 100%;
+  height: 28px;
+  border-radius: 8px;
+  background: #f3f3f3;
+}
 
 .fakeModal span {
   justify-self: end;
-  width: 36px;
+  width: 40px;
   height: 14px;
   border-radius: 8px;
   background: #9f2141;
-  margin-top: 2px;
 }
 
 @keyframes rise {

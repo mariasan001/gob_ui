@@ -65,10 +65,10 @@
 
 .stage {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  min-height: 160px;
-  padding: 32px 22px 40px;
+  min-height: 220px;
+  padding: 22px 18px 24px;
   border-radius: 18px;
   border: 1px solid #ebebeb;
   overflow: visible;
@@ -76,35 +76,36 @@
 }
 
 .stageInner {
-  width: min(520px, 100%);
+  width: min(480px, 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 12px;
-  padding-top: 4px;
+  align-items: stretch;
+  gap: 14px;
 }
 
 .openBtn {
   appearance: none;
+  align-self: center;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 0 16px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  background: #9f2141;
-  color: #fff;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 11px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #181511;
   font: inherit;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
   letter-spacing: -0.015em;
   cursor: pointer;
 }
 
 .openBtn:hover {
-  background: #7a1832;
+  background: #fafafa;
+  border-color: #d8d4ce;
 }
 
 .search {

@@ -886,6 +886,7 @@ export type GobModalProps = React.HTMLAttributes<HTMLElement> & {
   description?: string;
   body?: string;
   open?: boolean;
+  preview?: boolean;
   'confirm-label'?: string;
   'cancel-label'?: string;
 };
