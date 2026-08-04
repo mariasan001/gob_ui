@@ -30,6 +30,7 @@ export type PreviewKind =
   | 'textarea'
   | 'select'
   | 'combobox'
+  | 'checkbox'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -383,12 +384,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'checkbox',
+    href: '/casilla',
     name: 'Casilla',
     description: 'Seleccion multiple en formularios.',
-    preview: 'soon',
+    preview: 'checkbox',
     category: 'formularios',
     tags: ['form', 'check', 'checkbox'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'radio',
