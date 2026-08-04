@@ -389,6 +389,16 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'switch') {
+    return (
+      <div className={s.fakeSwitch} aria-hidden="true">
+        <i>
+          <em />
+        </i>
+        <b />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

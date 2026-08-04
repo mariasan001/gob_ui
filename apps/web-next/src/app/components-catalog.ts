@@ -32,6 +32,7 @@ export type PreviewKind =
   | 'combobox'
   | 'checkbox'
   | 'radio'
+  | 'switch'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -405,12 +406,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'switch',
+    href: '/interruptor',
     name: 'Interruptor',
     description: 'Encendido/apagado para preferencias y flags.',
-    preview: 'soon',
+    preview: 'switch',
     category: 'formularios',
     tags: ['toggle', 'form', 'switch'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'datepicker',

@@ -113,7 +113,36 @@ export type RadioStatus =
 export type RadioSize = 'sm' | 'md' | 'lg';
 
 export type GobSwitchProps =
-  React.HTMLAttributes<HTMLElement> & CommonControlProps;
+  React.HTMLAttributes<HTMLElement> &
+    CommonControlProps & {
+      variant?: SwitchVariant;
+      label?: string;
+      description?: string;
+      helper?: string;
+      status?: SwitchStatus;
+      size?: SwitchSize;
+      required?: boolean;
+    };
+
+export type SwitchVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'card'
+  | 'pill'
+  | 'tile'
+  | 'complete';
+
+export type SwitchStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type SwitchSize = 'sm' | 'md' | 'lg';
 
 export type GobChipProps =
   React.HTMLAttributes<HTMLElement> & {
