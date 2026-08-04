@@ -1707,13 +1707,14 @@
   border-radius: 14px;
   background: #fff;
   border: 1px solid rgba(24, 21, 17, 0.07);
+  border-left: 3px solid #bc945a;
 }
 
 .fakeForm span {
   height: 22px;
   border-radius: 8px;
-  background: #f3efe8;
-  border: 1px solid rgba(188, 148, 90, 0.28);
+  background: #f7f5f1;
+  border: 1px solid rgba(24, 21, 17, 0.08);
 }
 
 .fakeTabs {

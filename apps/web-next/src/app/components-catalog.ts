@@ -485,7 +485,7 @@ export const COMPONENTS: ComponentItem[] = [
   {
     id: 'form',
     href: '/diseno-formulario',
-    name: 'Diseno de formulario',
+    name: 'Diseño de formulario',
     description: 'Layouts de formulario de 1 o 2 columnas.',
     preview: 'form',
     category: 'formularios',

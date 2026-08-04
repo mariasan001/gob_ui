@@ -26,7 +26,7 @@ export const FORM_EXAMPLES: FormExample[] = [
   {
     id: 'basic',
     title: 'Basico',
-    description: 'Una columna limpia.',
+    description: 'Una columna limpia sin marco.',
     variant: 'basic',
     fields: [
       { label: 'Nombre', placeholder: 'Maria Sanchez' },
@@ -36,7 +36,7 @@ export const FORM_EXAMPLES: FormExample[] = [
   {
     id: 'single',
     title: 'Una columna',
-    description: 'Layout vertical estandar.',
+    description: 'Encabezado editorial y campos en serie.',
     variant: 'single',
     formTitle: 'Alta de ciudadano',
     formDescription: 'Datos basicos del registro.',
@@ -51,6 +51,7 @@ export const FORM_EXAMPLES: FormExample[] = [
     description: 'Pares de campos en escritorio.',
     variant: 'dual',
     formTitle: 'Domicilio',
+    formDescription: 'Se apila en movil.',
     fields: [
       { label: 'Calle', placeholder: 'Av. Juarez' },
       { label: 'Numero', placeholder: '120' },
@@ -63,6 +64,7 @@ export const FORM_EXAMPLES: FormExample[] = [
     title: 'Tres columnas',
     description: 'Fila densa de campos cortos.',
     variant: 'triple',
+    formTitle: 'Fecha del documento',
     fields: [
       { label: 'Dia', placeholder: '01' },
       { label: 'Mes', placeholder: '08' },
@@ -72,9 +74,10 @@ export const FORM_EXAMPLES: FormExample[] = [
   {
     id: 'stacked',
     title: 'Apilado',
-    description: 'Mayor separacion entre bloques.',
+    description: 'Mayor aire entre bloques.',
     variant: 'stacked',
     formTitle: 'Observaciones',
+    formDescription: 'Para notas del revisor.',
     fields: [
       { label: 'Motivo', placeholder: 'Revision documental' },
       { label: 'Notas', placeholder: 'Falta anexo 2' },
@@ -83,10 +86,11 @@ export const FORM_EXAMPLES: FormExample[] = [
   {
     id: 'dense',
     title: 'Compacto',
-    description: 'Gap reducido para paneles.',
+    description: 'Gap reducido para paneles y toolbars.',
     variant: 'dense',
     gap: 'sm',
     columns: 2,
+    formTitle: 'Filtro',
     fields: [
       { label: 'Folio', placeholder: 'EXP-01' },
       { label: 'Estado', placeholder: 'En revision' },
@@ -95,9 +99,10 @@ export const FORM_EXAMPLES: FormExample[] = [
   {
     id: 'soft',
     title: 'Suave',
-    description: 'Fondo tinte vino.',
+    description: 'Tinte vino plano, sin degradado.',
     variant: 'soft',
     formTitle: 'Filtro rapido',
+    formDescription: 'Consulta por dependencia.',
     fields: [
       { label: 'Dependencia', placeholder: 'Salud' },
       { label: 'Periodo', placeholder: '2026' },
@@ -106,7 +111,7 @@ export const FORM_EXAMPLES: FormExample[] = [
   {
     id: 'card',
     title: 'Tarjeta',
-    description: 'Contenedor con sombra ligera.',
+    description: 'Superficie limpia con pie de acciones.',
     variant: 'card',
     formTitle: 'Solicitud',
     formDescription: 'Completa los datos del tramite.',
@@ -119,9 +124,10 @@ export const FORM_EXAMPLES: FormExample[] = [
   {
     id: 'sections',
     title: 'Secciones',
-    description: 'Campos separados por reglas.',
+    description: 'Titulo uppercase y reglas entre campos.',
     variant: 'sections',
     formTitle: 'Expediente',
+    formDescription: 'Bloques separados por lineas.',
     fields: [
       { label: 'Titular', placeholder: 'Nombre del titular' },
       { label: 'Referencia', placeholder: 'OF-2026-12' },
@@ -130,7 +136,7 @@ export const FORM_EXAMPLES: FormExample[] = [
   {
     id: 'complete',
     title: 'Completo',
-    description: 'Titulo, descripcion, 2 cols y acciones.',
+    description: 'Panel moderno con riel dorado y acciones.',
     variant: 'complete',
     formTitle: 'Registro institucional',
     formDescription: 'Formulario de alta con validacion.',
