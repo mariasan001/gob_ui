@@ -723,6 +723,99 @@ export type GobToastProps = React.HTMLAttributes<HTMLElement> & {
   open?: boolean;
 };
 
+export type BannerVariant =
+  | 'basic'
+  | 'soft'
+  | 'solid'
+  | 'outline'
+  | 'dense'
+  | 'promo'
+  | 'sticky'
+  | 'centered'
+  | 'split'
+  | 'complete';
+
+export type BannerTone =
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'neutral'
+  | 'brand';
+
+export type GobBannerProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: BannerVariant;
+  tone?: BannerTone;
+  title?: string;
+  description?: string;
+  action?: string;
+  dismissible?: boolean;
+  hidden?: boolean;
+};
+
+export type BadgeVariant =
+  | 'basic'
+  | 'soft'
+  | 'solid'
+  | 'outline'
+  | 'dot'
+  | 'count'
+  | 'pill'
+  | 'square'
+  | 'status'
+  | 'complete';
+
+export type BadgeTone =
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'neutral';
+
+export type BadgeSize = 'sm' | 'md' | 'lg';
+
+export type GobBadgeProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: BadgeVariant;
+  tone?: BadgeTone;
+  size?: BadgeSize;
+  label?: string;
+  count?: number | string;
+  max?: number | string;
+};
+
+export type TagVariant =
+  | 'basic'
+  | 'soft'
+  | 'outline'
+  | 'solid'
+  | 'filter'
+  | 'removable'
+  | 'dense'
+  | 'icon'
+  | 'brand'
+  | 'complete';
+
+export type TagTone =
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'neutral';
+
+export type TagSize = 'sm' | 'md' | 'lg';
+
+export type GobTagProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: TagVariant;
+  tone?: TagTone;
+  size?: TagSize;
+  label?: string;
+  icon?: string;
+  removable?: boolean;
+  disabled?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1410,6 +1503,9 @@ declare global {
       'gob-fab': React.DetailedHTMLProps<GobFabProps, HTMLElement>;
       'gob-alert': React.DetailedHTMLProps<GobAlertProps, HTMLElement>;
       'gob-toast': React.DetailedHTMLProps<GobToastProps, HTMLElement>;
+      'gob-banner': React.DetailedHTMLProps<GobBannerProps, HTMLElement>;
+      'gob-badge': React.DetailedHTMLProps<GobBadgeProps, HTMLElement>;
+      'gob-tag': React.DetailedHTMLProps<GobTagProps, HTMLElement>;
     }
   }
 }

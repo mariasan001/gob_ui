@@ -50,6 +50,9 @@ import './components/split-button/gob-split-button';
 import './components/fab/gob-fab';
 import './components/alert/gob-alert';
 import './components/toast/gob-toast';
+import './components/banner/gob-banner';
+import './components/badge/gob-badge';
+import './components/tag/gob-tag';
 
 export type {
   ActivityFeedTone,
@@ -57,6 +60,11 @@ export type {
   AlertTone,
   AlertVariant,
   Appearance,
+  BadgeSize,
+  BadgeTone,
+  BadgeVariant,
+  BannerTone,
+  BannerVariant,
   BreadcrumbVariant,
   ButtonGroupSize,
   ButtonGroupVariant,
@@ -97,6 +105,8 @@ export type {
   GobActivityFeedProps,
   GobAlertProps,
   GobAppShellProps,
+  GobBadgeProps,
+  GobBannerProps,
   GobBreadcrumbProps,
   GobButtonGroupProps,
   GobButtonProps,
@@ -139,6 +149,7 @@ export type {
   GobStepsProps,
   GobSwitchProps,
   GobTabsProps,
+  GobTagProps,
   GobTableProps,
   GobTextareaProps,
   GobTimelineProps,
@@ -198,6 +209,9 @@ export type {
   SwitchSize,
   SwitchStatus,
   SwitchVariant,
+  TagSize,
+  TagTone,
+  TagVariant,
   TabsSize,
   TabsVariant,
   TableTone,

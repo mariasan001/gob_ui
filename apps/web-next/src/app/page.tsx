@@ -575,6 +575,32 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'banner') {
+    return (
+      <div className={s.fakeBanner} aria-hidden="true">
+        <b />
+        <em />
+        <i />
+      </div>
+    );
+  }
+  if (kind === 'badge') {
+    return (
+      <div className={s.fakeBadge} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'tag') {
+    return (
+      <div className={s.fakeTag} aria-hidden="true">
+        <i />
+        <b />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

@@ -2138,6 +2138,87 @@
   background: rgba(24, 21, 17, 0.08);
 }
 
+.fakeBanner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 8px;
+  width: 148px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  background: color-mix(in srgb, #9f2141 8%, #fff);
+  border: 1px solid color-mix(in srgb, #9f2141 14%, transparent);
+}
+
+.fakeBanner b,
+.fakeBanner em {
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.14);
+  grid-column: 1;
+}
+
+.fakeBanner em {
+  width: 78%;
+  background: rgba(24, 21, 17, 0.08);
+}
+
+.fakeBanner i {
+  width: 28px;
+  height: 16px;
+  border-radius: 8px;
+  background: #9f2141;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+
+.fakeBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 148px;
+  padding: 14px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeBadge i,
+.fakeBadge b,
+.fakeBadge em {
+  height: 18px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #9f2141 14%, #fff);
+}
+
+.fakeBadge i { width: 42px; background: #9f2141; }
+.fakeBadge b { width: 28px; }
+.fakeBadge em { width: 18px; border-radius: 999px; }
+
+.fakeTag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 148px;
+  padding: 14px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeTag i,
+.fakeTag b {
+  height: 22px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #9f2141 10%, #fff);
+  border: 1px solid color-mix(in srgb, #9f2141 18%, transparent);
+}
+
+.fakeTag i { width: 64px; }
+.fakeTag b { width: 48px; }
+
 @keyframes rise {
   from {
     opacity: 0;
