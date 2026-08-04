@@ -5,10 +5,9 @@
 }
 
 .hero {
-  padding: 32px 20px 40px;
-  background: #fff;
-  border-bottom: 1px solid rgba(24, 21, 17, 0.08);
-  color: #181511;
+  padding: 32px 20px 96px;
+  background: linear-gradient(165deg, #6e142c 0%, #9f2141 42%, #7a1832 100%);
+  color: #fff;
 }
 
 .heroInner {
@@ -21,21 +20,21 @@
 .back {
   width: fit-content;
   margin-bottom: 8px;
-  color: #6b655c;
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
 }
 
 .back:hover {
-  color: #181511;
+  color: #fff;
 }
 
 .title {
   margin: 0;
-  color: #181511;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  line-height: 0.98;
+  color: #fff;
+  font-size: clamp(2.8rem, 7vw, 4.6rem);
+  line-height: 0.95;
   letter-spacing: -0.03em;
   font-weight: 800;
 }
@@ -43,27 +42,27 @@
 .hint {
   margin: 0;
   max-width: 48ch;
-  color: #6b655c;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 15px;
   font-weight: 500;
   line-height: 1.55;
 }
 
 .hint strong {
-  color: #181511;
+  color: #fff;
   font-weight: 700;
 }
 
 .version {
   margin: 6px 0 0;
-  color: #8a8278;
+  color: rgba(255, 255, 255, 0.58);
   font-size: 12px;
   font-weight: 500;
 }
 
 .panelWrap {
   width: min(1100px, calc(100% - 24px));
-  margin: 28px auto 56px;
+  margin: -64px auto 56px;
   position: relative;
   z-index: 2;
 }
