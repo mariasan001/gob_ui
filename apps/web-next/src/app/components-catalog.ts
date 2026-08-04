@@ -33,6 +33,7 @@ export type PreviewKind =
   | 'checkbox'
   | 'radio'
   | 'switch'
+  | 'datepicker'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -416,12 +417,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'datepicker',
+    href: '/selector-fecha',
     name: 'Selector de fecha',
     description: 'Fecha y rango para filtros de tablero.',
-    preview: 'soon',
+    preview: 'datepicker',
     category: 'formularios',
     tags: ['fecha', 'calendario', 'dashboard', 'filtro'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'timepicker',

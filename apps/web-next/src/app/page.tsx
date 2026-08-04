@@ -399,6 +399,14 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'datepicker') {
+    return (
+      <div className={s.fakeDatepicker} aria-hidden="true">
+        <b />
+        <i />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

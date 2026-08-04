@@ -30,6 +30,7 @@ import './components/input/gob-input';
 import './components/textarea/gob-textarea';
 import './components/select/gob-select';
 import './components/combobox/gob-combobox';
+import './components/datepicker/gob-datepicker';
 
 export type {
   ActivityFeedTone,
@@ -48,6 +49,10 @@ export type {
   ContainerVariant,
   DataGridTone,
   DataGridVariant,
+  DatepickerMode,
+  DatepickerSize,
+  DatepickerStatus,
+  DatepickerVariant,
   DividerTone,
   DividerVariant,
   EmptyStateTone,
@@ -64,6 +69,7 @@ export type {
   GobComboboxProps,
   GobContainerProps,
   GobDataGridProps,
+  GobDatepickerProps,
   GobDividerProps,
   GobEmptyStateProps,
   GobFilterBarProps,
