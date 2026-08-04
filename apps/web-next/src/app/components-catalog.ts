@@ -31,6 +31,7 @@ export type PreviewKind =
   | 'select'
   | 'combobox'
   | 'checkbox'
+  | 'radio'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -394,12 +395,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'radio',
+    href: '/opcion-unica',
     name: 'Opcion unica',
     description: 'Seleccion unica en grupos de opciones.',
-    preview: 'soon',
+    preview: 'radio',
     category: 'formularios',
     tags: ['form', 'radio'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'switch',

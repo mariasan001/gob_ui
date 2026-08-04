@@ -381,6 +381,14 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'radio') {
+    return (
+      <div className={s.fakeRadio} aria-hidden="true">
+        <i />
+        <b />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
