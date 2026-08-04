@@ -2219,6 +2219,99 @@
 .fakeTag i { width: 64px; }
 .fakeTag b { width: 48px; }
 
+.fakeTooltip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 148px;
+  height: 72px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeTooltip i {
+  width: 56px;
+  height: 22px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.12);
+}
+
+.fakeTooltip b {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 18px;
+  border-radius: 8px;
+  background: #181511;
+}
+
+.fakeHelperText {
+  display: grid;
+  gap: 8px;
+  width: 148px;
+  padding: 14px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeHelperText i {
+  height: 22px;
+  border-radius: 8px;
+  background: rgba(24, 21, 17, 0.06);
+  border: 1px solid rgba(24, 21, 17, 0.08);
+}
+
+.fakeHelperText b,
+.fakeHelperText em {
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.12);
+}
+
+.fakeHelperText em {
+  width: 72%;
+  background: rgba(24, 21, 17, 0.08);
+}
+
+.fakeModal {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  width: 148px;
+  padding: 14px 12px;
+  border-radius: 14px;
+  background: rgba(24, 21, 17, 0.08);
+  border: 1px solid rgba(24, 21, 17, 0.06);
+}
+
+.fakeModal i,
+.fakeModal b,
+.fakeModal em {
+  height: 7px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.fakeModal i { width: 48%; }
+.fakeModal b { width: 78%; background: rgba(255, 255, 255, 0.75); }
+.fakeModal em { width: 64%; background: rgba(255, 255, 255, 0.55); }
+
+.fakeModal span {
+  justify-self: end;
+  width: 36px;
+  height: 14px;
+  border-radius: 8px;
+  background: #9f2141;
+  margin-top: 2px;
+}
+
 @keyframes rise {
   from {
     opacity: 0;

@@ -53,6 +53,9 @@ import './components/toast/gob-toast';
 import './components/banner/gob-banner';
 import './components/badge/gob-badge';
 import './components/tag/gob-tag';
+import './components/tooltip/gob-tooltip';
+import './components/helper-text/gob-helper-text';
+import './components/modal/gob-modal';
 
 export type {
   ActivityFeedTone,
@@ -126,11 +129,13 @@ export type {
   GobFormFieldProps,
   GobFormProps,
   GobGridProps,
+  GobHelperTextProps,
   GobIconButtonProps,
   GobInputProps,
   GobKpiCardProps,
   GobLinkProps,
   GobListProps,
+  GobModalProps,
   GobNavMenuProps,
   GobPageHeaderProps,
   GobPaginationBarProps,
@@ -156,9 +161,12 @@ export type {
   GobTimepickerProps,
   GobToastProps,
   GobToolbarProps,
+  GobTooltipProps,
   GobTopbarProps,
   GridGap,
   GridVariant,
+  HelperTextTone,
+  HelperTextVariant,
   IconButtonSize,
   IconButtonVariant,
   InputSize,
@@ -171,6 +179,8 @@ export type {
   KpiVariant,
   ListTone,
   ListVariant,
+  ModalSize,
+  ModalVariant,
   NavMenuSize,
   NavMenuVariant,
   PageHeaderSurface,
@@ -226,6 +236,8 @@ export type {
   TimepickerVariant,
   ToastTone,
   ToastVariant,
+  TooltipPlacement,
+  TooltipVariant,
   Tone,
   ToolbarTone,
   ToolbarVariant,
