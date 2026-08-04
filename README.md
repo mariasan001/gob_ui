@@ -1,13 +1,38 @@
-# gob-ui
+# gob_ui
 
-Monorepo pnpm para un sistema de interfaz enfocado en `gob-button`.
+Sistema de diseno institucional **Gob_v2** (monorepo pnpm).
+
+Incluye tokens, estilos, Web Components y un catalogo vivo en Next.js.
+Identidad visual: vino `#9F2141`, dorado `#BC945A`, fill `#f3f3f3`.
+
+## Estado actual
+
+- Catalogo **completo**: 76 entradas `ready` (sin pendientes `soon`)
+- **74** Web Components en `packages/ui-wc`
+- Docs por componente con ejemplos, variantes y boton **Copiar**
+- Demo Next en `http://localhost:9090`
+- Rama principal: `main`
+
+### Cobertura del catalogo
+
+| Categoria | Componentes |
+|---|---|
+| Fundamentos | Tipografia, Colores, Iconografia |
+| Acciones | Botones, Icono, Grupo, Menu desplegable, Dividido, Flotante |
+| Navegacion | Paginacion, Migas, Pestanas, Pasos, Menu, Enlace, Segmentado, Paleta de comandos… |
+| Layout | App shell, Sidebar, Topbar, Encabezado, Contenedor, Cuadricula, Separador, Espaciador |
+| Formularios | Input, Textarea, Select, Combobox, Casilla, Radio, Switch, Fecha, Hora, Archivos, Slider, Busqueda, Form field, Form |
+| Datos | KPI, Grafica, Tabla, Data grid, Filtros, Toolbar, Lista, Timeline, Actividad, Empty, Notificaciones |
+| Feedback | Skeleton, Progreso, Spinner, Alerta, Toast, Banner, Badge, Tag, Tooltip, Helper text |
+| Capas | Modal, Drawer, Popover, Sheet, Confirmacion |
+| Contenido | Tarjeta, Avatar, Menu usuario, Acordeon, Secciones, Hero, Footer, Indice, Codigo, Metricas |
 
 ## Workspace
 
 - `packages/tokens`: tokens base en JSON
 - `packages/styles`: estilos compartidos (`base.css`, `theme.css`, `utilities.css`, `fonts.css`)
-- `packages/ui-wc`: Web Component `gob-button`
-- `apps/web-next`: demo de referencia en Next.js
+- `packages/ui-wc`: libreria de Web Components (`@mariasan001/ui-wc`)
+- `apps/web-next`: catalogo / docs de referencia (Next.js)
 - `apps/web-vanilla`: demo minima en HTML puro
 
 ## Requisitos
@@ -23,7 +48,7 @@ Instala dependencias:
 pnpm install
 ```
 
-Demo Next.js:
+Catalogo Next.js:
 
 ```bash
 pnpm dev
@@ -44,13 +69,10 @@ pnpm build:ui-wc
 ```
 
 Despues sirve `apps/web-vanilla/` con cualquier servidor estatico y abre `index.html`.
-Esta demo consume los packages instalados desde `node_modules`.
 
 ## Como consumir packages
 
 ### Styles
-
-Importa solo los CSS que necesites:
 
 ```ts
 import '@mariasan001/styles/base.css';
@@ -59,21 +81,23 @@ import '@mariasan001/styles/utilities.css';
 import '@mariasan001/styles/fonts.css';
 ```
 
-### Web Component
+### Web Components
 
-Registra el custom element una vez en el cliente:
+Registra la libreria una vez en el cliente:
 
 ```ts
 import '@mariasan001/ui-wc';
 ```
 
-Luego puedes usar:
+Ejemplos:
 
 ```html
 <gob-button tone="primary" appearance="solid">Guardar</gob-button>
+<gob-alert tone="success" title="Listo" description="El tramite se envio."></gob-alert>
+<gob-modal open title="Confirmar" description="¿Deseas continuar?"></gob-modal>
 ```
 
-En React + TypeScript, el repo ya incluye una declaracion JSX local para `gob-button` en `apps/web-next/src/types/gob-ui.d.ts`.
+Los tipos JSX de los custom elements viven en `packages/ui-wc/src/types.ts`.
 
 ## Calidad y empaquetado
 
@@ -83,7 +107,7 @@ Puerta minima reproducible:
 pnpm verify
 ```
 
-Equivale a ejecutar:
+Equivale a:
 
 ```bash
 pnpm lint
@@ -93,42 +117,32 @@ pnpm pack:styles
 pnpm pack:ui-wc
 ```
 
-Tambien puedes correr pasos puntuales:
+Pasos puntuales:
 
 ```bash
 pnpm -C apps/web-next lint
 pnpm -C apps/web-next exec tsc --noEmit
 pnpm -C apps/web-next build
 pnpm -C packages/ui-wc build
-pnpm -C packages/styles exec npm pack --dry-run --cache .npm-cache
-pnpm -C packages/ui-wc exec npm pack --dry-run --cache .npm-cache
 ```
 
 ## Release checklist
 
-Aplica para los packages publicables actuales:
+Packages publicables:
 
 - `@mariasan001/styles`
 - `@mariasan001/ui-wc`
 
-`@gob/tokens` sigue como package privado y no entra al flujo de publicacion.
+`@gob/tokens` sigue privado.
 
 ### 1. Bump de versiones
 
-Si hubo cambios publicables, actualiza manualmente el campo `version` en:
+Actualiza `version` en:
 
 - `packages/styles/package.json`
 - `packages/ui-wc/package.json`
 
-Usa semver:
-
-- `patch`: fixes o ajustes internos sin romper API
-- `minor`: nuevas capacidades compatibles
-- `major`: cambios incompatibles
-
 ### 2. Verificacion previa
-
-Antes de taggear o publicar:
 
 ```bash
 pnpm verify
@@ -136,102 +150,58 @@ pnpm smoke:pack
 pnpm smoke:consumers
 ```
 
-Si alguno falla, no publiques.
-
 ### 3. Tag + release notes
-
-Crea un commit final de release y luego un tag anotado:
 
 ```bash
 git tag -a styles-vX.Y.Z -m "Release @mariasan001/styles vX.Y.Z"
 git tag -a ui-wc-vX.Y.Z -m "Release @mariasan001/ui-wc vX.Y.Z"
 ```
 
-Si ambos packages salen juntos, puedes usar tambien un tag coordinado del repo:
-
-```bash
-git tag -a release-YYYY-MM-DD -m "Release styles vX.Y.Z + ui-wc vA.B.C"
-```
-
-Las release notes deben incluir:
-
-- versiones publicadas
-- cambios visibles para consumidores
-- breaking changes, si existen
-- comandos de instalacion
-
 ### 4. Publicacion a GitHub Packages
 
-Configura un `.npmrc` local basado en `.npmrc.example` con `GITHUB_PACKAGES_TOKEN`.
-
-Publica desde cada package:
+Configura `.npmrc` local desde `.npmrc.example` con `GITHUB_PACKAGES_TOKEN`.
 
 ```bash
 pnpm -C packages/styles exec npm publish --registry=https://npm.pkg.github.com
 pnpm -C packages/ui-wc exec npm publish --registry=https://npm.pkg.github.com
 ```
 
-### 5. Confirmacion desde proyecto limpio
-
-Valida instalacion real fuera del workspace:
+### 5. Confirmacion
 
 ```bash
 pnpm smoke:pack
 pnpm smoke:consumers
 ```
 
-Ademas, valida desde un proyecto limpio contra registry si el release ya esta publicado:
-
-```bash
-pnpm add @mariasan001/styles @mariasan001/ui-wc
-```
-
-Comprueba al menos:
-
-- import de `@mariasan001/styles/base.css`
-- import de `@mariasan001/styles/theme.css`
-- import de `@mariasan001/styles/utilities.css`
-- import de `@mariasan001/ui-wc`
-- build exitoso del consumidor
-
-### 6. Criterio de salida
-
-Considera el release completo solo si:
-
-- `pnpm verify` pasa
-- `pnpm smoke:consumers` pasa
-- `npm publish` termina sin errores para cada package objetivo
-- la instalacion desde registry funciona en proyecto limpio
-- el tag y las release notes quedaron publicados
-
 ## Troubleshooting
 
 ### PowerShell bloquea `pnpm`
-
-Si PowerShell bloquea scripts (`pnpm.ps1`), usa:
 
 ```bash
 cmd /c pnpm install
 ```
 
-o ejecuta los comandos desde `cmd`.
+### Un custom element no aparece en JSX/TS
 
-### `gob-button` no existe en JSX
+Confirma:
 
-Confirma que:
+- import de `@mariasan001/ui-wc` en cliente
+- build de `packages/ui-wc` (`pnpm build:ui-wc`)
+- tipos exportados desde el package
 
-- `@mariasan001/ui-wc` este instalado en el workspace
-- la app tenga el import de tipos en `src/types/gob-ui.d.ts`
-- el registro del custom element se haga en cliente
+### La demo HTML no renderiza
 
-### La demo HTML no renderiza estilos o el componente
+Confirma:
 
-Confirma que:
-
-- corriste `pnpm install`
-- corriste `pnpm build:ui-wc`
-- estas sirviendo `apps/web-vanilla` con un servidor estatico, no abriendo el archivo sin servidor
+- `pnpm install`
+- `pnpm build:ui-wc`
+- servir `apps/web-vanilla` con un servidor estatico
 
 ## Tokens
 
 Los tokens viven en `packages/tokens/src/tokens.json`.
+
+## Autor
+
+- GitHub: [mariasan001](https://github.com/mariasan001)
+- Repo: [mariasan001/gob_ui](https://github.com/mariasan001/gob_ui)
