@@ -523,6 +523,33 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'button-group') {
+    return (
+      <div className={s.fakeButtonGroup} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'dropdown-menu') {
+    return (
+      <div className={s.fakeDropdownMenu} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+        <span />
+      </div>
+    );
+  }
+  if (kind === 'split-button') {
+    return (
+      <div className={s.fakeSplitButton} aria-hidden="true">
+        <i />
+        <b />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
