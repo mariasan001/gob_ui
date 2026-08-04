@@ -212,8 +212,13 @@ export const searchFieldStyles = `
   min-height: 22px;
   padding-top: 2px;
 }
-.root[data-variant='floating'][data-filled='false'][data-focused='false'] .field {
+/* Empty + idle: only the float label (avoid overlap with placeholder). */
+.root[data-variant='floating'][data-filled='false']:not([data-focused='true']) .field::placeholder {
+  opacity: 0;
   color: transparent;
+}
+.root[data-variant='floating'][data-focused='true'] .field::placeholder {
+  opacity: 1;
 }
 .root[data-variant='floating'][data-focused='true'] .float-label,
 .root[data-variant='floating'][data-filled='true'] .float-label {
