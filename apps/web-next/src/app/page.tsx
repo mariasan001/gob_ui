@@ -738,6 +738,42 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'code-block') {
+    return (
+      <div className={s.fakeCodeBlock} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'stat-strip') {
+    return (
+      <div className={s.fakeStatStrip} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'notification-center') {
+    return (
+      <div className={s.fakeNotificationCenter} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'command-palette') {
+    return (
+      <div className={s.fakeCommandPalette} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

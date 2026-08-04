@@ -71,6 +71,10 @@ export type PreviewKind =
   | 'hero-block'
   | 'footer'
   | 'table-of-contents'
+  | 'code-block'
+  | 'stat-strip'
+  | 'notification-center'
+  | 'command-palette'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -834,38 +838,42 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'code-block',
+    href: '/bloque-codigo',
     name: 'Bloque de codigo',
     description: 'Codigo con boton de copiar.',
-    preview: 'soon',
+    preview: 'code-block',
     category: 'contenido',
     tags: ['docs', 'snippet'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'stat-strip',
+    href: '/franja-metricas',
     name: 'Franja de metricas',
     description: 'Fila de metricas en landing o resumen.',
-    preview: 'soon',
+    preview: 'stat-strip',
     category: 'contenido',
     tags: ['web', 'metricas'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'notification-center',
+    href: '/centro-notificaciones',
     name: 'Centro de notificaciones',
     description: 'Centro de avisos del tablero.',
-    preview: 'soon',
+    preview: 'notification-center',
     category: 'datos',
     tags: ['dashboard', 'campana', 'avisos'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'command-palette',
+    href: '/paleta-comandos',
     name: 'Paleta de comandos',
     description: 'Busqueda global de acciones (Cmd/Ctrl+K).',
-    preview: 'soon',
+    preview: 'command-palette',
     category: 'navegacion',
     tags: ['busqueda', 'atajos', 'dashboard'],
-    status: 'soon',
+    status: 'ready',
   },
 ];

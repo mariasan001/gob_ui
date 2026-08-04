@@ -2833,6 +2833,107 @@
 }
 .fakeToc em { width: 88%; }
 
+.fakeCodeBlock {
+  display: grid;
+  gap: 0;
+  width: 156px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(24, 21, 17, 0.1);
+  background: #1c1916;
+}
+.fakeCodeBlock i {
+  height: 22px;
+  background: #f3f3f3;
+  border-bottom: 1px solid rgba(24, 21, 17, 0.08);
+}
+.fakeCodeBlock b,
+.fakeCodeBlock em {
+  height: 6px;
+  margin: 8px 10px 0;
+  border-radius: 3px;
+  background: rgba(244, 239, 232, 0.35);
+}
+.fakeCodeBlock b { width: 72%; }
+.fakeCodeBlock em { width: 48%; margin-bottom: 10px; }
+
+.fakeStatStrip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  width: 156px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+}
+.fakeStatStrip i,
+.fakeStatStrip b,
+.fakeStatStrip em {
+  height: 48px;
+  margin: 0;
+  border-right: 1px solid rgba(24, 21, 17, 0.08);
+  background:
+    linear-gradient(rgba(24, 21, 17, 0.16), rgba(24, 21, 17, 0.16)) 10px 12px / 40% 5px no-repeat,
+    linear-gradient(#181511, #181511) 10px 22px / 55% 10px no-repeat;
+}
+.fakeStatStrip em { border-right: 0; }
+
+.fakeNotificationCenter {
+  display: grid;
+  gap: 6px;
+  width: 140px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+  box-shadow: 0 10px 22px rgba(24, 21, 17, 0.08);
+}
+.fakeNotificationCenter i {
+  width: 55%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.16);
+}
+.fakeNotificationCenter b,
+.fakeNotificationCenter em {
+  height: 28px;
+  border-radius: 8px;
+  background: #f3f3f3;
+}
+.fakeNotificationCenter b {
+  background: #f7eef1;
+  box-shadow: inset 3px 0 0 #9f2141;
+}
+
+.fakeCommandPalette {
+  display: grid;
+  gap: 6px;
+  width: 150px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+  box-shadow: 0 14px 28px rgba(24, 21, 17, 0.12);
+}
+.fakeCommandPalette i {
+  height: 22px;
+  border-radius: 8px;
+  background: #f3f3f3;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+}
+.fakeCommandPalette b,
+.fakeCommandPalette em {
+  height: 18px;
+  border-radius: 8px;
+  background: #f3f3f3;
+}
+.fakeCommandPalette b {
+  background: #f7eef1;
+  width: 100%;
+}
+.fakeCommandPalette em { width: 80%; }
+
 @keyframes rise {
   from {
     opacity: 0;

@@ -68,6 +68,10 @@ import './components/content-section/gob-content-section';
 import './components/hero-block/gob-hero-block';
 import './components/footer/gob-footer';
 import './components/table-of-contents/gob-table-of-contents';
+import './components/code-block/gob-code-block';
+import './components/stat-strip/gob-stat-strip';
+import './components/notification-center/gob-notification-center';
+import './components/command-palette/gob-command-palette';
 
 export type {
   ActivityFeedTone,
@@ -97,7 +101,9 @@ export type {
   ComboboxSize,
   ComboboxStatus,
   ComboboxVariant,
+  CommandPaletteVariant,
   ConfirmDialogVariant,
+  CodeBlockVariant,
   ContainerVariant,
   ContentSectionVariant,
   DataGridTone,
@@ -142,7 +148,9 @@ export type {
   GobChartCardProps,
   GobCheckboxProps,
   GobChipProps,
+  GobCodeBlockProps,
   GobComboboxProps,
+  GobCommandPaletteProps,
   GobConfirmDialogProps,
   GobContainerProps,
   GobContentSectionProps,
@@ -168,6 +176,7 @@ export type {
   GobListProps,
   GobModalProps,
   GobNavMenuProps,
+  GobNotificationCenterProps,
   GobPageHeaderProps,
   GobPaginationBarProps,
   GobPaginationProps,
@@ -184,6 +193,7 @@ export type {
   GobSpacerProps,
   GobSpinnerProps,
   GobSplitButtonProps,
+  GobStatStripProps,
   GobStepsProps,
   GobSwitchProps,
   GobTabsProps,
@@ -219,6 +229,7 @@ export type {
   ModalVariant,
   NavMenuSize,
   NavMenuVariant,
+  NotificationCenterVariant,
   PageHeaderSurface,
   PageHeaderVariant,
   PaginationBarSize,
@@ -253,6 +264,7 @@ export type {
   SpinnerSize,
   SpinnerStatus,
   SpinnerVariant,
+  StatStripVariant,
   StepsSize,
   StepsVariant,
   SwitchSize,

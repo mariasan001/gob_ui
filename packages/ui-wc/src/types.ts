@@ -1160,6 +1160,79 @@ export type GobTableOfContentsProps = React.HTMLAttributes<HTMLElement> & {
   active?: number | string;
 };
 
+export type CodeBlockVariant =
+  | 'basic'
+  | 'soft'
+  | 'dense'
+  | 'outline'
+  | 'terminal'
+  | 'numbered'
+  | 'compact'
+  | 'wide'
+  | 'brand'
+  | 'complete';
+
+export type GobCodeBlockProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: CodeBlockVariant;
+  language?: string;
+  filename?: string;
+  code?: string;
+};
+
+export type StatStripVariant =
+  | 'basic'
+  | 'soft'
+  | 'dense'
+  | 'outline'
+  | 'cards'
+  | 'inline'
+  | 'centered'
+  | 'wide'
+  | 'brand'
+  | 'complete';
+
+export type GobStatStripProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: StatStripVariant;
+  items?: string;
+};
+
+export type NotificationCenterVariant =
+  | 'basic'
+  | 'soft'
+  | 'dense'
+  | 'outline'
+  | 'unread'
+  | 'compact'
+  | 'panel'
+  | 'feed'
+  | 'brand'
+  | 'complete';
+
+export type GobNotificationCenterProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: NotificationCenterVariant;
+  title?: string;
+  items?: string;
+};
+
+export type CommandPaletteVariant =
+  | 'basic'
+  | 'soft'
+  | 'dense'
+  | 'outline'
+  | 'grouped'
+  | 'compact'
+  | 'wide'
+  | 'spotlight'
+  | 'brand'
+  | 'complete';
+
+export type GobCommandPaletteProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: CommandPaletteVariant;
+  placeholder?: string;
+  query?: string;
+  items?: string;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1875,6 +1948,16 @@ declare global {
       'gob-footer': React.DetailedHTMLProps<GobFooterProps, HTMLElement>;
       'gob-table-of-contents': React.DetailedHTMLProps<
         GobTableOfContentsProps,
+        HTMLElement
+      >;
+      'gob-code-block': React.DetailedHTMLProps<GobCodeBlockProps, HTMLElement>;
+      'gob-stat-strip': React.DetailedHTMLProps<GobStatStripProps, HTMLElement>;
+      'gob-notification-center': React.DetailedHTMLProps<
+        GobNotificationCenterProps,
+        HTMLElement
+      >;
+      'gob-command-palette': React.DetailedHTMLProps<
+        GobCommandPaletteProps,
         HTMLElement
       >;
     }
