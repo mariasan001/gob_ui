@@ -435,10 +435,12 @@ class GobDatepickerElement extends SafeHTMLElement {
     const first = new Date(this.viewYear, this.viewMonth, 1);
     // Monday-first: JS Sunday=0 → shift
     const startOffset = (first.getDay() + 6) % 7;
+    const daysInMonth = new Date(this.viewYear, this.viewMonth + 1, 0).getDate();
+    const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
     const gridStart = new Date(this.viewYear, this.viewMonth, 1 - startOffset);
     const today = new Date();
 
-    for (let i = 0; i < 42; i += 1) {
+    for (let i = 0; i < totalCells; i += 1) {
       const date = new Date(
         gridStart.getFullYear(),
         gridStart.getMonth(),
