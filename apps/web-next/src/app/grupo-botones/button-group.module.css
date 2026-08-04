@@ -67,18 +67,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 140px;
-  padding: 28px 22px;
-  border-radius: 16px;
-  border: 1px solid #ececec;
-  overflow: hidden;
-  background: #ffffff;
+  min-height: 160px;
+  padding: 32px 22px;
+  border-radius: 18px;
+  border: 1px solid #ebebeb;
+  overflow: visible;
+  background: #f3f3f3;
 }
 
 .stageInner {
-  width: min(520px, 100%);
-  display: grid;
-  gap: 10px;
+  width: min(560px, 100%);
+  display: flex;
+  justify-content: center;
 }
 
 .search {
