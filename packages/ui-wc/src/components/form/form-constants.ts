@@ -9,6 +9,16 @@ export const FORM_VARIANTS = [
   'card',
   'sections',
   'complete',
+  'outline',
+  'rail',
+  'inset',
+  'flat',
+  'wide',
+  'split',
+  'panel',
+  'toolbar',
+  'bleed',
+  'dashboard',
 ] as const;
 
 export type FormVariant = (typeof FORM_VARIANTS)[number];
@@ -40,7 +50,9 @@ export function resolveFormColumns(value: string | null, variant: FormVariant): 
   if (value === '1' || value === '2' || value === '3') {
     return Number(value) as 1 | 2 | 3;
   }
-  if (variant === 'dual') return 2;
-  if (variant === 'triple') return 3;
+  if (variant === 'dual' || variant === 'split' || variant === 'wide' || variant === 'dashboard') {
+    return 2;
+  }
+  if (variant === 'triple' || variant === 'toolbar') return 3;
   return 1;
 }

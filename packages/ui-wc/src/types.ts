@@ -388,7 +388,17 @@ export type FormVariant =
   | 'soft'
   | 'card'
   | 'sections'
-  | 'complete';
+  | 'complete'
+  | 'outline'
+  | 'rail'
+  | 'inset'
+  | 'flat'
+  | 'wide'
+  | 'split'
+  | 'panel'
+  | 'toolbar'
+  | 'bleed'
+  | 'dashboard';
 
 export type FormGap = 'sm' | 'md' | 'lg';
 
