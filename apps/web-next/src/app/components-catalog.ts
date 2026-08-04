@@ -65,6 +65,9 @@ export type PreviewKind =
   | 'confirm-dialog'
   | 'card'
   | 'avatar'
+  | 'user-menu'
+  | 'accordion'
+  | 'content-section'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -768,30 +771,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'user-menu',
+    href: '/menu-usuario',
     name: 'Menu de usuario',
     description: 'Cuenta, sesion y preferencias.',
-    preview: 'soon',
+    preview: 'user-menu',
     category: 'contenido',
     tags: ['perfil', 'dashboard', 'topbar'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'accordion',
+    href: '/acordeon',
     name: 'Acordeon',
     description: 'Secciones expandibles de contenido.',
-    preview: 'soon',
+    preview: 'accordion',
     category: 'contenido',
     tags: ['faq', 'collapse'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'tabs-content',
+    href: '/secciones-contenido',
     name: 'Secciones de contenido',
     description: 'Bloques de seccion para landing y docs.',
-    preview: 'soon',
+    preview: 'content-section',
     category: 'contenido',
     tags: ['web', 'seccion', 'landing'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'hero-block',

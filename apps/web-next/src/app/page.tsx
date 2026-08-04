@@ -684,6 +684,33 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'user-menu') {
+    return (
+      <div className={s.fakeUserMenu} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'accordion') {
+    return (
+      <div className={s.fakeAccordion} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'content-section') {
+    return (
+      <div className={s.fakeContentSection} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

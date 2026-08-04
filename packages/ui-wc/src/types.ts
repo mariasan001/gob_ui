@@ -1040,6 +1040,66 @@ export type GobAvatarProps = React.HTMLAttributes<HTMLElement> & {
   status?: string;
 };
 
+export type UserMenuVariant =
+  | 'basic'
+  | 'soft'
+  | 'compact'
+  | 'elevated'
+  | 'dense'
+  | 'outline'
+  | 'brand'
+  | 'status'
+  | 'wide'
+  | 'complete';
+
+export type GobUserMenuProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: UserMenuVariant;
+  name?: string;
+  role?: string;
+  email?: string;
+  initials?: string;
+  open?: boolean;
+};
+
+export type AccordionVariant =
+  | 'basic'
+  | 'soft'
+  | 'outline'
+  | 'dense'
+  | 'flush'
+  | 'separated'
+  | 'brand'
+  | 'faq'
+  | 'single'
+  | 'complete';
+
+export type GobAccordionProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: AccordionVariant;
+  items?: string;
+  'open-index'?: number | string;
+};
+
+export type ContentSectionVariant =
+  | 'basic'
+  | 'soft'
+  | 'split'
+  | 'centered'
+  | 'dense'
+  | 'outline'
+  | 'steps'
+  | 'feature'
+  | 'brand'
+  | 'complete';
+
+export type GobContentSectionProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ContentSectionVariant;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  body?: string;
+  'action-label'?: string;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1745,6 +1805,12 @@ declare global {
       >;
       'gob-card': React.DetailedHTMLProps<GobCardProps, HTMLElement>;
       'gob-avatar': React.DetailedHTMLProps<GobAvatarProps, HTMLElement>;
+      'gob-user-menu': React.DetailedHTMLProps<GobUserMenuProps, HTMLElement>;
+      'gob-accordion': React.DetailedHTMLProps<GobAccordionProps, HTMLElement>;
+      'gob-content-section': React.DetailedHTMLProps<
+        GobContentSectionProps,
+        HTMLElement
+      >;
     }
   }
 }
