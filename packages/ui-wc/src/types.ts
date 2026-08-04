@@ -965,6 +965,81 @@ export type GobSheetProps = React.HTMLAttributes<HTMLElement> & {
   'cancel-label'?: string;
 };
 
+export type ConfirmDialogVariant =
+  | 'basic'
+  | 'danger'
+  | 'warning'
+  | 'success'
+  | 'info'
+  | 'dense'
+  | 'soft'
+  | 'outline'
+  | 'brand'
+  | 'complete';
+
+export type GobConfirmDialogProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ConfirmDialogVariant;
+  title?: string;
+  description?: string;
+  body?: string;
+  open?: boolean;
+  preview?: boolean;
+  'confirm-label'?: string;
+  'cancel-label'?: string;
+};
+
+export type CardVariant =
+  | 'basic'
+  | 'soft'
+  | 'outline'
+  | 'elevated'
+  | 'media'
+  | 'action'
+  | 'dense'
+  | 'stat'
+  | 'horizontal'
+  | 'complete';
+
+export type GobCardProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: CardVariant;
+  title?: string;
+  description?: string;
+  body?: string;
+  meta?: string;
+  'action-label'?: string;
+};
+
+export type AvatarVariant =
+  | 'basic'
+  | 'soft'
+  | 'solid'
+  | 'outline'
+  | 'square'
+  | 'status'
+  | 'group'
+  | 'dense'
+  | 'brand'
+  | 'complete';
+
+export type AvatarSize = 'sm' | 'md' | 'lg';
+
+export type AvatarTone =
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'neutral';
+
+export type GobAvatarProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: AvatarVariant;
+  size?: AvatarSize;
+  tone?: AvatarTone;
+  name?: string;
+  initials?: string;
+  status?: string;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1664,6 +1739,12 @@ declare global {
       'gob-drawer': React.DetailedHTMLProps<GobDrawerProps, HTMLElement>;
       'gob-popover': React.DetailedHTMLProps<GobPopoverProps, HTMLElement>;
       'gob-sheet': React.DetailedHTMLProps<GobSheetProps, HTMLElement>;
+      'gob-confirm-dialog': React.DetailedHTMLProps<
+        GobConfirmDialogProps,
+        HTMLElement
+      >;
+      'gob-card': React.DetailedHTMLProps<GobCardProps, HTMLElement>;
+      'gob-avatar': React.DetailedHTMLProps<GobAvatarProps, HTMLElement>;
     }
   }
 }

@@ -59,6 +59,9 @@ import './components/modal/gob-modal';
 import './components/drawer/gob-drawer';
 import './components/popover/gob-popover';
 import './components/sheet/gob-sheet';
+import './components/confirm-dialog/gob-confirm-dialog';
+import './components/card/gob-card';
+import './components/avatar/gob-avatar';
 
 export type {
   ActivityFeedTone,
@@ -66,6 +69,9 @@ export type {
   AlertTone,
   AlertVariant,
   Appearance,
+  AvatarSize,
+  AvatarTone,
+  AvatarVariant,
   BadgeSize,
   BadgeTone,
   BadgeVariant,
@@ -74,6 +80,7 @@ export type {
   BreadcrumbVariant,
   ButtonGroupSize,
   ButtonGroupVariant,
+  CardVariant,
   ChartCardTone,
   ChartCardVariant,
   CheckboxSize,
@@ -83,6 +90,7 @@ export type {
   ComboboxSize,
   ComboboxStatus,
   ComboboxVariant,
+  ConfirmDialogVariant,
   ContainerVariant,
   DataGridTone,
   DataGridVariant,
@@ -114,15 +122,18 @@ export type {
   GobActivityFeedProps,
   GobAlertProps,
   GobAppShellProps,
+  GobAvatarProps,
   GobBadgeProps,
   GobBannerProps,
   GobBreadcrumbProps,
   GobButtonGroupProps,
   GobButtonProps,
+  GobCardProps,
   GobChartCardProps,
   GobCheckboxProps,
   GobChipProps,
   GobComboboxProps,
+  GobConfirmDialogProps,
   GobContainerProps,
   GobDataGridProps,
   GobDatepickerProps,

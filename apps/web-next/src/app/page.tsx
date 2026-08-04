@@ -656,6 +656,34 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'confirm-dialog') {
+    return (
+      <div className={s.fakeConfirm} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+        <span />
+      </div>
+    );
+  }
+  if (kind === 'card') {
+    return (
+      <div className={s.fakeCard} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'avatar') {
+    return (
+      <div className={s.fakeAvatar} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
