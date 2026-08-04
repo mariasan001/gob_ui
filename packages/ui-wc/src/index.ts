@@ -38,6 +38,9 @@ import './components/search-field/gob-search-field';
 import './components/form-field/gob-form-field';
 import './components/form/gob-form';
 import './components/tabs/gob-tabs';
+import './components/steps/gob-steps';
+import './components/nav-menu/gob-nav-menu';
+import './components/pagination-bar/gob-pagination-bar';
 
 export type {
   ActivityFeedTone,
@@ -95,7 +98,9 @@ export type {
   GobInputProps,
   GobKpiCardProps,
   GobListProps,
+  GobNavMenuProps,
   GobPageHeaderProps,
+  GobPaginationBarProps,
   GobPaginationProps,
   GobProgressProps,
   GobRadioProps,
@@ -106,6 +111,7 @@ export type {
   GobSliderProps,
   GobSpacerProps,
   GobSpinnerProps,
+  GobStepsProps,
   GobSwitchProps,
   GobTabsProps,
   GobTableProps,
@@ -123,8 +129,12 @@ export type {
   KpiVariant,
   ListTone,
   ListVariant,
+  NavMenuSize,
+  NavMenuVariant,
   PageHeaderSurface,
   PageHeaderVariant,
+  PaginationBarSize,
+  PaginationBarVariant,
   PaginationLang,
   PaginationVariant,
   ProgressStatus,
@@ -148,6 +158,8 @@ export type {
   SpinnerSize,
   SpinnerStatus,
   SpinnerVariant,
+  StepsSize,
+  StepsVariant,
   SwitchSize,
   SwitchStatus,
   SwitchVariant,

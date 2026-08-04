@@ -1760,6 +1760,96 @@
   background: rgba(159, 33, 65, 0.45);
 }
 
+.fakeSteps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 148px;
+  padding: 14px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeSteps i,
+.fakeSteps b,
+.fakeSteps em,
+.fakeSteps span {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(24, 21, 17, 0.14);
+  background: #fff;
+  position: relative;
+}
+
+.fakeSteps i {
+  background: #9f2141;
+  border-color: #9f2141;
+}
+
+.fakeSteps b {
+  border-color: #9f2141;
+  box-shadow: 0 0 0 3px rgba(159, 33, 65, 0.12);
+}
+
+.fakeNavMenu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 148px;
+  padding: 12px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakeNavMenu i,
+.fakeNavMenu b,
+.fakeNavMenu em {
+  flex: 1 1 auto;
+  height: 8px;
+  border-radius: 4px;
+  background: #f3f3f3;
+}
+
+.fakeNavMenu i {
+  background: color-mix(in srgb, #9f2141 18%, #fff);
+}
+
+.fakePaginationBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 148px;
+  padding: 12px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(24, 21, 17, 0.07);
+}
+
+.fakePaginationBar em {
+  flex: 1 1 auto;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(24, 21, 17, 0.12);
+}
+
+.fakePaginationBar i,
+.fakePaginationBar b,
+.fakePaginationBar span {
+  width: 16px;
+  height: 16px;
+  border-radius: 6px;
+  background: #f3f3f3;
+  border: 1px solid rgba(24, 21, 17, 0.08);
+}
+
+.fakePaginationBar b {
+  background: #9f2141;
+  border-color: #9f2141;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
