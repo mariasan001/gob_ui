@@ -266,6 +266,42 @@ export type GobFileUploadProps = React.HTMLAttributes<HTMLElement> & {
   required?: boolean;
 };
 
+export type SliderVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'marks'
+  | 'range'
+  | 'complete';
+
+export type SliderStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type SliderSize = 'sm' | 'md' | 'lg';
+
+export type GobSliderProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: SliderVariant;
+  label?: string;
+  helper?: string;
+  status?: SliderStatus;
+  size?: SliderSize;
+  min?: number | string;
+  max?: number | string;
+  step?: number | string;
+  value?: number | string;
+  unit?: string;
+  name?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -921,6 +957,7 @@ declare global {
       'gob-datepicker': React.DetailedHTMLProps<GobDatepickerProps, HTMLElement>;
       'gob-timepicker': React.DetailedHTMLProps<GobTimepickerProps, HTMLElement>;
       'gob-file-upload': React.DetailedHTMLProps<GobFileUploadProps, HTMLElement>;
+      'gob-slider': React.DetailedHTMLProps<GobSliderProps, HTMLElement>;
     }
   }
 }

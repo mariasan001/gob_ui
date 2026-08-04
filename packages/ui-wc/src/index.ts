@@ -33,6 +33,7 @@ import './components/combobox/gob-combobox';
 import './components/datepicker/gob-datepicker';
 import './components/timepicker/gob-timepicker';
 import './components/file-upload/gob-file-upload';
+import './components/slider/gob-slider';
 
 export type {
   ActivityFeedTone,
@@ -90,6 +91,7 @@ export type {
   GobSelectProps,
   GobSidebarProps,
   GobSkeletonProps,
+  GobSliderProps,
   GobSpacerProps,
   GobSpinnerProps,
   GobSwitchProps,
@@ -123,6 +125,9 @@ export type {
   SidebarVariant,
   Size,
   SkeletonVariant,
+  SliderSize,
+  SliderStatus,
+  SliderVariant,
   SpacerVariant,
   SpinnerSize,
   SpinnerStatus,
