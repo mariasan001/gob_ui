@@ -7,11 +7,11 @@
 .exampleCard {
   position: relative;
   display: grid;
-  gap: 12px;
-  padding: 18px;
-  border-radius: 20px;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 24px;
   border: 1px solid #ebebeb;
-  background: #f3f3f3;
+  background: #fff;
   min-width: 0;
 }
 
@@ -67,16 +67,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 220px;
-  padding: 36px 24px;
-  border-radius: 20px;
+  min-height: 280px;
+  padding: 40px 28px;
+  border-radius: 22px;
   border: 1px solid #ebebeb;
   overflow: visible;
-  background: #f7f6f4;
+  background: #efecea;
 }
 
 .stageInner {
-  width: min(640px, 100%);
+  width: min(720px, 100%);
   display: grid;
   gap: 10px;
   justify-items: stretch;
