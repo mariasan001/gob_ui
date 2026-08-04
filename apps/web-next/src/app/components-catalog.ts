@@ -34,6 +34,7 @@ export type PreviewKind =
   | 'radio'
   | 'switch'
   | 'datepicker'
+  | 'timepicker'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -427,12 +428,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'timepicker',
+    href: '/selector-hora',
     name: 'Selector de hora',
     description: 'Seleccion de hora en agendas y reportes.',
-    preview: 'soon',
+    preview: 'timepicker',
     category: 'formularios',
     tags: ['hora', 'form'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'file-upload',
