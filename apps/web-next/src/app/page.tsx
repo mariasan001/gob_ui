@@ -550,6 +550,31 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'fab') {
+    return (
+      <div className={s.fakeFab} aria-hidden="true">
+        <i />
+      </div>
+    );
+  }
+  if (kind === 'alert') {
+    return (
+      <div className={s.fakeAlert} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
+  if (kind === 'toast') {
+    return (
+      <div className={s.fakeToast} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />

@@ -649,6 +649,77 @@ export type GobSplitButtonProps = React.HTMLAttributes<HTMLElement> & {
   disabled?: boolean;
 };
 
+export type FabVariant =
+  | 'basic'
+  | 'solid'
+  | 'soft'
+  | 'tonal'
+  | 'extended'
+  | 'mini'
+  | 'outline'
+  | 'danger'
+  | 'success'
+  | 'complete';
+
+export type FabSize = 'sm' | 'md' | 'lg';
+
+export type GobFabProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: FabVariant;
+  size?: FabSize;
+  icon?: string;
+  label?: string;
+  disabled?: boolean;
+};
+
+export type AlertVariant =
+  | 'basic'
+  | 'soft'
+  | 'outline'
+  | 'solid'
+  | 'banner'
+  | 'dense'
+  | 'inline'
+  | 'bordered'
+  | 'dismissible'
+  | 'complete';
+
+export type AlertTone = 'info' | 'success' | 'warning' | 'danger' | 'neutral';
+
+export type GobAlertProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: AlertVariant;
+  tone?: AlertTone;
+  title?: string;
+  description?: string;
+  action?: string;
+  dismissible?: boolean;
+  hidden?: boolean;
+};
+
+export type ToastVariant =
+  | 'basic'
+  | 'soft'
+  | 'solid'
+  | 'outline'
+  | 'dense'
+  | 'action'
+  | 'progress'
+  | 'stacked'
+  | 'compact'
+  | 'complete';
+
+export type ToastTone = 'info' | 'success' | 'warning' | 'danger' | 'neutral';
+
+export type GobToastProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: ToastVariant;
+  tone?: ToastTone;
+  title?: string;
+  description?: string;
+  action?: string;
+  dismissible?: boolean;
+  duration?: number | string;
+  open?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1333,6 +1404,9 @@ declare global {
         GobSplitButtonProps,
         HTMLElement
       >;
+      'gob-fab': React.DetailedHTMLProps<GobFabProps, HTMLElement>;
+      'gob-alert': React.DetailedHTMLProps<GobAlertProps, HTMLElement>;
+      'gob-toast': React.DetailedHTMLProps<GobToastProps, HTMLElement>;
     }
   }
 }
