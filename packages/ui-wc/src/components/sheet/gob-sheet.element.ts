@@ -7,6 +7,13 @@ import {
 import { sheetStyles } from './sheet-styles';
 
 const CLOSE_SVG = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`;
+const CHEVRON = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const SHEET_ICON = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 8.5h10v9H7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.5 6.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+const ACTION_ICONS = [
+  `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="2.2" stroke="currentColor" stroke-width="1.5"/><circle cx="7.5" cy="15.5" r="2.2" stroke="currentColor" stroke-width="1.5"/><circle cx="16.5" cy="15.5" r="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M10.2 9.5 8.4 13.5M13.8 9.5l1.8 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 9.5h8v9H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 7.5h4M10 13h4M10 15.5h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 8.5h8v9H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 6.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+];
 
 class GobSheetElement extends SafeHTMLElement {
   static get observedAttributes() {
@@ -15,6 +22,8 @@ class GobSheetElement extends SafeHTMLElement {
 
   private readonly backdropEl: HTMLElement;
   private readonly sheetEl: HTMLElement;
+  private readonly iconEl: HTMLElement;
+  private readonly eyebrowEl: HTMLElement;
   private readonly titleEl: HTMLElement;
   private readonly descEl: HTMLElement;
   private readonly bodyCardEl: HTMLElement;
@@ -48,8 +57,16 @@ class GobSheetElement extends SafeHTMLElement {
     const head = document.createElement('div');
     head.className = 'head';
 
+    this.iconEl = document.createElement('span');
+    this.iconEl.className = 'icon';
+    this.iconEl.setAttribute('aria-hidden', 'true');
+    this.iconEl.innerHTML = SHEET_ICON;
+
     const copy = document.createElement('div');
     copy.className = 'copy';
+
+    this.eyebrowEl = document.createElement('p');
+    this.eyebrowEl.className = 'eyebrow';
 
     this.titleEl = document.createElement('h2');
     this.titleEl.className = 'title';
@@ -58,7 +75,7 @@ class GobSheetElement extends SafeHTMLElement {
     this.descEl = document.createElement('p');
     this.descEl.className = 'description';
 
-    copy.append(this.titleEl, this.descEl);
+    copy.append(this.eyebrowEl, this.titleEl, this.descEl);
 
     this.closeBtn = document.createElement('button');
     this.closeBtn.type = 'button';
@@ -66,7 +83,7 @@ class GobSheetElement extends SafeHTMLElement {
     this.closeBtn.setAttribute('aria-label', 'Cerrar');
     this.closeBtn.innerHTML = CLOSE_SVG;
 
-    head.append(copy, this.closeBtn);
+    head.append(this.iconEl, copy, this.closeBtn);
 
     const body = document.createElement('div');
     body.className = 'body';
@@ -77,12 +94,20 @@ class GobSheetElement extends SafeHTMLElement {
 
     const actionList = document.createElement('div');
     actionList.className = 'action-list';
-    for (const label of ['Compartir', 'Imprimir', 'Archivar']) {
+    ['Compartir', 'Imprimir', 'Archivar'].forEach((label, index) => {
       const item = document.createElement('div');
       item.className = 'action-item';
-      item.textContent = label;
+      const icon = document.createElement('span');
+      icon.className = 'action-icon';
+      icon.innerHTML = ACTION_ICONS[index] || ACTION_ICONS[0];
+      const text = document.createElement('span');
+      text.textContent = label;
+      const chevron = document.createElement('span');
+      chevron.className = 'action-chevron';
+      chevron.innerHTML = CHEVRON;
+      item.append(icon, text, chevron);
       actionList.appendChild(item);
-    }
+    });
 
     body.append(this.bodyCardEl, actionList);
 
@@ -172,6 +197,14 @@ class GobSheetElement extends SafeHTMLElement {
     this.backdropEl.dataset.variant = variant;
     this.backdropEl.dataset.preview = preview ? 'true' : 'false';
 
+    this.eyebrowEl.textContent =
+      variant === 'danger'
+        ? 'Accion critica'
+        : variant === 'success'
+          ? 'Confirmacion'
+          : variant === 'actions'
+            ? 'Atajos'
+            : 'Hoja inferior';
     this.titleEl.textContent = title;
     this.descEl.textContent = description;
     this.bodyCardEl.textContent = body;

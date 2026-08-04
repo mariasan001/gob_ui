@@ -8,6 +8,12 @@ import {
 import { popoverStyles } from './popover-styles';
 
 const CARET = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const CHEVRON = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const MENU_ICONS = [
+  `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M12 11v4.5M12 8.2v.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 15.5V8.2A1.7 1.7 0 0 1 8.7 6.5h6.6A1.7 1.7 0 0 1 17 8.2v7.3l-4.3-2.4L7 15.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
+  `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 8.5h8v9H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 6.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+];
 
 class GobPopoverElement extends SafeHTMLElement {
   static get observedAttributes() {
@@ -49,6 +55,13 @@ class GobPopoverElement extends SafeHTMLElement {
     this.panelEl.setAttribute('part', 'panel');
     this.panelEl.setAttribute('role', 'dialog');
 
+    const arrow = document.createElement('span');
+    arrow.className = 'arrow';
+    arrow.setAttribute('aria-hidden', 'true');
+
+    const inner = document.createElement('div');
+    inner.className = 'panel-inner';
+
     this.titleEl = document.createElement('p');
     this.titleEl.className = 'panel-title';
 
@@ -57,14 +70,23 @@ class GobPopoverElement extends SafeHTMLElement {
 
     this.menuEl = document.createElement('div');
     this.menuEl.className = 'menu';
-    for (const label of ['Ver detalle', 'Descargar', 'Archivar']) {
+    ['Ver detalle', 'Descargar', 'Archivar'].forEach((label, index) => {
       const item = document.createElement('div');
       item.className = 'menu-item';
-      item.textContent = label;
+      const icon = document.createElement('span');
+      icon.className = 'menu-icon';
+      icon.innerHTML = MENU_ICONS[index] || MENU_ICONS[0];
+      const text = document.createElement('span');
+      text.textContent = label;
+      const chevron = document.createElement('span');
+      chevron.className = 'menu-chevron';
+      chevron.innerHTML = CHEVRON;
+      item.append(icon, text, chevron);
       this.menuEl.appendChild(item);
-    }
+    });
 
-    this.panelEl.append(this.titleEl, this.descEl, this.menuEl);
+    inner.append(this.titleEl, this.descEl, this.menuEl);
+    this.panelEl.append(arrow, inner);
     this.rootEl.append(this.triggerEl, this.panelEl);
     shadow.append(style, this.rootEl);
 
@@ -111,7 +133,6 @@ class GobPopoverElement extends SafeHTMLElement {
     this.triggerEl.setAttribute('aria-expanded', open ? 'true' : 'false');
     this.titleEl.textContent = title;
     this.descEl.textContent = description;
-    this.panelEl.hidden = false;
   }
 }
 
