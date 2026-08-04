@@ -96,3 +96,158 @@ export function buildSnippet(lang: CodeLang, example: FabExample): string {
   const imports = lang === 'html' ? '' : `import '@mariasan001/ui-wc';\n\n`;
   return `${imports}<gob-fab ${attrs}></gob-fab>\n`;
 }
+
+export type FabNoticeTone = 'info' | 'success' | 'warning' | 'danger' | 'neutral';
+
+export type FabNotice = {
+  title: string;
+  description: string;
+  tone: FabNoticeTone;
+};
+
+/** Mensaje distinto por cada ejemplo al pulsar el FAB principal. */
+export const FAB_PRIMARY_MESSAGES: Record<string, FabNotice> = {
+  basic: {
+    title: 'Nuevo registro',
+    description: 'Se abrio el formulario para agregar un expediente.',
+    tone: 'info',
+  },
+  solid: {
+    title: 'Modo edicion',
+    description: 'Ahora puedes corregir los datos del ciudadano.',
+    tone: 'info',
+  },
+  soft: {
+    title: 'Bandeja de mensajes',
+    description: 'Tienes 3 conversaciones sin leer.',
+    tone: 'neutral',
+  },
+  tonal: {
+    title: 'Enlace listo',
+    description: 'Se genero un enlace seguro para compartir el folio.',
+    tone: 'success',
+  },
+  extended: {
+    title: 'Tramite iniciado',
+    description: 'Folio TMP-2026-8841 creado. Completa los requisitos.',
+    tone: 'success',
+  },
+  actions: {
+    title: 'Elige una opcion',
+    description: 'Abre el menu y selecciona que quieres crear.',
+    tone: 'info',
+  },
+  'actions-open': {
+    title: 'Menu activo',
+    description: 'Selecciona una accion secundaria del listado.',
+    tone: 'neutral',
+  },
+  mini: {
+    title: 'Busqueda rapida',
+    description: 'Escribe CURP, RFC o numero de folio.',
+    tone: 'info',
+  },
+  outline: {
+    title: 'Carga de archivo',
+    description: 'Formatos permitidos: PDF, JPG o PNG (max. 10 MB).',
+    tone: 'warning',
+  },
+  danger: {
+    title: 'Reporte enviado',
+    description: 'Tu incidencia quedo registrada para revision.',
+    tone: 'danger',
+  },
+  success: {
+    title: 'Todo listo',
+    description: 'Los cambios se guardaron sin errores.',
+    tone: 'success',
+  },
+  complete: {
+    title: 'Centro de ayuda',
+    description: 'Consulta guias, horarios y chat de orientacion.',
+    tone: 'info',
+  },
+  sm: {
+    title: 'Atajo compacto',
+    description: 'Accion rapida agregada a tu barra de favoritos.',
+    tone: 'success',
+  },
+  lg: {
+    title: 'Accion destacada',
+    description: 'Se priorizo esta tarea en tu bandeja de trabajo.',
+    tone: 'info',
+  },
+  disabled: {
+    title: 'No disponible',
+    description: 'Este control esta bloqueado por permisos.',
+    tone: 'neutral',
+  },
+};
+
+/** Mensaje distinto por cada accion secundaria del speed dial. */
+export const FAB_ACTION_MESSAGES: Record<string, FabNotice> = {
+  camara: {
+    title: 'Camara lista',
+    description: 'Apunta al documento y captura la evidencia fotografica.',
+    tone: 'info',
+  },
+  archivo: {
+    title: 'Subir documento',
+    description: 'Selecciona el PDF firmado desde tu dispositivo.',
+    tone: 'warning',
+  },
+  persona: {
+    title: 'Alta de ciudadano',
+    description: 'Se abrio el padrón para registrar una persona nueva.',
+    tone: 'success',
+  },
+  tramite: {
+    title: 'Nuevo tramite',
+    description: 'Catalogo abierto: elige el tipo de solicitud.',
+    tone: 'success',
+  },
+  carpeta: {
+    title: 'Carpeta creada',
+    description: '“Expedientes 2026” ya esta disponible en tu bandeja.',
+    tone: 'success',
+  },
+  imprimir: {
+    title: 'Enviando a impresora',
+    description: 'Acuse en cola. Revisa el dispositivo institucional.',
+    tone: 'neutral',
+  },
+  compartir: {
+    title: 'Compartido',
+    description: 'Se envio el resumen al correo del solicitante.',
+    tone: 'info',
+  },
+};
+
+export function resolveFabNotice(
+  exampleId: string,
+  detail: {
+    action?: string;
+    value?: string;
+    label?: string;
+    item?: { id?: string; label?: string };
+  },
+): FabNotice {
+  if (detail.action === 'menu') {
+    const actionId = detail.item?.id || detail.value || '';
+    return (
+      FAB_ACTION_MESSAGES[actionId] || {
+        title: detail.item?.label || 'Accion',
+        description: 'La accion secundaria se ejecuto correctamente.',
+        tone: 'success',
+      }
+    );
+  }
+
+  return (
+    FAB_PRIMARY_MESSAGES[exampleId] || {
+      title: detail.label || 'Accion',
+      description: 'El boton flotante respondio al clic.',
+      tone: 'info',
+    }
+  );
+}
