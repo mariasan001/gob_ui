@@ -47,10 +47,37 @@ export type GobButtonProps =
     'aria-labelledby'?: string;
   };
 
+export type CheckboxVariant =
+  | 'basic'
+  | 'labeled'
+  | 'helper'
+  | 'dense'
+  | 'soft'
+  | 'card'
+  | 'pill'
+  | 'tile'
+  | 'complete';
+
+export type CheckboxStatus =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info';
+
+export type CheckboxSize = 'sm' | 'md' | 'lg';
+
 export type GobCheckboxProps =
   React.HTMLAttributes<HTMLElement> &
     CommonControlProps & {
       indeterminate?: boolean;
+      variant?: CheckboxVariant;
+      label?: string;
+      description?: string;
+      helper?: string;
+      status?: CheckboxStatus;
+      size?: CheckboxSize;
+      required?: boolean;
     };
 
 export type GobRadioProps =
