@@ -41,6 +41,9 @@ export type PreviewKind =
   | 'form-field'
   | 'form'
   | 'tabs'
+  | 'steps'
+  | 'nav-menu'
+  | 'pagination-bar'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -504,30 +507,33 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'steps',
+    href: '/pasos',
     name: 'Pasos',
     description: 'Flujos por pasos (altas, tramites, asistentes).',
-    preview: 'soon',
+    preview: 'steps',
     category: 'navegacion',
     tags: ['pasos', 'wizard', 'flujo', 'stepper'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'nav-menu',
+    href: '/menu-navegacion',
     name: 'Menu de navegacion',
     description: 'Menu horizontal o vertical de enlaces.',
-    preview: 'soon',
+    preview: 'nav-menu',
     category: 'navegacion',
     tags: ['menu', 'links'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'pagination-bar',
+    href: '/barra-paginacion',
     name: 'Barra de paginacion',
     description: 'Resumen + controles de pagina juntos.',
-    preview: 'soon',
+    preview: 'pagination-bar',
     category: 'navegacion',
     tags: ['paginacion', 'tabla'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'link',

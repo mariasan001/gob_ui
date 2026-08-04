@@ -438,6 +438,74 @@ export type GobTabsProps = React.HTMLAttributes<HTMLElement> & {
   disabled?: boolean;
 };
 
+export type StepsVariant =
+  | 'basic'
+  | 'numbered'
+  | 'dots'
+  | 'vertical'
+  | 'compact'
+  | 'soft'
+  | 'outlined'
+  | 'labeled'
+  | 'progress'
+  | 'complete';
+
+export type StepsSize = 'sm' | 'md' | 'lg';
+
+export type GobStepsProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: StepsVariant;
+  size?: StepsSize;
+  value?: string;
+  items?: string;
+  disabled?: boolean;
+};
+
+export type NavMenuVariant =
+  | 'basic'
+  | 'horizontal'
+  | 'vertical'
+  | 'pills'
+  | 'underline'
+  | 'soft'
+  | 'dense'
+  | 'icons'
+  | 'bordered'
+  | 'complete';
+
+export type NavMenuSize = 'sm' | 'md' | 'lg';
+
+export type GobNavMenuProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: NavMenuVariant;
+  size?: NavMenuSize;
+  value?: string;
+  items?: string;
+  disabled?: boolean;
+};
+
+export type PaginationBarVariant =
+  | 'basic'
+  | 'summary'
+  | 'dense'
+  | 'soft'
+  | 'bordered'
+  | 'compact'
+  | 'detailed'
+  | 'toolbar'
+  | 'split'
+  | 'complete';
+
+export type PaginationBarSize = 'sm' | 'md' | 'lg';
+
+export type GobPaginationBarProps = React.HTMLAttributes<HTMLElement> & {
+  variant?: PaginationBarVariant;
+  size?: PaginationBarSize;
+  page?: number | string;
+  total?: number | string;
+  'page-size'?: number | string;
+  summary?: string;
+  disabled?: boolean;
+};
+
 export type GobPaginationProps =
   React.HTMLAttributes<HTMLElement> & {
     page?: number | string;
@@ -1098,6 +1166,12 @@ declare global {
       'gob-form-field': React.DetailedHTMLProps<GobFormFieldProps, HTMLElement>;
       'gob-form': React.DetailedHTMLProps<GobFormProps, HTMLElement>;
       'gob-tabs': React.DetailedHTMLProps<GobTabsProps, HTMLElement>;
+      'gob-steps': React.DetailedHTMLProps<GobStepsProps, HTMLElement>;
+      'gob-nav-menu': React.DetailedHTMLProps<GobNavMenuProps, HTMLElement>;
+      'gob-pagination-bar': React.DetailedHTMLProps<
+        GobPaginationBarProps,
+        HTMLElement
+      >;
     }
   }
 }
