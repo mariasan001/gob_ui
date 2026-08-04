@@ -76,11 +76,20 @@
 }
 
 .stageInner {
+  position: relative;
   width: min(520px, 100%);
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   min-height: 56px;
+}
+
+.notice {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  max-width: min(280px, calc(100% - 72px));
 }
 
 .stageTall {
