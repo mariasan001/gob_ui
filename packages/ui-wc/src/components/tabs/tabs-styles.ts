@@ -14,7 +14,7 @@ export const tabsStyles = `
   --gob-tb-border: rgba(24, 21, 17, 0.1);
   --gob-tb-border-strong: rgba(24, 21, 17, 0.16);
   --gob-tb-bg: #ffffff;
-  --gob-tb-fill: #f4f1ec;
+  --gob-tb-fill: #f3f3f3;
   --gob-tb-radius: 10px;
   --gob-tb-height: 40px;
   --gob-tb-ease: cubic-bezier(0.22, 1, 0.36, 1);
