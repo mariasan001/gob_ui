@@ -36,6 +36,7 @@ export type PreviewKind =
   | 'datepicker'
   | 'timepicker'
   | 'file-upload'
+  | 'slider'
   | 'soon';
 
 export type ComponentStatus = 'ready' | 'soon';
@@ -449,12 +450,13 @@ export const COMPONENTS: ComponentItem[] = [
   },
   {
     id: 'slider',
+    href: '/control-deslizante',
     name: 'Control deslizante',
     description: 'Rango numerico continuo o discreto.',
-    preview: 'soon',
+    preview: 'slider',
     category: 'formularios',
     tags: ['range', 'form', 'slider'],
-    status: 'soon',
+    status: 'ready',
   },
   {
     id: 'search-field',

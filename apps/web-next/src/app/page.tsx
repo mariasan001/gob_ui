@@ -423,6 +423,15 @@ function Preview({ kind }: { kind: PreviewKind }) {
       </div>
     );
   }
+  if (kind === 'slider') {
+    return (
+      <div className={s.fakeSlider} aria-hidden="true">
+        <i>
+          <em />
+        </i>
+      </div>
+    );
+  }
   return (
     <div className={s.fakeSoon}>
       <CirclesFour weight="thin" size={28} />
